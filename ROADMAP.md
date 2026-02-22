@@ -1,49 +1,120 @@
 # The Game Crafter MCP - Feature Roadmap
 
-This roadmap is for the public `thegamecrafter-mcp` project and reflects planned delivery phases.
+This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative delivery with testing after each milestone.
 
-## Guiding Principles
-- Stable MCP tool contracts for AI clients.
-- Secure-by-default behavior with explicit user control.
-- Incremental delivery with working milestones.
+## Scope
+- Focus on account-authoring workflows (create/manage your own games and assets).
+- Keep public-catalog interaction secondary and avoid API usage patterns that may exceed intended use.
+- Prioritize new-game build completeness over copy workflows.
 
-## Phase 1 - Core Foundation (Current)
-- [x] MCP server scaffold with stdio transport.
-- [x] Tool contract defined for core game-management scope.
-- [x] TGC auth/session integration (`tgc_auth_login`, `tgc_auth_logout`).
-- [x] Basic read tools (`tgc_me`, `tgc_designer_list`, `tgc_game_get`).
+## Current Baseline
+- [x] MCP stdio server scaffold.
+- [x] Auth/session tools (`tgc_auth_login`, `tgc_auth_logout`).
+- [x] Read tools (`tgc_me`, `tgc_designer_list`, `tgc_game_get`, `tgc_game_list`).
 
-## Phase 2 - Authoring Essentials (Next)
-- [ ] Game creation and metadata updates (`tgc_game_create`, `tgc_game_update`, `tgc_game_copy`).
-- [ ] Publish lifecycle tools (`tgc_game_publish`, `tgc_game_unpublish`).
-- [ ] Folder and file asset workflows (`tgc_folder_create`, `tgc_file_upload`).
-- [ ] Deck/card creation basics (`tgc_deck_create`, `tgc_card_create`, bulk card create).
+## Milestone 1 - Game Foundation
+- [x] Implement `tgc_game_create`.
+- [x] Test gate:
+  - Login works.
+  - Create game succeeds with supplied `designerId`.
+  - Created game is readable via `tgc_game_get`.
 
-## Phase 3 - Discovery and Workflow Usability
-- [ ] Add `tgc_game_list` to enumerate a user's games directly.
-- [ ] Add preflight checks for common workflow failures.
-- [ ] Improve pagination/filter support across list tools.
-- [ ] Improve error messages for agent-driven troubleshooting.
+## Milestone 2 - Game Metadata Lifecycle
+- [x] Implement `tgc_game_delete`.
+- [x] Implement `tgc_game_update`.
+- [x] Implement `tgc_game_copy`.
+- [ ] Test gate:
+  - [x] Create/delete integration test leaves no residual test games.
+  - Patch updates are reflected on subsequent reads.
+  - Copy creates a new game with expected metadata.
 
-## Phase 4 - Reliability and Quality
-- [ ] Broader integration and contract test coverage.
-- [ ] CI enforcement for typecheck/build/tests.
-- [ ] Better retry/backoff strategy and rate-limit resilience.
-- [ ] Release/versioning and changelog automation.
+## Milestone 3 - Asset Ingestion
+- [x] Implement `tgc_folder_create`.
+- [x] Implement `tgc_file_upload`.
+- [ ] Test gate:
+  - [x] Folder creation and file upload IDs are reusable in later steps.
 
-## Phase 5 - Security Enhancements (Downstream)
-- [ ] Optional local secret-store integrations for unattended automation.
-  - Initial target: Linux/WSL-friendly secret manager flow.
-  - Goal: avoid plaintext credentials in shell profiles or config files.
-- [ ] Document secure credential handling patterns and threat model.
-- [ ] Add configurable auth modes (interactive login vs secret-manager-backed).
+## Milestone 4 - Card Component Buildout
+- [x] Implement `tgc_deck_create`.
+- [x] Implement `tgc_card_create`.
+- [x] Implement `tgc_deck_bulk_create_cards`.
+- [ ] Test gate:
+  - Deck/card creation works from uploaded art files.
+  - [x] Bulk card creation maps to TGC `face_id`/`back_id` payload and preserves `face_id` in created cards.
 
-## Phase 6 - Higher-Level Automation
-- [ ] Workflow tools such as `tgc_game_scaffold`.
-- [ ] Optional prepublish validation helper (`tgc_prepublish_check`).
-- [ ] Additional component support beyond base card/deck flow.
+## Milestone 5 - Part Linking and Cost Visibility
+- [x] Implement `tgc_part_create`.
+- [x] Implement `tgc_gamepart_upsert`.
+- [ ] Implement `tgc_game_cost_breakdown_get`.
+- [ ] Implement `tgc_game_bulk_pricing_get`.
+- [ ] Test gate:
+  - Linked parts appear in cost/pricing outputs.
 
-## Not In Scope for Initial Releases
+## Milestone 5.5 - Complex Component Primitives (Generals-class Games)
+- [x] Implement `tgc_game_components_list` (relationship-based component listing).
+- [x] Implement `tgc_component_items_list` (set member listing).
+- [x] Implement `tgc_component_create` (non-deck set/container creation).
+- [x] Implement `tgc_component_item_create` (set member creation).
+- [x] Test gate:
+  - Live integration validates `twosidedset/twosided`.
+  - Live integration validates `twosidedsluggedset/twosidedslugged`.
+  - Live integration validates `onesidedsluggedset/onesidedslugged`.
+- [ ] Next gate:
+  - End-to-end `Generals-v2` reconstruction script copies all supported component families into a new game.
+
+## Milestone 6 - Catalog Coverage And Build Completeness
+- [x] Implement `tgc_tgc_products_list` (catalog discovery endpoint).
+- [x] Add generated capability matrix (`tools/tgc-component-capability-matrix.md`) from live catalog data.
+- [ ] Add public-game metadata reconnaissance script to sample component family payload shapes across public games.
+- [ ] Add disposable synthetic fixture workflow for unsupported component families (create, verify, cleanup).
+- [ ] Expand MCP write coverage for missing create APIs discovered in matrix.
+  - [x] Packaging core coverage validated via `tgc_component_create`:
+    - `/api/tuckbox`
+    - `/api/hookbox`
+    - `/api/twosidedbox`
+    - `/api/boxtop`
+    - `/api/boxtopgloss`
+    - `/api/twosidedboxgloss`
+    - `/api/boxface`
+  - [x] Books/documents coverage validated:
+    - `/api/document`
+    - `/api/booklet`
+    - `/api/bookletpage`
+    - `/api/coilbook`
+    - `/api/coilbookpage`
+    - `/api/perfectboundbook`
+    - `/api/perfectboundbookpage`
+    - `/api/scorepad`
+- [ ] Test gate:
+  - For each newly added create API family, add a live integration probe that creates at least one valid component and verifies readback.
+
+## Milestone 7 - Publish Readiness
+- [ ] Implement `tgc_game_publish`.
+- [ ] Implement `tgc_game_unpublish`.
+- [ ] Implement `tgc_gamedownload_create`.
+- [ ] Add `tgc_prepublish_check` workflow helper.
+- [ ] Test gate:
+  - Prepublish checks identify missing assets/settings before publish attempts.
+
+## Milestone 8 - Workflow Automation
+- [ ] Add `tgc_game_scaffold` workflow tool (manifest-driven game setup).
+- [ ] Add resumable/idempotent behavior for multi-step workflows.
+- [ ] Add optional manual-copy workflow helper as a lower-priority convenience feature.
+- [ ] Test gate:
+  - One manifest can produce a reproducible game skeleton.
+
+## Milestone 9 - Hardening and Release
+- [ ] Contract/integration tests for all implemented tools.
+- [ ] CI for typecheck/build/tests.
+- [ ] Retry/backoff and improved error diagnostics.
+- [ ] Versioned releases and changelog discipline.
+- [ ] Package and publish reusable Codex skill for Game Crafter guided workflows.
+
+## Downstream Security Enhancements
+- [ ] Optional local secret-manager integration for unattended operation.
+- [ ] Auth mode documentation (interactive vs secret-store-backed).
+
+## Not In Scope For Initial Releases
 - Full UI/desktop frontend.
-- Background daemon as a required runtime.
-- Implicit auto-publish behavior without explicit user action.
+- Background daemon as required runtime.
+- Implicit auto-publish without explicit user action.

@@ -60,6 +60,20 @@ export const TOOL_CONTRACT: ToolContract[] = [
     },
   },
   {
+    name: "tgc_game_list",
+    description: "List public games with optional filtering.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+        designerId: { type: "string" },
+        userId: { type: "string" },
+      },
+      additionalProperties: false,
+    },
+  },
+  {
     name: "tgc_game_update",
     description: "Update game metadata fields.",
     inputSchema: {
@@ -80,8 +94,136 @@ export const TOOL_CONTRACT: ToolContract[] = [
       properties: {
         gameId: { type: "string" },
         include: { type: "array", items: { type: "string" } },
+        includeRelationships: { type: "array", items: { type: "string" } },
       },
       required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_deck_get",
+    description: "Fetch deck by id.",
+    inputSchema: {
+      type: "object",
+      properties: { deckId: { type: "string" } },
+      required: ["deckId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_game_decks_list",
+    description: "List decks in a game.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_deck_cards_list",
+    description: "List cards in a deck.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        deckId: { type: "string" },
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["deckId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_game_gameparts_list",
+    description: "List gamepart links in a game.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_game_components_list",
+    description: "List component instances for a game relationship path (for example: twosidedsets).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+        relationship: { type: "string" },
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["gameId", "relationship"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_component_items_list",
+    description: "List child items for a component container (for example: twosidedset -> twosideds).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        componentType: { type: "string" },
+        componentId: { type: "string" },
+        relationship: { type: "string" },
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["componentType", "componentId", "relationship"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_card_get",
+    description: "Fetch card by id.",
+    inputSchema: {
+      type: "object",
+      properties: { cardId: { type: "string" } },
+      required: ["cardId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_part_get",
+    description: "Fetch part by id.",
+    inputSchema: {
+      type: "object",
+      properties: { partId: { type: "string" } },
+      required: ["partId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_file_get",
+    description: "Fetch file by id.",
+    inputSchema: {
+      type: "object",
+      properties: { fileId: { type: "string" } },
+      required: ["fileId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_file_references_get",
+    description: "Fetch references for a file.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        fileId: { type: "string" },
+        page: { type: "integer", minimum: 1, maximum: 200, default: 1 },
+        limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["fileId"],
       additionalProperties: false,
     },
   },
@@ -94,6 +236,16 @@ export const TOOL_CONTRACT: ToolContract[] = [
         gameId: { type: "string" },
         name: { type: "string" },
       },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_game_delete",
+    description: "Delete a game.",
+    inputSchema: {
+      type: "object",
+      properties: { gameId: { type: "string" } },
       required: ["gameId"],
       additionalProperties: false,
     },
@@ -153,7 +305,11 @@ export const TOOL_CONTRACT: ToolContract[] = [
       properties: {
         name: { type: "string" },
         gameId: { type: "string" },
-        cardCount: { type: "integer", minimum: 1 },
+        identity: { type: "string" },
+        quantity: { type: "integer", minimum: 1, maximum: 99 },
+        backFileId: { type: "string" },
+        hasProofedBack: { type: "boolean" },
+        cardCount: { type: "integer", minimum: 1, deprecated: true },
       },
       required: ["name", "gameId"],
       additionalProperties: false,
@@ -181,7 +337,23 @@ export const TOOL_CONTRACT: ToolContract[] = [
       type: "object",
       properties: {
         deckId: { type: "string" },
-        cards: { type: "array", minItems: 1, maxItems: 200, items: { type: "object" } },
+        cards: {
+          type: "array",
+          minItems: 1,
+          maxItems: 100,
+          items: {
+            type: "object",
+            properties: {
+              name: { type: "string" },
+              frontFileId: { type: "string" },
+              backFileId: { type: "string" },
+              quantity: { type: "integer", minimum: 1, maximum: 99 },
+              classNumber: { type: "integer", minimum: 1, maximum: 5 },
+            },
+            required: ["name", "frontFileId"],
+            additionalProperties: false,
+          },
+        },
       },
       required: ["deckId", "cards"],
       additionalProperties: false,
@@ -214,6 +386,63 @@ export const TOOL_CONTRACT: ToolContract[] = [
         quantity: { type: "integer", minimum: 1 },
       },
       required: ["gameId", "partId", "componentType", "componentId", "quantity"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_component_create",
+    description: "Create a non-deck component container (for example: twosidedset, twosidedsluggedset).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        componentType: { type: "string" },
+        gameId: { type: "string" },
+        name: { type: "string" },
+        identity: { type: "string" },
+        quantity: { type: "integer", minimum: 1, maximum: 9999 },
+        backFileId: { type: "string" },
+        hasProofedBack: { type: "boolean" },
+      },
+      required: ["componentType", "gameId", "name"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_component_item_create",
+    description: "Create an item within a component set (for example: twosided, twosidedslugged, onesidedslugged).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        componentType: { type: "string" },
+        setId: { type: "string" },
+        name: { type: "string" },
+        frontFileId: { type: "string" },
+        backFileId: { type: "string" },
+        quantity: { type: "integer", minimum: 1, maximum: 9999 },
+        hasProofedFace: { type: "boolean" },
+        hasProofedBack: { type: "boolean" },
+      },
+      required: ["componentType", "setId", "name", "frontFileId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_component_page_create",
+    description: "Create a page for booklet/coilbook/perfectboundbook components.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        componentType: {
+          type: "string",
+          enum: ["bookletpage", "coilbookpage", "perfectboundbookpage"],
+        },
+        parentId: { type: "string" },
+        name: { type: "string" },
+        frontFileId: { type: "string" },
+        backFileId: { type: "string" },
+        quantity: { type: "integer", minimum: 1, maximum: 9999 },
+      },
+      required: ["componentType", "parentId", "name", "frontFileId"],
       additionalProperties: false,
     },
   },
@@ -270,4 +499,3 @@ export const TOOL_CONTRACT: ToolContract[] = [
 ];
 
 export const TOOL_NAMES = new Set(TOOL_CONTRACT.map((tool) => tool.name));
-

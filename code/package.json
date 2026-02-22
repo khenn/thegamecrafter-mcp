@@ -12,7 +12,15 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "start": "node dist/index.js",
     "dev": "node --loader tsx src/index.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:integration:game-create-delete": "tsx scripts/dev/test-game-create-delete.ts",
+    "test:integration:deck-bulk-create-cards": "tsx scripts/dev/test-deck-bulk-create-cards.ts",
+    "test:integration:zch-manual-copy-e2e": "tsx scripts/dev/test-zch-manual-copy-e2e.ts",
+    "test:integration:component-primitives": "tsx scripts/dev/test-component-primitives.ts",
+    "test:integration:batch0-smoke-harness": "tsx scripts/dev/test-batch0-smoke-harness.ts",
+    "test:integration:packaging-core": "tsx scripts/dev/test-packaging-core.ts",
+    "test:integration:batch2-books-documents": "tsx scripts/dev/test-batch2-books-documents.ts",
+    "report:component-matrix": "tsx scripts/dev/generate-component-capability-matrix.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",

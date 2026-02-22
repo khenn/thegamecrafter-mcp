@@ -18,6 +18,13 @@ Whenever you are operating in this repository, follow these rules:
 
 ---
 
+## Public Agent Profile
+- Also consult `context/AGENTS.md` for the public-facing agent behavior profile intended for external sharing.
+- Treat `context/AGENTS.md` as the default reusable behavior pack for this project.
+- If there is a conflict between this root `AGENTS.md` and `context/AGENTS.md`, follow this root `AGENTS.md` for local/project-specific work.
+
+---
+
 ## Content Structure
 Agents must treat the following document as the source of truth for repository layout and file/folder placement rules:
 - context/STRUCTURE.md
@@ -29,7 +36,7 @@ If any instruction conflicts with context/STRUCTURE.md, ask if the intent of the
 ## Folder Structure Expectations
 - Follow `context/STRUCTURE.md` for folder purposes and placement rules.
 - `code/` contains all project sources and scripts (`code/src/`, `code/scripts/`).
-- `tools/` holds reusable playbooks; `sessions/` holds point-in-time state notes and session logs (record each session there).
+- `tools/` holds reusable playbooks; `skills/` holds reusable Codex skill packages; `subprojects/` holds local exploratory sandboxes; `sessions/` holds point-in-time state notes and session logs (record each session there).
 - `logs/` is gitignored and only for runtime artifacts.
 
 ---
@@ -65,6 +72,47 @@ When performing refactors, writing queries, editing workflow instructions, or ge
   - Maintainability (modular API client, typed schemas, testability)
   - Public GitHub readiness (documentation, examples, install/run clarity)
 - For planning and architecture work in this repository, explicitly frame recommendations as MCP tool design guidance unless the user asks otherwise.
+
+---
+
+## Guided Interaction Defaults (TGC Workflows)
+- Treat user prompts like "create a game for me" as intent to run a guided workflow, not just a raw API call.
+- Ask only for missing required inputs.
+- For `tgc_game_create`, gather:
+  - `name` from the user.
+  - `designerId` automatically by calling `tgc_designer_list` after login (if not explicitly provided).
+- Do not ask for optional fields unless they materially improve the outcome.
+- After creation succeeds, immediately present:
+  - Created `gameId`
+  - Name
+  - Suggested next actions (for example: update metadata, add deck, upload art).
+- Keep tone collaborative and concise ("vibey" workflow), but keep tool calls explicit and auditable.
+- For component build requests (for example, "add a Large Stout Box"):
+  - use a capability-driven approach, not a fixed script:
+    - present only options that exist for the requested component type/identity,
+    - include image dimensions/slots, finish options, quantity, and defaults only when applicable,
+    - avoid asking about options that are not supported by that type.
+  - ask for only the still-missing choices in one compact prompt.
+  - if user does not specify optional choices, proceed with safe defaults and state which defaults were applied.
+- For bulk card copy workflows (`tgc_deck_bulk_create_cards`):
+  - Treat calls as append-only and non-idempotent.
+  - Do not "resume" into a partially populated target deck/game.
+  - If a copy run is interrupted or uncertain, abandon that target and create a fresh target game/deck, then rerun from zero.
+  - Validate final target counts against source counts before declaring success.
+- For non-deck set-based components (for example `twosidedset`, `twosidedsluggedset`, `onesidedsluggedset`):
+  - list containers via `tgc_game_components_list` (relationship path),
+  - list child items via `tgc_component_items_list` using relationship `members`,
+  - rebuild with `tgc_component_create` then `tgc_component_item_create`.
+
+---
+
+## Skills Maintenance Policy
+- Treat `skills/` as a first-class artifact for this repository.
+- Proactively update the relevant `skills/<skill-name>/SKILL.md` whenever:
+  - a guided TGC workflow is added/changed,
+  - tool contracts materially change workflow behavior,
+  - new guardrails or failure-handling patterns are proven.
+- Do this without waiting for explicit user reminder, and report the skill changes in the final update.
 
 ---
 

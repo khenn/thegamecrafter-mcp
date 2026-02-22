@@ -27,9 +27,11 @@ export class TgcApiError extends Error {
   }
 }
 
+type FormValue = Primitive | Blob | { blob: Blob; filename?: string };
+
 type RequestOptions = {
   query?: Record<string, Primitive | undefined>;
-  form?: Record<string, Primitive | undefined>;
+  form?: Record<string, FormValue | undefined>;
   sessionId?: string;
 };
 
@@ -105,6 +107,16 @@ export class TgcClient {
       const formData = new FormData();
       for (const [key, value] of Object.entries(options.form)) {
         if (value !== undefined) {
+          if (typeof value === "object") {
+            if (value instanceof Blob) {
+              formData.set(key, value);
+              continue;
+            }
+            if ("blob" in value && value.blob instanceof Blob) {
+              formData.set(key, value.blob, value.filename);
+              continue;
+            }
+          }
           formData.set(key, String(value));
         }
       }
@@ -150,4 +162,3 @@ export class TgcClient {
     return asWing.result;
   }
 }
-

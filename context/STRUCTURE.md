@@ -37,6 +37,24 @@ All agents must obey these rules when creating, modifying, or relocating files.
 
 ---
 
+## skills/
+- Reusable Codex skill packages intended for cross-repo/public reuse.
+- Layout convention:
+  - `skills/<skill-name>/SKILL.md` is required.
+  - Optional supporting files can live under `skills/<skill-name>/` (examples, templates, references).
+- Use when: documenting repeatable, trigger-based agent workflows that should be installable/shareable.
+- Keep skill instructions implementation-aware and test-gated; avoid project-transient session notes here.
+
+---
+
+## subprojects/
+- Local-only sandboxes for exploratory efforts that may have separate code/docs/workflows from the main product path.
+- Use when: running a focused experiment (for example, workflow proving, API limitation discovery, throwaway prototypes).
+- May contain its own mini-docs, scripts, and notes; keep naming explicit (for example `subprojects/zch-copy-lab/`).
+- Default policy: local and gitignored unless explicitly promoted into main repo artifacts.
+
+---
+
 ## code/
 - All project code lives under `code/`. No other top-level folder should contain source code.
 - Mandatory subfolders:

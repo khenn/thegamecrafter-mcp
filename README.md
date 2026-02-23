@@ -136,7 +136,41 @@ Use it when you want an LLM to create or manage your own TGC games through audit
 cd /absolute/path/to/your-project
 ```
 
-2. Register the MCP server directly (standard Codex method):
+2. Choose Codex config scope.
+- Global scope (default): Codex uses `~/.codex`.
+- Project-local scope (recommended): use `CODEX_HOME=/absolute/path/to/your-project/.codex`.
+
+Important:
+- If you do not set `CODEX_HOME`, Codex will update your global MCP config in `~/.codex`.
+
+3. Register MCP server (project-local scope, recommended):
+
+Unix-like:
+
+```bash
+mkdir -p /absolute/path/to/your-project/.codex
+CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp add thegamecrafter \
+  --env TGC_API_BASE_URL="$TGC_API_BASE_URL" \
+  --env TGC_PUBLIC_API_KEY_ID="$TGC_PUBLIC_API_KEY_ID" \
+  --env TGC_USERNAME="$TGC_USERNAME" \
+  --env TGC_PASSWORD="$TGC_PASSWORD" \
+  -- node /absolute/path/to/thegamecrafter-mcp/code/dist/index.js
+```
+
+Windows (PowerShell):
+
+```powershell
+New-Item -ItemType Directory -Force -Path "C:\absolute\path\to\your-project\.codex" | Out-Null
+$env:CODEX_HOME="C:\absolute\path\to\your-project\.codex"
+codex mcp add thegamecrafter `
+  --env TGC_API_BASE_URL="$env:TGC_API_BASE_URL" `
+  --env TGC_PUBLIC_API_KEY_ID="$env:TGC_PUBLIC_API_KEY_ID" `
+  --env TGC_USERNAME="$env:TGC_USERNAME" `
+  --env TGC_PASSWORD="$env:TGC_PASSWORD" `
+  -- node C:\absolute\path\to\thegamecrafter-mcp\code\dist\index.js
+```
+
+4. Optional: register MCP server in global scope instead:
 
 ```bash
 codex mcp add thegamecrafter \
@@ -158,17 +192,32 @@ codex mcp add thegamecrafter `
   -- node C:\absolute\path\to\thegamecrafter-mcp\code\dist\index.js
 ```
 
-3. Verify:
+5. Verify in the same scope used for install:
+
+Project-local scope (recommended):
+
+```bash
+CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp list
+CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp get thegamecrafter
+```
+
+Global scope:
 
 ```bash
 codex mcp list
 codex mcp get thegamecrafter
 ```
 
-4. If you need to update the config later, remove and re-add:
+6. If you need to update the config later, remove and re-add in the same scope:
 
 ```bash
 codex mcp remove thegamecrafter
+```
+
+Project-local example:
+
+```bash
+CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp remove thegamecrafter
 ```
 
 ### MCP Install For Claude (Step-by-step)
@@ -248,6 +297,12 @@ Copy-Item -Recurse -Force "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-gui
 ```
 
 2. Restart Codex so newly installed skills are loaded.
+3. If you installed to `<PROJECT_ROOT>/.codex/skills`, launch Codex with `CODEX_HOME=<PROJECT_ROOT>/.codex` so the skill is in active scope.
+4. Optional check:
+
+```bash
+ls -la /absolute/path/to/your-project/.codex/skills/tgc-guided-workflows
+```
 
 ### Skills Install For Claude (Step-by-step)
 
@@ -290,12 +345,21 @@ Use it when you want predictable agent behavior across sessions and tools.
 ### Agent Install For Codex (Step-by-step)
 
 1. Copy the public agent profile to your project root as `AGENTS.md`.
+2. If your project already has `AGENTS.md`, do not overwrite blindly:
+- copy TGCMCP profile to `AGENTS.tgcmcp.md`,
+- merge required sections into existing `AGENTS.md`.
 
 Unix-like:
 
 ```bash
 mkdir -p /absolute/path/to/your-project
 cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md /absolute/path/to/your-project/AGENTS.md
+```
+
+Unix-like safe merge path if `AGENTS.md` already exists:
+
+```bash
+cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md /absolute/path/to/your-project/AGENTS.tgcmcp.md
 ```
 
 Windows (PowerShell):
@@ -306,11 +370,19 @@ Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
   "C:\absolute\path\to\your-project\AGENTS.md"
 ```
 
-2. Start Codex in your target project.
+PowerShell safe merge path if `AGENTS.md` already exists:
+
+```powershell
+Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
+  "C:\absolute\path\to\your-project\AGENTS.tgcmcp.md"
+```
+
+3. Start Codex in your target project.
 
 ### Agent Install For Claude (Step-by-step)
 
 This repository does **not** include a `Claude.md` file directly.
+Do not create `Claude.md` unless you actively use Claude for that project.
 
 To convert `AGENTS.md` to Claude format:
 
@@ -347,11 +419,23 @@ Run an installation verification for The Game Crafter MCP.
 
 ## LLM Automation Prompt (Optional)
 
-You can give this prompt to an LLM to execute setup from this README:
+Use this when you want an LLM to do setup with minimal custom prompt maintenance.
+This prompt tells the LLM to clone first, then follow the README from that clone.
 
 ```text
-Read this README and perform setup in order: prerequisites check, npm build, TGC env var setup, MCP registration, then ask me for my target project path and install Agent plus the skill package into standard locations (.codex/skills and optionally .claude/skills). Stop if any required value is missing, and ask only for that value.
+Clone https://github.com/khenn/thegamecrafter-mcp.git, then read the README from the cloned repo and follow it exactly for setup. Ask me only for missing required values. Do not duplicate or invent setup steps not in the README.
 ```
+
+## LLM Operator Notes (Optional)
+
+These notes are for LLM-driven setup flows, not required for manual setup.
+
+- Probe before mutate:
+  - check whether repo/build artifacts already exist before reinstalling/rebuilding.
+  - check current MCP registration before add/remove operations.
+- Prefer idempotent behavior:
+  - do not remove/re-add MCP unless path/env or scope differs from target state.
+  - do not overwrite existing project `AGENTS.md` without merge review.
 
 ## Troubleshooting
 
@@ -389,24 +473,11 @@ Most common causes:
 - Retry after short delay.
 - Avoid high request bursts.
 
----
+### npm permission/cache issues
+- If `npm install` fails due to cache permissions, use a local temp cache path:
 
-## LLM-Driven Auto-Setup Prompt
-
-You can paste this into your LLM:
-
-```text
-Set up The Game Crafter MCP from source on this machine.
-1) Clone https://github.com/khenn/thegamecrafter-mcp.git
-2) Build with: cd code && npm install && npm run build
-3) Configure env vars: TGC_API_BASE_URL, TGC_PUBLIC_API_KEY_ID, TGC_USERNAME, TGC_PASSWORD
-4) Register MCP stdio server named thegamecrafter using node and code/dist/index.js
-5) Ask me for my target project root path, then install:
-   - AGENT profile: copy context/AGENTS.md to <PROJECT_ROOT>/AGENTS.md
-   - Codex skill: copy folder skills/tgc-guided-workflows to <PROJECT_ROOT>/.codex/skills/tgc-guided-workflows
-   - Claude skill (optional): copy folder skills/tgc-guided-workflows to <PROJECT_ROOT>/.claude/skills/tgc-guided-workflows
-6) For Claude usage, convert AGENTS to Claude.md by copying <PROJECT_ROOT>/AGENTS.md to <PROJECT_ROOT>/Claude.md
-7) Verify install by running: tgc_auth_login, then tgc_designer_list, then tgc_game_list using the first designerId; report PASS/FAIL and likely fix if failed
+```bash
+npm install --cache /tmp/$USER-npm-cache
 ```
 
 ---

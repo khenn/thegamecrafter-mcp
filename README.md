@@ -21,9 +21,10 @@ This README is optimized for both:
 - Node.js `>=20` (tested on Node `24.x`)
 - npm
 - Git
-- Codex CLI `>=0.104.0` (for Codex MCP setup; tested on `0.104.0`)
-- TGC account
-- TGC API key pair (you must use the **public key ID**)
+- LLM client/runtime with MCP support (Codex, Claude, Gemini, or similar)
+- Codex CLI `>=0.104.0` (recommended; tested on `0.104.0`)
+- The Game Crafter account: [thegamecrafter.com](https://www.thegamecrafter.com/)
+- TGC API key pair (use the **public key ID**): [Create API Key](https://www.thegamecrafter.com/developer/APIKey.html)
 
 Optional for PDF workflows:
 - `pdfinfo`
@@ -127,6 +128,10 @@ This MCP server exposes TGC operations as callable tools for an LLM, including:
 - pricing and packaging-related operations supported by the TGC API
 
 Use it when you want an LLM to create or manage your own TGC games through auditable tool calls.
+
+Client compatibility:
+- This README provides explicit setup steps for Codex and Claude.
+- The same setup is generally adaptable to Gemini or other LLM clients that support MCP, skills, and agent-style project instructions.
 
 ### MCP Install For Codex (Step-by-step)
 

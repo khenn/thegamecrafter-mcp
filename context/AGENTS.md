@@ -102,6 +102,35 @@ Rules:
   - `MediumCoilBook`: `https://www.thegamecrafter.com/make/products/MediumCoilBook`, `https://www.thegamecrafter.com/api/tgc/products/MediumCoilBook`
   - `DigestPerfectBoundBook`: `https://www.thegamecrafter.com/make/products/DigestPerfectBoundBook`, `https://www.thegamecrafter.com/api/tgc/products/DigestPerfectBoundBook`
   - `MediumScorePadColor`: `https://www.thegamecrafter.com/make/products/MediumScorePadColor`, `https://www.thegamecrafter.com/api/tgc/products/MediumScorePadColor`
+- Batch 1 implemented references (for preflight/linking):
+  - `tuckbox` / `PokerTuckBox54`:
+    - `https://www.thegamecrafter.com/make/products/PokerTuckBox54`
+    - `https://www.thegamecrafter.com/api/tgc/products/PokerTuckBox54`
+    - `http://help.thegamecrafter.com/article/83-boxes`
+  - `hookbox` / `PokerHookBox54`:
+    - `https://www.thegamecrafter.com/make/products/PokerHookBox54`
+    - `https://www.thegamecrafter.com/api/tgc/products/PokerHookBox54`
+    - `http://help.thegamecrafter.com/article/83-boxes`
+  - `twosidedbox` / `MediumStoutBox`:
+    - `https://www.thegamecrafter.com/make/products/MediumStoutBox`
+    - `https://www.thegamecrafter.com/api/tgc/products/MediumStoutBox`
+    - `http://help.thegamecrafter.com/article/83-boxes`
+  - `boxtop` / `MediumStoutBoxTopAndSide`:
+    - `https://www.thegamecrafter.com/make/products/MediumStoutBoxTopAndSide`
+    - `https://www.thegamecrafter.com/api/tgc/products/MediumStoutBoxTopAndSide`
+    - `http://help.thegamecrafter.com/article/83-boxes`
+  - `boxtopgloss` / `LargeStoutBoxTopAndSide`:
+    - `https://www.thegamecrafter.com/make/products/LargeStoutBoxTopAndSide`
+    - `https://www.thegamecrafter.com/api/tgc/products/LargeStoutBoxTopAndSide`
+    - `http://help.thegamecrafter.com/article/83-boxes`
+  - `twosidedboxgloss` / `LargeStoutBox`:
+    - `https://www.thegamecrafter.com/make/products/LargeStoutBox`
+    - `https://www.thegamecrafter.com/api/tgc/products/LargeStoutBox`
+    - `http://help.thegamecrafter.com/article/83-boxes`
+  - `boxface` / `PokerBooster`:
+    - `https://www.thegamecrafter.com/make/products/PokerBooster`
+    - `https://www.thegamecrafter.com/api/tgc/products/PokerBooster`
+    - `https://help.thegamecrafter.com/article/364-booster-packs-faq`
 
 ## End-User Output Links
 - Default to user-facing links:

@@ -47,3 +47,56 @@ Use these for preflight checks, recommendations, and user-facing links.
 Finish behavior notes:
 - `boxtopgloss` and `twosidedboxgloss` validated with `surfacing_treatment` including `Linen Finish`.
 - `tuckbox`, `hookbox`, `twosidedbox`, and `boxtop` did not persist `surfacing_treatment` in tested flow.
+
+## Batch 1 Authoritative References (Packaging)
+
+### tuckbox (`PokerTuckBox54`)
+- Product: `https://www.thegamecrafter.com/make/products/PokerTuckBox54`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/PokerTuckBox54`
+- Help: `http://help.thegamecrafter.com/article/83-boxes`
+- Video content:
+  - `https://www.youtube.com/watch?v=Mk4sKxZ6ciQ`
+  - `https://www.youtube.com/watch?v=6qFbCzbvtZs`
+  - `https://www.youtube.com/watch?v=Ta1F6p6MAyE`
+
+### hookbox (`PokerHookBox54`)
+- Product: `https://www.thegamecrafter.com/make/products/PokerHookBox54`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/PokerHookBox54`
+- Help: `http://help.thegamecrafter.com/article/83-boxes`
+- Video content:
+  - `https://www.youtube.com/watch?v=Lz_0EHN1wUA`
+
+### twosidedbox (`MediumStoutBox`)
+- Product: `https://www.thegamecrafter.com/make/products/MediumStoutBox`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/MediumStoutBox`
+- Help: `http://help.thegamecrafter.com/article/83-boxes`
+- Video content:
+  - `https://www.youtube.com/watch?v=V5Fa7mA7OG4`
+  - `https://www.youtube.com/watch?v=K_MIjh_3qAI`
+
+### boxtop (`MediumStoutBoxTopAndSide`)
+- Product: `https://www.thegamecrafter.com/make/products/MediumStoutBoxTopAndSide`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/MediumStoutBoxTopAndSide`
+- Help: `http://help.thegamecrafter.com/article/83-boxes`
+- Video content:
+  - `https://www.youtube.com/watch?v=V5Fa7mA7OG4`
+
+### boxtopgloss (`LargeStoutBoxTopAndSide`)
+- Product: `https://www.thegamecrafter.com/make/products/LargeStoutBoxTopAndSide`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/LargeStoutBoxTopAndSide`
+- Help: `http://help.thegamecrafter.com/article/83-boxes`
+- Video content:
+  - no product-level videos returned by current product metadata snapshot.
+
+### twosidedboxgloss (`LargeStoutBox`)
+- Product: `https://www.thegamecrafter.com/make/products/LargeStoutBox`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/LargeStoutBox`
+- Help: `http://help.thegamecrafter.com/article/83-boxes`
+- Video content:
+  - `https://www.youtube.com/watch?v=yzBvMRUthsU`
+  - `https://www.youtube.com/watch?v=K_MIjh_3qAI`
+
+### boxface (`PokerBooster`)
+- Product: `https://www.thegamecrafter.com/make/products/PokerBooster`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/PokerBooster`
+- Help: `https://help.thegamecrafter.com/article/364-booster-packs-faq`

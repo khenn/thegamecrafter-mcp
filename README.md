@@ -335,16 +335,15 @@ Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
 
 ## 3) Verify End-To-End Setup
 
-After your MCP client loads `thegamecrafter`:
+After your MCP client loads `thegamecrafter`, verify setup by giving your LLM this prompt:
 
-1. Call `tgc_auth_login`.
-2. Call `tgc_designer_list`.
-3. Call `tgc_game_list` with your `designerId`.
-
-Expected result:
-- login succeeds
-- at least one designer record is returned
-- your game list is returned
+```text
+Run an installation verification for The Game Crafter MCP.
+1) Authenticate with tgc_auth_login.
+2) Get my designers with tgc_designer_list.
+3) Use the first designerId to call tgc_game_list.
+4) Return a short PASS/FAIL summary and include any error details plus the likely fix.
+```
 
 ## LLM Automation Prompt (Optional)
 
@@ -407,7 +406,7 @@ Set up The Game Crafter MCP from source on this machine.
    - Codex skill: copy folder skills/tgc-guided-workflows to <PROJECT_ROOT>/.codex/skills/tgc-guided-workflows
    - Claude skill (optional): copy folder skills/tgc-guided-workflows to <PROJECT_ROOT>/.claude/skills/tgc-guided-workflows
 6) For Claude usage, convert AGENTS to Claude.md by copying <PROJECT_ROOT>/AGENTS.md to <PROJECT_ROOT>/Claude.md
-7) Run smoke test: tgc_auth_login, tgc_designer_list, tgc_game_list
+7) Verify install by running: tgc_auth_login, then tgc_designer_list, then tgc_game_list using the first designerId; report PASS/FAIL and likely fix if failed
 ```
 
 ---

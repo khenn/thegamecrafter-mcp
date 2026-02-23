@@ -15,7 +15,7 @@ Configure Codex CLI to run this project's TGC MCP server locally.
   - `TGC_PASSWORD`
 
 ## One-Time Setup
-From project root:
+From your target project root (where you want Codex to use this MCP server), not from this repository root:
 
 ```bash
 codex mcp add thegamecrafter \

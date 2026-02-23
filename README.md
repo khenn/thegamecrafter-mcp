@@ -130,10 +130,10 @@ Use it when you want an LLM to create or manage your own TGC games through audit
 
 ### MCP Install For Codex (Step-by-step)
 
-1. Go to repository root:
+1. Open the root of the project where you want to use this MCP server (your project root, not this repository root).
 
 ```bash
-cd /absolute/path/to/thegamecrafter-mcp
+cd /absolute/path/to/your-project
 ```
 
 2. Register the MCP server directly (standard Codex method):
@@ -173,16 +173,17 @@ codex mcp remove thegamecrafter
 
 ### MCP Install For Claude (Step-by-step)
 
-1. Identify the absolute server entry point path:
+1. Open the root of the project where you want Claude to use this MCP server (your project root, not this repository root).
+2. Identify the absolute server entry point path:
 - `/absolute/path/to/thegamecrafter-mcp/code/dist/index.js`
 
-2. Add an MCP stdio server in your Claude client/runtime config:
+3. Add an MCP stdio server in your Claude client/runtime config for that project:
 - name: `thegamecrafter`
 - command: `node`
 - args: `["/absolute/path/to/thegamecrafter-mcp/code/dist/index.js"]`
 - env: include `TGC_API_BASE_URL`, `TGC_PUBLIC_API_KEY_ID`, `TGC_USERNAME`, `TGC_PASSWORD`
 
-3. Example config shape (adapt to your Claude runtime format):
+4. Example config shape (adapt to your Claude runtime format):
 
 ```json
 {
@@ -201,7 +202,7 @@ codex mcp remove thegamecrafter
 }
 ```
 
-4. Restart Claude client/runtime so the MCP server is loaded.
+5. Restart Claude client/runtime so the MCP server is loaded.
 
 ## Skills
 

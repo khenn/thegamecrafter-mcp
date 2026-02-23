@@ -142,40 +142,22 @@ cd /absolute/path/to/your-project
 ```
 
 2. Choose Codex config scope.
-- Global scope (default): Codex uses `~/.codex`.
-- Project-local scope (recommended): use `CODEX_HOME=/absolute/path/to/your-project/.codex`.
+- Global scope: affects shared Codex config.
+- Project-local scope: isolates config to one project.
 
 Important:
-- If you do not set `CODEX_HOME`, Codex will update your global MCP config in `~/.codex`.
+- If you do not choose project-local scope, Codex uses global config.
+- Scope setup commands can change over time; we intentionally keep this README scope-agnostic.
+- For current Codex guidance, see:
+  - https://developers.openai.com/codex/
+  - https://developers.openai.com/codex/skills/
+- CLI help:
+  - `codex mcp --help`
+  - `codex mcp add --help`
 
-3. Register MCP server (project-local scope, recommended):
+3. Register MCP server:
 
 Unix-like:
-
-```bash
-mkdir -p /absolute/path/to/your-project/.codex
-CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp add thegamecrafter \
-  --env TGC_API_BASE_URL="$TGC_API_BASE_URL" \
-  --env TGC_PUBLIC_API_KEY_ID="$TGC_PUBLIC_API_KEY_ID" \
-  --env TGC_USERNAME="$TGC_USERNAME" \
-  --env TGC_PASSWORD="$TGC_PASSWORD" \
-  -- node /absolute/path/to/thegamecrafter-mcp/code/dist/index.js
-```
-
-Windows (PowerShell):
-
-```powershell
-New-Item -ItemType Directory -Force -Path "C:\absolute\path\to\your-project\.codex" | Out-Null
-$env:CODEX_HOME="C:\absolute\path\to\your-project\.codex"
-codex mcp add thegamecrafter `
-  --env TGC_API_BASE_URL="$env:TGC_API_BASE_URL" `
-  --env TGC_PUBLIC_API_KEY_ID="$env:TGC_PUBLIC_API_KEY_ID" `
-  --env TGC_USERNAME="$env:TGC_USERNAME" `
-  --env TGC_PASSWORD="$env:TGC_PASSWORD" `
-  -- node C:\absolute\path\to\thegamecrafter-mcp\code\dist\index.js
-```
-
-4. Optional: register MCP server in global scope instead:
 
 ```bash
 codex mcp add thegamecrafter \
@@ -197,32 +179,17 @@ codex mcp add thegamecrafter `
   -- node C:\absolute\path\to\thegamecrafter-mcp\code\dist\index.js
 ```
 
-5. Verify in the same scope used for install:
-
-Project-local scope (recommended):
-
-```bash
-CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp list
-CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp get thegamecrafter
-```
-
-Global scope:
+4. Verify:
 
 ```bash
 codex mcp list
 codex mcp get thegamecrafter
 ```
 
-6. If you need to update the config later, remove and re-add in the same scope:
+5. If you need to update the config later, remove and re-add:
 
 ```bash
 codex mcp remove thegamecrafter
-```
-
-Project-local example:
-
-```bash
-CODEX_HOME=/absolute/path/to/your-project/.codex codex mcp remove thegamecrafter
 ```
 
 ### MCP Install For Claude (Step-by-step)
@@ -302,7 +269,7 @@ Copy-Item -Recurse -Force "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-gui
 ```
 
 2. Restart Codex so newly installed skills are loaded.
-3. If you installed to `<PROJECT_ROOT>/.codex/skills`, launch Codex with `CODEX_HOME=<PROJECT_ROOT>/.codex` so the skill is in active scope.
+3. Ensure your active Codex scope matches where you installed the skill (`<PROJECT_ROOT>/.codex/skills` for project-local scope, or `~/.codex/skills` for global scope).
 4. Optional check:
 
 ```bash
@@ -439,6 +406,7 @@ These notes are for LLM-driven setup flows, not required for manual setup.
   - check whether repo/build artifacts already exist before reinstalling/rebuilding.
   - check current MCP registration before add/remove operations.
 - Prefer idempotent behavior:
+  - ask the user whether to configure MCP in local project scope or global scope before running Codex MCP config commands.
   - do not remove/re-add MCP unless path/env or scope differs from target state.
   - do not overwrite existing project `AGENTS.md` without merge review.
 

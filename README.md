@@ -17,7 +17,7 @@ This README is optimized for both:
 
 ## Prerequisites
 
-- Linux/macOS/WSL (Windows works with path adjustments)
+- Linux, macOS, or Windows
 - Node.js `>=20` (tested on Node `24.x`)
 - npm
 - Git
@@ -34,9 +34,20 @@ Optional for PDF workflows:
 2. Install dependencies.
 3. Build the project.
 
+### Unix-like (Linux/macOS/WSL)
+
 ```bash
 git clone https://github.com/khenn/thegamecrafter-mcp.git
 cd thegamecrafter-mcp/code
+npm install
+npm run build
+```
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/khenn/thegamecrafter-mcp.git
+Set-Location thegamecrafter-mcp\code
 npm install
 npm run build
 ```
@@ -56,6 +67,8 @@ Required variables:
 
 ### Temporary (current shell only)
 
+Unix-like (bash/zsh):
+
 ```bash
 export TGC_API_BASE_URL="https://www.thegamecrafter.com"
 export TGC_PUBLIC_API_KEY_ID="<YOUR_TGC_PUBLIC_KEY_ID>"
@@ -63,7 +76,18 @@ export TGC_USERNAME="<YOUR_TGC_USERNAME>"
 export TGC_PASSWORD="<YOUR_TGC_PASSWORD>"
 ```
 
-### Persistent (new shells too, bash)
+Windows (PowerShell):
+
+```powershell
+$env:TGC_API_BASE_URL="https://www.thegamecrafter.com"
+$env:TGC_PUBLIC_API_KEY_ID="<YOUR_TGC_PUBLIC_KEY_ID>"
+$env:TGC_USERNAME="<YOUR_TGC_USERNAME>"
+$env:TGC_PASSWORD="<YOUR_TGC_PASSWORD>"
+```
+
+### Persistent (new shells)
+
+Unix-like (bash):
 
 ```bash
 cat >> ~/.bashrc <<'ENVVARS'
@@ -76,8 +100,19 @@ ENVVARS
 source ~/.bashrc
 ```
 
+Windows (PowerShell profile):
+
+```powershell
+if (!(Test-Path -Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force }
+Add-Content -Path $PROFILE -Value '$env:TGC_API_BASE_URL="https://www.thegamecrafter.com"'
+Add-Content -Path $PROFILE -Value '$env:TGC_PUBLIC_API_KEY_ID="<YOUR_TGC_PUBLIC_KEY_ID>"'
+Add-Content -Path $PROFILE -Value '$env:TGC_USERNAME="<YOUR_TGC_USERNAME>"'
+Add-Content -Path $PROFILE -Value '$env:TGC_PASSWORD="<YOUR_TGC_PASSWORD>"'
+. $PROFILE
+```
+
 Security note:
-- The `.bashrc` approach stores secrets in plaintext.
+- The bash/PowerShell profile approach stores secrets in plaintext.
 - For stronger security, inject these values at runtime from an OS secret manager.
 
 ## MCP
@@ -118,6 +153,12 @@ code/scripts/dev/configure-codex-mcp.sh thegamecrafter
 codex mcp list
 codex mcp get thegamecrafter
 ```
+
+Windows note:
+- The helper scripts are bash scripts. On Windows, run them in WSL/Git Bash, or register the same server manually in Codex using:
+  - command: `node`
+  - args: `["<ABSOLUTE_PATH>\\thegamecrafter-mcp\\code\\dist\\index.js"]`
+  - env: `TGC_API_BASE_URL`, `TGC_PUBLIC_API_KEY_ID`, `TGC_USERNAME`, `TGC_PASSWORD`
 
 ### MCP Install For Claude (Step-by-step)
 
@@ -165,17 +206,30 @@ Use this when you want your LLM to behave consistently during game-building task
 
 ### Skills Install For Codex (Step-by-step)
 
-1. Choose your working folder (example: `~/tgcagent`).
-2. Create the Codex skills path.
-3. Copy the skill file.
+1. Choose your agent workspace folder.
+2. Set a workspace path variable:
+   - Unix-like example: `export AGENT_WORKSPACE="$HOME/my-tgc-agent"`
+   - PowerShell example: `$AGENT_WORKSPACE="$HOME\\my-tgc-agent"`
+3. Create the Codex skills path.
+4. Copy the skill file.
+
+Unix-like:
 
 ```bash
-mkdir -p ~/tgcagent/skills/tgc-guided-workflows
+mkdir -p "$AGENT_WORKSPACE/skills/tgc-guided-workflows"
 cp /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows/SKILL.md \
-  ~/tgcagent/skills/tgc-guided-workflows/SKILL.md
+  "$AGENT_WORKSPACE/skills/tgc-guided-workflows/SKILL.md"
 ```
 
-4. Start Codex in `~/tgcagent` so it can discover local skills.
+Windows (PowerShell):
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$AGENT_WORKSPACE\skills\tgc-guided-workflows" | Out-Null
+Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-guided-workflows\SKILL.md" `
+  "$AGENT_WORKSPACE\skills\tgc-guided-workflows\SKILL.md"
+```
+
+5. Start Codex in your workspace (`$AGENT_WORKSPACE`) so it can discover local skills.
 
 ### Skills Install For Claude (Step-by-step)
 
@@ -204,15 +258,28 @@ Use it when you want predictable agent behavior across sessions and tools.
 
 ### Agent Install For Codex (Step-by-step)
 
-1. Choose your working folder (example: `~/tgcagent`).
-2. Copy the public agent profile to workspace root as `AGENTS.md`.
+1. Choose your agent workspace folder.
+2. Set a workspace path variable:
+   - Unix-like example: `export AGENT_WORKSPACE="$HOME/my-tgc-agent"`
+   - PowerShell example: `$AGENT_WORKSPACE="$HOME\\my-tgc-agent"`
+3. Copy the public agent profile to workspace root as `AGENTS.md`.
+
+Unix-like:
 
 ```bash
-mkdir -p ~/tgcagent
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md ~/tgcagent/AGENTS.md
+mkdir -p "$AGENT_WORKSPACE"
+cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md "$AGENT_WORKSPACE/AGENTS.md"
 ```
 
-3. Start Codex in `~/tgcagent`.
+Windows (PowerShell):
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$AGENT_WORKSPACE" | Out-Null
+Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
+  "$AGENT_WORKSPACE\AGENTS.md"
+```
+
+4. Start Codex in your workspace (`$AGENT_WORKSPACE`).
 
 ### Agent Install For Claude (Step-by-step)
 
@@ -220,15 +287,25 @@ This repository does **not** include a `Claude.md` file directly.
 
 To convert `AGENTS.md` to Claude format:
 
-1. Copy and rename the public profile:
+1. Ensure `AGENT_WORKSPACE` is set to your workspace path.
+2. Copy and rename the public profile:
+
+Unix-like:
 
 ```bash
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md ~/tgcagent/Claude.md
+cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md "$AGENT_WORKSPACE/Claude.md"
 ```
 
-2. Open `~/tgcagent/Claude.md`.
-3. Remove or adjust any Codex-specific wording if your Claude runtime requires different phrasing.
-4. Ensure your Claude runtime/project is configured to load `Claude.md`.
+Windows (PowerShell):
+
+```powershell
+Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
+  "$AGENT_WORKSPACE\Claude.md"
+```
+
+3. Open `Claude.md` in your chosen workspace folder.
+4. Remove or adjust any Codex-specific wording if your Claude runtime requires different phrasing.
+5. Ensure your Claude runtime/project is configured to load `Claude.md`.
 
 ## 3) Verify End-To-End Setup
 
@@ -248,7 +325,7 @@ Expected result:
 You can give this prompt to an LLM to execute setup from this README:
 
 ```text
-Read this README and perform setup in order: prerequisites check, npm build, TGC env var setup, MCP registration, then install Agent and Skills into ~/tgcagent. Stop if any required value is missing, and ask only for that value.
+Read this README and perform setup in order: prerequisites check, npm build, TGC env var setup, MCP registration, then ask me for my agent workspace path and install Agent and Skills there. Stop if any required value is missing, and ask only for that value.
 ```
 
 ## Troubleshooting
@@ -260,6 +337,14 @@ Check:
 ```bash
 env | grep '^TGC_'
 cd /absolute/path/to/thegamecrafter-mcp/code && npm run build
+```
+
+Windows (PowerShell):
+
+```powershell
+Get-ChildItem Env: | Where-Object { $_.Name -like 'TGC_*' }
+Set-Location C:\absolute\path\to\thegamecrafter-mcp\code
+npm run build
 ```
 
 ### Login fails with missing auth input
@@ -291,10 +376,10 @@ Set up The Game Crafter MCP from source on this machine.
 2) Build with: cd code && npm install && npm run build
 3) Configure env vars: TGC_API_BASE_URL, TGC_PUBLIC_API_KEY_ID, TGC_USERNAME, TGC_PASSWORD
 4) Register MCP stdio server named thegamecrafter using node and code/dist/index.js
-5) Create ~/tgcagent and install:
-   - AGENT profile: copy context/AGENTS.md to ~/tgcagent/AGENTS.md
-   - Skill: copy skills/tgc-guided-workflows/SKILL.md to ~/tgcagent/skills/tgc-guided-workflows/SKILL.md
-6) For Claude usage, convert AGENTS to Claude.md by copying ~/tgcagent/AGENTS.md to ~/tgcagent/Claude.md
+5) Ask me for my preferred agent workspace path (do not assume a folder name), then install:
+   - AGENT profile: copy context/AGENTS.md to <WORKSPACE>/AGENTS.md
+   - Skill: copy skills/tgc-guided-workflows/SKILL.md to <WORKSPACE>/skills/tgc-guided-workflows/SKILL.md
+6) For Claude usage, convert AGENTS to Claude.md by copying <WORKSPACE>/AGENTS.md to <WORKSPACE>/Claude.md
 7) Run smoke test: tgc_auth_login, tgc_designer_list, tgc_game_list
 ```
 

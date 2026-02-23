@@ -219,6 +219,7 @@ const componentPageCreateSchema = z.object({
   frontFileId: z.string().min(1),
   backFileId: z.string().min(1).optional(),
   quantity: z.number().int().min(1).max(9999).optional(),
+  sequenceNumber: z.number().int().min(1).max(5000).optional(),
 });
 
 const folderCreateSchema = z.object({
@@ -615,6 +616,7 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
           frontFileId: input.frontFileId,
           backFileId: input.backFileId,
           quantity: input.quantity,
+          sequenceNumber: input.sequenceNumber,
         });
         return ok({ page });
       }

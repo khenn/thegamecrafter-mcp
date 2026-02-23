@@ -16,6 +16,10 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
 - Ship in batches by reusable API family, not by individual product identity.
 - Add read/list probes and write/create tools together when possible.
 - Every new write family gets a disposable live fixture test (create -> verify -> cleanup).
+- Every new write family must include a component-intelligence profile in skills/docs:
+  - source URLs (`make/products/<Identity>`, `api/tgc/products/<Identity>`, and `info` help URL if present),
+  - validated constraints (image dimensions, page rules, min/max, finish options),
+  - preflight warning/correction prompts for invalid user requests.
 - Avoid unsupported assumptions about non-owned assets; use owned/synthetic assets for validation.
 - Track any possible IP/security concern as a formal finding when discovered.
 
@@ -96,14 +100,16 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
 1. Add service method in `code/src/tgc/service.ts`.
 2. Add handler and contract schema in `code/src/mcp/handlers.ts` and `code/src/mcp/contract.ts`.
 3. Add/extend tool docs in `tools/tgc-mcp-tool-contract-v1.md`.
-4. Add a focused live test script in `code/scripts/dev/`:
+4. Add/extend component-intelligence guidance in `skills/tgc-guided-workflows/SKILL.md` and `context/AGENTS.md`:
+   - include source URLs and preflight rules.
+5. Add a focused live test script in `code/scripts/dev/`:
    - authenticate
    - create disposable game
    - create component(s)
    - verify with read endpoints
    - cleanup in `finally`
-5. Update skill guardrails/workflow notes when behavior/pitfalls are learned.
-6. Record session in `sessions/` with outcome and caveats.
+6. Update skill guardrails/workflow notes when behavior/pitfalls are learned.
+7. Record session in `sessions/` with outcome and caveats.
 
 ## Success Criteria
 - An LLM can build a new game using all practical component families exposed by TGC developer API create endpoints.

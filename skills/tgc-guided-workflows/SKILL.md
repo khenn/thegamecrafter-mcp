@@ -1,5 +1,17 @@
 # Skill: TGC Guided Workflows
 
+## Preferences (Global)
+```yaml
+preferences:
+  currency: USD
+```
+
+Rules:
+- Treat TGC prices as `USD` source values.
+- Always include currency code in cost outputs.
+- If `preferences.currency` is not `USD`, convert from USD using a reliable current FX source before presenting costs.
+- If conversion is unavailable or currency code is invalid, warn and display USD.
+
 ## Purpose
 Provide a consistent, low-friction workflow layer on top of TGC MCP tools so users can ask in natural language and still get safe, auditable API actions.
 
@@ -21,6 +33,33 @@ Provide a consistent, low-friction workflow layer on top of TGC MCP tools so use
 - For component interrogation:
   - default to all component types in the game,
   - only return a single component type when user explicitly requests that filter.
+- For component creation requests, run a component preflight before calling create tools:
+  - fetch and review product metadata from:
+    - `https://www.thegamecrafter.com/api/tgc/products/<Identity>`
+    - `https://www.thegamecrafter.com/make/products/<Identity>`
+    - product `info` help URL (when available in metadata)
+    - product `videos` metadata (prefer direct YouTube links where available)
+  - validate constraints (dimensions, page-count rules, min/max limits, finish support, required files).
+  - warn on likely TGC warnings/failures and provide corrective choices before mutating.
+  - for end-user responses, include product/help/video links; omit API links unless requested.
+- If user intent is generic (for example "add a rulebook") and no component is specified:
+  - propose the best 2-3 relevant implemented options,
+  - never exceed 3 options,
+  - include brief fit/cost/constraint comparisons,
+  - wait for user selection before creating components.
+
+## Print-Safe Image Rules (Cut + Binding)
+- Use product templates/overlays whenever available from product metadata (`templates`, `mask`, `overlay`).
+- Keep all critical text/icons inside safe area, not on trim/bleed boundaries.
+- For bound books, reserve additional inner margin for binding/gutter so text is not lost near spine.
+- When generating pages from PDFs:
+  - do not edge-fit text to full bleed by default,
+  - inset content conservatively, then center on target canvas,
+  - default guidance when template-safe zones are not machine-readable:
+    - outer safe inset: at least 5% of page width/height,
+    - binding-side inset for bound products: at least 8%,
+  - for two-page spreads, avoid placing critical content across the spine.
+- Trigger a warning before upload if source layout appears too close to edge/gutter (as seen in proof overlays).
 
 ## Baseline Workflow: Create Game
 1. Call `tgc_auth_login` if no active session.
@@ -124,7 +163,133 @@ Provide a consistent, low-friction workflow layer on top of TGC MCP tools so use
     - use `tgc_component_page_create`
     - `bookletpage` expects `booklet_id` (handled internally from `parentId`)
     - `coilbookpage` and `perfectboundbookpage` expect `book_id` (handled internally from `parentId`)
+    - page image payload must be sent as `image_id` (not `face_id`) to avoid blank/duplicate page renders.
+    - set `sequenceNumber` explicitly for page order-sensitive workflows to avoid ordering anomalies.
   - for page readback, use relationship `pages` on parent component types (`booklet`, `coilbook`, `perfectboundbook`).
+
+## Component Guidance Profiles (Seed Set)
+
+### Document (`Document`)
+- Product page:
+  - `https://www.thegamecrafter.com/make/products/Document`
+- Product API:
+  - `https://www.thegamecrafter.com/api/tgc/products/Document`
+- Help article:
+  - `https://help.thegamecrafter.com/article/89-documents`
+- Key constraints (from product metadata):
+  - image size: `2550x3300`
+  - not full bleed, not stapled
+  - folds (Z-fold at minimum; additional folds for smaller boxes)
+  - double-sided color printing
+- Pricing examples (metadata snapshot):
+  - qty 1: `1.82 USD`
+  - qty 10: `1.62 USD`
+  - qty 100: `1.33 USD`
+  - qty 500: `1.12 USD`
+  - qty 1000: `0.99 USD`
+
+### Large Booklet (`LargeBooklet`)
+- Product page:
+  - `https://www.thegamecrafter.com/make/products/LargeBooklet`
+- Product API:
+  - `https://www.thegamecrafter.com/api/tgc/products/LargeBooklet`
+- Help article:
+  - `http://help.thegamecrafter.com/article/80-booklets`
+- Key constraints (from product metadata):
+  - page image size: `1575x2475`
+  - max page count: `40`
+  - page-count rule: printed 4 to a sheet (pages should be a multiple of 4)
+  - page order is sequence-driven via page number/sequence
+- Pricing examples (metadata snapshot):
+  - qty 1: `1.88 USD`
+  - qty 10: `1.70 USD`
+  - qty 100: `1.38 USD`
+  - qty 500: `1.18 USD`
+  - qty 1000: `1.02 USD`
+- Preflight actions:
+  - if requested page count is not divisible by 4, offer:
+    - auto-append blank pages to next multiple of 4, or
+    - user-supplied additional pages.
+  - if page count exceeds 40, suggest `DigestPerfectBoundBook`.
+
+### Medium Coil Book (`MediumCoilBook`)
+- Product page:
+  - `https://www.thegamecrafter.com/make/products/MediumCoilBook`
+- Product API:
+  - `https://www.thegamecrafter.com/api/tgc/products/MediumCoilBook`
+- Help article:
+  - `http://help.thegamecrafter.com/`
+- Key constraints (from product metadata):
+  - page image size: `1575x2325`
+  - min page count: `4`
+  - max page count: `200`
+  - full page count includes covers
+  - even page totals preferred for an exterior back cover
+  - cover and optional cardstock pages may support UV/linen
+- Pricing examples (metadata snapshot):
+  - qty 1: `7.65 USD`
+  - qty 10: `6.87 USD`
+  - qty 100: `5.69 USD`
+  - qty 500: `4.78 USD`
+  - qty 1000: `4.15 USD`
+
+### Digest Perfect Bound Book (`DigestPerfectBoundBook`)
+- Product page:
+  - `https://www.thegamecrafter.com/make/products/DigestPerfectBoundBook`
+- Product API:
+  - `https://www.thegamecrafter.com/api/tgc/products/DigestPerfectBoundBook`
+- Help article:
+  - `https://help.thegamecrafter.com/article/468-setting-up-a-spine`
+- Key constraints (from product metadata):
+  - page image size: `1725x2625`
+  - min page count: `40`
+  - max page count: `200`
+  - total page count includes covers
+  - odd page totals may not provide an exterior back cover; even totals are preferred
+  - supports UV and linen texture on covers
+- Pricing examples (metadata snapshot):
+  - qty 1: `11.45 USD`
+  - qty 10: `10.45 USD`
+  - qty 100: `8.64 USD`
+  - qty 500: `7.39 USD`
+  - qty 1000: `6.47 USD`
+- Preflight actions:
+  - if page count < 40 or > 200, require adjustment before create.
+  - if odd page count, offer to append one blank page for even parity.
+
+### Medium Score Pad Color (`MediumScorePadColor`)
+- Product page:
+  - `https://www.thegamecrafter.com/make/products/MediumScorePadColor`
+- Product API:
+  - `https://www.thegamecrafter.com/api/tgc/products/MediumScorePadColor`
+- Help article:
+  - `http://help.thegamecrafter.com/article/95-score-pads`
+- Key constraints (from product metadata):
+  - image size: `1425x2475`
+  - glue bound; white cardstock back
+  - page block thickness depends on page variant
+- Pricing examples (metadata snapshot):
+  - qty 1: `7.00 USD`
+  - qty 10: `5.20 USD`
+  - qty 100: `4.30 USD`
+  - qty 500: `3.70 USD`
+  - qty 1000: `3.30 USD`
+
+## Guided Prompt Pattern For Book Requests
+- For prompts like "Create a 10 page booklet from this PDF", respond with:
+  - up to 3 likely-fit component options (for example `LargeBooklet`, `MediumCoilBook`, `DigestPerfectBoundBook`) with concise tradeoffs,
+  - a brief choice comparison (for example `LargeBooklet` vs `DigestPerfectBoundBook`),
+  - page-count feasibility check against each option,
+  - corrective options (blank-page padding or alternate component),
+  - source links (product page + help page + video links when available),
+  - then ask for explicit approval before applying padding or switching component type.
+  - do not auto-create until user selects one option.
+
+## Video Link Handling
+- If product metadata provides YouTube IDs in `videos`, format direct links as:
+  - `https://www.youtube.com/watch?v=<video_id>`
+- If titles are available, include titles with links.
+- If titles are not available, indicate video content is available and list the video IDs.
 
 ## Output Style
 - Keep updates concise and concrete.

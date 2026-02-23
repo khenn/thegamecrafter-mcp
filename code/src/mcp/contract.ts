@@ -441,6 +441,7 @@ export const TOOL_CONTRACT: ToolContract[] = [
         frontFileId: { type: "string" },
         backFileId: { type: "string" },
         quantity: { type: "integer", minimum: 1, maximum: 9999 },
+        sequenceNumber: { type: "integer", minimum: 1, maximum: 5000 },
       },
       required: ["componentType", "parentId", "name", "frontFileId"],
       additionalProperties: false,

@@ -513,6 +513,7 @@ export class TgcService {
     frontFileId: string;
     backFileId?: string;
     quantity?: number;
+    sequenceNumber?: number;
   }): Promise<Record<string, unknown>> {
     const session = this.requireSession();
     const safeComponentType = normalizePathToken(input.componentType, "componentType");
@@ -534,9 +535,10 @@ export class TgcService {
       form: {
         [parentField]: input.parentId,
         name: input.name,
-        face_id: input.frontFileId,
+        image_id: input.frontFileId,
         back_id: input.backFileId,
         quantity: input.quantity,
+        sequence_number: input.sequenceNumber,
       },
     });
   }

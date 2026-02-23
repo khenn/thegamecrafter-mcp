@@ -85,6 +85,14 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
     - `/api/perfectboundbook`
     - `/api/perfectboundbookpage`
     - `/api/scorepad`
+- [ ] Add component-intelligence guidance layer for each implemented component family.
+  - [x] Seeded for:
+    - `LargeBooklet`
+    - `DigestPerfectBoundBook`
+  - [ ] For every newly supported component family, add:
+    - source URLs in skills/docs (`make/products`, `api/tgc/products`, and help/article link when present),
+    - preflight validation rules (bounds, parity, required assets, finish options),
+    - guided warning/correction prompts before mutation when requests violate constraints.
 - [ ] Test gate:
   - For each newly added create API family, add a live integration probe that creates at least one valid component and verifies readback.
 

@@ -192,15 +192,17 @@ codex mcp remove thegamecrafter
       "command": "node",
       "args": ["/absolute/path/to/thegamecrafter-mcp/code/dist/index.js"],
       "env": {
-        "TGC_API_BASE_URL": "https://www.thegamecrafter.com",
-        "TGC_PUBLIC_API_KEY_ID": "<YOUR_TGC_PUBLIC_KEY_ID>",
-        "TGC_USERNAME": "<YOUR_TGC_USERNAME>",
-        "TGC_PASSWORD": "<YOUR_TGC_PASSWORD>"
+        "TGC_API_BASE_URL": "${TGC_API_BASE_URL}",
+        "TGC_PUBLIC_API_KEY_ID": "${TGC_PUBLIC_API_KEY_ID}",
+        "TGC_USERNAME": "${TGC_USERNAME}",
+        "TGC_PASSWORD": "${TGC_PASSWORD}"
       }
     }
   }
 }
 ```
+
+If your Claude runtime inherits environment variables from the parent process, you can omit the `env` block and set `TGC_*` in your shell/session before launch.
 
 5. Restart Claude client/runtime so the MCP server is loaded.
 

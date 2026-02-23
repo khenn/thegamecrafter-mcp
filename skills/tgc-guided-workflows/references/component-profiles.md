@@ -100,3 +100,27 @@ Finish behavior notes:
 - Product: `https://www.thegamecrafter.com/make/products/PokerBooster`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/PokerBooster`
 - Help: `https://help.thegamecrafter.com/article/364-booster-packs-faq`
+
+## Batch 3 Authoritative References (Board/Mat Surfaces)
+
+### onesided (`MediumGameMat`)
+- Product: `https://www.thegamecrafter.com/make/products/MediumGameMat`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/MediumGameMat`
+- Help: no product `info` URL returned by current product metadata snapshot.
+- Image size: `7275x4275`
+- Image slot: `face`
+- Video content:
+  - `https://www.youtube.com/watch?v=c9O_P2C4NW0`
+  - `https://www.youtube.com/watch?v=Mfaoks6DE3w`
+- Notes:
+  - ships outside game box; may increase shipping cost.
+
+### onesidedgloss (`BiFoldBoard`)
+- Product: `https://www.thegamecrafter.com/make/products/BiFoldBoard`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/BiFoldBoard`
+- Help: `http://help.thegamecrafter.com/article/90-game-boards`
+- Image size: `2775x5475`
+- Image slot: `face`
+- Notes:
+  - foldable board form factor.
+  - product notes indicate surfacing options are not suitable for dry-erase markers.

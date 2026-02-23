@@ -20,6 +20,7 @@
     "test:integration:batch0-smoke-harness": "tsx scripts/dev/test-batch0-smoke-harness.ts",
     "test:integration:packaging-core": "tsx scripts/dev/test-packaging-core.ts",
     "test:integration:batch2-books-documents": "tsx scripts/dev/test-batch2-books-documents.ts",
+    "test:integration:batch3-board-mat-surfaces": "tsx scripts/dev/test-batch3-board-mat-surfaces.ts",
     "report:component-matrix": "tsx scripts/dev/generate-component-capability-matrix.ts"
   },
   "dependencies": {

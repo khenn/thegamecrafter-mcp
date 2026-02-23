@@ -8,9 +8,9 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
 
 ## Current Gap Snapshot
 - Catalog products discovered: 201
-- Fully supported: 170
-- Products with gaps: 31
-- Missing create API families: 12
+- Fully supported: 178
+- Products with gaps: 23
+- Missing create API families: 10
 
 ## Build Principles
 - Ship in batches by reusable API family, not by individual product identity.
@@ -60,14 +60,14 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
     - [x] Create one fixture each for document/booklet/coil/perfectbound/scorepad.
     - [x] Verify page counts and membership/relationships via read endpoints.
 
-- [ ] **Batch 3: Board/Mat Surface Types**
+- [x] **Batch 3: Board/Mat Surface Types**
   - API families:
-    - `/api/onesided`
-    - `/api/onesidedgloss`
+    - [x] `/api/onesided`
+    - [x] `/api/onesidedgloss`
   - Why here:
     - Unlocks mats/boards variants used by many complex games.
   - Validation gate:
-    - Build fixtures for neoprene mat + fold board identities and verify dimensions/identity.
+    - [x] Build fixtures for neoprene mat + fold board identities and verify dimensions/identity.
 
 - [ ] **Batch 4: Advanced Cut and Dial Families**
   - API families:

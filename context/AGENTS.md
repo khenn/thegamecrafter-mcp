@@ -131,6 +131,14 @@ Rules:
     - `https://www.thegamecrafter.com/make/products/PokerBooster`
     - `https://www.thegamecrafter.com/api/tgc/products/PokerBooster`
     - `https://help.thegamecrafter.com/article/364-booster-packs-faq`
+- Batch 3 implemented references (for preflight/linking):
+  - `onesided` / `MediumGameMat`:
+    - `https://www.thegamecrafter.com/make/products/MediumGameMat`
+    - `https://www.thegamecrafter.com/api/tgc/products/MediumGameMat`
+  - `onesidedgloss` / `BiFoldBoard`:
+    - `https://www.thegamecrafter.com/make/products/BiFoldBoard`
+    - `https://www.thegamecrafter.com/api/tgc/products/BiFoldBoard`
+    - `http://help.thegamecrafter.com/article/90-game-boards`
 
 ## End-User Output Links
 - Default to user-facing links:

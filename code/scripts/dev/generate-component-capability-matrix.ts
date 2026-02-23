@@ -32,6 +32,8 @@ const VALIDATED_CREATE_APIS = new Set<string>([
   "/api/boxtopgloss",
   "/api/twosidedboxgloss",
   "/api/boxface",
+  "/api/onesided",
+  "/api/onesidedgloss",
   "/api/document",
   "/api/booklet",
   "/api/bookletpage",

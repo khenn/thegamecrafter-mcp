@@ -23,23 +23,23 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
 - [x] Implement `tgc_game_delete`.
 - [x] Implement `tgc_game_update`.
 - [x] Implement `tgc_game_copy`.
-- [ ] Test gate:
+- [x] Test gate:
   - [x] Create/delete integration test leaves no residual test games.
-  - Patch updates are reflected on subsequent reads.
-  - Copy creates a new game with expected metadata.
+  - [x] Patch updates are reflected on subsequent reads.
+  - [x] Copy creates a new game with expected metadata.
 
 ## Milestone 3 - Asset Ingestion
 - [x] Implement `tgc_folder_create`.
 - [x] Implement `tgc_file_upload`.
-- [ ] Test gate:
+- [x] Test gate:
   - [x] Folder creation and file upload IDs are reusable in later steps.
 
 ## Milestone 4 - Card Component Buildout
 - [x] Implement `tgc_deck_create`.
 - [x] Implement `tgc_card_create`.
 - [x] Implement `tgc_deck_bulk_create_cards`.
-- [ ] Test gate:
-  - Deck/card creation works from uploaded art files.
+- [x] Test gate:
+  - [x] Deck/card creation works from uploaded art files.
   - [x] Bulk card creation maps to TGC `face_id`/`back_id` payload and preserves `face_id` in created cards.
 
 ## Milestone 5 - Part Linking and Cost Visibility
@@ -85,16 +85,21 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
     - `/api/perfectboundbook`
     - `/api/perfectboundbookpage`
     - `/api/scorepad`
+  - [x] Board/mat surface coverage validated:
+    - `/api/onesided`
+    - `/api/onesidedgloss`
 - [ ] Add component-intelligence guidance layer for each implemented component family.
   - [x] Seeded for:
     - `LargeBooklet`
     - `DigestPerfectBoundBook`
+    - Batch 1 packaging families
+    - Batch 3 board/mat families
   - [ ] For every newly supported component family, add:
     - source URLs in skills/docs (`make/products`, `api/tgc/products`, and help/article link when present),
     - preflight validation rules (bounds, parity, required assets, finish options),
     - guided warning/correction prompts before mutation when requests violate constraints.
-- [ ] Test gate:
-  - For each newly added create API family, add a live integration probe that creates at least one valid component and verifies readback.
+- [x] Test gate:
+  - [x] For each newly added create API family, add a live integration probe that creates at least one valid component and verifies readback.
 
 ## Milestone 7 - Publish Readiness
 - [ ] Implement `tgc_game_publish`.

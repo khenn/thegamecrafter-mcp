@@ -349,6 +349,9 @@ Implemented additions (read/interrogation primitives):
     - `/api/boxtopgloss`
     - `/api/twosidedboxgloss`
     - `/api/boxface`
+  - Board/mat surface coverage validated in live tests for:
+    - `/api/onesided`
+    - `/api/onesidedgloss`
 
 24. `tgc_component_item_create`
 - Purpose: Create an item/member within a set-based container.

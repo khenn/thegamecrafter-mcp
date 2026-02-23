@@ -8,9 +8,9 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
 
 ## Current Gap Snapshot
 - Catalog products discovered: 201
-- Fully supported: 178
-- Products with gaps: 23
-- Missing create API families: 10
+- Fully supported: 194
+- Products with gaps: 7
+- Missing create API families: 5
 
 ## Build Principles
 - Ship in batches by reusable API family, not by individual product identity.
@@ -69,15 +69,15 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
   - Validation gate:
     - [x] Build fixtures for neoprene mat + fold board identities and verify dimensions/identity.
 
-- [ ] **Batch 4: Advanced Cut and Dial Families**
+- [x] **Batch 4: Advanced Cut and Dial Families**
   - API families:
-    - `/api/dial`
-    - `/api/customcutonesidedslugged`
-    - `/api/customcuttwosidedslugged`
-    - `/api/threesidedcustomcutset`, `/api/threesidedcustomcut`
+    - [x] `/api/dial`
+    - [x] `/api/customcutonesidedslugged`
+    - [x] `/api/customcuttwosidedslugged`
+    - [x] `/api/threesidedcustomcutset`, `/api/threesidedcustomcut`
   - Validation gate:
-    - Create one dual-layer board-like fixture and one custom-cut sticker/punchout fixture.
-    - Verify child member creation semantics and quantities.
+    - [x] Create one dual-layer board-like fixture and one custom-cut sticker/punchout fixture.
+    - [x] Verify child member creation semantics and quantities.
 
 - [ ] **Batch 5: Specialty Parts and Custom Dice/Meeples**
   - API families:

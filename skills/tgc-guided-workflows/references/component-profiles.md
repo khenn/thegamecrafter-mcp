@@ -124,3 +124,41 @@ Finish behavior notes:
 - Notes:
   - foldable board form factor.
   - product notes indicate surfacing options are not suitable for dry-erase markers.
+
+## Batch 4 Authoritative References (Advanced Cut + Dial)
+
+### dial (`SmallDial`)
+- Product: `https://www.thegamecrafter.com/make/products/SmallDial`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/SmallDial`
+- Help: `http://help.thegamecrafter.com/article/87-dials`
+- Image size: `825x2400`
+- Image slot: `outside`
+- Video content:
+  - `https://www.youtube.com/watch?v=9g7X1eq-bkU`
+
+### customcutonesidedslugged (`CustomSmallSticker`)
+- Product: `https://www.thegamecrafter.com/make/products/CustomSmallSticker`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomSmallSticker`
+- Help: `http://help.thegamecrafter.com/article/365-custom-stickers`
+- Image size: `975x1575`
+- Image slot: `face`
+
+### customcuttwosidedslugged (`CustomSmallPunchout`)
+- Product: `https://www.thegamecrafter.com/make/products/CustomSmallPunchout`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomSmallPunchout`
+- Help: `http://help.thegamecrafter.com/article/201-custom-punchouts`
+- Image size: `975x1575`
+- Image slots: `face`, `back`
+- Video content:
+  - `https://www.youtube.com/watch?v=SSIoi6KnMik`
+
+### threesidedcustomcutset (`SmallDualLayerBoard`) + threesidedcustomcut (`members`)
+- Product: `https://www.thegamecrafter.com/make/products/SmallDualLayerBoard`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/SmallDualLayerBoard`
+- Help: `http://help.thegamecrafter.com/article/658-dual-layer-boards`
+- Set image size: `1125x1725`
+- Set image slots: `face`, `back`, `inner`
+- Child API: `/api/threesidedcustomcut`
+- Child relationship: `members`
+- Video content:
+  - `https://www.youtube.com/watch?v=oxesLyWqcew`

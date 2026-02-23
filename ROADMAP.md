@@ -88,12 +88,19 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
   - [x] Board/mat surface coverage validated:
     - `/api/onesided`
     - `/api/onesidedgloss`
+  - [x] Advanced cut and dial coverage validated:
+    - `/api/dial`
+    - `/api/customcutonesidedslugged`
+    - `/api/customcuttwosidedslugged`
+    - `/api/threesidedcustomcutset`
+    - `/api/threesidedcustomcut`
 - [ ] Add component-intelligence guidance layer for each implemented component family.
   - [x] Seeded for:
     - `LargeBooklet`
     - `DigestPerfectBoundBook`
     - Batch 1 packaging families
     - Batch 3 board/mat families
+    - Batch 4 advanced cut/dial families
   - [ ] For every newly supported component family, add:
     - source URLs in skills/docs (`make/products`, `api/tgc/products`, and help/article link when present),
     - preflight validation rules (bounds, parity, required assets, finish options),

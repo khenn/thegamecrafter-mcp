@@ -326,6 +326,7 @@ Implemented additions (read/interrogation primitives):
   - `frontFileId` (string, optional)
   - `outsideFileId` (string, optional)
   - `insideFileId` (string, optional)
+  - `innerFileId` (string, optional)
   - `topFileId` (string, optional)
   - `bottomFileId` (string, optional)
   - `spotGlossFileId` (string, optional)
@@ -352,6 +353,11 @@ Implemented additions (read/interrogation primitives):
   - Board/mat surface coverage validated in live tests for:
     - `/api/onesided`
     - `/api/onesidedgloss`
+  - Advanced cut and dial coverage validated in live tests for:
+    - `/api/dial`
+    - `/api/customcutonesidedslugged`
+    - `/api/customcuttwosidedslugged`
+    - `/api/threesidedcustomcutset`
 
 24. `tgc_component_item_create`
 - Purpose: Create an item/member within a set-based container.
@@ -361,12 +367,14 @@ Implemented additions (read/interrogation primitives):
   - `name` (string, required)
   - `frontFileId` (string, required)
   - `backFileId` (string, optional)
+  - `innerFileId` (string, optional)
   - `quantity` (integer, optional)
   - `hasProofedFace` (boolean, optional)
   - `hasProofedBack` (boolean, optional)
 - Output data:
   - `item` (object)
   - Status: implemented
+  - Live validation includes `/api/threesidedcustomcut` member creation under `/api/threesidedcustomcutset`.
 
 25. `tgc_component_page_create`
 - Purpose: Create pages for book-family components.

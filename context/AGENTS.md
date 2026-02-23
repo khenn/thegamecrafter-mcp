@@ -160,6 +160,24 @@ Rules:
     - `https://www.thegamecrafter.com/make/products/BiFoldBoard`
     - `https://www.thegamecrafter.com/api/tgc/products/BiFoldBoard`
     - `http://help.thegamecrafter.com/article/90-game-boards`
+- Batch 4 implemented references (for preflight/linking):
+  - `dial` / `SmallDial`:
+    - `https://www.thegamecrafter.com/make/products/SmallDial`
+    - `https://www.thegamecrafter.com/api/tgc/products/SmallDial`
+    - `http://help.thegamecrafter.com/article/87-dials`
+  - `customcutonesidedslugged` / `CustomSmallSticker`:
+    - `https://www.thegamecrafter.com/make/products/CustomSmallSticker`
+    - `https://www.thegamecrafter.com/api/tgc/products/CustomSmallSticker`
+    - `http://help.thegamecrafter.com/article/365-custom-stickers`
+  - `customcuttwosidedslugged` / `CustomSmallPunchout`:
+    - `https://www.thegamecrafter.com/make/products/CustomSmallPunchout`
+    - `https://www.thegamecrafter.com/api/tgc/products/CustomSmallPunchout`
+    - `http://help.thegamecrafter.com/article/201-custom-punchouts`
+  - `threesidedcustomcutset` / `SmallDualLayerBoard`:
+    - `https://www.thegamecrafter.com/make/products/SmallDualLayerBoard`
+    - `https://www.thegamecrafter.com/api/tgc/products/SmallDualLayerBoard`
+    - `http://help.thegamecrafter.com/article/658-dual-layer-boards`
+    - child create API: `/api/threesidedcustomcut` via relationship `members`
 
 ## End-User Output Links
 - Default to user-facing links:

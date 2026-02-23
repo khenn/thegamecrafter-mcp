@@ -21,6 +21,7 @@ This README is optimized for both:
 - Node.js `>=20` (tested on Node `24.x`)
 - npm
 - Git
+- Codex CLI `>=0.104.0` (for Codex MCP setup; tested on `0.104.0`)
 - TGC account
 - TGC API key pair (you must use the **public key ID**)
 
@@ -135,30 +136,40 @@ Use it when you want an LLM to create or manage your own TGC games through audit
 cd /absolute/path/to/thegamecrafter-mcp
 ```
 
-2. Ensure helper scripts are executable:
+2. Register the MCP server directly (standard Codex method):
 
 ```bash
-chmod +x code/scripts/dev/run-tgc-mcp.sh code/scripts/dev/configure-codex-mcp.sh
+codex mcp add thegamecrafter \
+  --env TGC_API_BASE_URL="$TGC_API_BASE_URL" \
+  --env TGC_PUBLIC_API_KEY_ID="$TGC_PUBLIC_API_KEY_ID" \
+  --env TGC_USERNAME="$TGC_USERNAME" \
+  --env TGC_PASSWORD="$TGC_PASSWORD" \
+  -- node /absolute/path/to/thegamecrafter-mcp/code/dist/index.js
 ```
 
-3. Register MCP server in Codex:
+Windows (PowerShell):
 
-```bash
-code/scripts/dev/configure-codex-mcp.sh thegamecrafter
+```powershell
+codex mcp add thegamecrafter `
+  --env TGC_API_BASE_URL="$env:TGC_API_BASE_URL" `
+  --env TGC_PUBLIC_API_KEY_ID="$env:TGC_PUBLIC_API_KEY_ID" `
+  --env TGC_USERNAME="$env:TGC_USERNAME" `
+  --env TGC_PASSWORD="$env:TGC_PASSWORD" `
+  -- node C:\absolute\path\to\thegamecrafter-mcp\code\dist\index.js
 ```
 
-4. Verify:
+3. Verify:
 
 ```bash
 codex mcp list
 codex mcp get thegamecrafter
 ```
 
-Windows note:
-- The helper scripts are bash scripts. On Windows, run them in WSL/Git Bash, or register the same server manually in Codex using:
-  - command: `node`
-  - args: `["<ABSOLUTE_PATH>\\thegamecrafter-mcp\\code\\dist\\index.js"]`
-  - env: `TGC_API_BASE_URL`, `TGC_PUBLIC_API_KEY_ID`, `TGC_USERNAME`, `TGC_PASSWORD`
+4. If you need to update the config later, remove and re-add:
+
+```bash
+codex mcp remove thegamecrafter
+```
 
 ### MCP Install For Claude (Step-by-step)
 
@@ -388,7 +399,7 @@ Set up The Game Crafter MCP from source on this machine.
 ## Repository Map
 
 - MCP source: `code/src/`
-- MCP helper scripts: `code/scripts/dev/`
+- MCP dev scripts: `code/scripts/dev/`
 - Public agent profile: `context/AGENTS.md`
 - Public skill: `skills/tgc-guided-workflows/SKILL.md`
 - Local build profile: `AGENTS.md`

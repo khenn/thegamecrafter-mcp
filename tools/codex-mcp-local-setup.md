@@ -5,6 +5,7 @@ Configure Codex CLI to run this project's TGC MCP server locally.
 
 ## Prerequisites
 - Node 20+ installed.
+- Codex CLI `>=0.104.0`.
 - Project built at least once:
   - `cd code && npm install && npm run build`
 - TGC environment variables exported in your shell:
@@ -17,8 +18,12 @@ Configure Codex CLI to run this project's TGC MCP server locally.
 From project root:
 
 ```bash
-chmod +x code/scripts/dev/run-tgc-mcp.sh code/scripts/dev/configure-codex-mcp.sh
-code/scripts/dev/configure-codex-mcp.sh thegamecrafter
+codex mcp add thegamecrafter \
+  --env TGC_API_BASE_URL="$TGC_API_BASE_URL" \
+  --env TGC_PUBLIC_API_KEY_ID="$TGC_PUBLIC_API_KEY_ID" \
+  --env TGC_USERNAME="$TGC_USERNAME" \
+  --env TGC_PASSWORD="$TGC_PASSWORD" \
+  -- node /absolute/path/to/thegamecrafter-mcp/code/dist/index.js
 ```
 
 This registers a Codex MCP server named `thegamecrafter`.

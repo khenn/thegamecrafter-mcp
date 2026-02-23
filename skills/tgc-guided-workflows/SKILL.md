@@ -1,3 +1,8 @@
+---
+name: tgc-guided-workflows
+description: Guided workflows and guardrails for The Game Crafter MCP usage, including game creation, component preflight checks, print-safe asset handling, and safe mutation sequencing.
+---
+
 # Skill: TGC Guided Workflows
 
 ## Preferences (Global)

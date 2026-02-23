@@ -210,7 +210,7 @@ If your Claude runtime inherits environment variables from the parent process, y
 
 ### Skills Description And Intended Use
 
-`skills/tgc-guided-workflows/SKILL.md` provides reusable workflow logic, including:
+`skills/tgc-guided-workflows/` is a Codex skill package. It provides reusable workflow logic, including:
 - guided TGC intent handling
 - component preflight checks
 - print-safety guardrails
@@ -220,43 +220,83 @@ Use this when you want your LLM to behave consistently during game-building task
 
 ### Skills Install For Codex (Step-by-step)
 
-1. Choose your agent workspace folder.
-2. Set a workspace path variable:
-   - Unix-like example: `export AGENT_WORKSPACE="$HOME/my-tgc-agent"`
-   - PowerShell example: `$AGENT_WORKSPACE="$HOME\\my-tgc-agent"`
-3. Create the Codex skills path.
-4. Copy the skill file.
+Codex standard locations (choose one):
+- Project-scoped (recommended): `<PROJECT_ROOT>/.codex/skills/`
+- User-scoped: `~/.codex/skills/`
+
+1. Set path variables:
+- Unix-like example:
+
+```bash
+export PROJECT_ROOT="/absolute/path/to/your-project"
+export CODEX_SKILLS_DIR="$PROJECT_ROOT/.codex/skills"
+```
+
+- PowerShell example:
+
+```powershell
+$PROJECT_ROOT="C:\absolute\path\to\your-project"
+$CODEX_SKILLS_DIR="$PROJECT_ROOT\.codex\skills"
+```
+
+2. Copy the entire skill folder (not only `SKILL.md`):
 
 Unix-like:
 
 ```bash
-mkdir -p "$AGENT_WORKSPACE/skills/tgc-guided-workflows"
-cp /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows/SKILL.md \
-  "$AGENT_WORKSPACE/skills/tgc-guided-workflows/SKILL.md"
+mkdir -p "$CODEX_SKILLS_DIR"
+cp -R /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows "$CODEX_SKILLS_DIR/"
 ```
 
-Windows (PowerShell):
+PowerShell:
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$AGENT_WORKSPACE\skills\tgc-guided-workflows" | Out-Null
-Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-guided-workflows\SKILL.md" `
-  "$AGENT_WORKSPACE\skills\tgc-guided-workflows\SKILL.md"
+New-Item -ItemType Directory -Force -Path $CODEX_SKILLS_DIR | Out-Null
+Copy-Item -Recurse -Force "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-guided-workflows" `
+  "$CODEX_SKILLS_DIR\tgc-guided-workflows"
 ```
 
-5. Start Codex in your workspace (`$AGENT_WORKSPACE`) so it can discover local skills.
+3. Restart Codex so newly installed skills are loaded.
 
 ### Skills Install For Claude (Step-by-step)
 
-Claude runtimes do not universally support Codex-native `SKILL.md` loading. Use one of these standard approaches:
+Claude standard locations (choose one):
+- Project-scoped (recommended): `<PROJECT_ROOT>/.claude/skills/`
+- User-scoped: `~/.claude/skills/`
 
-1. Project instruction method:
-- copy `SKILL.md` content into your Claude project instructions.
+1. Set path variables:
+- PowerShell example:
 
-2. File reference method:
-- keep `SKILL.md` in your workspace and instruct Claude to apply it at session start.
+```powershell
+$PROJECT_ROOT="C:\absolute\path\to\your-project"
+$CLAUDE_SKILLS_DIR="$PROJECT_ROOT\.claude\skills"
+```
 
-Recommended minimal instruction for Claude:
-- "Apply instructions from `skills/tgc-guided-workflows/SKILL.md` before responding."
+- Unix-like example:
+
+```bash
+export PROJECT_ROOT="/absolute/path/to/your-project"
+export CLAUDE_SKILLS_DIR="$PROJECT_ROOT/.claude/skills"
+```
+
+2. Copy the same skill folder into Claude skills directory:
+
+PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force -Path $CLAUDE_SKILLS_DIR | Out-Null
+Copy-Item -Recurse -Force "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-guided-workflows" `
+  "$CLAUDE_SKILLS_DIR\tgc-guided-workflows"
+```
+
+Unix-like:
+
+```bash
+mkdir -p "$CLAUDE_SKILLS_DIR"
+cp -R /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows "$CLAUDE_SKILLS_DIR/"
+```
+
+3. Restart Claude Code so newly installed skills are loaded.
 
 ## Agent
 
@@ -272,28 +312,28 @@ Use it when you want predictable agent behavior across sessions and tools.
 
 ### Agent Install For Codex (Step-by-step)
 
-1. Choose your agent workspace folder.
-2. Set a workspace path variable:
-   - Unix-like example: `export AGENT_WORKSPACE="$HOME/my-tgc-agent"`
-   - PowerShell example: `$AGENT_WORKSPACE="$HOME\\my-tgc-agent"`
-3. Copy the public agent profile to workspace root as `AGENTS.md`.
+1. Choose your target project root.
+2. Set a project path variable:
+   - Unix-like example: `export PROJECT_ROOT="$HOME/my-tgc-project"`
+   - PowerShell example: `$PROJECT_ROOT="$HOME\\my-tgc-project"`
+3. Copy the public agent profile to project root as `AGENTS.md`.
 
 Unix-like:
 
 ```bash
-mkdir -p "$AGENT_WORKSPACE"
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md "$AGENT_WORKSPACE/AGENTS.md"
+mkdir -p "$PROJECT_ROOT"
+cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md "$PROJECT_ROOT/AGENTS.md"
 ```
 
 Windows (PowerShell):
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$AGENT_WORKSPACE" | Out-Null
+New-Item -ItemType Directory -Force -Path "$PROJECT_ROOT" | Out-Null
 Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
-  "$AGENT_WORKSPACE\AGENTS.md"
+  "$PROJECT_ROOT\AGENTS.md"
 ```
 
-4. Start Codex in your workspace (`$AGENT_WORKSPACE`).
+4. Start Codex in your target project (`$PROJECT_ROOT`).
 
 ### Agent Install For Claude (Step-by-step)
 
@@ -301,23 +341,23 @@ This repository does **not** include a `Claude.md` file directly.
 
 To convert `AGENTS.md` to Claude format:
 
-1. Ensure `AGENT_WORKSPACE` is set to your workspace path.
+1. Ensure `PROJECT_ROOT` is set to your target project path.
 2. Copy and rename the public profile:
 
 Unix-like:
 
 ```bash
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md "$AGENT_WORKSPACE/Claude.md"
+cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md "$PROJECT_ROOT/Claude.md"
 ```
 
 Windows (PowerShell):
 
 ```powershell
 Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
-  "$AGENT_WORKSPACE\Claude.md"
+  "$PROJECT_ROOT\Claude.md"
 ```
 
-3. Open `Claude.md` in your chosen workspace folder.
+3. Open `Claude.md` in your chosen project folder.
 4. Remove or adjust any Codex-specific wording if your Claude runtime requires different phrasing.
 5. Ensure your Claude runtime/project is configured to load `Claude.md`.
 
@@ -339,7 +379,7 @@ Expected result:
 You can give this prompt to an LLM to execute setup from this README:
 
 ```text
-Read this README and perform setup in order: prerequisites check, npm build, TGC env var setup, MCP registration, then ask me for my agent workspace path and install Agent and Skills there. Stop if any required value is missing, and ask only for that value.
+Read this README and perform setup in order: prerequisites check, npm build, TGC env var setup, MCP registration, then ask me for my target project path and install Agent plus the skill package into standard locations (.codex/skills and optionally .claude/skills). Stop if any required value is missing, and ask only for that value.
 ```
 
 ## Troubleshooting
@@ -390,10 +430,11 @@ Set up The Game Crafter MCP from source on this machine.
 2) Build with: cd code && npm install && npm run build
 3) Configure env vars: TGC_API_BASE_URL, TGC_PUBLIC_API_KEY_ID, TGC_USERNAME, TGC_PASSWORD
 4) Register MCP stdio server named thegamecrafter using node and code/dist/index.js
-5) Ask me for my preferred agent workspace path (do not assume a folder name), then install:
-   - AGENT profile: copy context/AGENTS.md to <WORKSPACE>/AGENTS.md
-   - Skill: copy skills/tgc-guided-workflows/SKILL.md to <WORKSPACE>/skills/tgc-guided-workflows/SKILL.md
-6) For Claude usage, convert AGENTS to Claude.md by copying <WORKSPACE>/AGENTS.md to <WORKSPACE>/Claude.md
+5) Ask me for my target project root path, then install:
+   - AGENT profile: copy context/AGENTS.md to <PROJECT_ROOT>/AGENTS.md
+   - Codex skill: copy folder skills/tgc-guided-workflows to <PROJECT_ROOT>/.codex/skills/tgc-guided-workflows
+   - Claude skill (optional): copy folder skills/tgc-guided-workflows to <PROJECT_ROOT>/.claude/skills/tgc-guided-workflows
+6) For Claude usage, convert AGENTS to Claude.md by copying <PROJECT_ROOT>/AGENTS.md to <PROJECT_ROOT>/Claude.md
 7) Run smoke test: tgc_auth_login, tgc_designer_list, tgc_game_list
 ```
 

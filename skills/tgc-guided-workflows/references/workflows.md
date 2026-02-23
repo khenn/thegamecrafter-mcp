@@ -9,6 +9,17 @@
 4. Call `tgc_game_create`.
 5. Return `gameId`, `name`, and next actions.
 
+## Rulebook From PDF (Outcome-Based)
+When user asks for a rulebook but does not specify component type:
+1. Evaluate viable implemented options (typically `LargeBooklet`, `MediumCoilBook`, `DigestPerfectBoundBook`) against page count and constraints.
+2. Present 2-3 viable options with concise tradeoffs:
+- fit (page-count compatibility),
+- constraints (min/max, parity, multiple-of-4),
+- approximate cost in configured currency when available.
+3. Ask user to choose one option before create.
+4. If only one option is viable, explain why other options are excluded and ask for explicit confirmation before create.
+5. Before upload, run print-safe preflight and offer remediation if clipping/binding risk is detected.
+
 ## Interrogate Game Components
 - Default: return all component types present.
 - Narrow to one type only when user explicitly requests that filter.

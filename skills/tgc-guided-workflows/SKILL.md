@@ -19,6 +19,7 @@ Use this skill to run safe, guided TGC workflows over MCP tools with minimal bac
 - Prefer the smallest valid sequence of tool calls.
 - After each mutation, report what changed and key IDs.
 - For outcome-based requests without explicit component type, suggest 2-3 relevant implemented options, then wait for user selection.
+  - if only one viable option remains, explain why alternatives were excluded and ask for explicit confirmation before create.
 
 ## Component Preflight (Required)
 Before any component mutation:
@@ -31,8 +32,15 @@ Before any component mutation:
 - Keep critical content inside safe zones; avoid trim/bleed for essential text.
 - For bound products, reserve extra gutter margin.
 - If explicit template-safe zones are unavailable, use conservative defaults:
-  - outer inset >= 5%
-  - binding-side inset >= 8%
+  - outer inset >= 7%
+  - binding-side inset >= 12%
+- For PDF/image imports of text-heavy pages:
+  - use contain-fit (not full-bleed fit) and preserve aspect ratio,
+  - center content in a safe frame before export,
+  - apply parity-aware gutter inset for bound books:
+    - odd pages: extra inset on left edge,
+    - even pages: extra inset on right edge.
+- If clipping risk is detected before upload, warn and offer auto-remediation by re-rendering with larger insets.
 
 ## Preferences (Global)
 ```yaml

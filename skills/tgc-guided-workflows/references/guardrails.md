@@ -6,6 +6,19 @@
 - For test/probe runs, use disposable naming and always plan cleanup.
 - TGC delete is soft delete (`trashed: 1`).
 
+## Print-Safe Upload Guardrail
+- Never auto-upload text-heavy PDF/image pages that are edge-fit to full bleed.
+- Use contain-fit render into a safe frame before upload.
+- Default fallback safe frame:
+  - non-bound products: outer inset >=7%
+  - bound products: outer inset >=7%, binding-side inset >=12%
+- For bound books, apply parity-aware gutter inset:
+  - odd pages: extra inset on left
+  - even pages: extra inset on right
+- If proof/clipping risk is detected, stop and offer:
+  1. auto-remediation (re-render with larger safe insets), or
+  2. user-provided revised source pages.
+
 ## Non-Idempotent Bulk Card Creation
 For `tgc_deck_bulk_create_cards`:
 - Treat as append-only and non-idempotent.

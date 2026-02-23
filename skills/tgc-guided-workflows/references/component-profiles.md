@@ -14,11 +14,13 @@ Use these for preflight checks, recommendations, and user-facing links.
 - Size: `1575x2475`
 - Rules: page count multiple of 4; max 40 pages.
 - Preflight: if not multiple of 4, offer blank-page padding.
+- Rulebook suitability: good for short rulebooks; not viable above 40 pages.
 
 ## Medium Coil Book (`MediumCoilBook`)
 - Product: `https://www.thegamecrafter.com/make/products/MediumCoilBook`
 - Size: `1575x2325`
 - Rules: min 4, max 200 pages.
+- Rulebook suitability: viable across a wide page range; good fallback when booklet constraints fail.
 
 ## Digest Perfect Bound Book (`DigestPerfectBoundBook`)
 - Product: `https://www.thegamecrafter.com/make/products/DigestPerfectBoundBook`
@@ -26,6 +28,7 @@ Use these for preflight checks, recommendations, and user-facing links.
 - Size: `1725x2625`
 - Rules: min 40, max 200 pages.
 - Preflight: if odd pages, offer one blank page for even parity.
+- Rulebook suitability: strong fit for longer manuals (for example 40+ pages) with spine/binding considerations.
 
 ## Medium Score Pad Color (`MediumScorePadColor`)
 - Product: `https://www.thegamecrafter.com/make/products/MediumScorePadColor`

@@ -57,11 +57,23 @@ Rules:
   - warn when the request is likely to fail or generate TGC warnings.
   - provide concise correction options (for example padding pages or choosing an alternate component class).
 - If user intent does not specify a component type, offer the best 2-3 relevant implemented options and ask user to choose before create.
+  - if only one viable option remains after constraints, explain why alternatives were excluded and ask for explicit confirmation before create.
 - For generated/derived images, enforce print-safe placement:
   - keep essential content inside safe zones (away from trim/bleed),
   - add extra inner-gutter margin for bound products,
   - use fallback insets when needed (>=5% outer, >=8% binding side),
   - prefer product templates/overlays when available.
+  - for PDF/image imports, do not full-bleed fit text-heavy pages by default:
+    - render using contain-fit onto target canvas,
+    - preserve aspect ratio,
+    - center inside a safe frame before export.
+  - default safe-frame fallback for text-heavy pages:
+    - non-bound products: outer inset >=7%
+    - bound products: outer inset >=7%, binding-side inset >=12%
+  - for bound books, binding side is page-parity dependent:
+    - odd pages: extra inset on left edge
+    - even pages: extra inset on right edge
+  - after render and before upload, run clipping-risk preflight; if risk exists, warn and offer auto-remediation (re-render with larger insets).
 - Book preflight guardrails (v1 scope):
   - `LargeBooklet`:
     - references:
@@ -80,6 +92,10 @@ Rules:
     - min `40` pages, max `200` pages
     - if odd page count, offer blank-page padding for even parity
     - if out of range, require user-approved adjustment before create.
+  - for outcome-based requests like "add my rulebook from this PDF":
+    - present 2-3 viable implemented options with concise tradeoffs (fit, constraints, approximate cost in configured currency),
+    - do not auto-select until user chooses,
+    - if only one option is viable, explain why and request explicit confirmation before create.
 - Batch 2 implemented references (for preflight/linking):
   - `Document`: `https://www.thegamecrafter.com/make/products/Document`, `https://www.thegamecrafter.com/api/tgc/products/Document`, `https://help.thegamecrafter.com/article/89-documents`
   - `LargeBooklet`: `https://www.thegamecrafter.com/make/products/LargeBooklet`, `https://www.thegamecrafter.com/api/tgc/products/LargeBooklet`

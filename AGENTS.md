@@ -33,6 +33,8 @@ This root `AGENTS.md` is for local/project build behavior only.
 ## Skills Maintenance
 - Treat `skills/` as first-class deliverables.
 - When workflows/tool behavior changes materially, update the relevant `skills/<skill>/SKILL.md` in the same workstream.
+- Proactively update `context/AGENTS.md` whenever reusable public behavior for TGC game-building workflows changes.
+- Proactively update both `context/AGENTS.md` and `skills/tgc-guided-workflows/SKILL.md` when new component constraints, options, links, or guardrails are discovered.
 
 ## Session Logging
 - Record each work session in `sessions/` with a dated markdown note.

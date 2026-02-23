@@ -118,3 +118,4 @@ Rules:
 - Keep roadmap items test-gated and incremental.
 - Record meaningful session snapshots in `sessions/`.
 - Keep reusable process docs in `tools/`.
+- Keep this public profile aligned with proven behavior; when TGC component guidance changes, update this file and the corresponding skill docs together.

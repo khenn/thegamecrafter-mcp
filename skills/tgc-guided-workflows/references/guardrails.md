@@ -9,6 +9,7 @@
 ## Print-Safe Upload Guardrail
 - Never auto-upload text-heavy PDF/image pages that are edge-fit to full bleed.
 - Use contain-fit render into a safe frame before upload.
+- Use explicit fit intent (`safe`, `near-trim`, `full-bleed`) and default to `safe` when unspecified.
 - Default fallback safe frame:
   - non-bound products: outer inset >=7%
   - bound products: outer inset >=7%, binding-side inset >=12%
@@ -18,6 +19,7 @@
 - If proof/clipping risk is detected, stop and offer:
   1. auto-remediation (re-render with larger safe insets), or
   2. user-provided revised source pages.
+- Before upload, provide concise fit metrics (target, bounds, clearances, residual risk).
 
 ## Non-Idempotent Bulk Card Creation
 For `tgc_deck_bulk_create_cards`:

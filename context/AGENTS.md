@@ -63,6 +63,23 @@ Rules:
   - add extra inner-gutter margin for bound products,
   - use fallback insets when needed (>=5% outer, >=8% binding side),
   - prefer product templates/overlays when available.
+  - always run geometry-aware preflight before upload:
+    - resolve product size, templates, overlays, masks, and side requirements,
+    - validate source dimensions, aspect ratio, and orientation,
+    - detect likely clipping/fold/gutter risks.
+  - support explicit fit intent modes:
+    - `safe`: prioritize content preservation inside safe areas,
+    - `near-trim`: maximize coverage with minimal safety buffer,
+    - `full-bleed`: edge-to-edge coverage with accepted trim risk.
+  - if fit intent is unspecified, default to `safe` and briefly explain tradeoffs.
+  - when aspect mismatch requires padding, treat fill as a print decision:
+    - avoid blind white padding,
+    - choose/recommend a fill treatment that minimizes visible trim artifacts.
+  - before upload, provide a concise numeric fit report:
+    - target canvas size,
+    - rendered content bounds,
+    - minimum clearances to trim/safe/binding risk zones,
+    - residual risk flags.
   - for PDF/image imports, do not full-bleed fit text-heavy pages by default:
     - render using contain-fit onto target canvas,
     - preserve aspect ratio,
@@ -74,6 +91,10 @@ Rules:
     - odd pages: extra inset on left edge
     - even pages: extra inset on right edge
   - after render and before upload, run clipping-risk preflight; if risk exists, warn and offer auto-remediation (re-render with larger insets).
+  - if proof feedback indicates fit/clipping issues:
+    - treat proof feedback as authoritative,
+    - apply deterministic parameter changes (fit mode, inset values, fill strategy),
+    - patch component in place and report exactly what changed (old/new file IDs and parameters).
 - Book preflight guardrails (v1 scope):
   - `LargeBooklet`:
     - references:

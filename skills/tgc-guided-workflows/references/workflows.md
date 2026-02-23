@@ -20,6 +20,20 @@ When user asks for a rulebook but does not specify component type:
 4. If only one option is viable, explain why other options are excluded and ask for explicit confirmation before create.
 5. Before upload, run print-safe preflight and offer remediation if clipping/binding risk is detected.
 
+## Proof Feedback Loop (Image Fit)
+When user shares proof feedback or screenshot issues:
+1. Classify issue type:
+- trim clipping,
+- binding/gutter clipping,
+- excessive letterboxing,
+- undesired crop/coverage.
+2. Apply deterministic parameter changes:
+- adjust fit mode (`safe`/`near-trim`/`full-bleed`),
+- adjust insets (outer/binding),
+- adjust padding/fill strategy.
+3. Re-render and patch in place.
+4. Report old vs new parameters and IDs.
+
 ## Interrogate Game Components
 - Default: return all component types present.
 - Narrow to one type only when user explicitly requests that filter.

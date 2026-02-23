@@ -27,6 +27,7 @@ Before any component mutation:
 - Validate request against dimensions, page rules, min/max bounds, finish support, and required assets.
 - If request is likely to fail or warn, stop and provide corrective options.
 - For user-facing responses, include product/help/video links; include API links only if requested.
+- For image-bearing components, use geometry-aware checks (trim/safe/fold/binding risk zones) before upload.
 
 ## Print-Safe Rules (Required)
 - Keep critical content inside safe zones; avoid trim/bleed for essential text.
@@ -41,6 +42,12 @@ Before any component mutation:
     - odd pages: extra inset on left edge,
     - even pages: extra inset on right edge.
 - If clipping risk is detected before upload, warn and offer auto-remediation by re-rendering with larger insets.
+- Support fit intent modes for image placement:
+  - `safe` (default),
+  - `near-trim`,
+  - `full-bleed`.
+- Before upload, produce a concise fit report (target size, content bounds, clearances, residual risks).
+- If proof feedback indicates issues, apply deterministic parameter updates and patch in place.
 
 ## Preferences (Global)
 ```yaml
@@ -58,6 +65,7 @@ Rules:
 - Read `references/workflows.md` when executing game create/copy/interrogation flows.
 - Read `references/guardrails.md` when handling retries, cleanup, non-idempotent calls, or test artifact control.
 - Read `references/component-profiles.md` when preflighting or recommending supported components.
+- Read `references/image-preflight-and-fit.md` for fit modes, geometry checks, and proof-iteration rules.
 
 ## Skill Split Policy
 Use this as the primary orchestration skill. Create additional skills only when a distinct workflow family emerges (different triggers, dependency profile, or safety posture), for example dedicated art-processing or publish/pricing pipelines.

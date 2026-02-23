@@ -216,6 +216,11 @@ If your Claude runtime inherits environment variables from the parent process, y
 - print-safety guardrails
 - known API pitfalls and safe sequencing patterns
 
+Package layout:
+- `SKILL.md`: concise trigger and workflow router
+- `references/`: detailed workflow/component guidance loaded only when needed
+- `agents/openai.yaml`: optional UI/dependency metadata
+
 Use this when you want your LLM to behave consistently during game-building tasks.
 
 ### Skills Install For Codex (Step-by-step)
@@ -446,7 +451,9 @@ Set up The Game Crafter MCP from source on this machine.
 - MCP dev scripts: `code/scripts/dev/`
 - Public agent profile: `context/AGENTS.md`
 - Public skill: `skills/tgc-guided-workflows/SKILL.md`
-- Local build profile: `AGENTS.md`
+- Skill references: `skills/tgc-guided-workflows/references/`
+- Skill metadata: `skills/tgc-guided-workflows/agents/openai.yaml`
+- Local root agent files (`AGENTS.md`, `AGENT.md`) are intentionally local-only and not tracked in git.
 - Roadmap: `ROADMAP.md`
 
 ---

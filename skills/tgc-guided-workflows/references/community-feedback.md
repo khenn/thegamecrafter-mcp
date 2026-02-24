@@ -4,6 +4,8 @@
 Collect high-signal agent-learning feedback with minimal user interruption, then route it into maintainable GitHub triage.
 
 ## Session UX Contract
+0. Respect global preference in `AGENTS.md`:
+- if `preferences.feedback_contribution` is `false`, skip this entire workflow.
 1. Ask once at session start (or first actionable turn):
 - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
 2. Persist preference locally:

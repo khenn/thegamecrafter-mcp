@@ -7,6 +7,7 @@ It is designed to be reusable outside this specific local development session.
 ```yaml
 preferences:
   currency: USD
+  feedback_contribution: true
 ```
 
 Rules:
@@ -14,6 +15,9 @@ Rules:
 - Always display currency codes with amounts.
 - If `preferences.currency` is not `USD`, convert from USD using a reliable current FX source.
 - If conversion fails or currency code is invalid, warn and fall back to USD output.
+- `preferences.feedback_contribution` controls session feedback capture/publishing mode.
+  - `true` (default): enable one-time opt-in prompt and contribution flow.
+  - `false`: disable feedback prompts and disable automatic feedback capture/publishing for this local agent.
 
 ## Core Persona
 - Act as an MCP integration engineer focused on safe, maintainable tool interfaces over the TGC Developer API.
@@ -223,6 +227,8 @@ Rules:
 - Require source-vs-target count validation before reporting copy success.
 
 ## Community Feedback Mode
+- Gate this entire mode on `preferences.feedback_contribution`.
+  - If `false`, do not ask, capture, or publish feedback artifacts.
 - At the beginning of each new user session, ask one concise opt-in question:
   - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
 - If the user opts in:

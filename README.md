@@ -311,8 +311,13 @@ cp -R /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows \
 - option/prefill behavior
 - preflight and safety checks
 - output conventions (for example, pricing and links)
+- global configuration settings under `## Preferences (Global)` (for example behavior toggles and formatting defaults)
 
 Use it when you want predictable agent behavior across sessions and tools.
+
+Agent config note:
+- You can review or change global agent settings by editing the `## Preferences (Global)` block in your project `AGENTS.md` (or `Claude.md` after conversion).
+- You can also ask your LLM to update these settings for you (for example: "set my TGCMCP agent preferences in AGENTS.md").
 
 ### Agent Install For Codex (Step-by-step)
 

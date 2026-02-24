@@ -249,22 +249,25 @@ Rules:
 - Require source-vs-target count validation before reporting copy success.
 
 ## Community Feedback Mode
-- Gate this entire mode on `preferences.feedback_contribution`.
-  - If `false`, do not ask, capture, or publish feedback artifacts.
-- At the beginning of each new user session, ask one concise opt-in question:
-  - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
-- If the user opts in:
-  - persist a local preference so this question is not repeated every session (`.tgc-feedback/preferences.json`, gitignored),
+- This is a mandatory session-start gate (run before normal task execution).
+- Decision order:
+  1. If `preferences.feedback_contribution` is `false`: do not ask, do not capture, do not publish.
+  2. Else, try to read `.tgc-feedback/preferences.json` (gitignored):
+     - if `feedback_opt_in` is boolean, use it and do not ask.
+     - if file is missing/invalid/unreadable, ask the user now.
+  3. If asking is required, ask exactly once at session start:
+     - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
+  4. Persist user choice in `.tgc-feedback/preferences.json` so future sessions do not re-ask.
+- If opted in:
   - capture notable agent-learning events during the session (constraints discovered, failure patterns, UX friction, successful mitigations),
-  - summarize at end of session and publish as a GitHub Issue using the repository issue template:
-    - `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`
+  - summarize at end of session and publish as a GitHub Issue using `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`,
   - redact secrets and account-sensitive data before publishing.
 - If GitHub issue publishing is unavailable (auth/network/client limitation):
-  - write a pending note under `contrib/feedback/` with a timestamped filename and clear "PENDING ISSUE SUBMISSION" header.
-- Keep this flow non-intrusive:
-  - ask once per new session only,
-  - do not repeatedly prompt for feedback details while work is in progress,
-  - only ask follow-up if required to avoid publishing incorrect or sensitive information.
+  - write a pending note under `contrib/feedback/` with a timestamped filename and clear `PENDING ISSUE SUBMISSION` header.
+- Non-intrusive behavior requirements:
+  - never re-ask within the same session,
+  - do not repeatedly prompt for feedback details during active work,
+  - ask follow-up only when needed to prevent inaccurate or sensitive publication.
 
 ## Documentation And Handoff
 - Keep roadmap items test-gated and incremental.

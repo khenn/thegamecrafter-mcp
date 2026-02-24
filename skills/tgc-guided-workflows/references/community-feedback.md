@@ -4,11 +4,16 @@
 Collect high-signal agent-learning feedback with minimal user interruption, then route it into maintainable GitHub triage.
 
 ## Session UX Contract
-0. Respect global preference in `AGENTS.md`:
+Run this as a mandatory startup check before normal task work.
+
+1. Respect global preference in `AGENTS.md`:
 - if `preferences.feedback_contribution` is `false`, skip this entire workflow.
-1. Ask once at session start (or first actionable turn):
+2. Resolve persisted local preference from `.tgc-feedback/preferences.json` (gitignored):
+- if `feedback_opt_in` exists and is boolean, use it and do not ask.
+- if file is missing/invalid/unreadable, ask now.
+3. If ask is needed, ask exactly once at session start:
 - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
-2. Persist preference locally:
+4. Persist preference locally after user answer:
 - path: `.tgc-feedback/preferences.json` (gitignored)
 - shape:
 ```json
@@ -17,7 +22,7 @@ Collect high-signal agent-learning feedback with minimal user interruption, then
   "updated_at": "2026-02-24T00:00:00Z"
 }
 ```
-3. Do not re-ask repeatedly in the same session.
+5. Never re-ask repeatedly in the same session.
 
 ## Capture Scope (What To Record)
 - Constraint gaps discovered (API behavior not yet covered by skill guidance).

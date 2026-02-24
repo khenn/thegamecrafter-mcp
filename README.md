@@ -399,9 +399,14 @@ Run an installation verification for The Game Crafter MCP.
 This repo supports a low-friction feedback loop so real usage can improve AGENT + skills behavior over time.
 
 Expected behavior for TGCMCP-aware agents:
-1. Ask once at session start whether you want to contribute learning notes.
-2. If you opt in, capture notable issues/fixes during the session without repeated prompting.
-3. Publish structured feedback to GitHub Issues using the `Agent Learning Feedback` issue template.
+1. On every new session, run this decision order before normal work:
+   - if global `preferences.feedback_contribution` is `false`, skip feedback mode,
+   - else check `.tgc-feedback/preferences.json`,
+   - if saved boolean `feedback_opt_in` exists, use it and do not ask,
+   - otherwise ask once at startup whether to contribute learning notes.
+2. Persist startup choice to `.tgc-feedback/preferences.json` so future sessions do not re-ask.
+3. If opted in, capture notable issues/fixes during the session without repeated prompting.
+4. Publish structured feedback to GitHub Issues using the `Agent Learning Feedback` issue template.
 
 Notes:
 - Primary intake path: GitHub Issues (`agent-feedback` label).

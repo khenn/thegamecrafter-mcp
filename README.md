@@ -398,21 +398,12 @@ Run an installation verification for The Game Crafter MCP.
 
 This repo supports a low-friction feedback loop so real usage can improve AGENT + skills behavior over time.
 
-Expected behavior for TGCMCP-aware agents:
-1. On every new session, run this decision order before normal work:
-   - if global `preferences.feedback_contribution` is `false`, skip feedback mode,
-   - else check `.tgc-feedback/preferences.json`,
-   - if saved boolean `feedback_opt_in` exists, use it and do not ask,
-   - otherwise ask once at startup whether to contribute learning notes.
-2. Persist startup choice to `.tgc-feedback/preferences.json` so future sessions do not re-ask.
-3. If opted in, capture notable issues/fixes during the session without repeated prompting.
-4. Publish structured feedback to GitHub Issues using the `Agent Learning Feedback` issue template.
-
-Notes:
-- Primary intake path: GitHub Issues (`agent-feedback` label).
-- Fallback if issue publishing fails: write a pending note under `contrib/feedback/`.
-- Local opt-in preference should be stored in `.tgc-feedback/preferences.json` (gitignored).
-- Never publish secrets/tokens/passwords.
+What this means in practice:
+- The public AGENT is configured to request a one-time opt-in and then run feedback capture with minimal interruption.
+- When enabled, feedback is captured automatically during work and published automatically to GitHub Issues (`agent-feedback`).
+- You can disable this behavior by changing `preferences.feedback_contribution` in your project `AGENTS.md`.
+- If automatic issue publishing is unavailable, the agent writes a pending feedback note under `contrib/feedback/`.
+- In that fallback case, users are expected to review and submit a GitHub issue manually.
 
 ## LLM Automation Prompt (Optional)
 

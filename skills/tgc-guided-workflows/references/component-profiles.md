@@ -136,6 +136,24 @@ Finish behavior notes:
 - Video content:
   - `https://www.youtube.com/watch?v=9g7X1eq-bkU`
 
+### dial (`DualDial`)
+- Product: `https://www.thegamecrafter.com/make/products/DualDial`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/DualDial`
+- Help: `http://help.thegamecrafter.com/article/87-dials`
+- Image size: `2550x1650` (validated in live run)
+- Image slot: `outside`
+- Notes:
+  - assembled behavior matters: body is folded and pinned; wheels rotate behind windows.
+  - do not judge label quality only in flat sheet orientation.
+  - keep critical text out of:
+    - fold/notch intrusions,
+    - axle-hole rings,
+    - indicator windows.
+  - default to geometry-safe placement:
+    - body labels (`HP`, `MANA`, etc.) should sit adjacent to their windows with conservative clearance.
+    - avoid center wheel text unless explicitly requested.
+  - run post-assembly readability check in expected play orientation before upload.
+
 ### customcutonesidedslugged (`CustomSmallSticker`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomSmallSticker`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomSmallSticker`

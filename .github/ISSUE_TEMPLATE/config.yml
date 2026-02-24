@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: TGCMCP Setup Guide
+    url: https://github.com/khenn/thegamecrafter-mcp#readme
+    about: Use the README for installation and MCP/skills/agent setup steps.

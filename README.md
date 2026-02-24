@@ -389,6 +389,21 @@ Run an installation verification for The Game Crafter MCP.
 4) Return a short PASS/FAIL summary and include any error details plus the likely fix.
 ```
 
+## 4) Contribute Agent Learning Feedback (Optional)
+
+This repo supports a low-friction feedback loop so real usage can improve AGENT + skills behavior over time.
+
+Expected behavior for TGCMCP-aware agents:
+1. Ask once at session start whether you want to contribute learning notes.
+2. If you opt in, capture notable issues/fixes during the session without repeated prompting.
+3. Publish structured feedback to GitHub Issues using the `Agent Learning Feedback` issue template.
+
+Notes:
+- Primary intake path: GitHub Issues (`agent-feedback` label).
+- Fallback if issue publishing fails: write a pending note under `contrib/feedback/`.
+- Local opt-in preference should be stored in `.tgc-feedback/preferences.json` (gitignored).
+- Never publish secrets/tokens/passwords.
+
 ## LLM Automation Prompt (Optional)
 
 Use this when you want an LLM to do setup with minimal custom prompt maintenance.

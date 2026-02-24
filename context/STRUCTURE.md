@@ -47,6 +47,21 @@ All agents must obey these rules when creating, modifying, or relocating files.
 
 ---
 
+## .github/
+- GitHub repository automation and collaboration metadata.
+- Contents: issue templates, PR templates, workflow automation, and repo-level contribution UX controls.
+- Use when: enabling structured external feedback or repeatable maintainer workflows through GitHub-native mechanisms.
+
+---
+
+## contrib/
+- Public contribution intake artifacts that are safe for broad community participation.
+- Contents: contributor-facing guidance and non-authoritative staging conventions for feedback capture.
+- Use when: collecting structured user/agent feedback for maintainer triage without granting direct write access to core source docs.
+- Do not treat content here as canonical behavior; canonical behavior remains in `context/` and `skills/`.
+
+---
+
 ## subprojects/
 - Local-only sandboxes for exploratory efforts that may have separate code/docs/workflows from the main product path.
 - Use when: running a focused experiment (for example, workflow proving, API limitation discovery, throwaway prototypes).

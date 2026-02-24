@@ -34,6 +34,23 @@ When user shares proof feedback or screenshot issues:
 3. Re-render and patch in place.
 4. Report old vs new parameters and IDs.
 
+## Dial Artwork Workflow (Dual Dial Included)
+When user asks for a dial and does not provide precise geometry instructions:
+1. Gather visual intent only:
+- labels/terms (for example `HP`, `MANA`),
+- style preferences (color/theme/typography),
+- track semantics (range/direction) if needed.
+2. Run dial geometry preflight:
+- resolve dial mask/cut/safe/fold/hole/window regions,
+- compute safe label zones.
+3. Auto-place dial content:
+- assign labels to geometry-safe zones nearest corresponding windows,
+- keep label boxes and symbols out of punched/fold conflict areas,
+- ensure wheel/center-hole areas remain readable and uncluttered.
+4. Validate final play orientation readability.
+5. Upload and mutate.
+6. If proof feedback arrives, iterate deterministically and patch in place (not duplicate by default).
+
 ## Interrogate Game Components
 - Default: return all component types present.
 - Narrow to one type only when user explicitly requests that filter.
@@ -58,3 +75,17 @@ When user shares proof feedback or screenshot issues:
 - `tgc_component_items_list` for set members
 3. Rebuild in target with primitive write tools.
 4. Treat `tgc_game_copy` as optional benchmark, not the primary capability target.
+
+## Community Feedback Capture (Optional, Opt-In)
+Use this when the user wants to help improve the public agent/skills without manual maintainer coaching.
+
+1. Ask once at session start:
+- "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
+2. Persist the answer locally in `.tgc-feedback/preferences.json` (gitignored) to avoid repeated prompts.
+3. If opted in, capture concise notes during work:
+- what failed,
+- what worked,
+- what guardrail would have prevented friction,
+- which component/workflow was affected.
+4. At session end, publish a GitHub issue using the repository feedback template.
+5. If issue publish is unavailable, write a pending note under `contrib/feedback/` for later submission.

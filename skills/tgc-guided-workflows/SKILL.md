@@ -48,6 +48,11 @@ Before any component mutation:
   - `full-bleed`.
 - Before upload, produce a concise fit report (target size, content bounds, clearances, residual risks).
 - If proof feedback indicates issues, apply deterministic parameter updates and patch in place.
+- For dials, default to geometry-safe auto-layout:
+  - infer safe label/track regions from mask/cut geometry,
+  - avoid axle holes, windows, fold/notch conflict zones,
+  - validate readability in final play orientation,
+  - ask user about visual intent (style/wording/colors), not XY positioning, unless explicitly requested.
 
 ## Preferences (Global)
 ```yaml
@@ -66,6 +71,7 @@ Rules:
 - Read `references/guardrails.md` when handling retries, cleanup, non-idempotent calls, or test artifact control.
 - Read `references/component-profiles.md` when preflighting or recommending supported components.
 - Read `references/image-preflight-and-fit.md` for fit modes, geometry checks, and proof-iteration rules.
+- Read `references/community-feedback.md` when running session-level contribution capture and GitHub issue publishing flow.
 
 ## Skill Split Policy
 Use this as the primary orchestration skill. Create additional skills only when a distinct workflow family emerges (different triggers, dependency profile, or safety posture), for example dedicated art-processing or publish/pricing pipelines.

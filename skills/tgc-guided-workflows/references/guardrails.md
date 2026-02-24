@@ -5,6 +5,17 @@
 - Avoid destructive actions unless requested.
 - For test/probe runs, use disposable naming and always plan cleanup.
 - TGC delete is soft delete (`trashed: 1`).
+- For revisions to existing components, default to in-place update behavior when supported; only create a duplicate when user explicitly asks for a variant/copy.
+
+## Feedback Publishing Safety
+- Never publish credentials, tokens, session IDs, or private file paths.
+- Redact usernames/emails unless the user explicitly asks to include them.
+- Keep issue content technical and reproducible:
+  - component/workflow,
+  - observed behavior,
+  - expected behavior,
+  - suggested guardrail/skill update.
+- If uncertain whether content is sensitive, keep it in local pending note form and ask once before publication.
 
 ## Print-Safe Upload Guardrail
 - Never auto-upload text-heavy PDF/image pages that are edge-fit to full bleed.

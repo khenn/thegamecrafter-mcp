@@ -95,6 +95,16 @@ Rules:
     - treat proof feedback as authoritative,
     - apply deterministic parameter changes (fit mode, inset values, fill strategy),
     - patch component in place and report exactly what changed (old/new file IDs and parameters).
+  - for dial components, run a dial-specific preflight and layout pass:
+    - model final physical assembly, not just flat sheet view (punch, fold, pin, rotate),
+    - validate all critical text/icons against cutline, fold/notch, axle holes, and indicator windows,
+    - default to automatic geometry-safe placement for labels/tracks when user does not request exact coordinates,
+    - evaluate readability in final play orientation and auto-correct orientation/placement risks.
+  - for `DualDial`-style trackers, default label placement behavior:
+    - keep labels on body panel areas adjacent to corresponding windows,
+    - keep labels outside hole rings and notch intrusion zones,
+    - reserve conservative clearance around punched geometry and fold axis,
+    - keep center wheel areas free of non-track labels unless explicitly requested.
 - Book preflight guardrails (v1 scope):
   - `LargeBooklet`:
     - references:
@@ -165,6 +175,12 @@ Rules:
     - `https://www.thegamecrafter.com/make/products/SmallDial`
     - `https://www.thegamecrafter.com/api/tgc/products/SmallDial`
     - `http://help.thegamecrafter.com/article/87-dials`
+  - `dial` / `DualDial`:
+    - `https://www.thegamecrafter.com/make/products/DualDial`
+    - `https://www.thegamecrafter.com/api/tgc/products/DualDial`
+    - `http://help.thegamecrafter.com/article/87-dials`
+    - image slot: `outside`
+    - validated size in live runs: `2550x1650`
   - `customcutonesidedslugged` / `CustomSmallSticker`:
     - `https://www.thegamecrafter.com/make/products/CustomSmallSticker`
     - `https://www.thegamecrafter.com/api/tgc/products/CustomSmallSticker`
@@ -205,6 +221,22 @@ Rules:
 - Treat `tgc_deck_bulk_create_cards` as append-only/non-idempotent.
 - Do not resume card-copy operations into partially populated decks; restart into a fresh target and re-run from zero.
 - Require source-vs-target count validation before reporting copy success.
+
+## Community Feedback Mode
+- At the beginning of each new user session, ask one concise opt-in question:
+  - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
+- If the user opts in:
+  - persist a local preference so this question is not repeated every session (`.tgc-feedback/preferences.json`, gitignored),
+  - capture notable agent-learning events during the session (constraints discovered, failure patterns, UX friction, successful mitigations),
+  - summarize at end of session and publish as a GitHub Issue using the repository issue template:
+    - `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`
+  - redact secrets and account-sensitive data before publishing.
+- If GitHub issue publishing is unavailable (auth/network/client limitation):
+  - write a pending note under `contrib/feedback/` with a timestamped filename and clear "PENDING ISSUE SUBMISSION" header.
+- Keep this flow non-intrusive:
+  - ask once per new session only,
+  - do not repeatedly prompt for feedback details while work is in progress,
+  - only ask follow-up if required to avoid publishing incorrect or sensitive information.
 
 ## Documentation And Handoff
 - Keep roadmap items test-gated and incremental.

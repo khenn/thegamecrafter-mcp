@@ -1,0 +1,78 @@
+name: Agent Learning Feedback
+description: Submit structured feedback from real TGCMCP agent usage to improve AGENTS/skills behavior.
+title: "[Agent Feedback] <short summary>"
+labels:
+  - agent-feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing. Share reproducible, behavior-focused notes from your session.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary Area
+      options:
+        - Component behavior
+        - Workflow behavior
+        - Print/proofing guidance
+        - API/tool contract behavior
+        - Auth/setup behavior
+        - Documentation clarity
+    validations:
+      required: true
+  - type: input
+    id: component_or_workflow
+    attributes:
+      label: Component Or Workflow
+      description: Example: DualDial, LargeBooklet, game interrogation, bulk card copy.
+      placeholder: DualDial
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed Behavior
+      description: What happened?
+      placeholder: The agent placed dial labels where they were clipped after assembly.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+      placeholder: The agent should auto-place labels in geometry-safe regions with no clipping.
+    validations:
+      required: true
+  - type: textarea
+    id: resolution
+    attributes:
+      label: What Fixed It (If Known)
+      description: Include deterministic changes that worked.
+      placeholder: Increased safe inset and moved labels away from fold/notch and windows.
+    validations:
+      required: false
+  - type: textarea
+    id: proposed_update
+    attributes:
+      label: Proposed AGENT/Skill Update
+      description: What should be added/changed in AGENTS or skills?
+      placeholder: Add DualDial auto-layout preflight and post-assembly readability checks.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Details
+      description: Include prompts/tool calls/context needed to reproduce.
+      placeholder: Prompt used, key tool calls, and relevant IDs (redacted as needed).
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy_check
+    attributes:
+      label: Privacy Check
+      options:
+        - label: I removed secrets/tokens/passwords/private credentials.
+          required: true

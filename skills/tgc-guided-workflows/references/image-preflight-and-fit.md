@@ -57,3 +57,28 @@ When proof/screenshot feedback indicates issues:
 - previous/new file IDs,
 - old/new fit parameters,
 - expected improvement.
+
+## Dial Geometry Preflight (Required For `dial` Components)
+Before dial artwork upload or revision:
+1. Resolve dial geometry:
+- canvas size,
+- cutline/safe guides,
+- punched regions (holes/windows),
+- fold/notch geometry (if present),
+- expected play orientation.
+2. Detect collisions:
+- compute text/icon bounding boxes,
+- reject/warn on overlap with hole/window/fold/notch regions,
+- warn when critical content is too close to trim/safe boundaries.
+3. Apply default auto-layout when user did not request exact coordinates:
+- place semantic labels near their corresponding windows,
+- keep labels outside center-hole and rotating wheel conflict zones,
+- keep conservative buffer from fold axis and notch intrusions.
+4. Validate post-assembly readability:
+- simulate final play orientation,
+- ensure labels are readable and semantically aligned in that orientation.
+5. Produce concise dial fit report:
+- dial canvas,
+- label/track clearances to risky geometry,
+- orientation/readability status,
+- residual risks (if any).

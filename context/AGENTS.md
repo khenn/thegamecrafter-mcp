@@ -60,6 +60,7 @@ Rules:
   - validate user inputs against product constraints before mutating.
   - warn when the request is likely to fail or generate TGC warnings.
   - provide concise correction options (for example padding pages or choosing an alternate component class).
+  - for side-based specialty parts (for example custom dice and acrylic shapes), verify all required side image slots are present before mutation.
 - If user intent does not specify a component type, offer the best 2-3 relevant implemented options and ask user to choose before create.
   - if only one viable option remains after constraints, explain why alternatives were excluded and ask for explicit confirmation before create.
 - For generated/derived images, enforce print-safe placement:
@@ -198,6 +199,27 @@ Rules:
     - `https://www.thegamecrafter.com/api/tgc/products/SmallDualLayerBoard`
     - `http://help.thegamecrafter.com/article/658-dual-layer-boards`
     - child create API: `/api/threesidedcustomcut` via relationship `members`
+- Batch 5 implemented references (for preflight/linking):
+  - `acrylicshape` / `AcrylicShape125`:
+    - `https://www.thegamecrafter.com/make/products/AcrylicShape125`
+    - `https://www.thegamecrafter.com/api/tgc/products/AcrylicShape125`
+    - image slots: `side1`, `side2` (`2400x1200`)
+  - `customcolord4` / `CustomColorD4`:
+    - `https://www.thegamecrafter.com/make/products/CustomColorD4`
+    - `https://www.thegamecrafter.com/api/tgc/products/CustomColorD4`
+    - image slots: `side1..side4` (`300x300`)
+  - `customcolord6` / `CustomColorD6`:
+    - `https://www.thegamecrafter.com/make/products/CustomColorD6`
+    - `https://www.thegamecrafter.com/api/tgc/products/CustomColorD6`
+    - image slots: `side1..side6` (`180x180`)
+  - `customcolord8` / `CustomColorD8`:
+    - `https://www.thegamecrafter.com/make/products/CustomColorD8`
+    - `https://www.thegamecrafter.com/api/tgc/products/CustomColorD8`
+    - image slots: `side1..side8` (`300x300`)
+  - `customprintedmeeple` / `CustomPrintedMeeple`:
+    - `https://www.thegamecrafter.com/make/products/CustomPrintedMeeple`
+    - `https://www.thegamecrafter.com/api/tgc/products/CustomPrintedMeeple`
+    - image slots: `face`, `back` (`300x300`)
 
 ## End-User Output Links
 - Default to user-facing links:

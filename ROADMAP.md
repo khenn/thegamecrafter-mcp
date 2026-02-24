@@ -67,7 +67,7 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
 - [x] Add generated capability matrix (`tools/tgc-component-capability-matrix.md`) from live catalog data.
 - [ ] Add public-game metadata reconnaissance script to sample component family payload shapes across public games.
 - [ ] Add disposable synthetic fixture workflow for unsupported component families (create, verify, cleanup).
-- [ ] Expand MCP write coverage for missing create APIs discovered in matrix.
+- [x] Expand MCP write coverage for missing create APIs discovered in matrix.
   - [x] Packaging core coverage validated via `tgc_component_create`:
     - `/api/tuckbox`
     - `/api/hookbox`
@@ -94,6 +94,12 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
     - `/api/customcuttwosidedslugged`
     - `/api/threesidedcustomcutset`
     - `/api/threesidedcustomcut`
+  - [x] Specialty parts/custom dice/meeple coverage validated:
+    - `/api/acrylicshape`
+    - `/api/customprintedmeeple`
+    - `/api/customcolord4`
+    - `/api/customcolord6`
+    - `/api/customcolord8`
 - [ ] Add component-intelligence guidance layer for each implemented component family.
   - [x] Seeded for:
     - `LargeBooklet`
@@ -101,6 +107,7 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
     - Batch 1 packaging families
     - Batch 3 board/mat families
     - Batch 4 advanced cut/dial families
+    - Batch 5 specialty parts families
   - [ ] For every newly supported component family, add:
     - source URLs in skills/docs (`make/products`, `api/tgc/products`, and help/article link when present),
     - preflight validation rules (bounds, parity, required assets, finish options),

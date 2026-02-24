@@ -331,6 +331,14 @@ Implemented additions (read/interrogation primitives):
   - `bottomFileId` (string, optional)
   - `spotGlossFileId` (string, optional)
   - `spotGlossBottomFileId` (string, optional)
+  - `side1FileId` (string, optional)
+  - `side2FileId` (string, optional)
+  - `side3FileId` (string, optional)
+  - `side4FileId` (string, optional)
+  - `side5FileId` (string, optional)
+  - `side6FileId` (string, optional)
+  - `side7FileId` (string, optional)
+  - `side8FileId` (string, optional)
   - `hasProofedFace` (boolean, optional)
   - `hasProofedBack` (boolean, optional)
   - `hasProofedOutside` (boolean, optional)
@@ -358,6 +366,12 @@ Implemented additions (read/interrogation primitives):
     - `/api/customcutonesidedslugged`
     - `/api/customcuttwosidedslugged`
     - `/api/threesidedcustomcutset`
+  - Specialty parts and custom dice/meeple coverage validated in live tests for:
+    - `/api/acrylicshape`
+    - `/api/customprintedmeeple`
+    - `/api/customcolord4`
+    - `/api/customcolord6`
+    - `/api/customcolord8`
 
 24. `tgc_component_item_create`
 - Purpose: Create an item/member within a set-based container.

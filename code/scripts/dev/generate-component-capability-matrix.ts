@@ -47,6 +47,11 @@ const VALIDATED_CREATE_APIS = new Set<string>([
   "/api/perfectboundbook",
   "/api/perfectboundbookpage",
   "/api/scorepad",
+  "/api/acrylicshape",
+  "/api/customprintedmeeple",
+  "/api/customcolord4",
+  "/api/customcolord6",
+  "/api/customcolord8",
 ]);
 
 function asObject(value: unknown): JsonObject | null {

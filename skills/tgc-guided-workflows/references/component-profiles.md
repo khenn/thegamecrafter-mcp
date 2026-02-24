@@ -180,3 +180,43 @@ Finish behavior notes:
 - Child relationship: `members`
 - Video content:
   - `https://www.youtube.com/watch?v=oxesLyWqcew`
+
+## Batch 5 Authoritative References (Specialty Parts + Custom Dice/Meeple)
+
+### acrylicshape (`AcrylicShape125`)
+- Product: `https://www.thegamecrafter.com/make/products/AcrylicShape125`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/AcrylicShape125`
+- Help: no product `info` URL returned by current product metadata snapshot.
+- Image size: `2400x1200`
+- Image slots: `side1`, `side2`
+- Notes:
+  - both sides should be provided to avoid blank/repeated defaults.
+  - keep critical art inset from outer contour due custom-cut perimeter.
+
+### customcolord4 (`CustomColorD4`)
+- Product: `https://www.thegamecrafter.com/make/products/CustomColorD4`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomColorD4`
+- Help: no product `info` URL returned by current product metadata snapshot.
+- Image size: `300x300`
+- Image slots: `side1`, `side2`, `side3`, `side4`
+
+### customcolord6 (`CustomColorD6`)
+- Product: `https://www.thegamecrafter.com/make/products/CustomColorD6`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomColorD6`
+- Help: no product `info` URL returned by current product metadata snapshot.
+- Image size: `180x180`
+- Image slots: `side1`, `side2`, `side3`, `side4`, `side5`, `side6`
+
+### customcolord8 (`CustomColorD8`)
+- Product: `https://www.thegamecrafter.com/make/products/CustomColorD8`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomColorD8`
+- Help: no product `info` URL returned by current product metadata snapshot.
+- Image size: `300x300`
+- Image slots: `side1`, `side2`, `side3`, `side4`, `side5`, `side6`, `side7`, `side8`
+
+### customprintedmeeple (`CustomPrintedMeeple`)
+- Product: `https://www.thegamecrafter.com/make/products/CustomPrintedMeeple`
+- Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomPrintedMeeple`
+- Help: no product `info` URL returned by current product metadata snapshot.
+- Image size: `300x300`
+- Image slots: `face`, `back`

@@ -394,6 +394,14 @@ export class TgcService {
     bottomFileId?: string;
     spotGlossFileId?: string;
     spotGlossBottomFileId?: string;
+    side1FileId?: string;
+    side2FileId?: string;
+    side3FileId?: string;
+    side4FileId?: string;
+    side5FileId?: string;
+    side6FileId?: string;
+    side7FileId?: string;
+    side8FileId?: string;
     hasProofedFace?: boolean;
     hasProofedBack?: boolean;
     hasProofedOutside?: boolean;
@@ -422,6 +430,14 @@ export class TgcService {
         bottom_id: input.bottomFileId,
         spot_gloss_id: input.spotGlossFileId,
         spot_gloss_bottom_id: input.spotGlossBottomFileId,
+        side1_id: input.side1FileId,
+        side2_id: input.side2FileId,
+        side3_id: input.side3FileId,
+        side4_id: input.side4FileId,
+        side5_id: input.side5FileId,
+        side6_id: input.side6FileId,
+        side7_id: input.side7FileId,
+        side8_id: input.side8FileId,
         has_proofed_face:
           input.hasProofedFace === undefined ? undefined : input.hasProofedFace ? 1 : 0,
         has_proofed_back:

@@ -8,9 +8,9 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
 
 ## Current Gap Snapshot
 - Catalog products discovered: 201
-- Fully supported: 194
-- Products with gaps: 7
-- Missing create API families: 5
+- Fully supported: 201
+- Products with gaps: 0
+- Missing create API families: 0
 
 ## Build Principles
 - Ship in batches by reusable API family, not by individual product identity.
@@ -79,14 +79,14 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
     - [x] Create one dual-layer board-like fixture and one custom-cut sticker/punchout fixture.
     - [x] Verify child member creation semantics and quantities.
 
-- [ ] **Batch 5: Specialty Parts and Custom Dice/Meeples**
+- [x] **Batch 5: Specialty Parts and Custom Dice/Meeples**
   - API families:
-    - `/api/acrylicshape`
-    - `/api/customprintedmeeple`
-    - `/api/customcolord4`, `/api/customcolord6`, `/api/customcolord8`
+    - [x] `/api/acrylicshape`
+    - [x] `/api/customprintedmeeple`
+    - [x] `/api/customcolord4`, `/api/customcolord6`, `/api/customcolord8`
   - Validation gate:
-    - Create each specialty component once with valid art/proof flags.
-    - Verify part/component linkage and cost/pricing visibility where available.
+    - [x] Create each specialty component once with valid art/proof flags.
+    - [x] Verify component readback via relationship endpoints.
 
 - [ ] **Batch 6: Capability Matrix Automation and Coverage Closure**
   - Deliverables:

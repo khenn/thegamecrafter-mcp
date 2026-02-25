@@ -656,6 +656,18 @@ export class TgcService {
     return true;
   }
 
+  public async publishGame(gameId: string): Promise<boolean> {
+    const session = this.requireSession();
+    await this.client.post(`/api/game/${gameId}/public`, { sessionId: session.id, form: {} });
+    return true;
+  }
+
+  public async unpublishGame(gameId: string): Promise<boolean> {
+    const session = this.requireSession();
+    await this.client.delete(`/api/game/${gameId}/public`, { sessionId: session.id });
+    return true;
+  }
+
   private requireSession(): ActiveSession {
     if (!this.session) {
       throw new TgcApiError("NOT_AUTHENTICATED", "No active TGC session. Call tgc_auth_login first.");

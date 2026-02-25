@@ -25,6 +25,7 @@
     "test:integration:batch5-specialty-parts": "tsx scripts/dev/test-batch5-specialty-parts.ts",
     "test:integration:component-update-custom-dice": "tsx scripts/dev/test-component-update-custom-dice.ts",
     "test:integration:component-update-global-nondice": "tsx scripts/dev/test-component-update-global-nondice.ts",
+    "test:integration:game-publish-unpublish": "tsx scripts/dev/test-game-publish-unpublish.ts",
     "report:component-matrix": "tsx scripts/dev/generate-component-capability-matrix.ts"
   },
   "dependencies": {

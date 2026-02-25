@@ -93,6 +93,10 @@ const gameDeleteSchema = z.object({
   gameId: z.string().min(1),
 });
 
+const gamePublishSchema = z.object({
+  gameId: z.string().min(1),
+});
+
 const deckGetSchema = z.object({
   deckId: z.string().min(1),
 });
@@ -634,6 +638,16 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
         const input = gameDeleteSchema.parse(safeArgs);
         const deleted = await context.tgc.deleteGame(input.gameId);
         return ok({ deleted });
+      }
+      case "tgc_game_publish": {
+        const input = gamePublishSchema.parse(safeArgs);
+        const published = await context.tgc.publishGame(input.gameId);
+        return ok({ published });
+      }
+      case "tgc_game_unpublish": {
+        const input = gamePublishSchema.parse(safeArgs);
+        const unpublished = await context.tgc.unpublishGame(input.gameId);
+        return ok({ unpublished });
       }
       case "tgc_deck_create": {
         const input = deckCreateSchema.parse(safeArgs);

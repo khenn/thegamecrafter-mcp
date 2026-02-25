@@ -116,8 +116,8 @@ This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative del
   - [x] For each newly added create API family, add a live integration probe that creates at least one valid component and verifies readback.
 
 ## Milestone 7 - Publish Readiness
-- [ ] Implement `tgc_game_publish`.
-- [ ] Implement `tgc_game_unpublish`.
+- [x] Implement `tgc_game_publish`.
+- [x] Implement `tgc_game_unpublish`.
 - [ ] Implement `tgc_gamedownload_create`.
 - [ ] Add `tgc_prepublish_check` workflow helper.
 - [ ] Test gate:

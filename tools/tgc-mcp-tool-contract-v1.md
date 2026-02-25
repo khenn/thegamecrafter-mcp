@@ -184,7 +184,10 @@ Implemented additions (read/interrogation primitives):
   - `gameId` (string)
 - Output data:
   - `published` (boolean)
-  - `game` (object)
+  - Status: implemented
+  - Notes:
+    - Uses `POST /api/game/{gameId}/public`.
+    - TGC may enforce policy gates (for example proofing/purchase requirements) before publish succeeds.
 
 11. `tgc_game_unpublish`
 - Purpose: Unpublish a game.
@@ -192,7 +195,9 @@ Implemented additions (read/interrogation primitives):
   - `gameId` (string)
 - Output data:
   - `unpublished` (boolean)
-  - `game` (object)
+  - Status: implemented
+  - Notes:
+    - Uses `DELETE /api/game/{gameId}/public`.
 
 12. `tgc_folder_create`
 - Purpose: Create an asset folder.

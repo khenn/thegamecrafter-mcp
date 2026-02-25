@@ -400,8 +400,12 @@ This repo supports a low-friction feedback loop so real usage can improve AGENT 
 
 What this means in practice:
 - The public AGENT is configured to request a one-time opt-in and then run feedback capture with minimal interruption.
-- When enabled, feedback is captured automatically during work, but publication still requires a final per-issue approval from the user after seeing the exact text to be sent.
-- Published feedback is limited to reusable TGC interface learnings (API/UI behavior), not user-specific game content or local machine details.
+- Security and privacy are strict defaults:
+  - feedback is scoped to reusable TGC interface learnings only (API/UI behavior),
+  - user-specific game/IP content, PII, secrets, session identifiers, and local machine details are excluded from publication,
+  - if context is needed, data is generalized/anonymized before sharing.
+- Before anything is posted publicly, the agent shows the exact issue text and asks for explicit permission.
+  - You can approve or reject each proposed publication.
 - You can disable this behavior by changing `preferences.feedback_contribution` in your project `AGENTS.md`.
 - If automatic issue publishing is unavailable, the agent writes a pending feedback note under `contrib/feedback/`.
 - In that fallback case, users are expected to review and submit a GitHub issue manually.

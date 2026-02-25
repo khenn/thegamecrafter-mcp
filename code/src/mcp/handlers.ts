@@ -7,6 +7,43 @@ import { fail, ok, type ToolResultEnvelope } from "./response.js";
 type JsonObject = Record<string, unknown>;
 type ToolContext = { tgc: TgcService };
 
+const CUSTOM_DICE_RULES: Record<
+  string,
+  {
+    identity: string;
+    requiredSideFields: string[];
+  }
+> = {
+  customcolord4: {
+    identity: "CustomColorD4",
+    requiredSideFields: ["side1FileId", "side2FileId", "side3FileId", "side4FileId"],
+  },
+  customcolord6: {
+    identity: "CustomColorD6",
+    requiredSideFields: [
+      "side1FileId",
+      "side2FileId",
+      "side3FileId",
+      "side4FileId",
+      "side5FileId",
+      "side6FileId",
+    ],
+  },
+  customcolord8: {
+    identity: "CustomColorD8",
+    requiredSideFields: [
+      "side1FileId",
+      "side2FileId",
+      "side3FileId",
+      "side4FileId",
+      "side5FileId",
+      "side6FileId",
+      "side7FileId",
+      "side8FileId",
+    ],
+  },
+};
+
 function asObject(value: unknown): JsonObject {
   if (value && typeof value === "object" && !Array.isArray(value)) {
     return value as JsonObject;
@@ -192,6 +229,7 @@ const componentCreateSchema = z.object({
   bottomFileId: z.string().min(1).optional(),
   spotGlossFileId: z.string().min(1).optional(),
   spotGlossBottomFileId: z.string().min(1).optional(),
+  dieColor: z.string().min(1).optional(),
   side1FileId: z.string().min(1).optional(),
   side2FileId: z.string().min(1).optional(),
   side3FileId: z.string().min(1).optional(),
@@ -209,6 +247,84 @@ const componentCreateSchema = z.object({
   hasProofedSpotGloss: z.boolean().optional(),
   hasProofedSpotGlossBottom: z.boolean().optional(),
 });
+
+const componentUpdateSchema = z
+  .object({
+    componentType: z.string().trim().min(1),
+    componentId: z.string().min(1),
+    name: z.string().min(1).optional(),
+    identity: z.string().min(1).optional(),
+    quantity: z.number().int().min(1).max(9999).optional(),
+    backFileId: z.string().min(1).optional(),
+    faceFileId: z.string().min(1).optional(),
+    frontFileId: z.string().min(1).optional(),
+    outsideFileId: z.string().min(1).optional(),
+    insideFileId: z.string().min(1).optional(),
+    innerFileId: z.string().min(1).optional(),
+    topFileId: z.string().min(1).optional(),
+    bottomFileId: z.string().min(1).optional(),
+    spotGlossFileId: z.string().min(1).optional(),
+    spotGlossBottomFileId: z.string().min(1).optional(),
+    dieColor: z.string().min(1).optional(),
+    diecolor: z.string().min(1).optional(),
+    side1FileId: z.string().min(1).optional(),
+    side2FileId: z.string().min(1).optional(),
+    side3FileId: z.string().min(1).optional(),
+    side4FileId: z.string().min(1).optional(),
+    side5FileId: z.string().min(1).optional(),
+    side6FileId: z.string().min(1).optional(),
+    side7FileId: z.string().min(1).optional(),
+    side8FileId: z.string().min(1).optional(),
+    hasProofedFace: z.boolean().optional(),
+    hasProofedBack: z.boolean().optional(),
+    hasProofedOutside: z.boolean().optional(),
+    hasProofedInside: z.boolean().optional(),
+    hasProofedTop: z.boolean().optional(),
+    hasProofedBottom: z.boolean().optional(),
+    hasProofedSpotGloss: z.boolean().optional(),
+    hasProofedSpotGlossBottom: z.boolean().optional(),
+  })
+  .superRefine((value, ctx) => {
+    const hasMutableField = Object.entries(value).some(
+      ([key, fieldValue]) => key !== "componentType" && key !== "componentId" && fieldValue !== undefined,
+    );
+    if (!hasMutableField) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["componentId"],
+        message: "Provide at least one mutable field to update.",
+      });
+    }
+  });
+
+function applyCustomDiceCreateRules(
+  input: z.infer<typeof componentCreateSchema>,
+): z.infer<typeof componentCreateSchema> {
+  const componentType = input.componentType.toLowerCase();
+  const rule = CUSTOM_DICE_RULES[componentType];
+  if (!rule) {
+    return input;
+  }
+
+  if (!input.identity) {
+    input.identity = rule.identity;
+  } else if (input.identity !== rule.identity) {
+    throw new TgcApiError(
+      "INVALID_INPUT",
+      `identity must be ${rule.identity} for componentType ${input.componentType}.`,
+    );
+  }
+
+  const missingSides = rule.requiredSideFields.filter((field) => !input[field as keyof typeof input]);
+  if (missingSides.length > 0) {
+    throw new TgcApiError(
+      "INVALID_INPUT",
+      `Missing required side image fields for ${input.componentType}: ${missingSides.join(", ")}.`,
+    );
+  }
+
+  return input;
+}
 
 const componentItemCreateSchema = z.object({
   componentType: z.string().trim().min(1),
@@ -576,7 +692,7 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
         return ok({ gamePart });
       }
       case "tgc_component_create": {
-        const input = componentCreateSchema.parse(safeArgs);
+        const input = applyCustomDiceCreateRules(componentCreateSchema.parse(safeArgs));
         const component = await context.tgc.createComponent({
           componentType: input.componentType,
           gameId: input.gameId,
@@ -593,6 +709,45 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
           bottomFileId: input.bottomFileId,
           spotGlossFileId: input.spotGlossFileId,
           spotGlossBottomFileId: input.spotGlossBottomFileId,
+          dieColor: input.dieColor,
+          side1FileId: input.side1FileId,
+          side2FileId: input.side2FileId,
+          side3FileId: input.side3FileId,
+          side4FileId: input.side4FileId,
+          side5FileId: input.side5FileId,
+          side6FileId: input.side6FileId,
+          side7FileId: input.side7FileId,
+          side8FileId: input.side8FileId,
+          hasProofedFace: input.hasProofedFace,
+          hasProofedBack: input.hasProofedBack,
+          hasProofedOutside: input.hasProofedOutside,
+          hasProofedInside: input.hasProofedInside,
+          hasProofedTop: input.hasProofedTop,
+          hasProofedBottom: input.hasProofedBottom,
+          hasProofedSpotGloss: input.hasProofedSpotGloss,
+          hasProofedSpotGlossBottom: input.hasProofedSpotGlossBottom,
+        });
+        return ok({ component });
+      }
+      case "tgc_component_update": {
+        const input = componentUpdateSchema.parse(safeArgs);
+        const component = await context.tgc.updateComponent({
+          componentType: input.componentType,
+          componentId: input.componentId,
+          name: input.name,
+          identity: input.identity,
+          quantity: input.quantity,
+          backFileId: input.backFileId,
+          faceFileId: input.faceFileId,
+          frontFileId: input.frontFileId,
+          outsideFileId: input.outsideFileId,
+          insideFileId: input.insideFileId,
+          innerFileId: input.innerFileId,
+          topFileId: input.topFileId,
+          bottomFileId: input.bottomFileId,
+          spotGlossFileId: input.spotGlossFileId,
+          spotGlossBottomFileId: input.spotGlossBottomFileId,
+          dieColor: input.dieColor ?? input.diecolor,
           side1FileId: input.side1FileId,
           side2FileId: input.side2FileId,
           side3FileId: input.side3FileId,

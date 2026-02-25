@@ -331,6 +331,7 @@ Implemented additions (read/interrogation primitives):
   - `bottomFileId` (string, optional)
   - `spotGlossFileId` (string, optional)
   - `spotGlossBottomFileId` (string, optional)
+  - `dieColor` (string, optional; for families that support die color)
   - `side1FileId` (string, optional)
   - `side2FileId` (string, optional)
   - `side3FileId` (string, optional)
@@ -372,8 +373,26 @@ Implemented additions (read/interrogation primitives):
     - `/api/customcolord4`
     - `/api/customcolord6`
     - `/api/customcolord8`
+  - Custom dice guardrails:
+    - `customcolord4/customcolord6/customcolord8` require all side slots.
+    - `identity` is auto-inferred when omitted (`CustomColorD4/CustomColorD6/CustomColorD8`).
 
-24. `tgc_component_item_create`
+24. `tgc_component_update`
+- Purpose: Update an existing non-deck component in place.
+- Input:
+  - `componentType` (string, required)
+  - `componentId` (string, required)
+  - Mutable optional fields:
+    - `name`, `identity`, `quantity`
+    - file slots: `faceFileId`, `backFileId`, `frontFileId`, `outsideFileId`, `insideFileId`, `innerFileId`, `topFileId`, `bottomFileId`, `spotGlossFileId`, `spotGlossBottomFileId`
+    - side slots: `side1FileId` ... `side8FileId`
+    - `dieColor` (string), plus `diecolor` alias accepted in handler
+    - proof flags: `hasProofedFace`, `hasProofedBack`, `hasProofedOutside`, `hasProofedInside`, `hasProofedTop`, `hasProofedBottom`, `hasProofedSpotGloss`, `hasProofedSpotGlossBottom`
+- Output data:
+  - `component` (object)
+  - Status: implemented
+
+25. `tgc_component_item_create`
 - Purpose: Create an item/member within a set-based container.
 - Input:
   - `componentType` (string, required; for example `twosided`, `twosidedslugged`, `onesidedslugged`)
@@ -390,7 +409,7 @@ Implemented additions (read/interrogation primitives):
   - Status: implemented
   - Live validation includes `/api/threesidedcustomcut` member creation under `/api/threesidedcustomcutset`.
 
-25. `tgc_component_page_create`
+26. `tgc_component_page_create`
 - Purpose: Create pages for book-family components.
 - Input:
   - `componentType` (enum: `bookletpage`, `coilbookpage`, `perfectboundbookpage`)

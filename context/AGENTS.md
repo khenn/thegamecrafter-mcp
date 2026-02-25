@@ -61,6 +61,12 @@ Rules:
   - warn when the request is likely to fail or generate TGC warnings.
   - provide concise correction options (for example padding pages or choosing an alternate component class).
   - for side-based specialty parts (for example custom dice and acrylic shapes), verify all required side image slots are present before mutation.
+  - for custom dice (`customcolord4/customcolord6/customcolord8`):
+    - require complete side slot coverage for the selected die type,
+    - require `identity` and auto-infer when omitted:
+      - `customcolord4` -> `CustomColorD4`
+      - `customcolord6` -> `CustomColorD6`
+      - `customcolord8` -> `CustomColorD8`
 - If user intent does not specify a component type, offer the best 2-3 relevant implemented options and ask user to choose before create.
   - if only one viable option remains after constraints, explain why alternatives were excluded and ask for explicit confirmation before create.
 - For generated/derived images, enforce print-safe placement:

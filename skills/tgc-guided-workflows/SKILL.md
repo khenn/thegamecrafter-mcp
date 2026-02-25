@@ -28,6 +28,7 @@ Before any component mutation:
 - Resolve product metadata and user-facing references.
 - Validate request against dimensions, page rules, min/max bounds, finish support, and required assets.
 - For side-based specialty parts (custom dice/acrylic), verify every required side slot is provided before create.
+- For custom dice (`customcolord4/customcolord6/customcolord8`), require identity and auto-infer from component type when omitted.
 - If request is likely to fail or warn, stop and provide corrective options.
 - For user-facing responses, include product/help/video links; include API links only if requested.
 - For image-bearing components, use geometry-aware checks (trim/safe/fold/binding risk zones) before upload.

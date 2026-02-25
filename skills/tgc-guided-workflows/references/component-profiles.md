@@ -199,6 +199,7 @@ Finish behavior notes:
 - Help: no product `info` URL returned by current product metadata snapshot.
 - Image size: `300x300`
 - Image slots: `side1`, `side2`, `side3`, `side4`
+- Identity guardrail: require `identity=CustomColorD4` (auto-infer when omitted).
 
 ### customcolord6 (`CustomColorD6`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomColorD6`
@@ -206,6 +207,7 @@ Finish behavior notes:
 - Help: no product `info` URL returned by current product metadata snapshot.
 - Image size: `180x180`
 - Image slots: `side1`, `side2`, `side3`, `side4`, `side5`, `side6`
+- Identity guardrail: require `identity=CustomColorD6` (auto-infer when omitted).
 
 ### customcolord8 (`CustomColorD8`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomColorD8`
@@ -213,6 +215,7 @@ Finish behavior notes:
 - Help: no product `info` URL returned by current product metadata snapshot.
 - Image size: `300x300`
 - Image slots: `side1`, `side2`, `side3`, `side4`, `side5`, `side6`, `side7`, `side8`
+- Identity guardrail: require `identity=CustomColorD8` (auto-infer when omitted).
 
 ### customprintedmeeple (`CustomPrintedMeeple`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomPrintedMeeple`

@@ -394,6 +394,7 @@ export class TgcService {
     bottomFileId?: string;
     spotGlossFileId?: string;
     spotGlossBottomFileId?: string;
+    dieColor?: string;
     side1FileId?: string;
     side2FileId?: string;
     side3FileId?: string;
@@ -430,6 +431,92 @@ export class TgcService {
         bottom_id: input.bottomFileId,
         spot_gloss_id: input.spotGlossFileId,
         spot_gloss_bottom_id: input.spotGlossBottomFileId,
+        diecolor: input.dieColor,
+        side1_id: input.side1FileId,
+        side2_id: input.side2FileId,
+        side3_id: input.side3FileId,
+        side4_id: input.side4FileId,
+        side5_id: input.side5FileId,
+        side6_id: input.side6FileId,
+        side7_id: input.side7FileId,
+        side8_id: input.side8FileId,
+        has_proofed_face:
+          input.hasProofedFace === undefined ? undefined : input.hasProofedFace ? 1 : 0,
+        has_proofed_back:
+          input.hasProofedBack === undefined ? undefined : input.hasProofedBack ? 1 : 0,
+        has_proofed_outside:
+          input.hasProofedOutside === undefined ? undefined : input.hasProofedOutside ? 1 : 0,
+        has_proofed_inside:
+          input.hasProofedInside === undefined ? undefined : input.hasProofedInside ? 1 : 0,
+        has_proofed_top:
+          input.hasProofedTop === undefined ? undefined : input.hasProofedTop ? 1 : 0,
+        has_proofed_bottom:
+          input.hasProofedBottom === undefined ? undefined : input.hasProofedBottom ? 1 : 0,
+        has_proofed_spot_gloss:
+          input.hasProofedSpotGloss === undefined ? undefined : input.hasProofedSpotGloss ? 1 : 0,
+        has_proofed_spot_gloss_bottom:
+          input.hasProofedSpotGlossBottom === undefined
+            ? undefined
+            : input.hasProofedSpotGlossBottom
+              ? 1
+              : 0,
+      },
+    });
+  }
+
+  public async updateComponent(input: {
+    componentType: string;
+    componentId: string;
+    name?: string;
+    identity?: string;
+    quantity?: number;
+    backFileId?: string;
+    faceFileId?: string;
+    frontFileId?: string;
+    outsideFileId?: string;
+    insideFileId?: string;
+    innerFileId?: string;
+    topFileId?: string;
+    bottomFileId?: string;
+    spotGlossFileId?: string;
+    spotGlossBottomFileId?: string;
+    dieColor?: string;
+    side1FileId?: string;
+    side2FileId?: string;
+    side3FileId?: string;
+    side4FileId?: string;
+    side5FileId?: string;
+    side6FileId?: string;
+    side7FileId?: string;
+    side8FileId?: string;
+    hasProofedFace?: boolean;
+    hasProofedBack?: boolean;
+    hasProofedOutside?: boolean;
+    hasProofedInside?: boolean;
+    hasProofedTop?: boolean;
+    hasProofedBottom?: boolean;
+    hasProofedSpotGloss?: boolean;
+    hasProofedSpotGlossBottom?: boolean;
+  }): Promise<Record<string, unknown>> {
+    const session = this.requireSession();
+    const safeComponentType = normalizePathToken(input.componentType, "componentType");
+    return this.client.put(`/api/${safeComponentType}/${input.componentId}`, {
+      sessionId: session.id,
+      form: {
+        name: input.name,
+        identity: input.identity,
+        quantity: input.quantity,
+        back_id: input.backFileId,
+        face_id: input.faceFileId,
+        front_id: input.frontFileId,
+        outside_id: input.outsideFileId,
+        inside_id: input.insideFileId,
+        inner_id: input.innerFileId,
+        top_id: input.topFileId,
+        bottom_id: input.bottomFileId,
+        spot_gloss_id: input.spotGlossFileId,
+        spot_gloss_bottom_id: input.spotGlossBottomFileId,
+        diecolor: input.dieColor,
         side1_id: input.side1FileId,
         side2_id: input.side2FileId,
         side3_id: input.side3FileId,

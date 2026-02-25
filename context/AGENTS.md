@@ -69,6 +69,10 @@ Rules:
       - `customcolord8` -> `CustomColorD8`
 - If user intent does not specify a component type, offer the best 2-3 relevant implemented options and ask user to choose before create.
   - if only one viable option remains after constraints, explain why alternatives were excluded and ask for explicit confirmation before create.
+- For edits/revisions of existing non-deck components:
+  - prefer in-place mutation via `tgc_component_update` by default,
+  - do not create duplicate replacement components unless the user explicitly asks for a variant/copy/new instance.
+  - when updating in place, report exactly which fields changed.
 - For generated/derived images, enforce print-safe placement:
   - keep essential content inside safe zones (away from trim/bleed),
   - add extra inner-gutter margin for bound products,

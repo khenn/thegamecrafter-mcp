@@ -22,6 +22,7 @@ Use this skill to run safe, guided TGC workflows over MCP tools with minimal bac
 - Before any feedback publish action, run the publication approval gate from `references/community-feedback.md` (show exact text -> require explicit approval).
 - For outcome-based requests without explicit component type, suggest 2-3 relevant implemented options, then wait for user selection.
   - if only one viable option remains, explain why alternatives were excluded and ask for explicit confirmation before create.
+- For revisions to existing non-deck components, default to `tgc_component_update` (in-place) instead of creating a second component.
 
 ## Component Preflight (Required)
 Before any component mutation:

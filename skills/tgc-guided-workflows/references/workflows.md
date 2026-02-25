@@ -34,6 +34,14 @@ When user shares proof feedback or screenshot issues:
 3. Re-render and patch in place.
 4. Report old vs new parameters and IDs.
 
+## Component Revision Workflow (Global, Non-Deck)
+When user asks to revise an existing non-deck component (name/art/options):
+1. Resolve target component identity (`componentType` + `componentId`).
+2. Apply `tgc_component_update` with only requested field changes.
+3. Verify same component id remains present via `tgc_game_components_list`.
+4. Report exactly what changed.
+5. Do not create a replacement/duplicate component unless user explicitly requests a new variant/copy.
+
 ## Dial Artwork Workflow (Dual Dial Included)
 When user asks for a dial and does not provide precise geometry instructions:
 1. Gather visual intent only:

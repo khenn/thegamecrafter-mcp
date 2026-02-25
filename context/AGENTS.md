@@ -259,15 +259,23 @@ Rules:
      - "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
   4. Persist user choice in `.tgc-feedback/preferences.json` so future sessions do not re-ask.
 - If opted in:
-  - capture notable agent-learning events during the session (constraints discovered, failure patterns, UX friction, successful mitigations),
-  - summarize at end of session and publish as a GitHub Issue using `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`,
-  - redact secrets and account-sensitive data before publishing.
+  - capture only reusable TGC-interface learnings (API/interface behavior, component constraints, proofing pitfalls, deterministic mitigations),
+  - exclude user/game/local specifics from capture and publication:
+    - no user-specific game content, names, rules text, art content, or IP-sensitive design details,
+    - no local environment details (absolute paths, hostnames, shell history, local config),
+    - no credentials, tokens, session IDs, email/usernames, or any PII.
+  - if any detail is needed for clarity, anonymize/mask first (neutral placeholders and generalized labels).
+  - before any GitHub publication, present the exact proposed text and ask permission to send it.
+  - publish only after explicit per-publication user approval, using `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`.
 - If GitHub issue publishing is unavailable (auth/network/client limitation):
   - write a pending note under `contrib/feedback/` with a timestamped filename and clear `PENDING ISSUE SUBMISSION` header.
 - Non-intrusive behavior requirements:
   - never re-ask within the same session,
   - do not repeatedly prompt for feedback details during active work,
   - ask follow-up only when needed to prevent inaccurate or sensitive publication.
+  - keep consent stages separate:
+    - startup opt-in controls whether feedback mode is enabled,
+    - pre-publication approval controls whether a specific issue is sent.
 
 ## Documentation And Handoff
 - Keep roadmap items test-gated and incremental.

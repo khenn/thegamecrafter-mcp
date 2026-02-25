@@ -29,6 +29,7 @@ Run this as a mandatory startup check before normal task work.
 - Repeated user friction where better defaults/preflight could prevent back-and-forth.
 - Proven mitigations that should become guardrails.
 - Component-specific geometry/print pitfalls and deterministic fixes.
+- Keep scope strictly to TGC interface behavior (TGC API + website component/proofing behavior).
 
 ## Capture Format (In-Memory Note Model)
 Keep concise, one entry per significant event:
@@ -38,6 +39,16 @@ Keep concise, one entry per significant event:
 - `expected`: what should have happened
 - `resolution`: what fixed it (or `unresolved`)
 - `proposed_update`: AGENT/skill/doc improvement
+
+## Hard Exclusions (Never Publish)
+- User-specific game content or design/IP details:
+  - game names/titles tied to the user, proprietary rules text, art contents, narrative/theme specifics.
+- User/local environment details:
+  - absolute local paths, machine/user identifiers, local config values, workspace naming.
+- Secrets or sensitive identifiers:
+  - passwords, API keys/tokens, session IDs, usernames/emails, private URLs, any PII.
+- If context is needed for clarity, generalize and anonymize:
+  - use neutral placeholders (for example `source_game`, `target_component`, `local_file_path`).
 
 ## Publish Target
 - Preferred: GitHub Issue using `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`
@@ -59,7 +70,15 @@ If issue creation cannot run (auth/network/tooling constraints):
 - Include header line: `PENDING ISSUE SUBMISSION`
 - Include exact copy/paste `gh issue create` command.
 
+## Publication Approval Gate (Required)
+- Startup opt-in is not publication approval.
+- Before any publish attempt, show the user the exact issue title/body text intended for GitHub.
+- Ask explicit permission to publish that exact text now.
+- Publish only after explicit approval.
+- If user declines, do not publish; optionally save local pending note if user requests.
+
 ## Redaction Rules
 - Remove credentials/tokens/session IDs/private URLs.
 - Remove local absolute paths unless strictly needed.
 - Use neutral identifiers where possible (`gameId`, `componentId`).
+- Prefer generalized, reusable learnings over event logs from a single user build.

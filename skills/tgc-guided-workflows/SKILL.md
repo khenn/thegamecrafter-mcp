@@ -19,6 +19,7 @@ Use this skill to run safe, guided TGC workflows over MCP tools with minimal bac
 - Prefer the smallest valid sequence of tool calls.
 - After each mutation, report what changed and key IDs.
 - Before normal task execution, run the community-feedback startup gate from `references/community-feedback.md` (global setting -> saved preference -> one-time session prompt).
+- Before any feedback publish action, run the publication approval gate from `references/community-feedback.md` (show exact text -> require explicit approval).
 - For outcome-based requests without explicit component type, suggest 2-3 relevant implemented options, then wait for user selection.
   - if only one viable option remains, explain why alternatives were excluded and ask for explicit confirmation before create.
 

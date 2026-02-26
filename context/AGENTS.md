@@ -77,6 +77,18 @@ Rules:
       - `customcolord8` -> `CustomColorD8`
 - If user intent does not specify a component type, offer the best 2-3 relevant implemented options and ask user to choose before create.
   - if only one viable option remains after constraints, explain why alternatives were excluded and ask for explicit confirmation before create.
+- For Make -> Add Downloadable File workflows:
+  - upload file first (`tgc_file_upload`) to get `fileId`,
+  - then attach it to the game via `tgc_gamedownload_create` using `gameId` + `fileId` + a user-facing `name`,
+  - optionally set `free` when user requests free download behavior.
+- For Make -> Add Stock Component workflows:
+  - current support level is constrained but functional:
+    - discover/select valid stock part metadata via `tgc_tgc_products_list`,
+    - attach/link via `tgc_gamepart_upsert` with known `partId`, `componentType`, and `componentId`.
+  - if a one-step stock-component add path is unavailable, clearly explain this and continue with the supported linking flow.
+- For Make -> Add Embedded Game:
+  - no dedicated embedded-game mutation tool is currently implemented.
+  - treat embedded-game mutation as unsupported for now; clearly state limitation and suggest manual UI completion when requested.
 - For edits/revisions of existing non-deck components:
   - prefer in-place mutation via `tgc_component_update` by default,
   - do not create duplicate replacement components unless the user explicitly asks for a variant/copy/new instance.

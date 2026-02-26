@@ -51,6 +51,25 @@ When user asks to change UV coating or linen texture:
 3. Call `tgc_game_surfacing_set` with one or both supplied values.
 4. Report resulting state and remind user to verify Production Cost deltas in TGC UI.
 
+## Downloadable File Workflow (Make Tab)
+When user asks to add a downloadable file:
+1. Upload the local file via `tgc_file_upload`.
+2. Ask for/derive a user-facing download name if missing.
+3. Attach the uploaded file to the game using `tgc_gamedownload_create` (`gameId`, `fileId`, `name`, optional `free`).
+4. Report `gamedownloadId` and file details.
+
+## Stock Component Workflow (Make Tab)
+Current support level is constrained but usable:
+1. Discover candidate stock products using `tgc_tgc_products_list`.
+2. Resolve required linkage identifiers (`partId`, `componentType`, `componentId`) from known product/game data.
+3. Link to the game via `tgc_gamepart_upsert`.
+4. If one-step stock-component add is unavailable, explicitly communicate this and proceed with the supported linking path.
+
+## Embedded Game Workflow (Make Tab)
+Current status:
+- Dedicated embedded-game mutation is not implemented in MCP yet.
+- If requested, state this limitation clearly and direct the user to complete Add Embedded Game in TGC UI.
+
 ## Dial Artwork Workflow (Dual Dial Included)
 When user asks for a dial and does not provide precise geometry instructions:
 1. Gather visual intent only:

@@ -373,6 +373,21 @@ const fileUploadSchema = z.object({
   name: z.string().min(1).optional(),
 });
 
+const gamedownloadCreateSchema = z.object({
+  gameId: z.string().min(1),
+  fileId: z.string().min(1),
+  name: z.string().min(1),
+  free: z.boolean().optional(),
+});
+
+const gameBulkPricingGetSchema = z.object({
+  gameIds: z.array(z.string().min(1)).min(1).max(50),
+});
+
+const gameCostBreakdownGetSchema = z.object({
+  gameId: z.string().min(1),
+});
+
 export async function executeTool(name: string, args: unknown, context: ToolContext): Promise<ToolResultEnvelope> {
   if (!TOOL_NAMES.has(name)) {
     return fail("TOOL_NOT_FOUND", `Unknown tool: ${name}`);
@@ -886,6 +901,51 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
           name: input.name,
         });
         return ok({ file });
+      }
+      case "tgc_gamedownload_create": {
+        const input = gamedownloadCreateSchema.parse(safeArgs);
+        const gameDownload = await context.tgc.createGameDownload({
+          gameId: input.gameId,
+          fileId: input.fileId,
+          name: input.name,
+          free: input.free,
+        });
+        return ok({ gameDownload });
+      }
+      case "tgc_game_bulk_pricing_get": {
+        const input = gameBulkPricingGetSchema.parse(safeArgs);
+        const pricing = [];
+        const errors = [];
+        for (const gameId of input.gameIds) {
+          try {
+            const result = await context.tgc.getGameBulkPricing(gameId);
+            pricing.push({ gameId, pricing: result });
+          } catch (error: unknown) {
+            if (error instanceof TgcApiError) {
+              errors.push({ gameId, code: error.code, message: error.message, details: error.details });
+              continue;
+            }
+            throw error;
+          }
+        }
+        return ok({
+          requested: input.gameIds.length,
+          successCount: pricing.length,
+          errorCount: errors.length,
+          pricing,
+          errors,
+        });
+      }
+      case "tgc_game_cost_breakdown_get": {
+        const input = gameCostBreakdownGetSchema.parse(safeArgs);
+        const result = await context.tgc.getGameCostBreakdown(input.gameId);
+        const items = Array.isArray(result.items)
+          ? result.items
+          : Array.isArray(result.gameledgerentries)
+            ? result.gameledgerentries
+            : [];
+        const total = typeof result.total === "number" ? result.total : undefined;
+        return ok({ gameId: input.gameId, items, total, raw: result });
       }
       default:
         return ok({

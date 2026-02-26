@@ -545,11 +545,16 @@ export const TOOL_CONTRACT: ToolContract[] = [
   },
   {
     name: "tgc_gamedownload_create",
-    description: "Generate a downloadable package for a game.",
+    description: "Create a downloadable file association for a game.",
     inputSchema: {
       type: "object",
-      properties: { gameId: { type: "string" } },
-      required: ["gameId"],
+      properties: {
+        gameId: { type: "string" },
+        fileId: { type: "string" },
+        name: { type: "string" },
+        free: { type: "boolean", default: false },
+      },
+      required: ["gameId", "fileId", "name"],
       additionalProperties: false,
     },
   },

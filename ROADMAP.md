@@ -48,18 +48,18 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [ ] Gate: readiness checks catch known fixture problems before ordering prototypes
 
 ### A7. Remaining Make-Phase Gaps
-- [ ] Implement `tgc_game_cost_breakdown_get`
-- [ ] Implement `tgc_game_bulk_pricing_get`
-- [ ] Implement `tgc_gamedownload_create`
-- [ ] Add first-class Surfacing support and guidance:
+- [x] ~~Implement `tgc_game_cost_breakdown_get`~~
+- [x] ~~Implement `tgc_game_bulk_pricing_get`~~
+- [x] ~~Implement `tgc_gamedownload_create`~~
+- [x] ~~Add first-class Surfacing support and guidance:~~
   - [x] ~~`enable_uv_coating` workflow support~~
   - [x] ~~`enable_linen_texture` workflow support~~
   - [x] ~~user-facing validation/prompts for surfacing tradeoffs and cost impact~~
-- [ ] Complete Make-tab parity review and close actionable gaps:
-  - [ ] stock component workflow support level (implement or explicitly document constraints)
-  - [ ] embedded game support decision (implement or explicitly document unsupported state)
-- [ ] Gate: complete make/iterate workflow from empty game to prototype-ready package
-- [ ] Gate: Make-tab functional parity for all supported API-backed features
+- [x] ~~Complete Make-tab parity review and close actionable gaps:~~
+  - [x] ~~stock component workflow support level (implement or explicitly document constraints)~~
+  - [x] ~~embedded game support decision (implement or explicitly document unsupported state)~~
+- [x] ~~Gate: complete make/iterate workflow from empty game to prototype-ready package~~
+- [x] ~~Gate: Make-tab functional parity for all supported API-backed features~~
 
 ## Goal B - Hardening and Release Ops (Release 1 Exit)
 

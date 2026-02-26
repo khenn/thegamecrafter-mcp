@@ -668,6 +668,34 @@ export class TgcService {
     return true;
   }
 
+  public async createGameDownload(input: {
+    gameId: string;
+    fileId: string;
+    name: string;
+    free?: boolean;
+  }): Promise<Record<string, unknown>> {
+    const session = this.requireSession();
+    return this.client.post("/api/gamedownload", {
+      sessionId: session.id,
+      form: {
+        game_id: input.gameId,
+        file_id: input.fileId,
+        name: input.name,
+        free: input.free === undefined ? undefined : input.free ? 1 : 0,
+      },
+    });
+  }
+
+  public async getGameBulkPricing(gameId: string): Promise<Record<string, unknown>> {
+    const session = this.requireSession();
+    return this.client.get(`/api/game/${gameId}/bulk-pricing`, { sessionId: session.id });
+  }
+
+  public async getGameCostBreakdown(gameId: string): Promise<Record<string, unknown>> {
+    const session = this.requireSession();
+    return this.client.get(`/api/game/${gameId}/gameledgerentries`, { sessionId: session.id });
+  }
+
   private requireSession(): ActiveSession {
     if (!this.session) {
       throw new TgcApiError("NOT_AUTHENTICATED", "No active TGC session. Call tgc_auth_login first.");

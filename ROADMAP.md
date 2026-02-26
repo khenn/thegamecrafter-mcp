@@ -1,147 +1,132 @@
 # The Game Crafter MCP - Feature Roadmap
 
-This roadmap is for public `thegamecrafter-mcp` and is ordered for iterative delivery with testing after each milestone.
+This roadmap is for public `thegamecrafter-mcp` and is ordered by creator workflow and release strategy.
 
 ## Scope
 - Focus on account-authoring workflows (create/manage your own games and assets).
 - Keep public-catalog interaction secondary and avoid API usage patterns that may exceed intended use.
 - Prioritize new-game build completeness over copy workflows.
 
-## Current Baseline
-- [x] MCP stdio server scaffold.
-- [x] Auth/session tools (`tgc_auth_login`, `tgc_auth_logout`).
-- [x] Read tools (`tgc_me`, `tgc_designer_list`, `tgc_game_get`, `tgc_game_list`).
+## Goal A - Make and Iterate (Release 1)
 
-## Milestone 1 - Game Foundation
-- [x] Implement `tgc_game_create`.
-- [x] Test gate:
-  - Login works.
-  - Create game succeeds with supplied `designerId`.
-  - Created game is readable via `tgc_game_get`.
+Ship the highest-usage workflows first: creating games, adding components/art, and preparing playable prototypes.
 
-## Milestone 2 - Game Metadata Lifecycle
-- [x] Implement `tgc_game_delete`.
-- [x] Implement `tgc_game_update`.
-- [x] Implement `tgc_game_copy`.
-- [x] Test gate:
-  - [x] Create/delete integration test leaves no residual test games.
-  - [x] Patch updates are reflected on subsequent reads.
-  - [x] Copy creates a new game with expected metadata.
+### A1. Core MCP Platform
+- [x] ~~MCP stdio server scaffold~~
+- [x] ~~Auth/session tools (`tgc_auth_login`, `tgc_auth_logout`)~~
+- [x] ~~Read tools (`tgc_me`, `tgc_designer_list`, `tgc_game_get`, `tgc_game_list`)~~
 
-## Milestone 3 - Asset Ingestion
-- [x] Implement `tgc_folder_create`.
-- [x] Implement `tgc_file_upload`.
-- [x] Test gate:
-  - [x] Folder creation and file upload IDs are reusable in later steps.
+### A2. Game Lifecycle
+- [x] ~~Implement `tgc_game_create`~~
+- [x] ~~Implement `tgc_game_update`~~
+- [x] ~~Implement `tgc_game_delete`~~
+- [x] ~~Implement `tgc_game_copy`~~
+- [x] ~~Gate: create/update/read/delete flows validated with cleanup~~
 
-## Milestone 4 - Card Component Buildout
-- [x] Implement `tgc_deck_create`.
-- [x] Implement `tgc_card_create`.
-- [x] Implement `tgc_deck_bulk_create_cards`.
-- [x] Test gate:
-  - [x] Deck/card creation works from uploaded art files.
-  - [x] Bulk card creation maps to TGC `face_id`/`back_id` payload and preserves `face_id` in created cards.
+### A3. Asset Ingestion
+- [x] ~~Implement `tgc_folder_create`~~
+- [x] ~~Implement `tgc_file_upload`~~
+- [x] ~~Gate: uploaded assets reusable across component workflows~~
 
-## Milestone 5 - Part Linking and Cost Visibility
-- [x] Implement `tgc_part_create`.
-- [x] Implement `tgc_gamepart_upsert`.
-- [ ] Implement `tgc_game_cost_breakdown_get`.
-- [ ] Implement `tgc_game_bulk_pricing_get`.
-- [ ] Test gate:
-  - Linked parts appear in cost/pricing outputs.
+### A4. Components and Parts Coverage
+- [x] ~~Implement deck/card workflows (`tgc_deck_create`, `tgc_card_create`, `tgc_deck_bulk_create_cards`)~~
+- [x] ~~Implement component container/item/page workflows (`tgc_component_create`, `tgc_component_item_create`, `tgc_component_page_create`)~~
+- [x] ~~Implement part linking (`tgc_gamepart_upsert`)~~
+- [x] ~~Implement component discovery/listing (`tgc_game_components_list`, `tgc_component_items_list`, `tgc_game_gameparts_list`)~~
+- [x] ~~Expand component write coverage across Batches 1-5~~
+- [x] ~~Gate: live create/readback probes for implemented component families~~
 
-## Milestone 5.5 - Complex Component Primitives (Generals-class Games)
-- [x] Implement `tgc_game_components_list` (relationship-based component listing).
-- [x] Implement `tgc_component_items_list` (set member listing).
-- [x] Implement `tgc_component_create` (non-deck set/container creation).
-- [x] Implement `tgc_component_item_create` (set member creation).
-- [x] Test gate:
-  - Live integration validates `twosidedset/twosided`.
-  - Live integration validates `twosidedsluggedset/twosidedslugged`.
-  - Live integration validates `onesidedsluggedset/onesidedslugged`.
-- [ ] Next gate:
-  - End-to-end `Generals-v2` reconstruction script copies all supported component families into a new game.
+### A5. Make-Phase Intelligence
+- [x] ~~Seed guidance for implemented component families in `skills/` + `context/AGENTS.md`~~
+- [x] ~~Add preflight guardrails for print-fit, bleed/cut, and component constraints~~
+- [ ] Complete per-component guidance parity for all implemented component families
+- [ ] Add/finish automated capability matrix regeneration in normal dev flow
 
-## Milestone 6 - Catalog Coverage And Build Completeness
-- [x] Implement `tgc_tgc_products_list` (catalog discovery endpoint).
-- [x] Add generated capability matrix (`tools/tgc-component-capability-matrix.md`) from live catalog data.
-- [ ] Add public-game metadata reconnaissance script to sample component family payload shapes across public games.
-- [ ] Add disposable synthetic fixture workflow for unsupported component families (create, verify, cleanup).
-- [x] Expand MCP write coverage for missing create APIs discovered in matrix.
-  - [x] Packaging core coverage validated via `tgc_component_create`:
-    - `/api/tuckbox`
-    - `/api/hookbox`
-    - `/api/twosidedbox`
-    - `/api/boxtop`
-    - `/api/boxtopgloss`
-    - `/api/twosidedboxgloss`
-    - `/api/boxface`
-  - [x] Books/documents coverage validated:
-    - `/api/document`
-    - `/api/booklet`
-    - `/api/bookletpage`
-    - `/api/coilbook`
-    - `/api/coilbookpage`
-    - `/api/perfectboundbook`
-    - `/api/perfectboundbookpage`
-    - `/api/scorepad`
-  - [x] Board/mat surface coverage validated:
-    - `/api/onesided`
-    - `/api/onesidedgloss`
-  - [x] Advanced cut and dial coverage validated:
-    - `/api/dial`
-    - `/api/customcutonesidedslugged`
-    - `/api/customcuttwosidedslugged`
-    - `/api/threesidedcustomcutset`
-    - `/api/threesidedcustomcut`
-  - [x] Specialty parts/custom dice/meeple coverage validated:
-    - `/api/acrylicshape`
-    - `/api/customprintedmeeple`
-    - `/api/customcolord4`
-    - `/api/customcolord6`
-    - `/api/customcolord8`
-- [ ] Add component-intelligence guidance layer for each implemented component family.
-  - [x] Seeded for:
-    - `LargeBooklet`
-    - `DigestPerfectBoundBook`
-    - Batch 1 packaging families
-    - Batch 3 board/mat families
-    - Batch 4 advanced cut/dial families
-    - Batch 5 specialty parts families
-  - [ ] For every newly supported component family, add:
-    - source URLs in skills/docs (`make/products`, `api/tgc/products`, and help/article link when present),
-    - preflight validation rules (bounds, parity, required assets, finish options),
-    - guided warning/correction prompts before mutation when requests violate constraints.
-- [x] Test gate:
-  - [x] For each newly added create API family, add a live integration probe that creates at least one valid component and verifies readback.
+### A6. Prototype/Test-Adjacent Coverage
+- [ ] Add read helpers for test-area relationships (`sanitytests`, `arttests`, `cvtests`) with user-facing interpretation
+- [ ] Add a `tgc_make_readiness_check` helper (prototype readiness, proofing warnings, missing assets)
+- [ ] Gate: readiness checks catch known fixture problems before ordering prototypes
 
-## Milestone 7 - Publish Readiness
-- [x] Implement `tgc_game_publish`.
-- [x] Implement `tgc_game_unpublish`.
-- [ ] Implement `tgc_gamedownload_create`.
-- [ ] Add `tgc_prepublish_check` workflow helper.
-- [ ] Test gate:
-  - Prepublish checks identify missing assets/settings before publish attempts.
+### A7. Remaining Make-Phase Gaps
+- [ ] Implement `tgc_game_cost_breakdown_get`
+- [ ] Implement `tgc_game_bulk_pricing_get`
+- [ ] Implement `tgc_gamedownload_create`
+- [ ] Gate: complete make/iterate workflow from empty game to prototype-ready package
 
-## Milestone 8 - Workflow Automation
-- [ ] Add `tgc_game_scaffold` workflow tool (manifest-driven game setup).
-- [ ] Add resumable/idempotent behavior for multi-step workflows.
-- [ ] Add optional manual-copy workflow helper as a lower-priority convenience feature.
-- [ ] Test gate:
-  - One manifest can produce a reproducible game skeleton.
+## Goal B - Hardening and Release Ops (Release 1 Exit)
 
-## Milestone 9 - Hardening and Release
-- [ ] Contract/integration tests for all implemented tools.
-- [ ] CI for typecheck/build/tests.
-- [ ] Retry/backoff and improved error diagnostics.
-- [ ] Versioned releases and changelog discipline.
-- [ ] Package and publish reusable Codex skill for Game Crafter guided workflows.
+Stabilize what was built in Goal A and ship a reliable public first release.
 
-## Downstream Security Enhancements
-- [ ] Optional local secret-manager integration for unattended operation.
-- [ ] Auth mode documentation (interactive vs secret-store-backed).
+### B1. Quality and Reliability
+- [ ] Contract and integration tests for all implemented tools
+- [ ] CI pipeline for typecheck/build/tests
+- [ ] Retry/backoff, timeout policy, and improved diagnostics
+- [ ] Idempotent/resumable behavior for long multi-step workflows
 
-## Not In Scope For Initial Releases
-- Full UI/desktop frontend.
-- Background daemon as required runtime.
-- Implicit auto-publish without explicit user action.
+### B2. Docs and Onboarding
+- [x] ~~Cross-platform README install and verification guidance~~
+- [x] ~~Agent/skill installation guidance for Codex and Claude-style workflows~~
+- [ ] Finish release-specific docs pass for v1 toolset and known limitations
+- [ ] Create concise upgrade notes/changelog template for future releases
+
+### B3. Skills and Agent Maintenance Loop
+- [x] ~~Issue-based feedback contribution flow with privacy safeguards~~
+- [x] ~~User approval gate before publishing feedback content~~
+- [ ] Add regression checklist for applying issue feedback across component/family/global scope
+- [ ] Gate: at least one full feedback cycle validated from issue to merged guidance update
+
+### B4. Release Packaging
+- [ ] Versioning + release process discipline
+- [ ] Configure GitHub community contribution baseline:
+  - [ ] `CONTRIBUTING.md` contribution flow
+  - [ ] issue/PR templates
+  - [ ] `CODE_OF_CONDUCT.md`
+  - [ ] `SECURITY.md` vulnerability reporting path
+  - [ ] branch protection/review expectations
+- [ ] Publish first stable release focused on Make/Iterate workflows
+
+## Goal C - Sell and Publish Workflow (Release 2)
+
+After v1 release, add guided publishing and visibility optimization.
+
+### C1. Sell-Surface API Coverage
+- [x] ~~Implement `tgc_game_publish`~~
+- [x] ~~Implement `tgc_game_unpublish`~~
+- [ ] Implement sell-asset/metadata helpers where API supports write operations:
+  - [ ] action shots create/update/delete/list
+  - [ ] game tags add/remove/list
+  - [ ] related games linkage/list/order (if API supports safe mutation)
+  - [ ] BOF workflow support (if API supports safe mutation)
+- [ ] Gate: CRUD/readback tests for each supported sell workflow
+
+### C2. Guided Publish Assistant
+- [ ] Implement `tgc_prepublish_check` for blockers + warnings + next actions
+- [ ] Add guided publish wizard behavior in skills/agent:
+  - [ ] collect missing inputs
+  - [ ] present top 2-3 options where relevant
+  - [ ] require explicit user confirmation before publish
+- [ ] Gate: end-to-end guided publish succeeds on a realistic fixture game
+
+### C3. Visibility and Merchandising Suggestions
+- [ ] Add `tgc_visibility_review` helper with actionable recommendations
+- [ ] Add Sell best-practice references and prompt patterns into skills
+- [ ] Gate: measurable improvement in completeness/visibility score after suggestions applied
+
+## Goal D - Crowd Sale and Growth (Release 3)
+
+Extend beyond publishing into promotion and campaign workflows.
+
+### D1. Crowd Sale Discovery and Support
+- [ ] Confirm and document writable API surface for crowd sale workflows (`crowdsale_game1/2/3` and related endpoints)
+- [ ] Add read/guide tools for crowd sale readiness and lifecycle
+- [ ] Implement write workflows if API safely supports them
+
+### D2. Post-Publish Growth Tooling
+- [ ] Add guidance for promotions, campaign setup, and post-launch optimization
+- [ ] Add analytics-oriented helper prompts where API support exists
+
+## Deferred (Not in Current Release Window)
+- [ ] Optional local OS secret-manager integration for unattended operation
+- [ ] Full UI/desktop frontend
+- [ ] Background daemon as required runtime
+- [ ] Implicit auto-publish without explicit user action

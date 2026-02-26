@@ -721,6 +721,8 @@ const GAME_PATCH_KEY_MAP: Record<string, string> = {
   privateSales: "private_sales",
   digitalDelivery: "digital_delivery",
   useAutomaticPricing: "use_automatic_pricing",
+  enableUvCoating: "enable_uv_coating",
+  enableLinenTexture: "enable_linen_texture",
 };
 
 function normalizePathToken(value: string, fieldName: string): string {

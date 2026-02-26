@@ -42,6 +42,15 @@ When user asks to revise an existing non-deck component (name/art/options):
 4. Report exactly what changed.
 5. Do not create a replacement/duplicate component unless user explicitly requests a new variant/copy.
 
+## Surfacing Workflow (Make Tab)
+When user asks to change UV coating or linen texture:
+1. Call `tgc_game_surfacing_get` and report current settings.
+2. If either target value is missing, ask once for both:
+- `enableUvCoating` (`true`/`false`)
+- `enableLinenTexture` (`true`/`false`)
+3. Call `tgc_game_surfacing_set` with one or both supplied values.
+4. Report resulting state and remind user to verify Production Cost deltas in TGC UI.
+
 ## Dial Artwork Workflow (Dual Dial Included)
 When user asks for a dial and does not provide precise geometry instructions:
 1. Gather visual intent only:

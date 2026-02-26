@@ -23,6 +23,10 @@ Use this skill to run safe, guided TGC workflows over MCP tools with minimal bac
 - For outcome-based requests without explicit component type, suggest 2-3 relevant implemented options, then wait for user selection.
   - if only one viable option remains, explain why alternatives were excluded and ask for explicit confirmation before create.
 - For revisions to existing non-deck components, default to `tgc_component_update` (in-place) instead of creating a second component.
+- For game-level surfacing changes, prefer:
+  - `tgc_game_surfacing_get` for current state + option prompt context,
+  - `tgc_game_surfacing_set` for validated updates.
+  - If user intent does not specify UV/linen values, ask once for both values in one prompt.
 
 ## Component Preflight (Required)
 Before any component mutation:

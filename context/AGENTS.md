@@ -48,6 +48,14 @@ Rules:
   - include default behavior when known.
 - Ask for missing selections in a single concise prompt, then execute.
 - If user skips optional values, proceed with defaults and explicitly report which defaults were used.
+- For Make -> Surfacing workflows:
+  - use first-class surfacing tools before generic patch calls:
+    - `tgc_game_surfacing_get` to inspect current state and prompt options,
+    - `tgc_game_surfacing_set` to apply chosen values.
+  - when user asks for surfacing but does not specify values, ask a single concise question that includes both options:
+    - `enableUvCoating` (`true`/`false`)
+    - `enableLinenTexture` (`true`/`false`)
+  - include a short note that surfacing surcharges are sheet/product dependent and users should verify in Production Cost after changes.
 - For book page creation (`bookletpage`, `coilbookpage`, `perfectboundbookpage`):
   - ensure page images map to `image_id` in API payloads,
   - provide explicit `sequenceNumber` for deterministic ordering.

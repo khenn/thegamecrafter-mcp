@@ -87,6 +87,33 @@ export const TOOL_CONTRACT: ToolContract[] = [
     },
   },
   {
+    name: "tgc_game_surfacing_get",
+    description: "Fetch current game-level surfacing settings and guidance.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+      },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_game_surfacing_set",
+    description:
+      "Update game-level surfacing settings (UV coating and/or linen texture) with validation-friendly inputs.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+        enableUvCoating: { type: "boolean" },
+        enableLinenTexture: { type: "boolean" },
+      },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
     name: "tgc_game_get",
     description: "Fetch game by id.",
     inputSchema: {

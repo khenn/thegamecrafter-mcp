@@ -97,6 +97,16 @@ const gamePublishSchema = z.object({
   gameId: z.string().min(1),
 });
 
+const gameSurfacingGetSchema = z.object({
+  gameId: z.string().min(1),
+});
+
+const gameSurfacingSetSchema = z.object({
+  gameId: z.string().min(1),
+  enableUvCoating: z.boolean().optional(),
+  enableLinenTexture: z.boolean().optional(),
+});
+
 const deckGetSchema = z.object({
   deckId: z.string().min(1),
 });
@@ -634,6 +644,57 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
         const game = await context.tgc.updateGame(input.gameId, input.patch);
         return ok({ game });
       }
+      case "tgc_game_surfacing_get": {
+        const input = gameSurfacingGetSchema.parse(safeArgs);
+        const game = await context.tgc.getGame(input.gameId, undefined, undefined);
+        const surfacing = readSurfacingState(game);
+        return ok({
+          gameId: input.gameId,
+          surfacing,
+          helper: {
+            prompt:
+              "Choose whether to enable UV coating and linen texture. If you are unsure, start with both disabled and enable only after proofing confirms your needs.",
+            options: [
+              "enableUvCoating: true|false",
+              "enableLinenTexture: true|false",
+            ],
+            note:
+              "Surcharges and availability are product/sheet dependent. Confirm current pricing in TGC Production Cost after updates.",
+          },
+        });
+      }
+      case "tgc_game_surfacing_set": {
+        const input = gameSurfacingSetSchema.parse(safeArgs);
+        if (input.enableUvCoating === undefined && input.enableLinenTexture === undefined) {
+          return fail(
+            "INVALID_INPUT",
+            "Provide at least one setting: enableUvCoating and/or enableLinenTexture.",
+            {
+              prompt:
+                "Please choose one or both options: enableUvCoating (true/false), enableLinenTexture (true/false).",
+            },
+          );
+        }
+
+        const patch: Record<string, unknown> = {};
+        if (input.enableUvCoating !== undefined) {
+          patch.enableUvCoating = input.enableUvCoating;
+        }
+        if (input.enableLinenTexture !== undefined) {
+          patch.enableLinenTexture = input.enableLinenTexture;
+        }
+
+        const game = await context.tgc.updateGame(input.gameId, patch);
+        const surfacing = readSurfacingState(game);
+        return ok({
+          gameId: input.gameId,
+          surfacing,
+          updated: {
+            enableUvCoating: input.enableUvCoating,
+            enableLinenTexture: input.enableLinenTexture,
+          },
+        });
+      }
       case "tgc_game_delete": {
         const input = gameDeleteSchema.parse(safeArgs);
         const deleted = await context.tgc.deleteGame(input.gameId);
@@ -849,4 +910,35 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
     const message = error instanceof Error ? error.message : String(error);
     return fail("UNEXPECTED_ERROR", message);
   }
+}
+
+function readSurfacingState(game: Record<string, unknown>): {
+  enableUvCoating: boolean | null;
+  enableLinenTexture: boolean | null;
+} {
+  const uvRaw = game.enable_uv_coating;
+  const linenRaw = game.enable_linen_texture;
+  return {
+    enableUvCoating: coerceBooleanish(uvRaw),
+    enableLinenTexture: coerceBooleanish(linenRaw),
+  };
+}
+
+function coerceBooleanish(value: unknown): boolean | null {
+  if (typeof value === "boolean") {
+    return value;
+  }
+  if (typeof value === "number") {
+    return value !== 0;
+  }
+  if (typeof value === "string") {
+    const trimmed = value.trim().toLowerCase();
+    if (trimmed === "1" || trimmed === "true" || trimmed === "yes") {
+      return true;
+    }
+    if (trimmed === "0" || trimmed === "false" || trimmed === "no") {
+      return false;
+    }
+  }
+  return null;
 }

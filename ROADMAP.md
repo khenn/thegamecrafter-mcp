@@ -135,6 +135,7 @@ Extend beyond publishing into promotion and campaign workflows.
 
 ## Deferred (Not in Current Release Window)
 - [ ] Optional local OS secret-manager integration for unattended operation
+- [ ] Optional MCP browsable resources support (`resources/list`, `resources/read`, templates) for discoverable docs/capabilities context
 - [ ] Full UI/desktop frontend
 - [ ] Background daemon as required runtime
 - [ ] Implicit auto-publish without explicit user action

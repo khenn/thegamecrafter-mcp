@@ -51,7 +51,15 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [ ] Implement `tgc_game_cost_breakdown_get`
 - [ ] Implement `tgc_game_bulk_pricing_get`
 - [ ] Implement `tgc_gamedownload_create`
+- [ ] Add first-class Surfacing support and guidance:
+  - [ ] `enable_uv_coating` workflow support
+  - [ ] `enable_linen_texture` workflow support
+  - [ ] user-facing validation/prompts for surfacing tradeoffs and cost impact
+- [ ] Complete Make-tab parity review and close actionable gaps:
+  - [ ] stock component workflow support level (implement or explicitly document constraints)
+  - [ ] embedded game support decision (implement or explicitly document unsupported state)
 - [ ] Gate: complete make/iterate workflow from empty game to prototype-ready package
+- [ ] Gate: Make-tab functional parity for all supported API-backed features
 
 ## Goal B - Hardening and Release Ops (Release 1 Exit)
 

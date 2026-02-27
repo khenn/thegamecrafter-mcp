@@ -54,3 +54,13 @@ Adopt optional RAG only if one or more are true:
 - Use private VPS refresh automation for periodic updates.
 - Re-evaluate after Release 1 using real user feedback.
 - If needed, implement RAG as an optional Goal B/Deferred enhancement.
+
+## Decision Snapshot (2026-02-26)
+- Outcome: **Do not implement RAG in Release 1**.
+- Basis:
+  - current static reference footprint is small and practical,
+  - progressive disclosure loading in skills is already in place,
+  - quality improvements can continue via curated references without extra infra.
+- Revisit trigger:
+  - missed-answer rate rises on long-tail help topics, or
+  - static references become too large/noisy for reliable retrieval in normal sessions.

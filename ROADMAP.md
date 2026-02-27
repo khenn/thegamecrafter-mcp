@@ -45,7 +45,8 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
   - [x] Crawl seeded Help Center categories and generate local catalog references.
   - [x] Add curated process/best-practice guidance reference for make/iterate workflows.
   - [x] Expand curated guidance coverage across all implemented component families.
-  - [ ] Decide whether to add optional RAG retrieval service (Supabase/pgvector) after evaluating static-reference performance.
+  - [x] ~~Decide whether to add optional RAG retrieval service (Supabase/pgvector) after evaluating static-reference performance.~~
+    - Decision: defer RAG for Release 1; use static references now and re-evaluate after Goal B release hardening.
 
 ### A6. Prototype/Test-Adjacent Coverage
 - [x] ~~Add read helpers for test-area relationships (`sanitytests`, `arttests`, `cvtests`) with user-facing interpretation~~

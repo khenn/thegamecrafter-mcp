@@ -9,6 +9,7 @@ Use TGC Help Center content to improve agent guidance quality without overloadin
   - `tgc-help-center-catalog.json`
   - `tgc-help-center-guidance.md`
 - Triggered, on-demand loading via `SKILL.md` reference rules.
+- Public repo does not include automated crawling/scraping scripts.
 
 Why this first:
 - No infra overhead.
@@ -43,7 +44,13 @@ Adopt optional RAG only if one or more are true:
 - Index only public TGC help content and project-authored guidance files.
 - Preserve source URLs in all retrieval responses.
 
+## Private Refresh Operations
+- Run automated help-content refresh outside this public repository (private VPS service or private repo).
+- Commit only reviewed, static reference outputs to this public repo.
+- Avoid shipping generic scraping automation publicly unless usage policy is explicitly confirmed.
+
 ## Recommendation
 - Keep static references as default for Goal A and Release 1.
+- Use private VPS refresh automation for periodic updates.
 - Re-evaluate after Release 1 using real user feedback.
 - If needed, implement RAG as an optional Goal B/Deferred enhancement.

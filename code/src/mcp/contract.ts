@@ -114,6 +114,32 @@ export const TOOL_CONTRACT: ToolContract[] = [
     },
   },
   {
+    name: "tgc_game_test_reports_get",
+    description: "Fetch game test-area reports (sanitytests, arttests, cvtests) with interpreted summary.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+        limitPerType: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: "tgc_make_readiness_check",
+    description:
+      "Evaluate whether a game is ready for prototype ordering and flag blockers/warnings with suggested fixes.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        gameId: { type: "string" },
+      },
+      required: ["gameId"],
+      additionalProperties: false,
+    },
+  },
+  {
     name: "tgc_game_get",
     description: "Fetch game by id.",
     inputSchema: {

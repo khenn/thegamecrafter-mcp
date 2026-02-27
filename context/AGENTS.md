@@ -89,6 +89,11 @@ Rules:
 - For Make -> Add Embedded Game:
   - no dedicated embedded-game mutation tool is currently implemented.
   - treat embedded-game mutation as unsupported for now; clearly state limitation and suggest manual UI completion when requested.
+- For prototype/test readiness checks:
+  - use `tgc_game_test_reports_get` to read `sanitytests`, `arttests`, and `cvtests` with interpreted summary.
+  - use `tgc_make_readiness_check` before recommending prototype orders.
+  - if readiness is `blocked`, resolve blockers before any order recommendation.
+  - if readiness is `ready_with_warnings`, summarize warnings and offer concrete remediation steps first.
 - For edits/revisions of existing non-deck components:
   - prefer in-place mutation via `tgc_component_update` by default,
   - do not create duplicate replacement components unless the user explicitly asks for a variant/copy/new instance.

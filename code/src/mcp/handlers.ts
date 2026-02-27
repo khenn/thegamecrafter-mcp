@@ -107,6 +107,15 @@ const gameSurfacingSetSchema = z.object({
   enableLinenTexture: z.boolean().optional(),
 });
 
+const gameTestReportsGetSchema = z.object({
+  gameId: z.string().min(1),
+  limitPerType: z.number().int().min(1).max(100).default(20),
+});
+
+const makeReadinessCheckSchema = z.object({
+  gameId: z.string().min(1),
+});
+
 const deckGetSchema = z.object({
   deckId: z.string().min(1),
 });
@@ -710,6 +719,95 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
           },
         });
       }
+      case "tgc_game_test_reports_get": {
+        const input = gameTestReportsGetSchema.parse(safeArgs);
+        const [sanity, art, cv] = await Promise.all([
+          context.tgc.listGameComponents(input.gameId, "sanitytests", 1, input.limitPerType),
+          context.tgc.listGameComponents(input.gameId, "arttests", 1, input.limitPerType),
+          context.tgc.listGameComponents(input.gameId, "cvtests", 1, input.limitPerType),
+        ]);
+
+        const sanityItems = Array.isArray(sanity.items) ? sanity.items : [];
+        const artItems = Array.isArray(art.items) ? art.items : [];
+        const cvItems = Array.isArray(cv.items) ? cv.items : [];
+        const interpreted = interpretTestReports(sanityItems, artItems, cvItems);
+        return ok({
+          gameId: input.gameId,
+          reports: {
+            sanitytests: { count: sanityItems.length, items: sanityItems },
+            arttests: { count: artItems.length, items: artItems },
+            cvtests: { count: cvItems.length, items: cvItems },
+          },
+          interpreted,
+        });
+      }
+      case "tgc_make_readiness_check": {
+        const input = makeReadinessCheckSchema.parse(safeArgs);
+        const [game, gameparts, sanity, art, cv] = await Promise.all([
+          context.tgc.getGame(input.gameId, undefined, undefined),
+          context.tgc.listGameGameparts(input.gameId, 1, 200),
+          context.tgc.listGameComponents(input.gameId, "sanitytests", 1, 50),
+          context.tgc.listGameComponents(input.gameId, "arttests", 1, 50),
+          context.tgc.listGameComponents(input.gameId, "cvtests", 1, 50),
+        ]);
+
+        const gamepartsItems = Array.isArray(gameparts.items) ? gameparts.items : [];
+        const sanityItems = Array.isArray(sanity.items) ? sanity.items : [];
+        const artItems = Array.isArray(art.items) ? art.items : [];
+        const cvItems = Array.isArray(cv.items) ? cv.items : [];
+
+        const blockers: string[] = [];
+        const warnings: string[] = [];
+        const suggestions: string[] = [];
+
+        if (gamepartsItems.length === 0) {
+          blockers.push("Game has no linked parts/components. Prototype order is not meaningful until components are added.");
+          suggestions.push("Add at least one component and link quantities before ordering.");
+        }
+
+        const archived = coerceBooleanish(game.archived);
+        if (archived) {
+          warnings.push("Game is archived. You can still edit, but this can hide it in list workflows.");
+          suggestions.push("Set archived=false in Organization if this is an active prototype.");
+        }
+
+        const unproofedCount = countUnproofedGameparts(gamepartsItems);
+        if (unproofedCount > 0) {
+          warnings.push(`${unproofedCount} linked component(s) appear unproofed or not fully proofed.`);
+          suggestions.push("Proof all component art in TGC before placing prototype orders.");
+        }
+
+        if (sanityItems.length === 0) {
+          warnings.push("No sanity test records were found.");
+          suggestions.push("Run sanity tests in TGC Test tab and resolve any failures.");
+        }
+        if (artItems.length === 0) {
+          warnings.push("No art test records were found.");
+          suggestions.push("Run art tests in TGC Test tab to catch image/print issues.");
+        }
+        if (cvItems.length === 0) {
+          warnings.push("No CV test records were found.");
+          suggestions.push("Run CV tests in TGC Test tab before ordering prototypes.");
+        }
+
+        const readiness = blockers.length === 0 ? (warnings.length === 0 ? "ready" : "ready_with_warnings") : "blocked";
+        return ok({
+          gameId: input.gameId,
+          readiness,
+          blockers,
+          warnings,
+          suggestions: Array.from(new Set(suggestions)),
+          signals: {
+            gamepartsCount: gamepartsItems.length,
+            unproofedGamepartsCount: unproofedCount,
+            testReports: {
+              sanitytests: sanityItems.length,
+              arttests: artItems.length,
+              cvtests: cvItems.length,
+            },
+          },
+        });
+      }
       case "tgc_game_delete": {
         const input = gameDeleteSchema.parse(safeArgs);
         const deleted = await context.tgc.deleteGame(input.gameId);
@@ -1001,4 +1099,61 @@ function coerceBooleanish(value: unknown): boolean | null {
     }
   }
   return null;
+}
+
+function countUnproofedGameparts(items: unknown[]): number {
+  let count = 0;
+  for (const raw of items) {
+    if (!raw || typeof raw !== "object") {
+      continue;
+    }
+    const item = raw as Record<string, unknown>;
+    const proofFields = [
+      "has_proofed_face",
+      "has_proofed_back",
+      "has_proofed_outside",
+      "has_proofed_inside",
+      "has_proofed_top",
+      "has_proofed_bottom",
+      "has_proofed_spot_gloss",
+      "has_proofed_spot_gloss_bottom",
+    ];
+    const known = proofFields
+      .map((field) => coerceBooleanish(item[field]))
+      .filter((v): v is boolean => v !== null);
+    if (known.length > 0 && known.some((v) => v === false)) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+function interpretTestReports(
+  sanityItems: unknown[],
+  artItems: unknown[],
+  cvItems: unknown[],
+): {
+  summary: string;
+  status: "missing_tests" | "tests_present";
+  recommendations: string[];
+} {
+  const total = sanityItems.length + artItems.length + cvItems.length;
+  if (total === 0) {
+    return {
+      summary: "No test records found in sanitytests, arttests, or cvtests.",
+      status: "missing_tests",
+      recommendations: [
+        "Run TGC Test tab checks before ordering prototypes.",
+        "Capture and resolve sanity/art/CV test issues before publishing.",
+      ],
+    };
+  }
+  return {
+    summary: `Found ${sanityItems.length} sanitytest, ${artItems.length} arttest, and ${cvItems.length} cvtest record(s).`,
+    status: "tests_present",
+    recommendations: [
+      "Review each test record for failed/warning states in TGC.",
+      "Re-run tests after major component or artwork changes.",
+    ],
+  };
 }

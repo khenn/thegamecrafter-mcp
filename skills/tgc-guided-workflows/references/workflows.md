@@ -70,6 +70,22 @@ Current status:
 - Dedicated embedded-game mutation is not implemented in MCP yet.
 - If requested, state this limitation clearly and direct the user to complete Add Embedded Game in TGC UI.
 
+## Test Reports Workflow (Prototype Safety)
+When user asks about test status or readiness:
+1. Call `tgc_game_test_reports_get`.
+2. Summarize counts and interpreted status for:
+- `sanitytests`
+- `arttests`
+- `cvtests`
+3. If reports are missing, recommend running Test tab checks before ordering.
+
+## Make Readiness Workflow
+Before prototype-order guidance:
+1. Call `tgc_make_readiness_check`.
+2. If `readiness=blocked`, stop and resolve blockers first.
+3. If `readiness=ready_with_warnings`, present warnings and suggested fixes.
+4. If `readiness=ready`, proceed with ordering guidance.
+
 ## Dial Artwork Workflow (Dual Dial Included)
 When user asks for a dial and does not provide precise geometry instructions:
 1. Gather visual intent only:

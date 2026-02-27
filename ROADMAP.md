@@ -43,9 +43,9 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [ ] Add/finish automated capability matrix regeneration in normal dev flow
 
 ### A6. Prototype/Test-Adjacent Coverage
-- [ ] Add read helpers for test-area relationships (`sanitytests`, `arttests`, `cvtests`) with user-facing interpretation
-- [ ] Add a `tgc_make_readiness_check` helper (prototype readiness, proofing warnings, missing assets)
-- [ ] Gate: readiness checks catch known fixture problems before ordering prototypes
+- [x] ~~Add read helpers for test-area relationships (`sanitytests`, `arttests`, `cvtests`) with user-facing interpretation~~
+- [x] ~~Add a `tgc_make_readiness_check` helper (prototype readiness, proofing warnings, missing assets)~~
+- [x] ~~Gate: readiness checks catch known fixture problems before ordering prototypes~~
 
 ### A7. Remaining Make-Phase Gaps
 - [x] ~~Implement `tgc_game_cost_breakdown_get`~~

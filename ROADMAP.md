@@ -44,7 +44,7 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [ ] In progress: Integrate TGC Help Center knowledge into agent/skills guidance.
   - [x] Crawl seeded Help Center categories and generate local catalog references.
   - [x] Add curated process/best-practice guidance reference for make/iterate workflows.
-  - [ ] Expand curated guidance coverage across all implemented component families.
+  - [x] Expand curated guidance coverage across all implemented component families.
   - [ ] Decide whether to add optional RAG retrieval service (Supabase/pgvector) after evaluating static-reference performance.
 
 ### A6. Prototype/Test-Adjacent Coverage

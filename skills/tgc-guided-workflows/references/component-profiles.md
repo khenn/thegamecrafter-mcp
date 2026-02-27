@@ -18,6 +18,9 @@ Use these for preflight checks, recommendations, and user-facing links.
 
 ## Medium Coil Book (`MediumCoilBook`)
 - Product: `https://www.thegamecrafter.com/make/products/MediumCoilBook`
+- Help:
+  - `https://help.thegamecrafter.com/article/39-templates`
+  - `https://help.thegamecrafter.com/article/5-getting-started`
 - Size: `1575x2325`
 - Rules: min 4, max 200 pages.
 - Rulebook suitability: viable across a wide page range; good fallback when booklet constraints fail.
@@ -33,6 +36,8 @@ Use these for preflight checks, recommendations, and user-facing links.
 ## Medium Score Pad Color (`MediumScorePadColor`)
 - Product: `https://www.thegamecrafter.com/make/products/MediumScorePadColor`
 - Help: `http://help.thegamecrafter.com/article/95-score-pads`
+- Related help:
+  - `https://help.thegamecrafter.com/article/39-templates`
 - Size: `1425x2475`
 
 ## Packaging Family Snapshot
@@ -106,7 +111,9 @@ Finish behavior notes:
 ### onesided (`MediumGameMat`)
 - Product: `https://www.thegamecrafter.com/make/products/MediumGameMat`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/MediumGameMat`
-- Help: no product `info` URL returned by current product metadata snapshot.
+- Help:
+  - `https://help.thegamecrafter.com/article/91-game-mats`
+  - `https://help.thegamecrafter.com/article/54-creating-game-mats`
 - Image size: `7275x4275`
 - Image slot: `face`
 - Video content:
@@ -157,14 +164,18 @@ Finish behavior notes:
 ### customcutonesidedslugged (`CustomSmallSticker`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomSmallSticker`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomSmallSticker`
-- Help: `http://help.thegamecrafter.com/article/365-custom-stickers`
+- Help:
+  - `https://help.thegamecrafter.com/article/98-stickers`
+  - `https://help.thegamecrafter.com/article/201-custom-punchouts-and-card-stock`
 - Image size: `975x1575`
 - Image slot: `face`
 
 ### customcuttwosidedslugged (`CustomSmallPunchout`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomSmallPunchout`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomSmallPunchout`
-- Help: `http://help.thegamecrafter.com/article/201-custom-punchouts`
+- Help:
+  - `https://help.thegamecrafter.com/article/201-custom-punchouts-and-card-stock`
+  - `https://help.thegamecrafter.com/article/204-custom-punchouts-rivets-dials`
 - Image size: `975x1575`
 - Image slots: `face`, `back`
 - Video content:
@@ -174,6 +185,8 @@ Finish behavior notes:
 - Product: `https://www.thegamecrafter.com/make/products/SmallDualLayerBoard`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/SmallDualLayerBoard`
 - Help: `http://help.thegamecrafter.com/article/658-dual-layer-boards`
+- Related help:
+  - `https://help.thegamecrafter.com/article/201-custom-punchouts-and-card-stock`
 - Set image size: `1125x1725`
 - Set image slots: `face`, `back`, `inner`
 - Child API: `/api/threesidedcustomcut`
@@ -186,7 +199,7 @@ Finish behavior notes:
 ### acrylicshape (`AcrylicShape125`)
 - Product: `https://www.thegamecrafter.com/make/products/AcrylicShape125`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/AcrylicShape125`
-- Help: no product `info` URL returned by current product metadata snapshot.
+- Help: `https://help.thegamecrafter.com/article/379-custom-acrylic-shapes`
 - Image size: `2400x1200`
 - Image slots: `side1`, `side2`
 - Notes:
@@ -196,7 +209,10 @@ Finish behavior notes:
 ### customcolord4 (`CustomColorD4`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomColorD4`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomColorD4`
-- Help: no product `info` URL returned by current product metadata snapshot.
+- Help:
+  - `https://help.thegamecrafter.com/article/370-custom-dice`
+  - `https://help.thegamecrafter.com/article/441-how-to-make-and-order-custom-printed-dice`
+  - `https://help.thegamecrafter.com/article/349-custom-color-printed-dice`
 - Image size: `300x300`
 - Image slots: `side1`, `side2`, `side3`, `side4`
 - Identity guardrail: require `identity=CustomColorD4` (auto-infer when omitted).
@@ -204,7 +220,10 @@ Finish behavior notes:
 ### customcolord6 (`CustomColorD6`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomColorD6`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomColorD6`
-- Help: no product `info` URL returned by current product metadata snapshot.
+- Help:
+  - `https://help.thegamecrafter.com/article/370-custom-dice`
+  - `https://help.thegamecrafter.com/article/441-how-to-make-and-order-custom-printed-dice`
+  - `https://help.thegamecrafter.com/article/349-custom-color-printed-dice`
 - Image size: `180x180`
 - Image slots: `side1`, `side2`, `side3`, `side4`, `side5`, `side6`
 - Identity guardrail: require `identity=CustomColorD6` (auto-infer when omitted).
@@ -212,7 +231,10 @@ Finish behavior notes:
 ### customcolord8 (`CustomColorD8`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomColorD8`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomColorD8`
-- Help: no product `info` URL returned by current product metadata snapshot.
+- Help:
+  - `https://help.thegamecrafter.com/article/370-custom-dice`
+  - `https://help.thegamecrafter.com/article/441-how-to-make-and-order-custom-printed-dice`
+  - `https://help.thegamecrafter.com/article/349-custom-color-printed-dice`
 - Image size: `300x300`
 - Image slots: `side1`, `side2`, `side3`, `side4`, `side5`, `side6`, `side7`, `side8`
 - Identity guardrail: require `identity=CustomColorD8` (auto-infer when omitted).
@@ -220,6 +242,6 @@ Finish behavior notes:
 ### customprintedmeeple (`CustomPrintedMeeple`)
 - Product: `https://www.thegamecrafter.com/make/products/CustomPrintedMeeple`
 - Product API: `https://www.thegamecrafter.com/api/tgc/products/CustomPrintedMeeple`
-- Help: no product `info` URL returned by current product metadata snapshot.
+- Help: `https://help.thegamecrafter.com/article/366-custom-printed-meeples`
 - Image size: `300x300`
 - Image slots: `face`, `back`

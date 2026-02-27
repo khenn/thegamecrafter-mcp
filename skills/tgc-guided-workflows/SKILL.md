@@ -27,6 +27,7 @@ Use this skill to run safe, guided TGC workflows over MCP tools with minimal bac
   - `tgc_game_surfacing_get` for current state + option prompt context,
   - `tgc_game_surfacing_set` for validated updates.
   - If user intent does not specify UV/linen values, ask once for both values in one prompt.
+- For policy/process questions that are not pure API mechanics (file prep, proofing, production, queue timing), consult TGC Help Center references before answering.
 
 ## Component Preflight (Required)
 Before any component mutation:
@@ -81,6 +82,8 @@ Rules:
 - Read `references/component-profiles.md` when preflighting or recommending supported components.
 - Read `references/image-preflight-and-fit.md` for fit modes, geometry checks, and proof-iteration rules.
 - Read `references/community-feedback.md` when running session-level contribution capture and GitHub issue publishing flow.
+- Read `references/tgc-help-center-guidance.md` when users need process/best-practice guidance.
+- Read `references/tgc-help-center-catalog.md` when you need specific article links by topic.
 
 ## Skill Split Policy
 Use this as the primary orchestration skill. Create additional skills only when a distinct workflow family emerges (different triggers, dependency profile, or safety posture), for example dedicated art-processing or publish/pricing pipelines.

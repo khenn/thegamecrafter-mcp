@@ -94,6 +94,12 @@ Rules:
   - use `tgc_make_readiness_check` before recommending prototype orders.
   - if readiness is `blocked`, resolve blockers before any order recommendation.
   - if readiness is `ready_with_warnings`, summarize warnings and offer concrete remediation steps first.
+- For TGC process/best-practice guidance (file prep, proofing, production timing, publishing readiness, queue expectations):
+  - consult Help Center references first:
+    - `skills/tgc-guided-workflows/references/tgc-help-center-guidance.md`
+    - `skills/tgc-guided-workflows/references/tgc-help-center-catalog.md`
+  - provide concise recommendations with direct Help Center links.
+  - do not paste long policy excerpts; summarize and cite.
 - For edits/revisions of existing non-deck components:
   - prefer in-place mutation via `tgc_component_update` by default,
   - do not create duplicate replacement components unless the user explicitly asks for a variant/copy/new instance.

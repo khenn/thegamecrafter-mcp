@@ -41,6 +41,11 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [x] ~~Add preflight guardrails for print-fit, bleed/cut, and component constraints~~
 - [ ] Complete per-component guidance parity for all implemented component families
 - [ ] Add/finish automated capability matrix regeneration in normal dev flow
+- [ ] In progress: Integrate TGC Help Center knowledge into agent/skills guidance.
+  - [x] Crawl seeded Help Center categories and generate local catalog references.
+  - [x] Add curated process/best-practice guidance reference for make/iterate workflows.
+  - [ ] Expand curated guidance coverage across all implemented component families.
+  - [ ] Decide whether to add optional RAG retrieval service (Supabase/pgvector) after evaluating static-reference performance.
 
 ### A6. Prototype/Test-Adjacent Coverage
 - [x] ~~Add read helpers for test-area relationships (`sanitytests`, `arttests`, `cvtests`) with user-facing interpretation~~

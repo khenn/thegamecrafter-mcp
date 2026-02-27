@@ -86,6 +86,13 @@ Before prototype-order guidance:
 3. If `readiness=ready_with_warnings`, present warnings and suggested fixes.
 4. If `readiness=ready`, proceed with ordering guidance.
 
+## Help-Center-Grounded Guidance Workflow
+When user asks for best practices, troubleshooting, or process advice:
+1. Load `tgc-help-center-guidance.md`.
+2. If topic-specific links are needed, load `tgc-help-center-catalog.md`.
+3. Respond with concise, actionable guidance and cite direct Help Center article links.
+4. Keep API mutation guidance separate from policy/process guidance to avoid confusion.
+
 ## Dial Artwork Workflow (Dual Dial Included)
 When user asks for a dial and does not provide precise geometry instructions:
 1. Gather visual intent only:

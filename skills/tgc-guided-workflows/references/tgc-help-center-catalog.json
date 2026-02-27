@@ -1,0 +1,539 @@
+{
+  "generatedAt": "2026-02-27T14:22:33.839Z",
+  "sourceCategories": [
+    {
+      "name": "Getting Started",
+      "url": "https://help.thegamecrafter.com/category/4-getting-started"
+    },
+    {
+      "name": "Frequently Asked Questions",
+      "url": "https://help.thegamecrafter.com/category/71-frequently-asked-questions"
+    },
+    {
+      "name": "File Preparation",
+      "url": "https://help.thegamecrafter.com/category/10-file-preparation"
+    },
+    {
+      "name": "Game Editor",
+      "url": "https://help.thegamecrafter.com/category/11-game-editor"
+    },
+    {
+      "name": "Production",
+      "url": "https://help.thegamecrafter.com/category/12-production"
+    },
+    {
+      "name": "Design Tools & Artwork",
+      "url": "https://help.thegamecrafter.com/category/197-design-tools-artwork"
+    }
+  ],
+  "totalArticles": 69,
+  "categories": [
+    {
+      "name": "Getting Started",
+      "url": "https://help.thegamecrafter.com/category/4-getting-started",
+      "articleCount": 9,
+      "articles": [
+        {
+          "url": "https://help.thegamecrafter.com/article/5-getting-started",
+          "title": "Getting Started",
+          "summary": "Click on a tutorial video below to learn how to make a custom board game or card game . Create a new user account on our website and sign in, or login to your existing account. You must also have a graphic design program installed. We cannot print anything that contains copyrighted or trademarked: - Images, Characters, or Logos - Names or Quoted Text Note: This is true even if the game is only intended for personal use. For more information, please see our intellectual property policy. The first"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/24-how-do-i-just-make-one-custom-printed-item-not-a-game",
+          "title": "How do I just make one custom-printed item (not a game)?",
+          "summary": "Think of a \"game\" more like a basket where you tell our system what you want to be sent to you. What you add to that game does not need to be a full game you can just add 1 card and we will send you that 1 card if you order that game. We would recommend that you start by reading through the \"Getting Started\" section of our website, as it contains a lot of great information about our products and services, as well as information about how you can use our website to create your game. You can get s"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/23-game-costs",
+          "title": "How much will my game cost?",
+          "summary": "The best way to find the cost of custom printed components for your game would be to build a quote in our system. 1. First, click on \"Make\" at the top of the screen. Then, select \"Pricing\" from the drop-down list. 2. Next, click on \"Build a Quote.\""
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/399-how-to-make-a-card-game-tarot-deck",
+          "title": "How to make a Card Game / Tarot Deck",
+          "summary": "You can watch a tutorial about how to download templates for your game here: https://youtu.be/VggD1_mTlmY You can watch a tutorial about how to design images using our templates here: https://youtu.be/8IDecwxMakY You can watch a tutorial about how to load your images into a game here: https://youtu.be/fFQcLH5yTiE You can watch a tutorial about how to order your game here: https://youtu.be/ual0FnfQcMI ------------------------------------------------------------------------------------------------"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/429-how-to-order-your-game",
+          "title": "How to Order Your Game",
+          "summary": "After you have put all the work into loading your images into your game and proofing them , you will want to order a copy of your game. Many designers want to order multiple copies of their game. Please order only one copy of your game and check it carefully for any errors, omissions, or changes that need to be made before ordering multiple copies of your game or publishing your game. This will save you time, money and stress down the road. -------------------------------------------------------"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/9-intellectual-property",
+          "title": "Intellectual Property",
+          "summary": "We want you to know that your intellectual property is protected when you use The Game Crafter. When you upload a game to The Game Crafter, you still retain all rights to the game. We do not assume your copyrights or trademarks. The Game Crafter is not mentioned in your game components unless you put it in there yourself. Absolutely! You can choose to sell your game, however (and wherever) you like."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/26-what-does-it-mean-to-publish-my-game",
+          "title": "What does it mean to \"Publish\" my game?",
+          "summary": "When you publish your game with The Game Crafter, your game becomes available (and searchable) in our Shop for purchase by other customers. When a customer purchases your game, a copy of the game will be produced and shipped directly to the customer from our facility. You will not be involved in the transaction, except for receiving a royalty payment approximately 30 days after the sale. You can find more information about how to publish your game at https://help.thegamecrafter.com/article/109-p"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/27-what-is-the-game-crafter",
+          "title": "What is The Game Crafter?",
+          "summary": "The Game Crafter is a print on demand board game publisher. Our website allows anyone to create their own board game, card game, or custom playing cards. Game designers have a lot of flexibility and can build out their game with playing cards, game boards, tiles, game pieces, rules documents, and custom packaging. When the game is ready the designer can purchase 1 copy or as many as they'd like and The Game Crafter prints and ships the game. Since we are a print on demand game publisher, there a"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/28-who-is-tgc-for",
+          "title": "Who is TGC for?",
+          "summary": "The reality is that most games will never sell 10,000 units. Unfortunately, traditional production runs require you to buy 5,000 - 20,000 units to make production cheap enough to be profitable. At The Game Crafter (TGC), even if your game only sells one copy, you'll have made a profit! Try to beat that by negotiating with publishers, distributors, retailers, and manufacturers. Even if you are an established game developer, making prototypes for play-testing can be time-consuming and costly. Some"
+        }
+      ]
+    },
+    {
+      "name": "Frequently Asked Questions",
+      "url": "https://help.thegamecrafter.com/category/71-frequently-asked-questions",
+      "articleCount": 10,
+      "articles": [
+        {
+          "url": "https://help.thegamecrafter.com/article/451-can-i-buy-some-of-the-components-of-my-game-instead-of-having-to-buy-the-whole-game",
+          "title": "Can I buy some of the components of my game instead of having to buy the whole game?",
+          "summary": "Yes. The easiest thing to do would be to create a copy of your game, delete any pieces you don't need, then place an order for the copy. To create a copy of your game, click on \"Games\", click on \"Edit\" next to your game, then click on \"Copy\" in the Manage section."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/19-can-i",
+          "title": "Can I make an adult-themed game?",
+          "summary": "Yes. We generally don't censor content, but do have a couple of rules for adult-themed games: 1) They can't contain anything illegal. 2) If they are made available for sale on our site, there can be no nudity or explicit language on the game's Shop page, and the game should be clearly identified as intended for a mature audience ages 18+. 3) If your game contains photos of people, you should provide the permission/license to use the photos to customer support prior to ordering. For more informat"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/20-can-i-make-games-for-kids",
+          "title": "Can I make games for kids?",
+          "summary": "Although we'd love to allow you, our valued authors, to publish games for children under the age of 14, an Act of Congress prevents us from allowing it. The Consumer Products Safety Improvement Act (CPSIA) requires that all products manufactured for children under the age of 14 be tested by an independent third party. This testing costs several thousand dollars per product, and is therefore not something we can realistically provide. While we think that it's important to protect children from ch"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/72-do-you-offer-free-samples-of-products",
+          "title": "Do you offer free samples of products?",
+          "summary": "While we don't offer samples at this time, you can purchase blank versions of many of our printed components (with no minimum order requirement) in our Shop, at https://www.thegamecrafter.com/parts#category=https://www.thegamecrafter.com/parts?query=blank&hitsPerPage=18#category=Blanks , and boxes at https://www.thegamecrafter.com/parts#category=Boxes . There are designers in the community have created sample kits that you can easily order from our site: Unprinted Sample Pack ( https://www.thega"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/22-do-you-offer-samples-of-your-products",
+          "title": "Do you offer samples of your products?",
+          "summary": "While we don't offer samples at this time, you can purchase blank versions of many of our printed components (with no minimum order requirement) in our Shop, at https://www.thegamecrafter.com/parts#category=https://www.thegamecrafter.com/parts?query=blank&hitsPerPage=18#category=Blanks , and boxes at https://www.thegamecrafter.com/parts#category=Boxes . There are designers in the community have created sample kits that you can easily order from our site: Unprinted Sample Pack ( https://www.thega"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/314-how-can-i-send-you-a-feature-request",
+          "title": "How can I send you a feature request?",
+          "summary": "We collect ideas for feature requests on our ideas page . We tend to work on features that are ranked highest first. So please vote up the ideas that you like most."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/23-game-costs",
+          "title": "How much will my game cost?",
+          "summary": "The best way to find the cost of custom printed components for your game would be to build a quote in our system. 1. First, click on \"Make\" at the top of the screen. Then, select \"Pricing\" from the drop-down list. 2. Next, click on \"Build a Quote.\""
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/399-how-to-make-a-card-game-tarot-deck",
+          "title": "How to make a Card Game / Tarot Deck",
+          "summary": "You can watch a tutorial about how to download templates for your game here: https://youtu.be/VggD1_mTlmY You can watch a tutorial about how to design images using our templates here: https://youtu.be/8IDecwxMakY You can watch a tutorial about how to load your images into a game here: https://youtu.be/fFQcLH5yTiE You can watch a tutorial about how to order your game here: https://youtu.be/ual0FnfQcMI ------------------------------------------------------------------------------------------------"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/429-how-to-order-your-game",
+          "title": "How to Order Your Game",
+          "summary": "After you have put all the work into loading your images into your game and proofing them , you will want to order a copy of your game. Many designers want to order multiple copies of their game. Please order only one copy of your game and check it carefully for any errors, omissions, or changes that need to be made before ordering multiple copies of your game or publishing your game. This will save you time, money and stress down the road. -------------------------------------------------------"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/82-why-has-my-estimated-ship-date-changed",
+          "title": "Why has my \"Estimated Ship Date\" changed?",
+          "summary": "You may have noticed a change to your \"Estimated Ship Date\" and this is quite common. When you place your order, our system gives you the best estimate possible. Because this is an estimate, it is not guaranteed in any way. In some cases, we're able to deliver orders quicker and other times we may run into delays that cause your ship date to be pushed back. Watch the video below to learn more about how our production process works and the tools available to check the status of your order. Here a"
+        }
+      ]
+    },
+    {
+      "name": "File Preparation",
+      "url": "https://help.thegamecrafter.com/category/10-file-preparation",
+      "articleCount": 20,
+      "articles": [
+        {
+          "url": "https://help.thegamecrafter.com/article/425-3d-box-viewer",
+          "title": "3D Viewer",
+          "summary": "The 3D viewer allows you to see a 3D rendering of your game components. It also allows you to see what the printing will look like with varying degrees of drift. For boxes, the viewer allows you to see what the box will look like when open and closed. For folding game boards and mats, it allows you to see what the board/mat will look like when folded and unfolded. For dials, you can use the 3D viewer to see how the print will appear on the assembled dial wheels. For custom dice, you can use the "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/29-art-resources",
+          "title": "Art Resources",
+          "summary": "We offer a department in our Shop for game design assets . You’ll find over 1000+ sets of illustrations, card designs, currency, and icons, with more being added every day. Most game design assets come in the form of sets so that you have almost everything you need to create a game. Most are sold under our standard commercial license that gives you the rights to do almost anything you want with the assets, except resell them yourself. This gives you the flexibility to use the images to build you"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/30-color-profile",
+          "title": "Color Profile",
+          "summary": "Due to human perception, light levels, monitor calibration, and all sorts of printing variations (humidity, heat, age of fuser, toner changes, etc), not to mention the difference between colors created by light and colors created by print, it is impossible to do perfect color matching from what you see on your screen to what we print. However, by using our color profile with your image editors, you'll get a little closer than you would otherwise. Download this file and use it with your image edi"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/379-custom-acrylic-shapes",
+          "title": "Custom Acrylic Shapes",
+          "summary": "Board game designers can now create their own 100% custom acrylic game pieces! In the past we’ve allowed you to make custom punchouts, stickers, cards, and other printable components all to your exact specifications. For the first time we can now do that with plastic game pieces. You’ll start with a piece of 8 inch by 4 inch or 10.5 inch x 9 inch acrylic. The 8 x 4 comes in 2 thicknesses(1/4″ or 1/8″) and over a dozen colors."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/349-custom-color-printed-dice",
+          "title": "Custom Color Printed Dice",
+          "summary": "Now you can make full color custom-printed D4 , D6 , and D8 dice at The Game Crafter! To do so, you'll just upload full-color images like you would with any of our other products. That said, there is a special process for printing white on the dice. You can find detailed information about how to create your dice at https://help.thegamecrafter.com/article/441-how-to-make-and-order-custom-printed-dice . **Note** It is very important it is to have a high-quality PNG image with no jpeg artifacts and"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/370-custom-dice",
+          "title": "Custom Dice",
+          "summary": "The Game Crafter can manufacture several types of custom dice. They are produced on demand and can be ordered in any quantity. You can find more information about Dice Stickers and how to get them here. You can use the dice stickers with our blank dice . You can find more information about Custom Printed Dice and how to get them here."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/366-custom-printed-meeples",
+          "title": "Custom Printed Meeples",
+          "summary": "You can design your own full color custom printed Meeples ! These are perfect for adding extra flair to any game. Plus, you can print front and back so you can determine directionality for your Meeples. Pricing is $0.50 per Meeple base, plus $0.75 per printed side. However, if you have 6 or more Meeples in your game, the cost drops to only $0.25 per printed side. And you can choose to print only 1 side if you like. To do so, you'll just upload full-color images like you would with any of our oth"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/201-custom-punchouts-and-card-stock",
+          "title": "Custom Punchouts and Card Stock",
+          "summary": "With custom punchouts and cardstock , you can design your own shapes to be cut. You choose the size of the slug you want to use, and then create the artwork and the cut lines! For the first time, you can have truly bespoke game pieces in a print on demand game. All custom punchouts are printed and made of 60 point (0.07 inches) thick chipboard. All custom card stock items are printed and made of 12pt 320gsm black core card stock. The slug sizes for custom punchouts are 3.25\" x 5.25\" for small , "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/206-custom-punchouts-hinges",
+          "title": "Custom Punchouts: Hinges",
+          "summary": "A hinge is a tie that is meant to bend rather than separate. Hinges can be used to create 3-dimensional objects .For parts that need to bend or have a hinge, use ties that are 0.07” wide with slits that are 0.5” long and 0.07” wide. Adding more ties will yield a stronger hinge. Hinges.ai For a cleaner look, hinges or bends may be made with a straight line rather than a 0.07” rectangle. However, this will yield a weaker hinge."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/204-custom-punchouts-rivets-dials",
+          "title": "Custom Punchouts: Screws & Dials",
+          "summary": "Screws come as two pieces that twist together to hold 2-3 layers of chipboard. A great way to utilize these features is by creating custom dials. To create a dial, begin by downloading the printing template of the desired slug size."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/205-custom-punchouts-standees",
+          "title": "Custom Punchouts: Standees",
+          "summary": "Standees are harder to make than you might think. The slot that hooks the two pieces together must be very precise for them to stay connected. The slot in the bottom of the upper piece must be the same height as the remaining area below the slit on the lower piece. For a snug fit, the slots are smaller at the innermost end than they are at the opening. Our chipboard is .065\" thick, so the opening of the slot should also be .065\" wide. The innermost end of the slot should be .055\" wide."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/31-design-tools",
+          "title": "Design Tools",
+          "summary": "We provide templates in a variety of formats, and the files can be used with the image editing programs listed below: You can find additional information about the types of software that are useful for pre-production at https://help.thegamecrafter.com/article/198-types-of-software"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/32-designer-tips",
+          "title": "Designer Tips",
+          "summary": "For the best results, follow the design recommendations below: Watch the video below to learn about our templates and the proper way to insert artwork. Watch the video below to learn what drift is, how it can make your game look bad, and how you can design your game to mitigate its effects."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/501-designing-for-foil",
+          "title": "Designing for Foil",
+          "summary": "Foil cards can be used to great effect, whether it’s for an ultra-rare card or an entire shiny deck. You do not have to change your existing card artwork to get it in a foil version, but there are a few things to keep in mind about your card design if you want your foil cards to really stand out. Most printers, including ours, print with four colors: cyan, magenta, yellow, and black (CMYK). Our normal printers do not lay down any white, as it’s assumed that the paper being printed on is bright w"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/34-how-do-i-get-a-upc-for-my-game",
+          "title": "How do I get a UPC/ ISBN for my game?",
+          "summary": "Many of our customers wish to sell their games in retail shops, but to do so they must have a barcode on the packaging. This is actually a relatively easy process, but if you haven’t done it before, it can feel daunting. To help you out we’ve decided to provide a quick tutorial on the process. The first step is to determine if you need a UPC (universal product code). The only reason to have it is if you plan to sell it at retailers. If you’re selling your game exclusively from our website, your "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/441-how-to-make-and-order-custom-printed-dice",
+          "title": "How to Make and Order Custom Printed Dice",
+          "summary": "Completely custom printed dice are possible, and AWESOME, using The Game Crafter. We offer custom acrylic dice in multiple shapes: D4 (4-sided) dice, 16mm D6 (6-sided) dice, and D8 (8-sided) dice To make custom dice, you will first need to download the template for the custom dice you want to make. The template is for a single side of the die. When making custom dice using our site, you will create and load an image for each face of the die individually. For our Full Color dice, we have 4 option"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/427-printing-with-white-ink",
+          "title": "Printing With White Ink",
+          "summary": "Printing with white ink on non-paper based items is not as straightforward as it might seem. When using our service for items like Custom-printed Meeples, Clear Cards, Dice, Acrylic, Foil Cards and Mint Tins, you will need to use a shade of white other than pure white (#FFFFFF). If you use pure white in your image, no color will be printed where the white is, and the underlying color of the component will show through in that section. Booster Packs cannot be printed with any shade of white at al"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/37-shop-images",
+          "title": "Shop Images",
+          "summary": "Shop images are used in the shop view of your game, in search results and game browsing. The templates for the various shop images are below. The Shop Ad is used throughout the site to advertise your game to game buyers that visit our site. This is your first and best chance to get someone to buy your game, so make sure you put your best foot forward in your ad. The advertisement image must be 216x150 pixels. It has no trim line because it's not printed. Here is an example."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/39-templates",
+          "title": "Templates",
+          "summary": "Once you decide on the components in your game, you'll be ready to download our templates. We provide a variety of blank templates to make the design process quick and easy. You can watch a tutorial about how to download templates for your game here: https://youtu.be/VggD1_mTlmY You can watch a tutorial about how to design images using our templates here: https://youtu.be/8IDecwxMakY The templates display trim lines, bleed areas and other guides so game designers know exactly where to place artw"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/42-utility-templates",
+          "title": "Utility Templates",
+          "summary": "The templates on this page aren't designed for our printing process, but rather can be useful to you in designing your printable items. You're welcome to use The Game Crafter logos in your games to promote the fact that your game was published through our website. (You can find a variety of logo files here ) A label to put in your rules or box art to indicate the minimum age of player intended to play this game. We've provided templates for you in a variety of image formats:"
+        }
+      ]
+    },
+    {
+      "name": "Game Editor",
+      "url": "https://help.thegamecrafter.com/category/11-game-editor",
+      "articleCount": 20,
+      "articles": [
+        {
+          "url": "https://help.thegamecrafter.com/article/425-3d-box-viewer",
+          "title": "3D Viewer",
+          "summary": "The 3D viewer allows you to see a 3D rendering of your game components. It also allows you to see what the printing will look like with varying degrees of drift. For boxes, the viewer allows you to see what the box will look like when open and closed. For folding game boards and mats, it allows you to see what the board/mat will look like when folded and unfolded. For dials, you can use the 3D viewer to see how the print will appear on the assembled dial wheels. For custom dice, you can use the "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/46-card-deck-randomizer",
+          "title": "Card Deck Randomizer",
+          "summary": "Our game editor has a randomization feature that allows you to create randomly generated decks of cards for your game. This is primarily useful for Trading Card Games (TCG) and Collectable Card Games (CCG). 1. Games that contain randomized card decks are not eligible for bulk pricing. Bulk pricing is available when we are able to save production time through printing and producing multiple copies of exactly the same game. When there are randomized card decks involved, however, each game copy has"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/47-card-decks",
+          "title": "Card Decks",
+          "summary": "Decks of cards can be added to a game and they can be any size. The cards can all have the same image on the back or you can make cards that each have unique front and back images. Watch the tutorial video below for more information. You can also visit https://help.thegamecrafter.com/article/399-how-to-make-a-card-game-tarot-deck for step-by-step written instructions. Card decks will not be shrink-wrapped; rather, a paper band will be used to secure the cards. Note: Cards of the same type/shape/"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/196-color-filter",
+          "title": "Color Filter",
+          "summary": "The color filter on the Proof screen offers a representation of how the colors in your images may appear in the final print. Here’s an example of a high contrast image. Because the statue in the foreground is so dark, when it is printed, you won’t actually see most of the detail. on it. The filter gives you a heads up about it. Most images don’t have such a stark contrast. However, if you have a lot of dark elements in your images, then those will come out with more contrast on the printer. For "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/54-creating-game-mats",
+          "title": "Creating Game Mats",
+          "summary": "Game mats can be uploaded as a jpg or png, and each has a face image and a back image. All image files must have a resolution of 300 PPI/DPI, and all dimensions are in pixels. Game mat images must be sized exactly or the system will not accept the image files for use. There are 23 sizes of game mats available . To add mats to a game, visit the Games page and edit the correct game, and click \"Add Custom Component\": Next, click on \"Mats\":"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/379-custom-acrylic-shapes",
+          "title": "Custom Acrylic Shapes",
+          "summary": "Board game designers can now create their own 100% custom acrylic game pieces! In the past we’ve allowed you to make custom punchouts, stickers, cards, and other printable components all to your exact specifications. For the first time we can now do that with plastic game pieces. You’ll start with a piece of 8 inch by 4 inch or 10.5 inch x 9 inch acrylic. The 8 x 4 comes in 2 thicknesses(1/4″ or 1/8″) and over a dozen colors."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/48-custom-playing-cards",
+          "title": "Custom Playing Cards",
+          "summary": "The custom playing card wizard makes it easy for you to create a deck of custom poker playing cards with your photo or image on the back. The process is simple, and it starts with you choosing which photo/image you want from your computer. Next, you can position and resize the image so it looks exactly how you want it. Finally, you'll choose which poker card style you want for the front of your cards. Several examples of our designs are below Click here to get started with your custom playing ca"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/366-custom-printed-meeples",
+          "title": "Custom Printed Meeples",
+          "summary": "You can design your own full color custom printed Meeples ! These are perfect for adding extra flair to any game. Plus, you can print front and back so you can determine directionality for your Meeples. Pricing is $0.50 per Meeple base, plus $0.75 per printed side. However, if you have 6 or more Meeples in your game, the cost drops to only $0.25 per printed side. And you can choose to print only 1 side if you like. To do so, you'll just upload full-color images like you would with any of our oth"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/201-custom-punchouts-and-card-stock",
+          "title": "Custom Punchouts and Card Stock",
+          "summary": "With custom punchouts and cardstock , you can design your own shapes to be cut. You choose the size of the slug you want to use, and then create the artwork and the cut lines! For the first time, you can have truly bespoke game pieces in a print on demand game. All custom punchouts are printed and made of 60 point (0.07 inches) thick chipboard. All custom card stock items are printed and made of 12pt 320gsm black core card stock. The slug sizes for custom punchouts are 3.25\" x 5.25\" for small , "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/206-custom-punchouts-hinges",
+          "title": "Custom Punchouts: Hinges",
+          "summary": "A hinge is a tie that is meant to bend rather than separate. Hinges can be used to create 3-dimensional objects .For parts that need to bend or have a hinge, use ties that are 0.07” wide with slits that are 0.5” long and 0.07” wide. Adding more ties will yield a stronger hinge. Hinges.ai For a cleaner look, hinges or bends may be made with a straight line rather than a 0.07” rectangle. However, this will yield a weaker hinge."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/204-custom-punchouts-rivets-dials",
+          "title": "Custom Punchouts: Screws & Dials",
+          "summary": "Screws come as two pieces that twist together to hold 2-3 layers of chipboard. A great way to utilize these features is by creating custom dials. To create a dial, begin by downloading the printing template of the desired slug size."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/207-custom-punchouts-spinners",
+          "title": "Custom Punchouts: Spinners",
+          "summary": "Do you have a game idea that requires a randomizer with custom icons and a D6 just isn’t cutting it? Consider making a custom spinner! Previously, the only spinner available at the Game Crafter is an 8” mat made of cardstock. With the custom punchout option, spinners can now be made of sturdy chipboard, in many sizes and infinite shapes. Spinners come as two pieces that snap together. Our spinners are 2.73” long, making them a great size for a 3” spinner tile that can fit on the Small Punchout s"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/205-custom-punchouts-standees",
+          "title": "Custom Punchouts: Standees",
+          "summary": "Standees are harder to make than you might think. The slot that hooks the two pieces together must be very precise for them to stay connected. The slot in the bottom of the upper piece must be the same height as the remaining area below the slit on the lower piece. For a snug fit, the slots are smaller at the innermost end than they are at the opening. Our chipboard is .065\" thick, so the opening of the slot should also be .065\" wide. The innermost end of the slot should be .055\" wide."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/501-designing-for-foil",
+          "title": "Designing for Foil",
+          "summary": "Foil cards can be used to great effect, whether it’s for an ultra-rare card or an entire shiny deck. You do not have to change your existing card artwork to get it in a foil version, but there are a few things to keep in mind about your card design if you want your foil cards to really stand out. Most printers, including ours, print with four colors: cyan, magenta, yellow, and black (CMYK). Our normal printers do not lay down any white, as it’s assumed that the paper being printed on is bright w"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/49-download-only-print-and-play-items",
+          "title": "Download Only/Print and Play Items",
+          "summary": "You can sell digital files on The Game Crafter. Why would you want to do that? You may want to sell a print and play version of your game. Or you may use The Game Crafter to make maps and GM screens for your RPG, and now you can sell a PDF copy of the handbook as a complete kit. You may be a Tarotist who uses The Game Crafter to sell your decks, but you want to include a meanings PDF to people who bought the deck. There is an endless number of reasons you may want to include some files with your"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/348-embedded-games",
+          "title": "Embedded Games",
+          "summary": "We offer the option to embed a game into another game. This means that you can have one packaged \"game\" (the embedded game) placed into another, larger game (the main game). Here are some scenarios where a game designer might wish to embed a game: There are some limitations:"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/56-game-stats",
+          "title": "Game Stats",
+          "summary": "Your \"My Games\" page shows all of your games' statistics in one place, such as the number of sales, page views and so on. To view your stats, you must be logged into the site. Click on \"Make\" at the top of the screen, then select \"Games\" from the drop-down list. You will be presented with the following screen: You can also see your game's statistics in the At a Glance section under Sell > Overview for your game. The descriptions for each column are below: Game: The game name (clicking on the nam"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/57-how-do-i-keep-other-people-from-seeing-buying-my-game",
+          "title": "How do I keep other people from seeing/buying my game?",
+          "summary": "By default, the following settings are set to \"No.\" By clicking \"Sell\", then \"Shop Preferences,\" you can change the setting that doesn't allow anyone to be able to view or purchase your unpublished game. To do so:"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/59-promotion",
+          "title": "Promotion",
+          "summary": "There are several different ways to promote your game through the TGC website. To see promotion options, edit your game and go to the \"Promote\" tab: Please note that most promotion options will require your game to have passed a Community Verified Test before you can proceed. You will see this noted on the promotion options until your game has passed the test. (Some options also may not be available due to answers to the safe search questions.) You can make your game a featured game in the shop "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/60-publishing-waiting-period",
+          "title": "Publishing Waiting Period",
+          "summary": "In order to publish your game, you'll first need to purchase a copy. You'll then need to wait 10 days from the date you place your order for your game to publish. We've implemented this waiting period to encourage game designers to review the printed copies of their games for errors prior to publishing. (For more information, you can visit our News feed post on the subject here ). You can see a tutorial on how to Publish your game here: https://youtu.be/Wclfbl-A8cs Once the 10 days are over, you"
+        }
+      ]
+    },
+    {
+      "name": "Production",
+      "url": "https://help.thegamecrafter.com/category/12-production",
+      "articleCount": 20,
+      "articles": [
+        {
+          "url": "https://help.thegamecrafter.com/article/425-3d-box-viewer",
+          "title": "3D Viewer",
+          "summary": "The 3D viewer allows you to see a 3D rendering of your game components. It also allows you to see what the printing will look like with varying degrees of drift. For boxes, the viewer allows you to see what the box will look like when open and closed. For folding game boards and mats, it allows you to see what the board/mat will look like when folded and unfolded. For dials, you can use the 3D viewer to see how the print will appear on the assembled dial wheels. For custom dice, you can use the "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/80-booklets",
+          "title": "Booklets",
+          "summary": "Our booklets are a great way to create a professional-looking set of rules for your game. They are saddle stitched, full color, and full bleed, and are available for just 20 cents per page. (A 20-page booklet takes up the thickness of 4 cards in a box.) When adding pages to your booklet, you'll create an image for each individual page. This means the first page you load will be the cover, then the next page will be page 2. Booklets can have up to 40 pages. Please note that your total page count "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/83-boxes",
+          "title": "Boxes and Other Packaging",
+          "summary": "TGC offers a variety of custom-printed packaging options for your game: If you order more 200 or more copies of a game that is produced in a tuck box, The Game Crafter will automatically upgrade the tuck box to a thicker material (18pt card stock rather than 16pt) and apply a glossy protective coating to the box. This is something we do for free, but can only afford to do in larger batches, so that's why we don't offer it for every tuck box we produce. See your box in 3D using our 3D Box Viewer:"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/84-bulk-pricing",
+          "title": "Bulk Pricing",
+          "summary": "When ordering games for yourself, or when you use our bulk order fulfillment system , you may qualify for bulk pricing. Discounts start at 10 copies of a game (in one order) for approximately 5% off, and can go up to as much as a 35% discount at 100 copies. We also offer additional discounts for many games at 500 and 1000 copies. Each game is a little bit different. Some components have a fairly fixed cost even at large volumes, so not all games will qualify for the same discount. Please note th"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/85-cards",
+          "title": "Cards",
+          "summary": "The Game Crafter can make 17 different sizes of cards. All cards are die-cut, have rounded corners (except for the trading card ), and are printed in full color on both sides. Standard cards are printed on 12\" x 18\" sheets of 12pt 320gsm black core card stock, and this gives them a nice texture and good heft. Clear cards are printed on a glossy 12pt PVC plastic. Decks of cards can contain any number of cards (up to 2000 total components per game), and they are printed at our facility in Madison,"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/86-chits",
+          "title": "Chits",
+          "summary": "Chits are used as counters and customizable tokens in many games. Sometimes they are referred to as \"punchouts\". They are made of 60pt chipboard and are printed full-color and full-bleed and are double-sided. *Please be sure to indicate the quantity of tiles you wish to receive, as you will receive only as many as are indicated in the \"Quantity\" field next to each chit.* Note: If a component only has a quantity of 1, that means we will ship you 1 copy of that image/component (chit, card, etc...)"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/87-dials",
+          "title": "Dials",
+          "summary": "Dials are often used as score-keeping devices or health trackers, or used as a sort of decoder ring. There are two types of dials offered: Small Dials Dual Dials"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/88-dice-stickers",
+          "title": "Dice Stickers",
+          "summary": "Custom Dice Stickers are half inch square stickers that are used in conjunction with our blank dice . This allows game designers to create their own custom printed dice. Custom Dice Sticker image files should be 188x188 pixels. It is generally a good idea to bleed your background color over the entire square image (past the red line, all the way to the edges of the image so that there is no gray visible). In addition, even minor print/cut registration problems will be very apparent because the s"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/90-game-boards",
+          "title": "Game Boards",
+          "summary": "Game Boards are often the central component in tabletop games, hence the name \"board games\". We offer a variety of game boards to suit your needs: Our standard sizes of game boards are listed above. However, if you need a custom size/shape game board, visit our Laboratory and they can assist you in creating a 100% custom prototype game board. Also, if you need something bigger or a special size, consider putting 2 or more boards together for a larger playing surface. Click here for game board te"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/91-game-mats",
+          "title": "Game Mats",
+          "summary": "Mats are a great option for game designers who are looking for low-cost, custom-printed game components. Mats provide designers with plenty of flexibility and they are affordable because they're produced from cardstock. Mats use a 16pt cardstock that is slightly thicker than the cardstock used for our cards. All mats are printed double-sided in full color. In addition, we now offer two sizes of custom-printed neoprene mats . We do not make game mats in custom sizes. You could create a small cust"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/92-going-green",
+          "title": "Going Green",
+          "summary": "TGC is concerned about the environment, and we're working hard to reduce our footprint. Unfortunately, one-off production is far less efficient than mass production. That actually adds to our footprint, but one-off production also has some advantages:"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/178-linen-texture",
+          "title": "Linen Texture",
+          "summary": "When you enable linen texture on your game, all applicable items in your game from your cards to your box to your game board will get our professional linen texture. This finish is available with or without the UV coating (but the UV coating really makes it pop). **Note: Linen texture does not work well with dry erase markers, as the marker residue will get caught in the texture. You can add linen texture to your game for $.25 per component sheet. To do so, visit the Make tab in your game and en"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/93-made-in-the-usa",
+          "title": "Made in the USA",
+          "summary": "The Game Crafter, LLC is located in Madison, Wisconsin (USA) and is an American company. The Game Crafter has specialized employees that print, assemble, and ship orders to customers. Note: Game pieces and parts are sourced from both domestic (US-based) and international companies. The reason for this is that there aren't many game part manufacturers available. Many game parts are only available from overseas suppliers where lower labor and manufacturing costs allow them to be profitable. The Ga"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/168-play-money",
+          "title": "Play Money",
+          "summary": "Play Money is made of 148gsm paper, and is printed double sided. Click here for play money templates and product info Please note that play money flips along the long edge during production. If you wish for both sides of the bill to be oriented in the same direction in print, you will need to rotate either the front or the back image by 180 degrees, so that the images are oriented in opposite directions in the game editor."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/94-production-queues",
+          "title": "Production Queues",
+          "summary": "We have an Urgent Queue, Normal Queue, Parts-Only Queue, and a Bulk Queue . You can learn more about our queues by listening to this podcast . You can see the status of our queues from the status page. The estimated shipping date listed for each queue is the estimated date that we will finish production of an order placed today in that queue. The estimated shipping date is not when the order will arrive at the shipping address. Orders in the Normal Queue are produced on a first-in, first-out bas"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/369-sell-game-upgrades",
+          "title": "Sell Game Upgrades",
+          "summary": "Along with creating a game to Sell on The Game Crafter , or creating art to sell in the Game Design Assets section, you can also create Game Upgrades . Game Upgrades are intended to be component upgrades and fan-made expansions for mass market games. Got some new dice for Descent? They go here. Want to use our premium game pieces to make a new token set for Robinson Crusoe? Put it here as well. Board game collectors from around the world will seek them out to upgrade their favorite games. 1. You"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/97-shards",
+          "title": "Shards",
+          "summary": "Shards are basically miniature mats. They're an inexpensive printable token that can be used to keep track of resources such as health, ammunition, or other counters. In war games, they can be used to represent units on the battlefield. Our shards are printed on two sides in full color and full bleed on 0.012-inch thick cardstock. *Please be sure to indicate the quantity of shards you wish to receive, as you will receive only as many as are indicated in the \"Quantity\" field next to each shard.* "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/98-stickers",
+          "title": "Stickers",
+          "summary": "Stickers are a printable item designed to be placed on game components by customers before playing the game. Right now we offer Custom Stickers , Dice Stickers , Meeple Stickers , Mint Tin Stickers , Pawn Stickers , and Token Stickers ."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/99-tiles",
+          "title": "Tiles",
+          "summary": "Tiles are the foundational element in many games, as they are used for the dynamic building of game boards. This enables them to keep the replayability of games strong. All of our tiles are printed double-sided in full color. *Please be sure to indicate the quantity of tiles you wish to receive, as you will receive only as many as are indicated in the \"Quantity\" field next to each tile.* Note: If a component only has a quantity of 1, that means we will ship you 1 copy of that image/component (ch"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/169-uv-coating",
+          "title": "UV Coating",
+          "summary": "UV coating is a special liquid that bonds to your game pieces via UV light. It protects your game from dirt, scratches, and moisture. It also makes your game pieces dry erase (for use with our dry erase markers ). You can add UV coating to your game for $.25 per component sheet. To do so, visit the Make tab in your game and enable UV coating under the Surfacing section. If you enable UV coating, every printed item in your game will be UV coated except:"
+        }
+      ]
+    },
+    {
+      "name": "Design Tools & Artwork",
+      "url": "https://help.thegamecrafter.com/category/197-design-tools-artwork",
+      "articleCount": 14,
+      "articles": [
+        {
+          "url": "https://help.thegamecrafter.com/article/425-3d-box-viewer",
+          "title": "3D Viewer",
+          "summary": "The 3D viewer allows you to see a 3D rendering of your game components. It also allows you to see what the printing will look like with varying degrees of drift. For boxes, the viewer allows you to see what the box will look like when open and closed. For folding game boards and mats, it allows you to see what the board/mat will look like when folded and unfolded. For dials, you can use the 3D viewer to see how the print will appear on the assembled dial wheels. For custom dice, you can use the "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/29-art-resources",
+          "title": "Art Resources",
+          "summary": "We offer a department in our Shop for game design assets . You’ll find over 1000+ sets of illustrations, card designs, currency, and icons, with more being added every day. Most game design assets come in the form of sets so that you have almost everything you need to create a game. Most are sold under our standard commercial license that gives you the rights to do almost anything you want with the assets, except resell them yourself. This gives you the flexibility to use the images to build you"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/379-custom-acrylic-shapes",
+          "title": "Custom Acrylic Shapes",
+          "summary": "Board game designers can now create their own 100% custom acrylic game pieces! In the past we’ve allowed you to make custom punchouts, stickers, cards, and other printable components all to your exact specifications. For the first time we can now do that with plastic game pieces. You’ll start with a piece of 8 inch by 4 inch or 10.5 inch x 9 inch acrylic. The 8 x 4 comes in 2 thicknesses(1/4″ or 1/8″) and over a dozen colors."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/370-custom-dice",
+          "title": "Custom Dice",
+          "summary": "The Game Crafter can manufacture several types of custom dice. They are produced on demand and can be ordered in any quantity. You can find more information about Dice Stickers and how to get them here. You can use the dice stickers with our blank dice . You can find more information about Custom Printed Dice and how to get them here."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/366-custom-printed-meeples",
+          "title": "Custom Printed Meeples",
+          "summary": "You can design your own full color custom printed Meeples ! These are perfect for adding extra flair to any game. Plus, you can print front and back so you can determine directionality for your Meeples. Pricing is $0.50 per Meeple base, plus $0.75 per printed side. However, if you have 6 or more Meeples in your game, the cost drops to only $0.25 per printed side. And you can choose to print only 1 side if you like. To do so, you'll just upload full-color images like you would with any of our oth"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/201-custom-punchouts-and-card-stock",
+          "title": "Custom Punchouts and Card Stock",
+          "summary": "With custom punchouts and cardstock , you can design your own shapes to be cut. You choose the size of the slug you want to use, and then create the artwork and the cut lines! For the first time, you can have truly bespoke game pieces in a print on demand game. All custom punchouts are printed and made of 60 point (0.07 inches) thick chipboard. All custom card stock items are printed and made of 12pt 320gsm black core card stock. The slug sizes for custom punchouts are 3.25\" x 5.25\" for small , "
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/206-custom-punchouts-hinges",
+          "title": "Custom Punchouts: Hinges",
+          "summary": "A hinge is a tie that is meant to bend rather than separate. Hinges can be used to create 3-dimensional objects .For parts that need to bend or have a hinge, use ties that are 0.07” wide with slits that are 0.5” long and 0.07” wide. Adding more ties will yield a stronger hinge. Hinges.ai For a cleaner look, hinges or bends may be made with a straight line rather than a 0.07” rectangle. However, this will yield a weaker hinge."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/204-custom-punchouts-rivets-dials",
+          "title": "Custom Punchouts: Screws & Dials",
+          "summary": "Screws come as two pieces that twist together to hold 2-3 layers of chipboard. A great way to utilize these features is by creating custom dials. To create a dial, begin by downloading the printing template of the desired slug size."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/207-custom-punchouts-spinners",
+          "title": "Custom Punchouts: Spinners",
+          "summary": "Do you have a game idea that requires a randomizer with custom icons and a D6 just isn’t cutting it? Consider making a custom spinner! Previously, the only spinner available at the Game Crafter is an 8” mat made of cardstock. With the custom punchout option, spinners can now be made of sturdy chipboard, in many sizes and infinite shapes. Spinners come as two pieces that snap together. Our spinners are 2.73” long, making them a great size for a 3” spinner tile that can fit on the Small Punchout s"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/205-custom-punchouts-standees",
+          "title": "Custom Punchouts: Standees",
+          "summary": "Standees are harder to make than you might think. The slot that hooks the two pieces together must be very precise for them to stay connected. The slot in the bottom of the upper piece must be the same height as the remaining area below the slit on the lower piece. For a snug fit, the slots are smaller at the innermost end than they are at the opening. Our chipboard is .065\" thick, so the opening of the slot should also be .065\" wide. The innermost end of the slot should be .055\" wide."
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/501-designing-for-foil",
+          "title": "Designing for Foil",
+          "summary": "Foil cards can be used to great effect, whether it’s for an ultra-rare card or an entire shiny deck. You do not have to change your existing card artwork to get it in a foil version, but there are a few things to keep in mind about your card design if you want your foil cards to really stand out. Most printers, including ours, print with four colors: cyan, magenta, yellow, and black (CMYK). Our normal printers do not lay down any white, as it’s assumed that the paper being printed on is bright w"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/297-game-design-asset-shop-artist-faq",
+          "title": "Game Design Asset Shop: Artist FAQ",
+          "summary": "When posting art on our Game Design Assets page, you are making your art available for sale. You still retain the rights to use your art as you see fit. Here is a list of the licenses we have available for our creators to use when posting art on our Game Design Assets page. https://creativecommons.org/licenses/by/4.0/ https://creativecommons.org/licenses/by-sa/4.0/ https://creativecommons.org/licenses/by-nd/4.0/ https://creativecommons.org/licenses/by-nc-sa/4.0/ https://creativecommons.org/licen"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/198-types-of-software",
+          "title": "Types of Software",
+          "summary": "This list of software tools was assembled by JT Smith and Jeff King from The Game Crafter Official Podcast . In episode 74 , they answered a listener request which asked them: \"what software tools are useful for pre-production, before getting to The Game Crafter's online process?\" . So JT and Jeff came up with a list of useful tools that can assist you in creating your games. If you are a new designer and not familiar with these tools, we suggest that you watch some YouTube tutorials for these p"
+        },
+        {
+          "url": "https://help.thegamecrafter.com/article/28-who-is-tgc-for",
+          "title": "Who is TGC for?",
+          "summary": "The reality is that most games will never sell 10,000 units. Unfortunately, traditional production runs require you to buy 5,000 - 20,000 units to make production cheap enough to be profitable. At The Game Crafter (TGC), even if your game only sells one copy, you'll have made a profit! Try to beat that by negotiating with publishers, distributors, retailers, and manufacturers. Even if you are an established game developer, making prototypes for play-testing can be time-consuming and costly. Some"
+        }
+      ]
+    }
+  ]
+}

@@ -47,6 +47,21 @@ Recommended install location:
 - Install in the same project where you keep your game files/artwork and prompts.
 - Prefer project-local scope over global scope so behavior/config is isolated per game project and easier to audit/reproduce.
 
+## Quick Install Summary (Advanced)
+
+1. Build the MCP server (`code/dist/index.js`).  
+Details: [Build The MCP Server](#1-build-the-mcp-server)
+2. Set required `TGC_*` environment variables in your runtime/shell.  
+Details: [Configure Authentication Environment Variables](#2-configure-authentication-environment-variables)
+3. Register `thegamecrafter` MCP server in your LLM client/runtime using `node .../code/dist/index.js` and pass/inherit the same `TGC_*` environment variables.  
+Details: [MCP](#mcp)
+4. Install `skills/tgc-guided-workflows` in your client’s skills location/tooling.  
+Details: [Skills](#skills)
+5. Reference `context/TGCAGENT.md` from your local project agent file (`AGENTS.md`/`Claude.md`) instead of overwriting your existing file.  
+Details: [Agent](#agent)
+6. Run a live verification prompt to confirm auth + basic tool calls.  
+Details: [Verify End-To-End Setup](#3-verify-end-to-end-setup)
+
 ## 1) Build The MCP Server
 
 1. Clone the repository.

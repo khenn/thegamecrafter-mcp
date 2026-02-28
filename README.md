@@ -280,13 +280,19 @@ Use the same skill package and place it where your Claude runtime expects skills
 - option/prefill behavior
 - preflight and safety checks
 - output conventions (for example, pricing and links)
-- global configuration settings under `## Preferences (Global)` (for example behavior toggles and formatting defaults)
+- preference contract keys expected from your local agent file (`AGENTS.md`/`Claude.md`)
 
 Use it when you want predictable agent behavior across sessions and tools.
 
 Agent config note:
-- You can review or change global agent settings by editing the `## Preferences (Global)` block in your project `AGENTS.md` (or `Claude.md` after conversion).
-- You can also ask your LLM to update these settings for you (for example: "set my TGCMCP agent preferences in AGENTS.md").
+- Keep preference values in your local project `AGENTS.md`/`Claude.md` so pulling new TGCMCP versions does not overwrite your choices.
+- Recommended local block:
+```yaml
+preferences:
+  currency: USD
+  feedback_contribution: true
+```
+- You can ask your LLM to update these settings for you (for example: "set my TGCMCP preferences in AGENTS.md").
 
 ### Agent Install For Codex (Step-by-step)
 
@@ -339,14 +345,14 @@ Run an installation verification for The Game Crafter MCP.
 This repo supports a low-friction feedback loop so real usage can improve AGENT + skills behavior over time.
 
 What this means in practice:
-- The public AGENT is configured to request a one-time opt-in and then run feedback capture with minimal interruption.
+- Feedback is event-driven: when the agent discovers a non-trivial, reusable learning that is not already in skills and would improve future build accuracy, it drafts an issue proposal automatically.
 - Security and privacy are strict defaults:
   - feedback is scoped to reusable TGC interface learnings only (API/UI behavior),
   - user-specific game/IP content, PII, secrets, session identifiers, and local machine details are excluded from publication,
   - if context is needed, data is generalized/anonymized before sharing.
 - Before anything is posted publicly, the agent shows the exact issue text and asks for explicit permission.
   - You can approve or reject each proposed publication.
-- You can disable this behavior by changing `preferences.feedback_contribution` in the TGCMCP profile referenced from your project `AGENTS.md`/`Claude.md`.
+- Disable this behavior by setting `preferences.feedback_contribution: false` in your local `AGENTS.md`/`Claude.md`.
 - If automatic issue publishing is unavailable, the agent writes a pending feedback note under `contrib/feedback/`.
 - In that fallback case, users are expected to review and submit a GitHub issue manually.
 

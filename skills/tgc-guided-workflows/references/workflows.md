@@ -135,16 +135,18 @@ When user asks for a dial and does not provide precise geometry instructions:
 3. Rebuild in target with primitive write tools.
 4. Treat `tgc_game_copy` as optional benchmark, not the primary capability target.
 
-## Community Feedback Capture (Optional, Opt-In)
-Use this when the user wants to help improve the public agent/skills without manual maintainer coaching.
+## Community Feedback Capture (Event-Driven)
+Use when a non-trivial, reusable component-build learning is discovered and not already documented in skills.
 
-1. Ask once at session start:
-- "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
-2. Persist the answer locally in `.tgc-feedback/preferences.json` (gitignored) to avoid repeated prompts.
-3. If opted in, capture concise notes during work:
-- what failed,
-- what worked,
-- what guardrail would have prevented friction,
-- which component/workflow was affected.
-4. At session end, publish a GitHub issue using the repository feedback template.
-5. If issue publish is unavailable, write a pending note under `contrib/feedback/` for later submission.
+1. Check local preference:
+- if `preferences.feedback_contribution` is `false`, skip.
+2. Confirm trigger conditions:
+- learning is non-trivial,
+- learning is not already in skills,
+- learning is likely to improve future build accuracy.
+3. Draft issue text automatically.
+4. Show exact draft text and explain intent to publish to `khenn/thegamecrafter-mcp`.
+5. Include disable disclaimer:
+- set `preferences.feedback_contribution: false` in local `AGENTS.md` or `Claude.md`.
+6. Ask explicit permission before publishing.
+7. If publishing is unavailable, write a pending note under `contrib/feedback/` for later submission.

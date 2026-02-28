@@ -1,58 +1,53 @@
 # Community Feedback Reference
 
 ## Goal
-Collect high-signal agent-learning feedback with minimal user interruption, then route it into maintainable GitHub triage.
+Capture only high-value, reusable learnings and turn them into maintainable GitHub issues that improve future TGCMCP skill releases.
 
-## Session UX Contract
-Run this as a mandatory startup check before normal task work.
+## Trigger (Event-Driven, Not Startup-Driven)
+Run this flow when all conditions are true:
+1. The agent learned something **non-trivial** about building/proofing a TGC component.
+2. The learning is **not already captured** in current skills/references.
+3. The learning is likely to improve future build accuracy or reduce avoidable retries.
+4. Local preference `preferences.feedback_contribution` is not explicitly `false`.
 
-1. Respect global preference in `AGENTS.md`:
-- if `preferences.feedback_contribution` is `false`, skip this entire workflow.
-2. Resolve persisted local preference from `.tgc-feedback/preferences.json` (gitignored):
-- if `feedback_opt_in` exists and is boolean, use it and do not ask.
-- if file is missing/invalid/unreadable, ask now.
-3. If ask is needed, ask exactly once at session start:
-- "Would you like to contribute learning notes from this session to improve TGCMCP agent behavior and skills?"
-4. Persist preference locally after user answer:
-- path: `.tgc-feedback/preferences.json` (gitignored)
-- shape:
-```json
-{
-  "feedback_opt_in": true,
-  "updated_at": "2026-02-24T00:00:00Z"
-}
-```
-5. Never re-ask repeatedly in the same session.
+If any condition fails, do not draft or propose publication.
+
+## User Prompt Contract
+When triggered, draft issue content automatically, then show it to the user before publishing.
+
+Required explanation to user:
+- state that you found a reusable learning that could improve future TGCMCP skills,
+- state that you would like to create a GitHub issue in `khenn/thegamecrafter-mcp`,
+- include the exact draft title/body text,
+- include a short disclaimer:
+  - "You can disable this behavior by setting `preferences.feedback_contribution: false` in your local `AGENTS.md` or `Claude.md`."
+
+Then ask for explicit permission to publish that exact text now.
 
 ## Capture Scope (What To Record)
-- Constraint gaps discovered (API behavior not yet covered by skill guidance).
-- Repeated user friction where better defaults/preflight could prevent back-and-forth.
-- Proven mitigations that should become guardrails.
-- Component-specific geometry/print pitfalls and deterministic fixes.
-- Keep scope strictly to TGC interface behavior (TGC API + website component/proofing behavior).
-
-## Capture Format (In-Memory Note Model)
-Keep concise, one entry per significant event:
-- `area`: `component|workflow|auth|api|proofing|docs`
-- `context`: short task description
-- `observed`: what happened
-- `expected`: what should have happened
-- `resolution`: what fixed it (or `unresolved`)
-- `proposed_update`: AGENT/skill/doc improvement
+- Component constraints/geometry/proofing behavior that caused or prevented failure.
+- Deterministic fixes that should become guardrails/defaults.
+- API or UI behavior that materially changes safe sequencing.
 
 ## Hard Exclusions (Never Publish)
-- User-specific game content or design/IP details:
-  - game names/titles tied to the user, proprietary rules text, art contents, narrative/theme specifics.
-- User/local environment details:
-  - absolute local paths, machine/user identifiers, local config values, workspace naming.
-- Secrets or sensitive identifiers:
-  - passwords, API keys/tokens, session IDs, usernames/emails, private URLs, any PII.
-- If context is needed for clarity, generalize and anonymize:
-  - use neutral placeholders (for example `source_game`, `target_component`, `local_file_path`).
+- User-specific game/IP details (names, story/rules content, proprietary art/content).
+- Local environment/system details (absolute paths, hostnames, workspace naming).
+- Secrets/sensitive identifiers (passwords, keys, tokens, session IDs, emails/usernames, private URLs, PII).
+
+If context is needed, anonymize and generalize.
+
+## Draft Format
+Keep issue drafts concise and reusable:
+- `area`: `component|workflow|api|proofing|docs`
+- `component/family`: specific TGC component identity or family
+- `observed_behavior`
+- `expected_behavior`
+- `deterministic_mitigation`
+- `proposed_skill_or_agent_update`
 
 ## Publish Target
 - Preferred: GitHub Issue using `.github/ISSUE_TEMPLATE/agent-learning-feedback.yml`
-- Labels: `agent-feedback`, plus optional `component:*` and `area:*`
+- Labels: `agent-feedback` plus optional scoped labels.
 
 Suggested publish command:
 ```bash
@@ -67,18 +62,10 @@ gh issue create \
 If issue creation cannot run (auth/network/tooling constraints):
 - Write pending artifact:
   - `contrib/feedback/<YYYY-MM-DD>-<short-topic>-pending.md`
-- Include header line: `PENDING ISSUE SUBMISSION`
+- Include header: `PENDING ISSUE SUBMISSION`
 - Include exact copy/paste `gh issue create` command.
 
 ## Publication Approval Gate (Required)
-- Startup opt-in is not publication approval.
-- Before any publish attempt, show the user the exact issue title/body text intended for GitHub.
-- Ask explicit permission to publish that exact text now.
-- Publish only after explicit approval.
-- If user declines, do not publish; optionally save local pending note if user requests.
-
-## Redaction Rules
-- Remove credentials/tokens/session IDs/private URLs.
-- Remove local absolute paths unless strictly needed.
-- Use neutral identifiers where possible (`gameId`, `componentId`).
-- Prefer generalized, reusable learnings over event logs from a single user build.
+- Drafting is automatic when trigger conditions are met.
+- Publication is never automatic.
+- Publish only after explicit user approval of the exact draft text.

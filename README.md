@@ -50,28 +50,28 @@ Recommended install location:
 ## Quick Install Summary
 
 1. Build the MCP server (`code/dist/index.js`).  
-Details: [Build The MCP Server](#1-build-the-mcp-server)
+Details: [Step 1: Build The MCP Server](#1-build-the-mcp-server)
 2. Set required `TGC_*` environment variables in your runtime/shell.  
-Details: [Configure Authentication Environment Variables](#2-configure-authentication-environment-variables)
+Details: [Step 2: Configure Authentication Environment Variables](#2-configure-authentication-environment-variables)
 3. Register `thegamecrafter` MCP server in your LLM client/runtime using `node .../code/dist/index.js` and pass/inherit the same `TGC_*` environment variables.  
-Details: [MCP](#mcp)
+Details: [Step 3: Configure MCP Client](#3-configure-mcp-client)
 4. Install `skills/tgc-guided-workflows` in your client’s skills location/tooling.  
-Details: [Skills](#skills)
+Details: [Step 4: Install Skills](#4-install-skills)
 5. Reference `context/TGCAGENT.md` from your local project agent file (`AGENTS.md`/`Claude.md`) instead of overwriting your existing file.  
-Details: [Agent](#agent)
+Details: [Step 5: Configure Agent Profile](#5-configure-agent-profile)
 6. Run a live verification prompt to confirm auth + basic tool calls.  
-Details: [Verify End-To-End Setup](#3-verify-end-to-end-setup)
+Details: [Step 6: Verify End-To-End Setup](#6-verify-end-to-end-setup)
 
 ## Detailed Instructions
 
-## 1) Build The MCP Server
+### 1) Build The MCP Server
 
 1. Clone the repository.
 2. Install dependencies.
 3. Build the project.
 4. Verify the build output exists (while still in `thegamecrafter-mcp/code`).
 
-### Unix-like (Linux/macOS/WSL)
+#### Unix-like (Linux/macOS/WSL)
 
 ```bash
 git clone https://github.com/khenn/thegamecrafter-mcp.git
@@ -82,7 +82,7 @@ npm run build
 test -f dist/index.js && echo "Build OK: dist/index.js" || echo "Build missing: run npm run build"
 ```
 
-### Windows (PowerShell)
+#### Windows (PowerShell)
 
 ```powershell
 git clone https://github.com/khenn/thegamecrafter-mcp.git
@@ -93,7 +93,7 @@ npm run build
 if (Test-Path .\dist\index.js) { "Build OK: dist/index.js" } else { "Build missing: run npm run build" }
 ```
 
-## 2) Configure Authentication Environment Variables
+### 2) Configure Authentication Environment Variables
 
 The MCP server reads TGC auth settings from environment variables.
 
@@ -103,7 +103,7 @@ Required variables:
 - `TGC_USERNAME`
 - `TGC_PASSWORD`
 
-### Temporary (current shell only)
+#### Temporary (current shell only)
 
 Unix-like (bash/zsh):
 
@@ -123,7 +123,7 @@ $env:TGC_USERNAME="<YOUR_TGC_USERNAME>"
 $env:TGC_PASSWORD="<YOUR_TGC_PASSWORD>"
 ```
 
-### Persistent (new shells)
+#### Persistent (new shells)
 
 Unix-like (bash):
 
@@ -153,9 +153,9 @@ Security note:
 - The bash/PowerShell profile approach stores secrets in plaintext.
 - For stronger security, inject these values at runtime from an OS secret manager.
 
-## MCP
+### 3) Configure MCP Client
 
-### MCP Description And Intended Use
+#### Description And Intended Use
 
 This MCP server exposes TGC operations as callable tools for an LLM, including:
 - authentication/session management
@@ -169,7 +169,7 @@ Client compatibility:
 - This README provides explicit setup steps for Codex and Claude.
 - The same setup is generally adaptable to Gemini or other LLM clients that support MCP, skills, and agent-style project instructions.
 
-### MCP Install For Codex (Step-by-step)
+#### Codex (Step-by-step)
 
 1. Open the root of the project where you want to use this MCP server (your project root, not this repository root).
 
@@ -228,7 +228,7 @@ codex mcp get thegamecrafter
 codex mcp remove thegamecrafter
 ```
 
-### MCP Install For Claude (Step-by-step)
+#### Claude (Step-by-step)
 
 1. Open the root of the project where you want Claude to use this MCP server (your project root, not this repository root).
 2. Identify the absolute server entry point path:
@@ -263,9 +263,9 @@ If your Claude runtime inherits environment variables from the parent process, y
 
 5. Restart Claude client/runtime so the MCP server is loaded.
 
-## Skills
+### 4) Install Skills
 
-### Skills Description And Intended Use
+#### Description And Intended Use
 
 `skills/tgc-guided-workflows/` is a Codex skill package. It provides reusable workflow logic, including:
 - guided TGC intent handling
@@ -280,7 +280,7 @@ Package layout:
 
 Use this when you want your LLM to behave consistently during game-building tasks.
 
-### Skills Install For Codex (Step-by-step)
+#### Codex (Step-by-step)
 
 Use Codex's built-in skill installer (recommended):
 
@@ -298,7 +298,7 @@ Notes:
 - Use `codex skills --help` for current CLI options and scope behavior.
 - Codex CLI evolves quickly; this README intentionally uses the standard installer flow instead of custom helper scripts.
 
-### Skills Install For Claude (Step-by-step)
+#### Claude (Step-by-step)
 
 Use the same skill package and place it where your Claude runtime expects skills.
 
@@ -307,9 +307,9 @@ Use the same skill package and place it where your Claude runtime expects skills
 3. Verify by asking Claude:
    - `"List installed skills and confirm tgc-guided-workflows is available."`
 
-## Agent
+### 5) Configure Agent Profile
 
-### Agent Description And Intended Use
+#### Description And Intended Use
 
 `context/TGCAGENT.md` is the public behavior profile for TGC workflows. It defines:
 - interaction style for guided game creation
@@ -330,7 +330,7 @@ preferences:
 ```
 - You can ask your LLM to update these settings for you (for example: "set my TGCMCP preferences in AGENTS.md").
 
-### Agent Install For Codex (Step-by-step)
+#### Codex (Step-by-step)
 
 Recommended pattern: keep your own `AGENTS.md` and include TGCMCP instructions by reference.
 
@@ -348,7 +348,7 @@ Why this pattern:
 - avoids overwriting your existing `AGENTS.md`,
 - allows `git pull` updates to refresh TGCMCP guidance without manual merge churn.
 
-### Agent Install For Claude (Step-by-step)
+#### Claude (Step-by-step)
 
 This repository does **not** include a `Claude.md` file directly.
 Do not create `Claude.md` unless you actively use Claude for that project.
@@ -364,7 +364,7 @@ For The Game Crafter workflows, also follow:
 
 2. Ensure your Claude runtime/project is configured to load `Claude.md`.
 
-## 3) Verify End-To-End Setup
+### 6) Verify End-To-End Setup
 
 After your MCP client loads `thegamecrafter`, verify setup by giving your LLM this prompt:
 
@@ -376,7 +376,7 @@ Run an installation verification for The Game Crafter MCP.
 4) Return a short PASS/FAIL summary and include any error details plus the likely fix.
 ```
 
-## 4) Contribute Agent Learning Feedback (Optional)
+### 7) Contribute Agent Learning Feedback (Optional)
 
 This repo supports a low-friction feedback loop so real usage can improve AGENT + skills behavior over time.
 
@@ -392,7 +392,9 @@ What this means in practice:
 - If automatic issue publishing is unavailable, the agent writes a pending feedback note under `contrib/feedback/`.
 - In that fallback case, users are expected to review and submit a GitHub issue manually.
 
-## LLM Automation Prompt (Optional)
+## LLM Automation (Optional)
+
+### Setup Prompt
 
 Use this when you want an LLM to do setup with minimal custom prompt maintenance.
 This prompt tells the LLM to clone first, then follow the README from that clone.
@@ -401,7 +403,7 @@ This prompt tells the LLM to clone first, then follow the README from that clone
 Clone https://github.com/khenn/thegamecrafter-mcp.git, then read the README from the cloned repo and follow it exactly for setup. Ask me only for missing required values. Do not duplicate or invent setup steps not in the README.
 ```
 
-## LLM Operator Notes (Optional)
+### Operator Notes
 
 These notes are for LLM-driven setup flows, not required for manual setup.
 

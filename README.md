@@ -25,9 +25,16 @@ This README is optimized for both:
 - The Game Crafter account: [thegamecrafter.com](https://www.thegamecrafter.com/)
 - TGC API key pair (use the **public key ID**): [Create API Key](https://www.thegamecrafter.com/developer/APIKey.html)
 
-Optional for PDF workflows:
-- `pdfinfo`
-- `pdftoppm`
+Optional helper tools (recommended):
+- PDF tools:
+  - `pdfinfo` (inspect page count/size metadata)
+  - `pdftoppm` (convert PDF pages to image files for component uploads)
+- Image generation/editing:
+  - `ImageMagick` (`magick`/`convert`) for resize/crop/pad/canvas prep and simple text overlays
+  - `pngquant` (optional) for PNG size optimization before upload
+- LLM workflow utilities:
+  - `gh` (GitHub CLI) for issue-based feedback publishing flow
+  - `jq` for JSON inspection/transform during debugging and script output review
 
 ## 1) Build The MCP Server
 

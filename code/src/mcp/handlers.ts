@@ -1063,11 +1063,41 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
       });
     }
     if (error instanceof TgcApiError) {
-      return fail(error.code, error.message, error.details);
+      return fail(error.code, error.message, sanitizeErrorDetails(error.details));
     }
     const message = error instanceof Error ? error.message : String(error);
     return fail("UNEXPECTED_ERROR", message);
   }
+}
+
+function sanitizeErrorDetails(details: Record<string, unknown> | null): Record<string, unknown> | null {
+  if (!details) {
+    return null;
+  }
+  return sanitizeUnknown(details) as Record<string, unknown>;
+}
+
+function sanitizeUnknown(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map((item) => sanitizeUnknown(item));
+  }
+  if (value && typeof value === "object") {
+    const source = value as Record<string, unknown>;
+    const out: Record<string, unknown> = {};
+    for (const [key, raw] of Object.entries(source)) {
+      if (isSensitiveKey(key)) {
+        out[key] = "[REDACTED]";
+        continue;
+      }
+      out[key] = sanitizeUnknown(raw);
+    }
+    return out;
+  }
+  return value;
+}
+
+function isSensitiveKey(key: string): boolean {
+  return /(pass(word)?|token|secret|api[_-]?key|authorization|cookie|session(_?id)?)/i.test(key);
 }
 
 function readSurfacingState(game: Record<string, unknown>): {

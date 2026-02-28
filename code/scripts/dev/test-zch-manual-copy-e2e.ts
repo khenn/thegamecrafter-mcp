@@ -75,8 +75,8 @@ async function main(): Promise<void> {
   let createdGameId: string | null = null;
 
   try {
-    const session = await tgc.login({});
-    console.log(`Logged in: session=${session.id}`);
+    await tgc.login({});
+    console.log("Logged in to TGC.");
 
     const designers = await tgc.listDesigners(1, 1);
     const designer = asItems(designers.items)[0];

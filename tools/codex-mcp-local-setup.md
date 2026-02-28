@@ -35,5 +35,6 @@ codex mcp get thegamecrafter
 ```
 
 ## Notes
-- Secrets are not stored in Codex MCP config by this setup.
-- The server process reads credentials from your shell environment at runtime.
+- This setup reads credentials from your shell environment at runtime.
+- Depending on Codex/client behavior, resolved `--env` values may still be persisted in local config.
+- Treat local client config as sensitive and avoid storing plaintext secrets when possible.

@@ -88,8 +88,17 @@ npm install
 npm run build
 ```
 
-Expected output artifact:
-- `code/dist/index.js`
+Build verification (run from `thegamecrafter-mcp/code`):
+
+```bash
+test -f dist/index.js && echo "Build OK: dist/index.js" || echo "Build missing: run npm run build"
+```
+
+Windows (PowerShell):
+
+```powershell
+if (Test-Path .\dist\index.js) { "Build OK: dist/index.js" } else { "Build missing: run npm run build" }
+```
 
 ## 2) Configure Authentication Environment Variables
 

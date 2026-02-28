@@ -62,6 +62,8 @@ Details: [Agent](#agent)
 6. Run a live verification prompt to confirm auth + basic tool calls.  
 Details: [Verify End-To-End Setup](#3-verify-end-to-end-setup)
 
+## Detailed Instructions
+
 ## 1) Build The MCP Server
 
 1. Clone the repository.

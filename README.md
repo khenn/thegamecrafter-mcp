@@ -22,7 +22,6 @@ This README is optimized for both:
 - npm
 - Git
 - LLM client/runtime with MCP support (Codex, Claude, Gemini, or similar)
-- Codex CLI `>=0.104.0` (recommended; tested on `0.104.0`)
 - The Game Crafter account: [thegamecrafter.com](https://www.thegamecrafter.com/)
 - TGC API key pair (use the **public key ID**): [Create API Key](https://www.thegamecrafter.com/developer/APIKey.html)
 

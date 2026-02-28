@@ -36,6 +36,17 @@ Optional helper tools (recommended):
   - `gh` (GitHub CLI) for issue-based feedback publishing flow
   - `jq` for JSON inspection/transform during debugging and script output review
 
+## Recommended Integration Pattern
+
+Use all three layers together:
+- `MCP`: executes TGC API actions.
+- `Skills`: provides guardrails, preflight checks, and workflow sequencing.
+- `Agent profile`: sets consistent interaction behavior (guided prompts, safety/privacy posture, output style).
+
+Recommended install location:
+- Install in the same project where you keep your game files/artwork and prompts.
+- Prefer project-local scope over global scope so behavior/config is isolated per game project and easier to audit/reproduce.
+
 ## 1) Build The MCP Server
 
 1. Clone the repository.

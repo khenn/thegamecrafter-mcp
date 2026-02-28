@@ -69,7 +69,7 @@ Details: [Verify End-To-End Setup](#3-verify-end-to-end-setup)
 1. Clone the repository.
 2. Install dependencies.
 3. Build the project.
-4. Verify the build output exists.
+4. Verify the build output exists (while still in `thegamecrafter-mcp/code`).
 
 ### Unix-like (Linux/macOS/WSL)
 
@@ -78,6 +78,7 @@ git clone https://github.com/khenn/thegamecrafter-mcp.git
 cd thegamecrafter-mcp/code
 npm install
 npm run build
+# verify while still in the code directory
 test -f dist/index.js && echo "Build OK: dist/index.js" || echo "Build missing: run npm run build"
 ```
 
@@ -88,6 +89,7 @@ git clone https://github.com/khenn/thegamecrafter-mcp.git
 Set-Location thegamecrafter-mcp\code
 npm install
 npm run build
+# verify while still in the code directory
 if (Test-Path .\dist\index.js) { "Build OK: dist/index.js" } else { "Build missing: run npm run build" }
 ```
 

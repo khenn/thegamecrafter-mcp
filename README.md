@@ -47,7 +47,7 @@ Recommended install location:
 - Install in the same project where you keep your game files/artwork and prompts.
 - Prefer project-local scope over global scope so behavior/config is isolated per game project and easier to audit/reproduce.
 
-## Quick Install Summary (Advanced)
+## Quick Install Summary
 
 1. Build the MCP server (`code/dist/index.js`).  
 Details: [Build The MCP Server](#1-build-the-mcp-server)

@@ -2,7 +2,7 @@
 
 ## Purpose
 Convert field feedback from GitHub Issues into reliable improvements for:
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
 - `skills/tgc-guided-workflows/`
 - `README.md` (if onboarding/usage changes)
 
@@ -22,7 +22,7 @@ Convert field feedback from GitHub Issues into reliable improvements for:
 - `defer` (needs more evidence),
 - `reject` (out of scope/not actionable).
 4. If accepted:
-- update public behavior docs (`context/AGENTS.md`),
+- update public behavior docs (`context/TGCAGENT.md`),
 - update skill router/reference files,
 - add/adjust tests or verification scripts when feasible,
 - close issue with commit reference and outcome summary.

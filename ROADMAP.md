@@ -37,7 +37,7 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [x] ~~Gate: live create/readback probes for implemented component families~~
 
 ### A5. Make-Phase Intelligence
-- [x] ~~Seed guidance for implemented component families in `skills/` + `context/AGENTS.md`~~
+- [x] ~~Seed guidance for implemented component families in `skills/` + `context/TGCAGENT.md`~~
 - [x] ~~Add preflight guardrails for print-fit, bleed/cut, and component constraints~~
 - [ ] Complete per-component guidance parity for all implemented component families
 - [ ] Add/finish automated capability matrix regeneration in normal dev flow

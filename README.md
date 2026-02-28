@@ -246,67 +246,36 @@ Use this when you want your LLM to behave consistently during game-building task
 
 ### Skills Install For Codex (Step-by-step)
 
-Codex standard locations (choose one):
-- Project-scoped (recommended): `<PROJECT_ROOT>/.codex/skills/`
-- User-scoped: `~/.codex/skills/`
+Use Codex's built-in skill installer (recommended):
 
-1. Copy the entire skill folder (not only `SKILL.md`) into your project root skills path:
-
-Unix-like:
+1. From your target project root, run:
 
 ```bash
-mkdir -p /absolute/path/to/your-project/.codex/skills
-cp -R /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows \
-  /absolute/path/to/your-project/.codex/skills/
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows
 ```
 
-PowerShell:
+2. Restart Codex so the new skill is loaded.
+3. Verify by asking Codex:
+   - `"List installed skills and confirm tgc-guided-workflows is available."`
 
-```powershell
-New-Item -ItemType Directory -Force -Path "C:\absolute\path\to\your-project\.codex\skills" | Out-Null
-Copy-Item -Recurse -Force "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-guided-workflows" `
-  "C:\absolute\path\to\your-project\.codex\skills\tgc-guided-workflows"
-```
-
-2. Restart Codex so newly installed skills are loaded.
-3. Ensure your active Codex scope matches where you installed the skill (`<PROJECT_ROOT>/.codex/skills` for project-local scope, or `~/.codex/skills` for global scope).
-4. Optional check:
-
-```bash
-ls -la /absolute/path/to/your-project/.codex/skills/tgc-guided-workflows
-```
+Notes:
+- Use `codex skills --help` for current CLI options and scope behavior.
+- Codex CLI evolves quickly; this README intentionally uses the standard installer flow instead of custom helper scripts.
 
 ### Skills Install For Claude (Step-by-step)
 
-Claude standard locations (choose one):
-- Project-scoped (recommended): `<PROJECT_ROOT>/.claude/skills/`
-- User-scoped: `~/.claude/skills/`
+Use the same skill package and place it where your Claude runtime expects skills.
 
-1. Copy the same skill folder into your project root Claude skills path:
-
-PowerShell:
-
-```powershell
-New-Item -ItemType Directory -Force -Path "C:\absolute\path\to\your-project\.claude\skills" | Out-Null
-Copy-Item -Recurse -Force "C:\absolute\path\to\thegamecrafter-mcp\skills\tgc-guided-workflows" `
-  "C:\absolute\path\to\your-project\.claude\skills\tgc-guided-workflows"
-```
-
-Unix-like:
-
-```bash
-mkdir -p /absolute/path/to/your-project/.claude/skills
-cp -R /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows \
-  /absolute/path/to/your-project/.claude/skills/
-```
-
-2. Restart Claude Code so newly installed skills are loaded.
+1. Copy `skills/tgc-guided-workflows` from this repo into your Claude skills location.
+2. Restart Claude Code.
+3. Verify by asking Claude:
+   - `"List installed skills and confirm tgc-guided-workflows is available."`
 
 ## Agent
 
 ### Agent Description And Intended Use
 
-`context/AGENTS.md` is the public behavior profile for TGC workflows. It defines:
+`context/TGCAGENT.md` is the public behavior profile for TGC workflows. It defines:
 - interaction style for guided game creation
 - option/prefill behavior
 - preflight and safety checks
@@ -321,66 +290,37 @@ Agent config note:
 
 ### Agent Install For Codex (Step-by-step)
 
-1. Copy the public agent profile to your project root as `AGENTS.md`.
-2. If your project already has `AGENTS.md`, do not overwrite blindly:
-- copy TGCMCP profile to `AGENTS.tgcmcp.md`,
-- merge required sections into existing `AGENTS.md`.
+Recommended pattern: keep your own `AGENTS.md` and include TGCMCP instructions by reference.
 
-Unix-like:
+1. Clone this repository somewhere local (inside or outside your project).
+2. In your project's `AGENTS.md`, add a short include instruction:
 
-```bash
-mkdir -p /absolute/path/to/your-project
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md /absolute/path/to/your-project/AGENTS.md
-```
-
-Unix-like safe merge path if `AGENTS.md` already exists:
-
-```bash
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md /absolute/path/to/your-project/AGENTS.tgcmcp.md
-```
-
-Windows (PowerShell):
-
-```powershell
-New-Item -ItemType Directory -Force -Path "C:\absolute\path\to\your-project" | Out-Null
-Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
-  "C:\absolute\path\to\your-project\AGENTS.md"
-```
-
-PowerShell safe merge path if `AGENTS.md` already exists:
-
-```powershell
-Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
-  "C:\absolute\path\to\your-project\AGENTS.tgcmcp.md"
+```md
+For The Game Crafter workflows, also follow:
+/absolute/path/to/thegamecrafter-mcp/context/TGCAGENT.md
 ```
 
 3. Start Codex in your target project.
+
+Why this pattern:
+- avoids overwriting your existing `AGENTS.md`,
+- allows `git pull` updates to refresh TGCMCP guidance without manual merge churn.
 
 ### Agent Install For Claude (Step-by-step)
 
 This repository does **not** include a `Claude.md` file directly.
 Do not create `Claude.md` unless you actively use Claude for that project.
 
-To convert `AGENTS.md` to Claude format:
+To convert your setup for Claude:
 
-1. Copy and rename the public profile:
+1. In your project's `Claude.md`, add the same include instruction:
 
-Unix-like:
-
-```bash
-cp /absolute/path/to/thegamecrafter-mcp/context/AGENTS.md /absolute/path/to/your-project/Claude.md
+```md
+For The Game Crafter workflows, also follow:
+/absolute/path/to/thegamecrafter-mcp/context/TGCAGENT.md
 ```
 
-Windows (PowerShell):
-
-```powershell
-Copy-Item "C:\absolute\path\to\thegamecrafter-mcp\context\AGENTS.md" `
-  "C:\absolute\path\to\your-project\Claude.md"
-```
-
-2. Open `Claude.md` in your chosen project folder.
-3. Remove or adjust any Codex-specific wording if your Claude runtime requires different phrasing.
-4. Ensure your Claude runtime/project is configured to load `Claude.md`.
+2. Ensure your Claude runtime/project is configured to load `Claude.md`.
 
 ## 3) Verify End-To-End Setup
 
@@ -406,7 +346,7 @@ What this means in practice:
   - if context is needed, data is generalized/anonymized before sharing.
 - Before anything is posted publicly, the agent shows the exact issue text and asks for explicit permission.
   - You can approve or reject each proposed publication.
-- You can disable this behavior by changing `preferences.feedback_contribution` in your project `AGENTS.md`.
+- You can disable this behavior by changing `preferences.feedback_contribution` in the TGCMCP profile referenced from your project `AGENTS.md`/`Claude.md`.
 - If automatic issue publishing is unavailable, the agent writes a pending feedback note under `contrib/feedback/`.
 - In that fallback case, users are expected to review and submit a GitHub issue manually.
 
@@ -429,7 +369,7 @@ These notes are for LLM-driven setup flows, not required for manual setup.
 - Prefer idempotent behavior:
   - ask the user whether to configure MCP in local project scope or global scope before running Codex MCP config commands.
   - do not remove/re-add MCP unless path/env or scope differs from target state.
-  - do not overwrite existing project `AGENTS.md` without merge review.
+  - prefer include-by-reference to `context/TGCAGENT.md` rather than overwriting an existing project agent file.
 
 ## Troubleshooting
 
@@ -480,7 +420,7 @@ npm install --cache /tmp/$USER-npm-cache
 
 - MCP source: `code/src/`
 - MCP dev scripts: `code/scripts/dev/`
-- Public agent profile: `context/AGENTS.md`
+- Public agent profile: `context/TGCAGENT.md`
 - Public skill: `skills/tgc-guided-workflows/SKILL.md`
 - Skill references: `skills/tgc-guided-workflows/references/`
 - Skill metadata: `skills/tgc-guided-workflows/agents/openai.yaml`

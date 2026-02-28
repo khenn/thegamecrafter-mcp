@@ -16,5 +16,5 @@ This folder is the fallback staging area for agent-learning feedback when automa
 ## Important
 - Do not include secrets, passwords, tokens, or private credentials.
 - Notes in this folder are not canonical behavior docs. Maintainers promote accepted learnings into:
-  - `context/AGENTS.md`
+  - `context/TGCAGENT.md`
   - `skills/tgc-guided-workflows/`

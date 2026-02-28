@@ -100,7 +100,7 @@ Close the remaining game-building functionality gaps in a safe, test-as-you-go s
 1. Add service method in `code/src/tgc/service.ts`.
 2. Add handler and contract schema in `code/src/mcp/handlers.ts` and `code/src/mcp/contract.ts`.
 3. Add/extend tool docs in `tools/tgc-mcp-tool-contract-v1.md`.
-4. Add/extend component-intelligence guidance in `skills/tgc-guided-workflows/SKILL.md` and `context/AGENTS.md`:
+4. Add/extend component-intelligence guidance in `skills/tgc-guided-workflows/SKILL.md` and `context/TGCAGENT.md`:
    - include source URLs and preflight rules.
 5. Add a focused live test script in `code/scripts/dev/`:
    - authenticate

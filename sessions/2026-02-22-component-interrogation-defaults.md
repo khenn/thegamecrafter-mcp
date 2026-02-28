@@ -9,7 +9,7 @@
 
 ## Changes Made
 - Updated shared/public agent profile:
-  - `context/AGENTS.md`
+  - `context/TGCAGENT.md`
   - Added "Component Interrogation Defaults" section.
 - Updated reusable skill behavior:
   - `skills/tgc-guided-workflows/SKILL.md`

@@ -31,7 +31,7 @@
   - updated current gap snapshot counts from regenerated matrix.
 - `tools/tgc-mcp-tool-contract-v1.md`:
   - added validated coverage note for `/api/onesided` and `/api/onesidedgloss`.
-- `context/AGENTS.md`:
+- `context/TGCAGENT.md`:
   - added Batch 3 authoritative reference links.
 - `skills/tgc-guided-workflows/references/component-profiles.md`:
   - added Batch 3 authoritative references, constraints, and notes.

@@ -4,7 +4,7 @@
 - `logs/agent-dial-artwork-guidance.md`
 
 ## What Was Updated
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
   - Added dial-specific preflight/layout expectations.
   - Added `DualDial` reference and validated size/slot notes.
 - `skills/tgc-guided-workflows/SKILL.md`

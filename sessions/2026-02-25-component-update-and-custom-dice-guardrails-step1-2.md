@@ -45,6 +45,6 @@ Implement updated plan steps 1 and 2 from feedback issue #1:
 - Updated tool contract docs:
   - `tools/tgc-mcp-tool-contract-v1.md`
 - Updated public guidance for custom-dice identity/slot guardrails:
-  - `context/AGENTS.md`
+  - `context/TGCAGENT.md`
   - `skills/tgc-guided-workflows/SKILL.md`
   - `skills/tgc-guided-workflows/references/component-profiles.md`

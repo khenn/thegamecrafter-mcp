@@ -20,5 +20,5 @@
 - Updated local root `AGENTS.md` policy with explicit skill writing/splitting guidance.
 
 ## Notes
-- Public reusable agent profile remains `context/AGENTS.md`.
+- Public reusable agent profile remains `context/TGCAGENT.md`.
 - Skill split policy now defaults to one orchestration skill unless a distinct workflow family justifies a new skill.

@@ -23,7 +23,7 @@
 ## Files Updated
 - `skills/tgc-guided-workflows/references/component-profiles.md`
   - added authoritative product page, product API, help, and video links for all Batch 1 components.
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
   - added Batch 1 implemented references block for preflight/linking behavior parity with Batch 2.
 
 ## Notes

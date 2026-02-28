@@ -7,7 +7,7 @@ Apply in-place update preference globally across component workflows and add rep
 
 ## Changes
 - Guidance refinements:
-  - `context/AGENTS.md`
+  - `context/TGCAGENT.md`
     - added explicit global rule: prefer `tgc_component_update` for existing non-deck revisions; avoid duplicates unless explicitly requested.
   - `skills/tgc-guided-workflows/SKILL.md`
     - added core default for in-place revision behavior.

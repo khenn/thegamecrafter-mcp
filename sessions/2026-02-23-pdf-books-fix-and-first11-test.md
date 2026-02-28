@@ -51,7 +51,7 @@ Asset folder:
 ## Skills / Agent Notes Updated
 - `skills/tgc-guided-workflows/SKILL.md`
   - added guardrail: use `image_id` for book page artwork and set `sequenceNumber` explicitly.
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
   - added default for book page creation mapping and ordering.
 
 ## Tooling

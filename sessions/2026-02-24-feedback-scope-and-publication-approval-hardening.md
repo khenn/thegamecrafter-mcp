@@ -6,7 +6,7 @@ Date: 2026-02-24
 Tighten contribution publishing rules to prevent any user/game/local leakage and require explicit approval of exact content before public posting.
 
 ## Changes
-- Updated `context/AGENTS.md` Community Feedback Mode with:
+- Updated `context/TGCAGENT.md` Community Feedback Mode with:
   - strict capture scope limited to reusable TGC interface learnings,
   - hard exclusions for user-specific game/IP content, local environment details, PII, and secrets,
   - anonymization/masking requirement when context is needed,

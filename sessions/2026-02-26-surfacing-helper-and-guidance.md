@@ -17,7 +17,7 @@ Implemented first-class game surfacing helpers and guidance to reduce ambiguity 
   - `enableLinenTexture -> enable_linen_texture`
 
 ## Guidance Updates
-- Updated `context/AGENTS.md` with explicit Surfacing workflow behavior.
+- Updated `context/TGCAGENT.md` with explicit Surfacing workflow behavior.
 - Updated `skills/tgc-guided-workflows/SKILL.md` and `references/workflows.md` to use surfacing helpers and prompt for both values together.
 
 ## Roadmap Updates

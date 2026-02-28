@@ -42,4 +42,4 @@
   - current gap snapshot updated.
 - `tools/tgc-mcp-tool-contract-v1.md` updated with Batch 4 validated coverage and `innerFileId` notes.
 - `skills/tgc-guided-workflows/references/component-profiles.md` updated with Batch 4 authoritative references.
-- `context/AGENTS.md` updated with Batch 4 implemented references.
+- `context/TGCAGENT.md` updated with Batch 4 implemented references.

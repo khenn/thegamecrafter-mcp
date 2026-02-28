@@ -30,7 +30,7 @@ Referenced public pages:
 
 ## Files Updated
 - `AGENTS.md`
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
 - `skills/tgc-guided-workflows/SKILL.md`
 - `ROADMAP.md`
 - `tools/tgc-gap-closure-plan.md`

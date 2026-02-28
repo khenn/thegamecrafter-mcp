@@ -28,7 +28,7 @@ Implement Batch 5 API-family coverage for specialty parts and custom dice/meeple
   - `tools/tgc-mcp-tool-contract-v1.md`
   - `tools/tgc-gap-closure-plan.md`
   - `ROADMAP.md`
-  - `context/AGENTS.md`
+  - `context/TGCAGENT.md`
   - `skills/tgc-guided-workflows/SKILL.md`
   - `skills/tgc-guided-workflows/references/component-profiles.md`
 

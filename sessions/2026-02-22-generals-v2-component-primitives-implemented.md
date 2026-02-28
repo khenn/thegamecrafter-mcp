@@ -41,5 +41,5 @@ Add MCP primitives required to reconstruct non-deck components for complex games
 - `ROADMAP.md` updated with Milestone 5.5 for complex component primitives.
 - Updated guidance in:
   - `AGENTS.md`
-  - `context/AGENTS.md`
+  - `context/TGCAGENT.md`
   - `skills/tgc-guided-workflows/SKILL.md`

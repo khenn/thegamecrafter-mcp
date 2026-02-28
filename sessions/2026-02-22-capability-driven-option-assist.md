@@ -5,7 +5,7 @@ Updated agent and skill guidance to use capability-driven component option promp
 
 ## Updated Files
 - `AGENTS.md`
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
 - `skills/tgc-guided-workflows/SKILL.md`
 
 ## Key Change

@@ -6,3 +6,6 @@ code/scripts/dev/configure-codex-mcp.sh
 AGENTS.md
 AGENT.md
 .tgc-feedback/
+
+context/MEMORY.md
+context/STRUCTURE.md

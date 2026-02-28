@@ -8,7 +8,7 @@
 - Improve print-safe behavior for PDF/image imports to reduce trim/binding clipping risk.
 
 ## Changes Made
-- Updated `context/AGENTS.md`:
+- Updated `context/TGCAGENT.md`:
   - reinforced outcome-based component selection behavior:
     - present 2-3 options when component type is not specified,
     - if only one viable option remains, explain exclusions and request explicit confirmation.

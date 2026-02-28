@@ -7,8 +7,8 @@ Separate local build-agent behavior from public end-user agent behavior to avoid
 
 ## Changes
 - Replaced root `AGENTS.md` with a build-focused, local-only instruction file.
-- Removed cross-file dependency that made root behavior hinge on `context/AGENTS.md`.
-- Kept `context/AGENTS.md` as the public-facing behavior profile artifact for downstream testing/use.
+- Removed cross-file dependency that made root behavior hinge on `context/TGCAGENT.md`.
+- Kept `context/TGCAGENT.md` as the public-facing behavior profile artifact for downstream testing/use.
 
 ## Notes
 - Root agent now governs MCP/tool development workflow only.

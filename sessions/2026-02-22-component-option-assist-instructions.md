@@ -5,7 +5,7 @@ Updated agent and skill instructions so component build requests proactively sur
 
 ## Updated Files
 - `AGENTS.md`
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
 - `skills/tgc-guided-workflows/SKILL.md`
 
 ## Behavior Added

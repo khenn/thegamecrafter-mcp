@@ -16,7 +16,7 @@ Observed overfill risk when copy run is interrupted/retried:
 ## Policy Updates
 Updated:
 - `AGENTS.md`
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
 - `skills/tgc-guided-workflows/SKILL.md`
 
 New guidance requires:

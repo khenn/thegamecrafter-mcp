@@ -7,7 +7,7 @@ Separate local repo-build agent behavior from public end-user TGC agent behavior
 
 ## Changes
 - Added canonical public profile: `context/TGCAGENT.md`.
-- Converted `context/AGENTS.md` into a compatibility shim pointing to `context/TGCAGENT.md`.
+- Converted `context/TGCAGENT.md` into a compatibility shim pointing to `context/TGCAGENT.md`.
 - Updated local root `AGENTS.md` (local-only, gitignored) to:
   - keep repo-build behavior,
   - load `context/TGCAGENT.md` only when explicitly simulating end-user TGC workflows,
@@ -25,5 +25,5 @@ Separate local repo-build agent behavior from public end-user TGC agent behavior
 - Claude guidance kept compatible with the same skill and include-by-reference pattern.
 
 ## Verification
-- Searched repository for active docs/playbooks referencing canonical `context/AGENTS.md` and migrated them.
+- Searched repository for active docs/playbooks referencing canonical `context/TGCAGENT.md` and migrated them.
 - No runtime/server code changes in this session.

@@ -23,7 +23,7 @@ Implemented Goal A6 by adding test-report read helpers and a make-readiness chec
   - missing test-report warnings.
 
 ## Guidance Updates
-- Updated `context/AGENTS.md` with readiness-check usage rules.
+- Updated `context/TGCAGENT.md` with readiness-check usage rules.
 - Updated `skills/tgc-guided-workflows/references/workflows.md` with:
   - test report workflow
   - make readiness workflow

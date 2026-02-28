@@ -21,7 +21,7 @@ Date: 2026-02-23
 
 ## Files Updated
 - `AGENTS.md`
-- `context/AGENTS.md`
+- `context/TGCAGENT.md`
 - `skills/tgc-guided-workflows/SKILL.md`
 
 ## Behavior Added

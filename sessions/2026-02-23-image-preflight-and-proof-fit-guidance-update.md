@@ -10,7 +10,7 @@
 - `logs/2026-02-23-204322-agents-notes-image-preflight-and-fit.md`
 
 ## Changes Made
-- Updated `context/AGENTS.md` with stronger image-bearing workflow rules:
+- Updated `context/TGCAGENT.md` with stronger image-bearing workflow rules:
   - geometry-aware preflight before upload,
   - explicit fit intent modes (`safe`, `near-trim`, `full-bleed`),
   - default to `safe` when intent is unspecified,

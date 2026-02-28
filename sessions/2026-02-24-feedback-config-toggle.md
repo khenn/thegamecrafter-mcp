@@ -4,7 +4,7 @@
 Add a global config setting (similar to currency) so local users can disable community feedback contribution mode. Default should remain enabled.
 
 ## Changes
-- Updated `context/AGENTS.md` preferences:
+- Updated `context/TGCAGENT.md` preferences:
   - added `preferences.feedback_contribution: true`.
 - Added behavior rules:
   - when `preferences.feedback_contribution` is `false`, skip feedback prompt/capture/publish workflow entirely.

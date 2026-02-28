@@ -12,7 +12,7 @@ Enable opt-in, low-friction user feedback so TGCMCP agent/skill behavior can imp
 - Added maintainer triage playbook:
   - `tools/community-feedback-triage.md`
 - Updated public behavior profile:
-  - `context/AGENTS.md` with one-time opt-in flow, local preference persistence, and issue/fallback publishing rules.
+  - `context/TGCAGENT.md` with one-time opt-in flow, local preference persistence, and issue/fallback publishing rules.
 - Updated skill docs:
   - `skills/tgc-guided-workflows/SKILL.md`
   - `skills/tgc-guided-workflows/references/workflows.md`

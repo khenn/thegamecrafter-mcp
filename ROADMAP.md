@@ -41,6 +41,12 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 - [x] ~~Add preflight guardrails for print-fit, bleed/cut, and component constraints~~
 - [ ] Complete per-component guidance parity for all implemented component families
 - [ ] Add/finish automated capability matrix regeneration in normal dev flow
+- [ ] Align skill architecture with OpenAI skills best practices:
+  - [ ] keep each skill focused on one workflow job,
+  - [ ] prefer instructions over scripts unless deterministic tooling is required,
+  - [ ] write imperative steps with explicit inputs/outputs,
+  - [ ] validate trigger behavior with prompt tests,
+  - [ ] optimize skill split/reference loading so only component-relevant context is loaded per task.
 - [ ] In progress: Integrate TGC Help Center knowledge into agent/skills guidance.
   - [x] Crawl seeded Help Center categories and generate local catalog references.
   - [x] Add curated process/best-practice guidance reference for make/iterate workflows.

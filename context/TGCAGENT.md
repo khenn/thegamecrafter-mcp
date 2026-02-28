@@ -60,6 +60,8 @@ Use `skills/tgc-guided-workflows/` for detailed behavior:
 - `references/guardrails.md` for mutation safety and idempotency constraints.
 - `references/community-feedback.md` for feedback consent, redaction, and publication rules.
 - `references/tgc-help-center-guidance.md` and `references/tgc-help-center-catalog.md` for process/help-center guidance.
+- Proactively use this skill stack for TGC tasks without waiting for explicit user instruction to invoke skills.
+- Load only the specific reference files needed for the current task; do not bulk-load all references.
 
 ## Maintenance Boundary
 - Keep this file orchestration-level and stable.

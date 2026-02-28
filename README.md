@@ -61,6 +61,8 @@ Details: [Step 4: Install Skills](#4-install-skills)
 Details: [Step 5: Configure Agent Profile](#5-configure-agent-profile)
 6. Run a live verification prompt to confirm auth + basic tool calls.  
 Details: [Step 6: Verify End-To-End Setup](#6-verify-end-to-end-setup)
+7. (Optional) Enable contribution workflow so reusable learnings can be proposed back to TGCMCP via issue drafts with explicit approval.  
+Details: [Step 7: Contribute Agent Learning Feedback](#7-contribute-agent-learning-feedback-optional)
 
 ## Detailed Instructions
 

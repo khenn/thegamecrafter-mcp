@@ -1,0 +1,46 @@
+name: Skills Policy Checks
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'docs/skills/**'
+      - 'code/scripts/skills/**'
+      - 'tests/skills/**'
+      - 'AGENTS.md'
+      - 'code/package.json'
+      - '.github/workflows/skills-policy.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'skills/**'
+      - 'docs/skills/**'
+      - 'code/scripts/skills/**'
+      - 'tests/skills/**'
+      - 'AGENTS.md'
+      - 'code/package.json'
+      - '.github/workflows/skills-policy.yml'
+
+jobs:
+  skills-policy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: code
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: code/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run skill policy test suite
+        run: npm run skills:test

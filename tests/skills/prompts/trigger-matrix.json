@@ -1,0 +1,125 @@
+{
+  "skills": [
+    {
+      "skill": "tgc-component-preflight",
+      "keywords": [
+        "component",
+        "component preflight",
+        "required assets",
+        "finish options",
+        "mutation sequence"
+      ],
+      "positive": [
+        "Run component preflight before I add this box and validate required assets.",
+        "Check finish options and required assets before mutation sequence.",
+        "Validate this component request and tell me what is missing."
+      ],
+      "negative": [
+        "Import the first 10 pages of this PDF into a rulebook booklet.",
+        "Fix trim and bleed clipping in this uploaded image proof.",
+        "List my games and summarize their production cost."
+      ]
+    },
+    {
+      "skill": "tgc-book-rulebook-workflows",
+      "keywords": [
+        "rulebook",
+        "booklet",
+        "perfectbound",
+        "page parity"
+      ],
+      "positive": [
+        "Create a rulebook from this PDF and handle page parity safely.",
+        "Should I use booklet or perfectbound for this manual?",
+        "Import pages into a perfectbound book and warn on parity issues."
+      ],
+      "negative": [
+        "Validate required side slots for a custom die component.",
+        "Fix bleed and safe zone placement for this board image.",
+        "Set UV coating and linen texture on my game."
+      ]
+    },
+    {
+      "skill": "tgc-image-preflight-fit",
+      "keywords": [
+        "safe zone",
+        "bleed",
+        "trim",
+        "proof-fit"
+      ],
+      "positive": [
+        "Preflight this image for safe zone and bleed before upload.",
+        "The proof shows clipping; adjust trim margins and rerender.",
+        "Give me a proof-fit report for this artwork."
+      ],
+      "negative": [
+        "Create a new game and set player counts.",
+        "Compare booklet vs perfectbound parity requirements.",
+        "Validate this component's required assets before creation."
+      ]
+    },
+    {
+      "skill": "tgc-guided-workflows",
+      "keywords": [
+        "the game crafter",
+        "workflow",
+        "surfacing",
+        "game creation",
+        "readiness check",
+        "test reports"
+      ],
+      "positive": [
+        "Create a new The Game Crafter game and set up the workflow steps.",
+        "Run a readiness check and summarize test reports for this game.",
+        "Set UV and linen surfacing on my game and explain tradeoffs."
+      ],
+      "negative": [
+        "Summarize this Python stack trace and propose a fix.",
+        "Write a Dockerfile for a Node API server.",
+        "Explain SQL indexes for OLTP workloads."
+      ]
+    }
+  ],
+  "routingCases": [
+    {
+      "prompt": "Validate required assets and finish options before creating this component.",
+      "expectedPrimary": "tgc-component-preflight",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Create a rulebook from this PDF and handle page parity for booklet vs perfectbound.",
+      "expectedPrimary": "tgc-book-rulebook-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "The proof is clipping text near trim and bleed; preflight image fit and fix it.",
+      "expectedPrimary": "tgc-image-preflight-fit",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Create a new The Game Crafter game, set surfacing, and summarize next actions.",
+      "expectedPrimary": "tgc-guided-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Build me a game creation end-to-end workflow: create a game, add a rulebook from PDF, then fix proof clipping on images.",
+      "expectedPrimary": "tgc-guided-workflows",
+      "minPrimaryHits": 1
+    },
+    {
+      "prompt": "Before creating this component, verify required assets and identity side slots are complete.",
+      "expectedPrimary": "tgc-component-preflight",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "I need booklet versus perfectbound guidance for this 46-page PDF with parity checks.",
+      "expectedPrimary": "tgc-book-rulebook-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "This dial proof clips text near trim and bleed lines; run image fit remediation and keep labels readable.",
+      "expectedPrimary": "tgc-image-preflight-fit",
+      "minPrimaryHits": 2
+    }
+  ]
+}

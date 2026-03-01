@@ -47,6 +47,32 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
   - [ ] write imperative steps with explicit inputs/outputs,
   - [ ] validate trigger behavior with prompt tests,
   - [ ] optimize skill split/reference loading so only component-relevant context is loaded per task.
+- [ ] Skills architecture rollout plan (captured and gated):
+  - [x] ~~Plan A (policy/tooling first, required before any skill split work):~~
+    - [x] ~~A.1 Add repo skill authoring policy (`docs/skills/SKILL_AUTHORING_POLICY.md`).~~
+    - [x] ~~A.2 Add repo skill review checklist (`docs/skills/SKILL_REVIEW_CHECKLIST.md`).~~
+    - [x] ~~A.3 Add policy-compliant skill scaffold helper.~~
+    - [x] ~~A.4 Enforce policy usage in local `AGENTS.md`.~~
+    - [x] ~~A.5 Add skill validation/trigger test harness.~~
+    - [x] ~~A.6 Add fixture-based validator tests + CI wiring.~~
+    - [x] ~~A.7 Run and document end-to-end dry run in `sessions/`.~~
+  - [ ] Package Plan A governance as a reusable Codex skill in a separate, project-agnostic repository (not bundled in TGCMCP source tree).
+  - [ ] Plan B (execute only after Plan A gate is complete):
+    - [ ] B.1 Keep `tgc-guided-workflows` as thin orchestration/router skill.
+      - [x] ~~Add required baseline policy sections (`Inputs Required`, `Outputs Produced`, `Safety and Privacy`).~~
+    - [ ] B.2 Split workflow families into focused skills (not per-component by default).
+      - [x] ~~Initial production-ready scaffolds created for first split set: `tgc-component-preflight`, `tgc-book-rulebook-workflows`, `tgc-image-preflight-fit`.~~
+    - [ ] B.3 Re-scope references so only workflow-relevant context loads.
+      - [x] ~~Migrated component/image/book guidance out of router skill into focused family skills.~~
+      - [ ] Continue migrating remaining cross-cutting guidance into family-owned references as additional skills are introduced.
+    - [ ] B.4 Expand trigger fixtures per skill and verify overlap boundaries.
+      - [x] ~~Added routing overlap cases with expected-primary assertions in trigger test harness.~~
+      - [ ] Add additional ambiguous/edge-case routing prompts as more focused skills are introduced.
+    - [ ] B.5 Migrate and validate all existing behavior under new skill layout.
+      - [x] ~~Moved deep preflight/print-fit behavior ownership out of router skill and into focused skills.~~
+      - [x] ~~Added explicit routing-map reference and delegation contract for router skill.~~
+      - [x] ~~Expanded parity validation with 8 routing cases across focused and cross-workflow prompts.~~
+      - [ ] Validate live parity with end-to-end TGC user prompts in tgcagent before closing B.5.
 - [ ] In progress: Integrate TGC Help Center knowledge into agent/skills guidance.
   - [x] Crawl seeded Help Center categories and generate local catalog references.
   - [x] Add curated process/best-practice guidance reference for make/iterate workflows.

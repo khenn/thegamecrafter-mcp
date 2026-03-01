@@ -1,152 +1,77 @@
-# Workflows Reference
+# TGC Guided Router Workflows
+
+This reference is orchestration-only. Use focused skills for deep constraints.
+
+## Routing Rules
+- Use `tgc-component-preflight` for component option validation and mutation readiness.
+- Use `tgc-book-rulebook-workflows` for rulebook/book creation, parity, and page sequencing.
+- Use `tgc-image-preflight-fit` for bleed/trim/safe-zone geometry and proof remediation.
 
 ## Baseline: Create Game
 1. `tgc_auth_login` if no active session.
 2. Resolve `designerId`:
-- use user-provided value if given,
-- otherwise call `tgc_designer_list` and select primary designer.
+   - use user-provided value if given,
+   - otherwise call `tgc_designer_list` and select primary designer.
 3. Ask user only for `name` if missing.
 4. Call `tgc_game_create`.
 5. Return `gameId`, `name`, and next actions.
 
-## Rulebook From PDF (Outcome-Based)
-When user asks for a rulebook but does not specify component type:
-1. Evaluate viable implemented options (typically `LargeBooklet`, `MediumCoilBook`, `DigestPerfectBoundBook`) against page count and constraints.
-2. Present 2-3 viable options with concise tradeoffs:
-- fit (page-count compatibility),
-- constraints (min/max, parity, multiple-of-4),
-- approximate cost in configured currency when available.
-3. Ask user to choose one option before create.
-4. If only one option is viable, explain why other options are excluded and ask for explicit confirmation before create.
-5. Before upload, run print-safe preflight and offer remediation if clipping/binding risk is detected.
-
-## Proof Feedback Loop (Image Fit)
-When user shares proof feedback or screenshot issues:
-1. Classify issue type:
-- trim clipping,
-- binding/gutter clipping,
-- excessive letterboxing,
-- undesired crop/coverage.
-2. Apply deterministic parameter changes:
-- adjust fit mode (`safe`/`near-trim`/`full-bleed`),
-- adjust insets (outer/binding),
-- adjust padding/fill strategy.
-3. Re-render and patch in place.
-4. Report old vs new parameters and IDs.
-
 ## Component Revision Workflow (Global, Non-Deck)
-When user asks to revise an existing non-deck component (name/art/options):
 1. Resolve target component identity (`componentType` + `componentId`).
 2. Apply `tgc_component_update` with only requested field changes.
 3. Verify same component id remains present via `tgc_game_components_list`.
 4. Report exactly what changed.
-5. Do not create a replacement/duplicate component unless user explicitly requests a new variant/copy.
+5. Do not create duplicates unless user explicitly asks for a variant/copy.
 
 ## Surfacing Workflow (Make Tab)
-When user asks to change UV coating or linen texture:
 1. Call `tgc_game_surfacing_get` and report current settings.
 2. If either target value is missing, ask once for both:
-- `enableUvCoating` (`true`/`false`)
-- `enableLinenTexture` (`true`/`false`)
+   - `enableUvCoating` (`true`/`false`)
+   - `enableLinenTexture` (`true`/`false`)
 3. Call `tgc_game_surfacing_set` with one or both supplied values.
 4. Report resulting state and remind user to verify Production Cost deltas in TGC UI.
 
 ## Downloadable File Workflow (Make Tab)
-When user asks to add a downloadable file:
-1. Upload the local file via `tgc_file_upload`.
-2. Ask for/derive a user-facing download name if missing.
-3. Attach the uploaded file to the game using `tgc_gamedownload_create` (`gameId`, `fileId`, `name`, optional `free`).
+1. Upload local file via `tgc_file_upload`.
+2. Ask for/derive download name if missing.
+3. Attach file to game using `tgc_gamedownload_create`.
 4. Report `gamedownloadId` and file details.
 
 ## Stock Component Workflow (Make Tab)
-Current support level is constrained but usable:
 1. Discover candidate stock products using `tgc_tgc_products_list`.
-2. Resolve required linkage identifiers (`partId`, `componentType`, `componentId`) from known product/game data.
-3. Link to the game via `tgc_gamepart_upsert`.
-4. If one-step stock-component add is unavailable, explicitly communicate this and proceed with the supported linking path.
+2. Resolve linkage identifiers (`partId`, `componentType`, `componentId`) from known product/game data.
+3. Link to game via `tgc_gamepart_upsert`.
+4. If one-step add is unavailable, state limitation and continue with supported linking path.
 
 ## Embedded Game Workflow (Make Tab)
-Current status:
 - Dedicated embedded-game mutation is not implemented in MCP yet.
-- If requested, state this limitation clearly and direct the user to complete Add Embedded Game in TGC UI.
+- If requested, state limitation and direct user to TGC UI.
 
-## Test Reports Workflow (Prototype Safety)
-When user asks about test status or readiness:
+## Test Reports Workflow
 1. Call `tgc_game_test_reports_get`.
-2. Summarize counts and interpreted status for:
-- `sanitytests`
-- `arttests`
-- `cvtests`
-3. If reports are missing, recommend running Test tab checks before ordering.
+2. Summarize interpreted status for `sanitytests`, `arttests`, `cvtests`.
+3. Recommend Test-tab checks before prototype order when reports are missing.
 
 ## Make Readiness Workflow
-Before prototype-order guidance:
 1. Call `tgc_make_readiness_check`.
-2. If `readiness=blocked`, stop and resolve blockers first.
-3. If `readiness=ready_with_warnings`, present warnings and suggested fixes.
-4. If `readiness=ready`, proceed with ordering guidance.
+2. If blocked, stop and resolve blockers.
+3. If warnings, present fixes.
+4. If ready, proceed with ordering guidance.
 
-## Help-Center-Grounded Guidance Workflow
-When user asks for best practices, troubleshooting, or process advice:
+## Help-Center-Grounded Guidance
 1. Load `tgc-help-center-guidance.md`.
-2. If topic-specific links are needed, load `tgc-help-center-catalog.md`.
-3. Respond with concise, actionable guidance and cite direct Help Center article links.
-4. Keep API mutation guidance separate from policy/process guidance to avoid confusion.
-
-## Dial Artwork Workflow (Dual Dial Included)
-When user asks for a dial and does not provide precise geometry instructions:
-1. Gather visual intent only:
-- labels/terms (for example `HP`, `MANA`),
-- style preferences (color/theme/typography),
-- track semantics (range/direction) if needed.
-2. Run dial geometry preflight:
-- resolve dial mask/cut/safe/fold/hole/window regions,
-- compute safe label zones.
-3. Auto-place dial content:
-- assign labels to geometry-safe zones nearest corresponding windows,
-- keep label boxes and symbols out of punched/fold conflict areas,
-- ensure wheel/center-hole areas remain readable and uncluttered.
-4. Validate final play orientation readability.
-5. Upload and mutate.
-6. If proof feedback arrives, iterate deterministically and patch in place (not duplicate by default).
+2. Load `tgc-help-center-catalog.md` when topic-specific links are needed.
+3. Keep policy/process guidance separate from mutation guidance.
 
 ## Interrogate Game Components
-- Default: return all component types present.
-- Narrow to one type only when user explicitly requests that filter.
-- For set-based components, list container then members:
-1. `tgc_game_components_list`
-2. `tgc_component_items_list` with `relationship=members`
-
-## Primitive Manual-Copy Sequence
-1. Authenticate + resolve source game:
-- `tgc_auth_login`
-- `tgc_designer_list`
-- `tgc_game_list`
-2. Interrogate source graph before any mutation:
-- `tgc_game_get`
-- `tgc_game_decks_list`
-- `tgc_deck_cards_list`
-- `tgc_card_get`
-- `tgc_file_get`
-- `tgc_file_references_get`
-- `tgc_game_gameparts_list`
-- `tgc_game_components_list`
-- `tgc_component_items_list` for set members
-3. Rebuild in target with primitive write tools.
-4. Treat `tgc_game_copy` as optional benchmark, not the primary capability target.
+- Default: return all component types.
+- Narrow only when user explicitly requests a type filter.
+- For set families, list container then members:
+  1. `tgc_game_components_list`
+  2. `tgc_component_items_list` with `relationship=members`
 
 ## Community Feedback Capture (Event-Driven)
-Use when a non-trivial, reusable component-build learning is discovered and not already documented in skills.
-
-1. Check local preference:
-- if `preferences.feedback_contribution` is `false`, skip.
-2. Confirm trigger conditions:
-- learning is non-trivial,
-- learning is not already in skills,
-- learning is likely to improve future build accuracy.
-3. Draft issue text automatically.
-4. Show exact draft text and explain intent to publish to `khenn/thegamecrafter-mcp`.
-5. Include disable disclaimer:
-- set `preferences.feedback_contribution: false` in local `AGENTS.md` or `Claude.md`.
-6. Ask explicit permission before publishing.
-7. If publishing is unavailable, write a pending note under `contrib/feedback/` for later submission.
+1. Respect `preferences.feedback_contribution`.
+2. Only draft issue text for non-trivial, reusable, undocumented learnings.
+3. Show exact draft text and ask explicit publication approval.
+4. If publishing unavailable, write pending note under `contrib/feedback/`.

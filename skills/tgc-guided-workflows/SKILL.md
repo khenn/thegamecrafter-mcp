@@ -1,23 +1,42 @@
 ---
 name: tgc-guided-workflows
-description: Guided workflows and guardrails for The Game Crafter MCP usage, including game creation, component preflight checks, print-safe asset handling, and safe mutation sequencing.
+description: Orchestrate The Game Crafter MCP workflows by routing user intent to focused skills, sequencing safe tool calls, and managing cross-workflow guardrails.
 ---
 
 # Skill: TGC Guided Workflows
 
 ## Purpose
-Use this skill to run safe, guided TGC workflows over MCP tools with minimal back-and-forth and explicit preflight checks before mutations.
+Use this skill as the orchestration router for safe TGC workflows over MCP tools with minimal back-and-forth and explicit preflight checks before mutations.
 
 ## Use This Skill When
 - The user asks for TGC game creation/maintenance in natural language.
 - The user asks for component setup, books/rulebooks, or game interrogation.
 - The task requires multiple MCP calls with ordering and validation constraints.
 
+## Inputs Required
+- User intent and desired outcome.
+- Target game/component context (name/id) when available.
+- Missing required options only (ask minimally).
+
+## Outputs Produced
+- A short workflow plan (selected tools + order of operations).
+- A validated mutation path or blocking feedback with corrective options.
+- Post-mutation summary including key IDs and residual risks.
+
+## Safety and Privacy
+- Never request or expose secrets, local environment values, or proprietary assets outside active workflow output.
+- Require explicit confirmation before destructive or publish-impacting actions.
+- Do not publish user/game-specific content to public channels without explicit per-item approval.
+
 ## Core Defaults
 - Ask only for missing required inputs.
 - Resolve obvious context automatically (for example `designerId` via `tgc_designer_list`).
 - Prefer the smallest valid sequence of tool calls.
 - After each mutation, report what changed and key IDs.
+- Route focused validation/execution to specialized skills where appropriate:
+  - `tgc-component-preflight`
+  - `tgc-book-rulebook-workflows`
+  - `tgc-image-preflight-fit`
 - Use event-driven feedback capture from `references/community-feedback.md`:
   - when non-trivial, new component-build learnings are discovered that are not already present in skills and would improve build accuracy, draft a GitHub issue proposal automatically,
   - show exact draft text to user and request explicit publication approval before creating the issue.
@@ -28,42 +47,19 @@ Use this skill to run safe, guided TGC workflows over MCP tools with minimal bac
   - `tgc_game_surfacing_get` for current state + option prompt context,
   - `tgc_game_surfacing_set` for validated updates.
   - If user intent does not specify UV/linen values, ask once for both values in one prompt.
+- For readiness check and test reports, run game-level readiness/report helpers and summarize actionable next steps.
 - For policy/process questions that are not pure API mechanics (file prep, proofing, production, queue timing), consult TGC Help Center references before answering.
 
-## Component Preflight (Required)
-Before any component mutation:
-- Resolve product metadata and user-facing references.
-- Validate request against dimensions, page rules, min/max bounds, finish support, and required assets.
-- For side-based specialty parts (custom dice/acrylic), verify every required side slot is provided before create.
-- For custom dice (`customcolord4/customcolord6/customcolord8`), require identity and auto-infer from component type when omitted.
-- If request is likely to fail or warn, stop and provide corrective options.
-- For user-facing responses, include product/help/video links; include API links only if requested.
-- For image-bearing components, use geometry-aware checks (trim/safe/fold/binding risk zones) before upload.
-
-## Print-Safe Rules (Required)
-- Keep critical content inside safe zones; avoid trim/bleed for essential text.
-- For bound products, reserve extra gutter margin.
-- If explicit template-safe zones are unavailable, use conservative defaults:
-  - outer inset >= 7%
-  - binding-side inset >= 12%
-- For PDF/image imports of text-heavy pages:
-  - use contain-fit (not full-bleed fit) and preserve aspect ratio,
-  - center content in a safe frame before export,
-  - apply parity-aware gutter inset for bound books:
-    - odd pages: extra inset on left edge,
-    - even pages: extra inset on right edge.
-- If clipping risk is detected before upload, warn and offer auto-remediation by re-rendering with larger insets.
-- Support fit intent modes for image placement:
-  - `safe` (default),
-  - `near-trim`,
-  - `full-bleed`.
-- Before upload, produce a concise fit report (target size, content bounds, clearances, residual risks).
-- If proof feedback indicates issues, apply deterministic parameter updates and patch in place.
-- For dials, default to geometry-safe auto-layout:
-  - infer safe label/track regions from mask/cut geometry,
-  - avoid axle holes, windows, fold/notch conflict zones,
-  - validate readability in final play orientation,
-  - ask user about visual intent (style/wording/colors), not XY positioning, unless explicitly requested.
+## Delegation Contract (Required)
+- Do not execute deep component checks in this router skill when a focused skill exists.
+- Delegate by intent:
+  - component options/required fields/mutation readiness -> `tgc-component-preflight`
+  - book/rulebook optioning, page parity, sequencing -> `tgc-book-rulebook-workflows`
+  - image safe-zone/bleed/trim/proof-fit remediation -> `tgc-image-preflight-fit`
+- Preserve end-to-end continuity:
+  - router selects skill and call order,
+  - focused skill performs deep validation logic,
+  - router summarizes outcomes and next actions.
 
 ## Preferences (Global)
 ```yaml
@@ -81,9 +77,8 @@ Rules:
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` when executing game create/copy/interrogation flows.
+- Read `references/skill-routing-map.md` when intent is ambiguous between router and focused skills.
 - Read `references/guardrails.md` when handling retries, cleanup, non-idempotent calls, or test artifact control.
-- Read `references/component-profiles.md` when preflighting or recommending supported components.
-- Read `references/image-preflight-and-fit.md` for fit modes, geometry checks, and proof-iteration rules.
 - Read `references/community-feedback.md` when evaluating/producing reusable learning issue drafts and publication approval flow.
 - Read `references/tgc-help-center-guidance.md` when users need process/best-practice guidance.
 - Read `references/tgc-help-center-catalog.md` when you need specific article links by topic.

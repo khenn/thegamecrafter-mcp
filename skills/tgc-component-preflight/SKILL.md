@@ -31,9 +31,12 @@ Validate a requested component workflow before mutation so the agent can prevent
 ## Workflow
 1. Resolve target game/component context.
 2. Validate dimensions, required assets, finish options, quantity bounds, and side/page/slot completeness.
-3. If invalid or likely to warn/fail, stop and provide corrective options.
-4. If valid, produce a mutation sequencing plan and execute only after required confirmations.
+3. For required-art components (for example boxes/boards), block create when required slots are missing.
+4. If invalid or likely to warn/fail, stop and provide corrective options.
+5. If valid, produce a mutation sequencing plan and execute only after required confirmations.
+6. After mutation, verify required slots persisted expected file IDs via readback before reporting success.
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` for preflight validation order and failure handling.
 - Read `references/component-profiles.md` when resolving component-specific dimensions, slots, and product/help links.
+- Read `references/shared-fit-contract.md` when image-bearing component gates depend on fit outcomes.

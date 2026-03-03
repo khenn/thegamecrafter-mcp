@@ -1,4 +1,6 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { readEnvConfig } from "../../src/config/env.js";
 import { TgcService } from "../../src/tgc/service.js";
 
@@ -12,6 +14,10 @@ type Product = {
   createApi: string;
   childCreateApi: string;
   childRelationship: string;
+};
+
+type CoverageProfile = {
+  coveredIdentities: Set<string>;
 };
 
 const VALIDATED_CREATE_APIS = new Set<string>([
@@ -116,7 +122,33 @@ function markdownTable(rows: string[][]): string {
   return `${header}\n${sep}\n${body}\n`;
 }
 
+function docsRootFromScriptDir(scriptDir: string): string {
+  return path.resolve(scriptDir, "../../..");
+}
+
+async function readCoverageProfile(repoRoot: string): Promise<CoverageProfile> {
+  const profilePaths = [
+    path.join(repoRoot, "skills/tgc-component-preflight/references/component-profiles.md"),
+    path.join(repoRoot, "skills/tgc-book-rulebook-workflows/references/book-component-profiles.md"),
+  ];
+  const identityPattern = /\(`([A-Za-z0-9]+)`\)/g;
+  const coveredIdentities = new Set<string>();
+
+  for (const profilePath of profilePaths) {
+    const text = await readFile(profilePath, "utf8");
+    for (const match of text.matchAll(identityPattern)) {
+      const identity = (match[1] ?? "").trim();
+      if (identity) coveredIdentities.add(identity);
+    }
+  }
+
+  return { coveredIdentities };
+}
+
 async function main(): Promise<void> {
+  const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+  const repoRoot = docsRootFromScriptDir(scriptDir);
+  const toolsDir = path.join(repoRoot, "tools");
   const env = readEnvConfig();
   const tgc = new TgcService(env);
 
@@ -190,9 +222,120 @@ async function main(): Promise<void> {
     lines.push(markdownTable(gapRows).trimEnd());
     lines.push("");
 
-    await writeFile("../tools/tgc-component-capability-matrix.md", `${lines.join("\n")}\n`, "utf8");
+    const capabilityMatrixPath = path.join(toolsDir, "tgc-component-capability-matrix.md");
+    await writeFile(capabilityMatrixPath, `${lines.join("\n")}\n`, "utf8");
     console.log("Wrote tools/tgc-component-capability-matrix.md");
     console.log(`Products: total=${uniqueProducts.length} supported=${fullySupported.length} gaps=${gaps.length}`);
+
+    const coverageProfile = await readCoverageProfile(repoRoot);
+    const coveredByIdentity = uniqueProducts.filter((product) => coverageProfile.coveredIdentities.has(product.identity));
+    const underserved = uniqueProducts.filter((product) => !coverageProfile.coveredIdentities.has(product.identity));
+
+    const byCategory = new Map<string, { total: number; covered: number; underserved: number }>();
+    for (const product of uniqueProducts) {
+      const category = product.categories[0] ?? "Uncategorized";
+      const current = byCategory.get(category) ?? { total: 0, covered: 0, underserved: 0 };
+      current.total += 1;
+      if (coverageProfile.coveredIdentities.has(product.identity)) {
+        current.covered += 1;
+      } else {
+        current.underserved += 1;
+      }
+      byCategory.set(category, current);
+    }
+
+    const categoryRows = Array.from(byCategory.entries())
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([category, counts]) => [
+        category,
+        String(counts.total),
+        String(counts.covered),
+        String(counts.underserved),
+        `${Math.round((counts.covered / counts.total) * 100)}%`,
+      ]);
+
+    const underservedRows = underserved
+      .sort((a, b) => a.identity.localeCompare(b.identity))
+      .map((product) => [
+        `\`${product.identity}\``,
+        product.name,
+        product.categories[0] ?? "",
+        product.createApi ? `\`${product.createApi}\`` : "",
+        `https://www.thegamecrafter.com/make/products/${product.identity}`,
+      ]);
+
+    const indexLines: string[] = [];
+    indexLines.push("# TGC Component Coverage Index");
+    indexLines.push("");
+    indexLines.push(`Generated: ${new Date().toISOString()}`);
+    indexLines.push("");
+    indexLines.push("## Scope");
+    indexLines.push("This index is generated from live `GET /api/tgc/products` data and current skill reference profiles.");
+    indexLines.push("Coverage here means an identity has explicit baseline guidance in skill references.");
+    indexLines.push("");
+    indexLines.push("## Summary");
+    indexLines.push(`- Active catalog products discovered: ${uniqueProducts.length}`);
+    indexLines.push(`- Skill-covered identities: ${coveredByIdentity.length}`);
+    indexLines.push(`- Underserved identities: ${underserved.length}`);
+    indexLines.push(
+      `- Basic coverage ratio: ${Math.round((coveredByIdentity.length / Math.max(uniqueProducts.length, 1)) * 100)}%`,
+    );
+    indexLines.push("");
+    indexLines.push("## Category Coverage");
+    indexLines.push("| Category | Total | Covered | Underserved | Coverage |");
+    indexLines.push("|---|---:|---:|---:|---:|");
+    for (const row of categoryRows) {
+      indexLines.push(`| ${row[0]} | ${row[1]} | ${row[2]} | ${row[3]} | ${row[4]} |`);
+    }
+    indexLines.push("");
+    indexLines.push("## Underserved Identities");
+    indexLines.push("| Identity | Name | Category | Create API | Product URL |");
+    indexLines.push("|---|---|---|---|---|");
+    for (const row of underservedRows) {
+      indexLines.push(`| ${row[0]} | ${row[1]} | ${row[2]} | ${row[3]} | ${row[4]} |`);
+    }
+    indexLines.push("");
+
+    const scorecardLines: string[] = [];
+    scorecardLines.push("# TGC Skills Coverage Scorecard");
+    scorecardLines.push("");
+    scorecardLines.push(`Generated: ${new Date().toISOString()}`);
+    scorecardLines.push("");
+    scorecardLines.push("## Current Score");
+    scorecardLines.push(`- Identity coverage: ${coveredByIdentity.length}/${uniqueProducts.length}`);
+    scorecardLines.push(
+      `- Coverage percent: ${Math.round((coveredByIdentity.length / Math.max(uniqueProducts.length, 1)) * 100)}%`,
+    );
+    scorecardLines.push(`- Underserved identities remaining: ${underserved.length}`);
+    scorecardLines.push("");
+    scorecardLines.push("## Top Underserved Categories");
+    const topUnderserved = Array.from(byCategory.entries())
+      .map(([category, counts]) => ({ category, ...counts }))
+      .filter((row) => row.underserved > 0)
+      .sort((a, b) => b.underserved - a.underserved || a.category.localeCompare(b.category));
+    if (topUnderserved.length === 0) {
+      scorecardLines.push("- None");
+    } else {
+      for (const row of topUnderserved) {
+        scorecardLines.push(
+          `- ${row.category}: underserved ${row.underserved}/${row.total} (covered ${row.covered}/${row.total})`,
+        );
+      }
+    }
+    scorecardLines.push("");
+    scorecardLines.push("## Inputs");
+    scorecardLines.push("- Live catalog: `/api/tgc/products`");
+    scorecardLines.push("- Skill references:");
+    scorecardLines.push("  - `skills/tgc-component-preflight/references/component-profiles.md`");
+    scorecardLines.push("  - `skills/tgc-book-rulebook-workflows/references/book-component-profiles.md`");
+    scorecardLines.push("");
+
+    const coverageIndexPath = path.join(toolsDir, "tgc-component-coverage-index.md");
+    const scorecardPath = path.join(toolsDir, "tgc-skill-coverage-scorecard.md");
+    await writeFile(coverageIndexPath, `${indexLines.join("\n")}\n`, "utf8");
+    await writeFile(scorecardPath, `${scorecardLines.join("\n")}\n`, "utf8");
+    console.log("Wrote tools/tgc-component-coverage-index.md");
+    console.log("Wrote tools/tgc-skill-coverage-scorecard.md");
   } finally {
     await tgc.logout().catch(() => {});
   }

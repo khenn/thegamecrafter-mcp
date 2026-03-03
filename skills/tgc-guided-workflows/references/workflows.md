@@ -13,8 +13,11 @@ This reference is orchestration-only. Use focused skills for deep constraints.
    - use user-provided value if given,
    - otherwise call `tgc_designer_list` and select primary designer.
 3. Ask user only for `name` if missing.
-4. Call `tgc_game_create`.
-5. Return `gameId`, `name`, and next actions.
+4. Idempotency guard for repeated names:
+   - search for same-name games before create,
+   - ask user whether to reuse existing, create new, or abort.
+5. Call `tgc_game_create` only after duplicate-name decision.
+6. Return `gameId`, `name`, and next actions.
 
 ## Component Revision Workflow (Global, Non-Deck)
 1. Resolve target component identity (`componentType` + `componentId`).
@@ -22,6 +25,13 @@ This reference is orchestration-only. Use focused skills for deep constraints.
 3. Verify same component id remains present via `tgc_game_components_list`.
 4. Report exactly what changed.
 5. Do not create duplicates unless user explicitly asks for a variant/copy.
+
+## End-to-End Build Acceptance Gate
+For multi-component build requests, do not report final success until all components pass:
+1. Required slot completeness and readback match.
+2. Fit/quality gates from focused skills (board/book/image/dial).
+3. No unresolved blocked components in the requested build set.
+If any fail, return `partial_success` summary with per-component remediation actions.
 
 ## Surfacing Workflow (Make Tab)
 1. Call `tgc_game_surfacing_get` and report current settings.

@@ -6,6 +6,8 @@
         "component",
         "component preflight",
         "required assets",
+        "required slots",
+        "readback",
         "finish options",
         "mutation sequence"
       ],
@@ -45,6 +47,8 @@
         "safe zone",
         "bleed",
         "trim",
+        "safe frame",
+        "dial",
         "proof-fit"
       ],
       "positive": [
@@ -63,6 +67,7 @@
       "keywords": [
         "the game crafter",
         "workflow",
+        "game",
         "surfacing",
         "game creation",
         "readiness check",
@@ -120,6 +125,26 @@
       "prompt": "This dial proof clips text near trim and bleed lines; run image fit remediation and keep labels readable.",
       "expectedPrimary": "tgc-image-preflight-fit",
       "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Before creating a new game creation workflow, check for duplicate game names and ask whether to reuse existing or create new.",
+      "expectedPrimary": "tgc-guided-workflows",
+      "minPrimaryHits": 1
+    },
+    {
+      "prompt": "Block this box creation until all required art slots are provided and verify slot readback after patch.",
+      "expectedPrimary": "tgc-component-preflight",
+      "minPrimaryHits": 1
+    },
+    {
+      "prompt": "Scale this board art to maximize safe frame utilization and avoid tiny centered content.",
+      "expectedPrimary": "tgc-image-preflight-fit",
+      "minPrimaryHits": 1
+    },
+    {
+      "prompt": "Enforce DualDial vertical label alignment to indicator windows in assembled orientation before upload.",
+      "expectedPrimary": "tgc-image-preflight-fit",
+      "minPrimaryHits": 1
     }
   ]
 }

@@ -1,6 +1,6 @@
 # TGC Component Capability Matrix
 
-Generated: 2026-02-24T11:49:32.836Z
+Generated: 2026-03-02T08:20:59.749Z
 
 ## Scope
 This matrix is generated from live `GET /api/tgc/products` data.

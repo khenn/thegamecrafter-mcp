@@ -31,6 +31,9 @@
   1. auto-remediation (re-render with larger safe insets), or
   2. user-provided revised source pages.
 - Before upload, provide concise fit metrics (target, bounds, clearances, residual risk).
+- For board-style components, also report safe-frame utilization and avoid low-utilization centered art unless user explicitly accepts it.
+- Do not report success if required slot readback does not match intended file IDs.
+- For dial components, enforce functional label alignment to indicator windows in assembled orientation; safe-zone-only pass is insufficient.
 
 ## Non-Idempotent Bulk Card Creation
 For `tgc_deck_bulk_create_cards`:

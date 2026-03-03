@@ -31,9 +31,11 @@ Guide safe, high-quality creation and update of TGC booklet/coil/perfectbound wo
 ## Workflow
 1. Determine viable book options and ask user to choose when unspecified.
 2. Run page parity and binding/gutter checks before create.
-3. Build upload plan (cover + interior order) and execute in deterministic sequence.
-4. Report residual proofing risks and offer remediation choices.
+3. Run each page through shared fit contract before upload.
+4. Build upload plan (cover + interior order) and execute in deterministic sequence.
+5. Verify required slots/pages persisted as intended and report residual proofing risks.
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` for parity rules, sequencing, and proof-risk checks.
 - Read `references/book-component-profiles.md` when selecting among document/booklet/coil/perfectbound options.
+- Read `references/shared-fit-contract.md` for cross-skill fit gates applied to page imports.

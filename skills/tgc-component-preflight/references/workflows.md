@@ -12,6 +12,15 @@
 - Side/page requirements not satisfied.
 - Invalid quantity or option selection.
 - Known high-risk layout/proofing conflict without user approval.
+- Attempt to create required-art component without required files attached.
+
+## Required-Art Hard Gate
+- For components that require image slots to be printable (for example many box/board surfaces), do not create component until required files are supplied unless user explicitly asks for placeholder creation.
+- If user requests placeholder create, warn it may be non-printable and require explicit confirmation.
+
+## Post-Mutation Verification
+- After create/update, read the component back and assert required slot/file mappings are present.
+- If expected file IDs are not persisted, treat operation as failed and provide remediation path.
 
 ## Output Contract
 - `status`: `proceed | block | needs_input`

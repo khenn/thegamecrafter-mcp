@@ -77,8 +77,15 @@ Before dial artwork upload or revision:
 4. Validate post-assembly readability:
 - simulate final play orientation,
 - ensure labels are readable and semantically aligned in that orientation.
-5. Produce concise dial fit report:
+5. DualDial semantic alignment rule:
+- functional labels (`HP`, `MANA`, etc.) must be vertically aligned with their corresponding indicator windows in final assembled orientation.
+- reject/warn when safe-zone pass exists but semantic alignment fails.
+6. Produce concise dial fit report:
 - dial canvas,
 - label/track clearances to risky geometry,
 - orientation/readability status,
 - residual risks (if any).
+
+## Mandatory Post-Mutation Verification
+- After upload/update, read back the component and verify the expected image slot references the intended file id.
+- If readback mismatch occurs, report failure and remediation instead of success.

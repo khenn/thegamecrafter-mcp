@@ -32,7 +32,7 @@ Use this checklist before merging any skill change.
 - [ ] Trigger fixture contains positive and negative cases.
 
 ## Documentation and Traceability
-- [ ] Relevant `sessions/YYYY-MM-DD-*.md` note added/updated.
+- [ ] Relevant local `sessions/YYYY-MM-DD-*.md` note added/updated.
 - [ ] If user-facing behavior changed, related docs updated.
 
 ## Scope Classification (Feedback Changes)

@@ -1,5 +1,6 @@
 logs/*
 !logs/.gitkeep
+sessions/
 subprojects/*
 !subprojects/.gitkeep
 code/scripts/dev/configure-codex-mcp.sh

@@ -11,7 +11,7 @@ This policy defines how skills are created and maintained in this repository.
 1. Draft or update the skill using Codex built-in `skill-creator`.
 2. Apply this policy and `docs/skills/SKILL_REVIEW_CHECKLIST.md` before commit.
 3. Run repository skill validators and trigger tests.
-4. Record outcome in a `sessions/` note.
+4. Record outcome in a local `sessions/` note.
 
 ## Skill Scope Rules
 - One skill = one workflow family.
@@ -70,4 +70,4 @@ A skill change is not complete until all pass:
 When refactoring skill architecture:
 - Preserve behavior parity first.
 - Then reduce context size and tighten triggers.
-- Document split/merge rationale in `sessions/`.
+- Document split/merge rationale in local `sessions/`.

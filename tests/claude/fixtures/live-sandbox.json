@@ -1,0 +1,80 @@
+{
+  "suite": "claude-live-sandbox",
+  "defaults": {
+    "mode": "live",
+    "effort": "medium",
+    "permissionMode": "dontAsk",
+    "timeoutSeconds": 180,
+    "retryCount": 2,
+    "warn": {
+      "maxOutputTokens": 2600
+    },
+    "expect": {
+      "needsUserInput": false,
+      "approvalRequired": false,
+      "requestedMutation": true,
+      "requireTelemetry": true,
+      "forbidApprovalLanguage": true,
+      "referencesLoadedNoneOf": ["code/", "src/", "dist/", "package.json", ".mcp.json"],
+      "maxReferencesLoaded": 8
+    }
+  },
+  "cases": [
+    {
+      "id": "live-packaging-create-readback-cleanup",
+      "description": "Claude should be able to create, verify, and clean up a disposable packaging workflow.",
+      "userRequest": "Log in if needed. Create a disposable sandbox game named `claude-live-packaging-regression`. In that game create one packaging component with identity `PokerTuckBox54` named `claude-live-poker-tuckbox`. If art is required for print readiness, you may still create a non-print-ready placeholder component for this regression test. Verify it exists by reading the `tuckboxes` relationship. Delete the sandbox game after verification. In your notes include exactly these literal tokens: `game=claude-live-packaging-regression`, `component=PokerTuckBox54`, `relationship=tuckboxes`, `cleanup=done`.",
+      "expect": {
+        "primarySkill": "tgc-packaging-workflows",
+        "notesAllOf": [
+          "game=claude-live-packaging-regression",
+          "component=PokerTuckBox54",
+          "relationship=tuckboxes",
+          "cleanup=done"
+        ]
+      }
+    },
+    {
+      "id": "live-card-deck-create-readback-cleanup",
+      "description": "Claude should be able to create, verify, and clean up a disposable deck workflow.",
+      "userRequest": "Log in if needed. Create a disposable sandbox game named `claude-live-card-regression`. In that game create one deck with identity `PokerDeck` named `claude-live-poker-deck`. Verify it exists by listing the game's decks. Delete the sandbox game after verification. In your notes include exactly these literal tokens: `game=claude-live-card-regression`, `deck=PokerDeck`, `verification=game_decks`, `cleanup=done`.",
+      "expect": {
+        "primarySkill": "tgc-card-deck-workflows",
+        "notesAllOf": [
+          "game=claude-live-card-regression",
+          "deck=PokerDeck",
+          "verification=game_decks",
+          "cleanup=done"
+        ]
+      }
+    },
+    {
+      "id": "live-board-create-readback-cleanup",
+      "description": "Claude should be able to create, verify, and clean up a disposable board workflow.",
+      "userRequest": "Log in if needed. Create a disposable sandbox game named `claude-live-board-regression`. In that game create one board component with identity `BiFoldBoard` named `claude-live-bifold-board`. If art is required for print readiness, you may still create a non-print-ready placeholder component for this regression test. Verify it exists by reading the `onesidedglosses` relationship. Delete the sandbox game after verification. In your notes include exactly these literal tokens: `game=claude-live-board-regression`, `component=BiFoldBoard`, `relationship=onesidedglosses`, `cleanup=done`.",
+      "expect": {
+        "primarySkill": "tgc-board-mat-workflows",
+        "notesAllOf": [
+          "game=claude-live-board-regression",
+          "component=BiFoldBoard",
+          "relationship=onesidedglosses",
+          "cleanup=done"
+        ]
+      }
+    },
+    {
+      "id": "live-booklet-create-readback-cleanup",
+      "description": "Claude should be able to create, verify, and clean up a disposable booklet workflow.",
+      "userRequest": "Log in if needed. Create a disposable sandbox game named `claude-live-book-regression`. In that game create one booklet component with identity `LargeBooklet` named `claude-live-booklet`. If pages are required for print readiness, you may still create a non-print-ready placeholder component for this regression test. Verify it exists by reading the `booklets` relationship. Delete the sandbox game after verification. In your notes include exactly these literal tokens: `game=claude-live-book-regression`, `component=LargeBooklet`, `relationship=booklets`, `cleanup=done`.",
+      "expect": {
+        "primarySkill": "tgc-book-rulebook-workflows",
+        "notesAllOf": [
+          "game=claude-live-book-regression",
+          "component=LargeBooklet",
+          "relationship=booklets",
+          "cleanup=done"
+        ]
+      }
+    }
+  ]
+}

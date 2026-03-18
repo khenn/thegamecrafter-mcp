@@ -1,0 +1,13 @@
+interface:
+  display_name: "TGC Packaging Workflows"
+  short_description: "Choose and preflight TGC boxes, tins, and other packaging"
+  default_prompt: "Use $tgc-packaging-workflows to recommend, validate, and update TGC packaging with required art-slot and proofing checks."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "thegamecrafter"
+      description: "The Game Crafter MCP server"
+
+policy:
+  allow_implicit_invocation: true

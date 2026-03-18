@@ -55,7 +55,7 @@ Details: [Step 1: Build The MCP Server](#1-build-the-mcp-server)
 Details: [Step 2: Configure Authentication Environment Variables](#2-configure-authentication-environment-variables)
 3. Register `thegamecrafter` MCP server in your LLM client/runtime using `node .../code/dist/index.js` and pass/inherit the same `TGC_*` environment variables.  
 Details: [Step 3: Configure MCP Client](#3-configure-mcp-client)
-4. Install `skills/tgc-guided-workflows` in your client’s skills location/tooling.  
+4. Install the TGCMCP skill stack in your client’s skills location/tooling.  
 Details: [Step 4: Install Skills](#4-install-skills)
 5. Reference `context/TGCAGENT.md` from your local project agent file (`AGENTS.md`/`Claude.md`) instead of overwriting your existing file.  
 Details: [Step 5: Configure Agent Profile](#5-configure-agent-profile)
@@ -269,10 +269,25 @@ If your Claude runtime inherits environment variables from the parent process, y
 
 #### Description And Intended Use
 
-`skills/tgc-guided-workflows/` is a Codex skill package. It provides reusable workflow logic, including:
+TGCMCP now uses a small skill stack instead of a single all-purpose skill. The recommended install set is:
+- `skills/tgc-guided-workflows/`
+- `skills/tgc-packaging-workflows/`
+- `skills/tgc-card-deck-workflows/`
+- `skills/tgc-board-mat-workflows/`
+- `skills/tgc-custom-cut-workflows/`
+- `skills/tgc-parts-dice-workflows/`
+- `skills/tgc-component-preflight/`
+- `skills/tgc-book-rulebook-workflows/`
+- `skills/tgc-image-preflight-fit/`
+
+Together these provide:
 - guided TGC intent handling
-- component preflight checks
-- print-safety guardrails
+- focused packaging/component/book workflows
+- focused card/deck workflows
+- focused board/mat/screen workflows
+- focused custom-cut, sticker, dial, and dual-layer-board workflows
+- focused acrylic, dice, meeple, and play-money workflows
+- print-safety and proof-fit guardrails
 - known API pitfalls and safe sequencing patterns
 
 Package layout:
@@ -290,11 +305,19 @@ Use Codex's built-in skill installer (recommended):
 
 ```bash
 codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-guided-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-packaging-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-card-deck-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-board-mat-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-custom-cut-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-parts-dice-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-component-preflight
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-book-rulebook-workflows
+codex skills install /absolute/path/to/thegamecrafter-mcp/skills/tgc-image-preflight-fit
 ```
 
 2. Restart Codex so the new skill is loaded.
 3. Verify by asking Codex:
-   - `"List installed skills and confirm tgc-guided-workflows is available."`
+   - `"List installed skills and confirm the TGCMCP skills are available."`
 
 Notes:
 - Use `codex skills --help` for current CLI options and scope behavior.
@@ -304,10 +327,22 @@ Notes:
 
 Use the same skill package and place it where your Claude runtime expects skills.
 
-1. Copy `skills/tgc-guided-workflows` from this repo into your Claude skills location.
+1. Copy the same TGCMCP skill folders from this repo into your Claude skills location:
+   - `skills/tgc-guided-workflows`
+   - `skills/tgc-packaging-workflows`
+   - `skills/tgc-card-deck-workflows`
+   - `skills/tgc-board-mat-workflows`
+   - `skills/tgc-custom-cut-workflows`
+   - `skills/tgc-parts-dice-workflows`
+   - `skills/tgc-component-preflight`
+   - `skills/tgc-book-rulebook-workflows`
+   - `skills/tgc-image-preflight-fit`
+   Important:
+   - Claude reads the installed copies from its skills directory, not from this repo working tree.
+   - After pulling TGCMCP updates or changing any `skills/` files locally, recopy the updated skill folders into Claude's skills location before rerunning verification or regression prompts.
 2. Restart Claude Code.
 3. Verify by asking Claude:
-   - `"List installed skills and confirm tgc-guided-workflows is available."`
+   - `"List installed skills and confirm the TGCMCP skills are available."`
 
 ### 5) Configure Agent Profile
 
@@ -453,6 +488,11 @@ Most common causes:
 - Retry after short delay.
 - Avoid high request bursts.
 
+### Deleted test games still appear in TGC
+- TGC game deletion is effectively trash/soft-delete first.
+- TGCMCP regression cleanup guarantees that disposable live test games are no longer active after the run.
+- Trashed entries can still remain visible in TGC views for some time after deletion before TGC fully removes them.
+
 ### npm permission/cache issues
 - If `npm install` fails due to cache permissions, use a local temp cache path:
 
@@ -467,9 +507,10 @@ npm install --cache /tmp/$USER-npm-cache
 - MCP source: `code/src/`
 - MCP dev scripts: `code/scripts/dev/`
 - Public agent profile: `context/TGCAGENT.md`
-- Public skill: `skills/tgc-guided-workflows/SKILL.md`
-- Skill references: `skills/tgc-guided-workflows/references/`
-- Skill metadata: `skills/tgc-guided-workflows/agents/openai.yaml`
+- Public router skill: `skills/tgc-guided-workflows/SKILL.md`
+- Focused skills: `skills/tgc-packaging-workflows/`, `skills/tgc-card-deck-workflows/`, `skills/tgc-board-mat-workflows/`, `skills/tgc-custom-cut-workflows/`, `skills/tgc-parts-dice-workflows/`, `skills/tgc-component-preflight/`, `skills/tgc-book-rulebook-workflows/`, `skills/tgc-image-preflight-fit/`
+- Skill references: `skills/*/references/`
+- Skill metadata: `skills/*/agents/openai.yaml`
 - Local root agent files (`AGENTS.md`, `AGENT.md`) are intentionally local-only and not tracked in git.
 - Roadmap: `ROADMAP.md`
 

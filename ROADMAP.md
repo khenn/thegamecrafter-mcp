@@ -39,14 +39,14 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
 ### A5. Make-Phase Intelligence
 - [x] ~~Seed guidance for implemented component families in `skills/` + `context/TGCAGENT.md`~~
 - [x] ~~Add preflight guardrails for print-fit, bleed/cut, and component constraints~~
-- [ ] Complete per-component guidance parity for all implemented component families
-- [ ] Add/finish automated capability matrix regeneration in normal dev flow
-- [ ] Align skill architecture with OpenAI skills best practices:
-  - [ ] keep each skill focused on one workflow job,
-  - [ ] prefer instructions over scripts unless deterministic tooling is required,
-  - [ ] write imperative steps with explicit inputs/outputs,
-  - [ ] validate trigger behavior with prompt tests,
-  - [ ] optimize skill split/reference loading so only component-relevant context is loaded per task.
+- [x] ~~Complete per-component guidance parity for all implemented component families~~
+- [x] ~~Add/finish automated capability matrix regeneration in normal dev flow~~
+- [x] ~~Align skill architecture with OpenAI skills best practices:~~
+  - [x] ~~keep each skill focused on one workflow job,~~
+  - [x] ~~prefer instructions over scripts unless deterministic tooling is required,~~
+  - [x] ~~write imperative steps with explicit inputs/outputs,~~
+  - [x] ~~validate trigger behavior with prompt tests,~~
+  - [x] ~~optimize skill split/reference loading so only component-relevant context is loaded per task.~~
 - [ ] Skills architecture rollout plan (captured and gated):
   - [x] ~~Plan A (policy/tooling first, required before any skill split work):~~
     - [x] ~~A.1 Add repo skill authoring policy (`docs/skills/SKILL_AUTHORING_POLICY.md`).~~
@@ -58,27 +58,103 @@ Ship the highest-usage workflows first: creating games, adding components/art, a
     - [x] ~~A.7 Run and document end-to-end dry run in `sessions/`.~~
   - [ ] Package Plan A governance as a reusable Codex skill in a separate, project-agnostic repository (not bundled in TGCMCP source tree).
   - [ ] Plan B (execute only after Plan A gate is complete):
-    - [ ] B.1 Keep `tgc-guided-workflows` as thin orchestration/router skill.
+    - [x] ~~B.1 Keep `tgc-guided-workflows` as thin orchestration/router skill.~~
       - [x] ~~Add required baseline policy sections (`Inputs Required`, `Outputs Produced`, `Safety and Privacy`).~~
-    - [ ] B.2 Split workflow families into focused skills (not per-component by default).
+    - [x] ~~B.2 Split workflow families into focused skills (not per-component by default).~~
       - [x] ~~Initial production-ready scaffolds created for first split set: `tgc-component-preflight`, `tgc-book-rulebook-workflows`, `tgc-image-preflight-fit`.~~
-    - [ ] B.3 Re-scope references so only workflow-relevant context loads.
+    - [x] ~~B.3 Re-scope references so only workflow-relevant context loads.~~
       - [x] ~~Migrated component/image/book guidance out of router skill into focused family skills.~~
-      - [ ] Continue migrating remaining cross-cutting guidance into family-owned references as additional skills are introduced.
-    - [ ] B.4 Expand trigger fixtures per skill and verify overlap boundaries.
+      - [x] ~~Continue migrating remaining cross-cutting guidance into family-owned references as additional skills are introduced.~~
+    - [x] ~~B.4 Expand trigger fixtures per skill and verify overlap boundaries.~~
       - [x] ~~Added routing overlap cases with expected-primary assertions in trigger test harness.~~
-      - [ ] Add additional ambiguous/edge-case routing prompts as more focused skills are introduced.
-    - [ ] B.5 Migrate and validate all existing behavior under new skill layout.
+      - [x] ~~Add additional ambiguous/edge-case routing prompts as more focused skills are introduced.~~
+    - [x] ~~B.5 Migrate and validate all existing behavior under new skill layout.~~
       - [x] ~~Moved deep preflight/print-fit behavior ownership out of router skill and into focused skills.~~
       - [x] ~~Added explicit routing-map reference and delegation contract for router skill.~~
       - [x] ~~Expanded parity validation with 8 routing cases across focused and cross-workflow prompts.~~
-      - [ ] Validate live parity with end-to-end TGC user prompts in tgcagent before closing B.5.
+      - [x] ~~Validate live parity with end-to-end TGC user prompts in tgcagent before closing B.5.~~
 - [ ] In progress: Integrate TGC Help Center knowledge into agent/skills guidance.
   - [x] Crawl seeded Help Center categories and generate local catalog references.
   - [x] Add curated process/best-practice guidance reference for make/iterate workflows.
   - [x] Expand curated guidance coverage across all implemented component families.
   - [x] ~~Decide whether to add optional RAG retrieval service (Supabase/pgvector) after evaluating static-reference performance.~~
     - Decision: defer RAG for Release 1; use static references now and re-evaluate after Goal B release hardening.
+
+#### A5 Detailed Plan (Locked 2026-03-12)
+
+Goal:
+- keep `context/TGCAGENT.md` lean, proactive, and orchestration-focused,
+- keep deep component knowledge in focused skills and references,
+- maximize useful TGC guidance while minimizing always-loaded context.
+
+Definition of done:
+- every active catalog identity has an assigned owner workflow family,
+- every identity has at least one current authoritative user-facing source plus explicit preflight guidance,
+- routing points broad requests to the router and deep requests to the focused skill with minimal extra loading,
+- coverage/index artifacts are generated from live catalog data and catch regressions,
+- live tgcagent prompt checks show proactive guidance without requiring bulk reference loads.
+
+Execution phases:
+- [x] ~~Phase 1: Foundation and source normalization~~
+  - [x] ~~refresh/verify latest TGC Help Center and product-reference source set,~~
+  - [x] ~~define strict guidance coverage contract,~~
+  - [x] ~~generate owner-family map for all active identities,~~
+  - [x] ~~add coverage artifacts that distinguish current baseline coverage from target family ownership.~~
+- [x] ~~Phase 2: Skill-tree optimization for minimal context~~
+  - [x] ~~keep `tgc-guided-workflows` as thin router/orchestrator,~~
+  - [x] ~~keep `context/TGCAGENT.md` orchestration-only,~~
+  - [x] ~~split or tighten focused skills so each loads one workflow family with minimal unrelated references.~~
+- [x] ~~Phase 3: Family guidance completion~~
+  - [x] ~~Packaging~~
+  - [x] ~~Cards and decks~~
+  - [x] ~~Punchouts, stickers, dials, and custom-cut workflows~~
+  - [x] ~~Boards, mats, and screens~~
+  - [x] ~~Remaining books/rulebooks long-tail~~
+  - [x] ~~Specialty parts, dice, meeples, and acrylic~~
+- [x] ~~Phase 4: Regression gates and parity validation~~
+  - [x] ~~add owner-map/coverage regression checks to normal dev flow,~~
+  - [x] ~~expand prompt-routing fixtures for each focused family,~~
+  - [x] ~~run live tgcagent parity prompts and record closure evidence in `sessions/`.~~
+  - [x] ~~before building the automated Claude suite, run a non-automated Claude smoke test in the downstream-style sandbox install to confirm:~~
+    - Claude responds without human approval/intervention for normal read-only prompts,
+    - Claude is using the expected project agent/profile path,
+    - Claude can complete a minimal TGC guidance response without scanning unrelated repo internals.
+  - [x] ~~after the smoke test passes, create a sandboxed Claude regression harness and prompt pack that:~~
+    - [x] ~~runs without human-in-the-loop approval for normal supported prompts,~~
+    - [x] ~~starts a fresh Claude session per test to avoid context bleed,~~
+    - [x] ~~verifies expected skill behavior per component family,~~
+    - [x] ~~reports what context was loaded,~~
+    - [x] ~~confirms the guidance path uses minimal necessary context for the answer,~~
+    - [x] ~~captures token-usage telemetry when the Claude runtime exposes it.~~
+  - [x] ~~require each Claude regression prompt to emit a compact structured block that includes:~~
+    - [x] ~~`primary_skill`~~
+    - [x] ~~`secondary_skills`~~
+    - [x] ~~`references_loaded`~~
+    - [x] ~~`needs_user_input`~~
+    - [x] ~~`approval_required`~~
+    - [x] ~~`requested_mutation`~~
+    - [x] ~~runtime token usage fields when available.~~
+  - [x] ~~split Claude regression coverage into:~~
+    - [x] ~~read-only routing/minimal-context checks,~~
+    - [x] ~~family workflow checks,~~
+    - [x] ~~cross-family orchestration checks,~~
+    - [x] ~~sandbox live workflow checks with disposable artifacts and cleanup.~~
+  - [x] ~~add a dedicated non-interactive Claude smoke gate that verifies:~~
+    - response returns successfully,
+    - response returns useful initial guidance without approval,
+    - `approval_required=false`,
+    - no permission/approval language appears in the response.
+  - [x] ~~use the first successful Claude regression run to establish baseline token-usage ranges by workflow family, then add thresholds later after observing real usage.~~
+
+Target workflow-family ownership:
+- `tgc-guided-workflows`: broad orchestration, option narrowing, sequencing, and cross-family flows only.
+- `tgc-book-rulebook-workflows`: document/booklet/coil/perfectbound/score pad optioning and sequencing.
+- `tgc-image-preflight-fit`: shared fit, safe-zone, bleed, gutter, trim, proof remediation, and geometry-risk logic.
+- `tgc-packaging-workflows`: boxes, boosters, envelopes, tins, and inserts.
+- `tgc-card-deck-workflows`: deck/card selection, back-image strategy, randomizer/class guidance, and card-family tradeoffs.
+- `tgc-board-mat-workflows`: boards, mats, fold behavior, surfacing caveats, and proof/3D-viewer checks.
+- `tgc-custom-cut-workflows`: punchouts, stickers, dual-layer boards, dials, and slug/cut-line rules.
+- `tgc-parts-dice-workflows`: acrylic, meeples, printed dice, and other specialty parts.
 
 ### A6. Prototype/Test-Adjacent Coverage
 - [x] ~~Add read helpers for test-area relationships (`sanitytests`, `arttests`, `cvtests`) with user-facing interpretation~~
@@ -174,6 +250,7 @@ Extend beyond publishing into promotion and campaign workflows.
 ## Deferred (Not in Current Release Window)
 - [ ] Optional local OS secret-manager integration for unattended operation
 - [ ] Optional MCP browsable resources support (`resources/list`, `resources/read`, templates) for discoverable docs/capabilities context
+- [ ] Make the downstream skills regression harness LLM-agnostic so contributors can choose different build/test models or runtimes (for example build skills with Claude but run parity with Codex)
 - [ ] Full UI/desktop frontend
 - [ ] Background daemon as required runtime
 - [ ] Implicit auto-publish without explicit user action

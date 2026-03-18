@@ -27,11 +27,21 @@
     "test:integration:component-update-global-nondice": "tsx scripts/dev/test-component-update-global-nondice.ts",
     "test:integration:game-publish-unpublish": "tsx scripts/dev/test-game-publish-unpublish.ts",
     "report:component-matrix": "tsx scripts/dev/generate-component-capability-matrix.ts",
+    "report:component-matrix:check": "tsx scripts/dev/generate-component-capability-matrix.ts --check",
+    "claude:test": "tsx scripts/dev/run-claude-regression.ts --repo-root ..",
+    "claude:test:smoke": "tsx scripts/dev/run-claude-regression.ts --repo-root .. --fixture ../tests/claude/fixtures/smoke.json",
+    "claude:test:routing": "tsx scripts/dev/run-claude-regression.ts --repo-root .. --fixture ../tests/claude/fixtures/routing-minimal-context.json",
+    "claude:test:guardrails": "tsx scripts/dev/run-claude-regression.ts --repo-root .. --fixture ../tests/claude/fixtures/family-guardrails.json",
+    "claude:test:live": "tsx scripts/dev/run-claude-regression.ts --repo-root .. --fixture ../tests/claude/fixtures/live-sandbox.json",
+    "claude:test:core": "npm run claude:test:smoke && npm run claude:test:routing && npm run claude:test:guardrails",
+    "claude:test:all": "npm run claude:test:core && npm run claude:test:live",
     "skills:create": "tsx scripts/skills/create-skill-scaffold.ts --repo-root ..",
     "skills:validate": "tsx scripts/skills/validate-skill-package.ts --repo-root ..",
     "skills:test-triggers": "tsx scripts/skills/test-skill-triggers.ts --repo-root ..",
     "skills:test-fixtures": "tsx scripts/skills/test-skill-validator-fixtures.ts --repo-root ..",
-    "skills:test": "npm run skills:validate && npm run skills:test-triggers && npm run skills:test-fixtures"
+    "skills:test": "npm run skills:validate && npm run skills:test-triggers && npm run skills:test-fixtures",
+    "a5:test": "npm run report:component-matrix:check && npm run skills:test",
+    "a5:test:claude": "npm run claude:test:core"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",

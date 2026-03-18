@@ -1,0 +1,78 @@
+{
+  "suite": "claude-family-guardrails",
+  "defaults": {
+    "mode": "read-only",
+    "effort": "low",
+    "permissionMode": "dontAsk",
+    "timeoutSeconds": 120,
+    "retryCount": 1,
+    "warn": {
+      "maxOutputTokens": 1700
+    },
+    "expect": {
+      "approvalRequired": false,
+      "requestedMutation": false,
+      "requireTelemetry": true,
+      "expectNoPermissionDenials": true,
+      "forbidApprovalLanguage": true,
+      "referencesLoadedNoneOf": ["code/", "src/", "dist/", "package.json", ".mcp.json"],
+      "maxReferencesLoaded": 6
+    }
+  },
+  "cases": [
+    {
+      "id": "packaging-slot-guardrails",
+      "description": "Packaging should block or pause when tuckbox art coverage is incomplete.",
+      "userRequest": "Guardrail classification check only. Scenario: PokerTuckBox54 is requested, but only front art exists and the other printable packaging faces are missing. Return the correct packaging preflight outcome and essential blocker summary. In your notes include the literal tokens `decision=block`, `missing_slots`, and `placeholder_only_if_confirmed`.",
+      "expect": {
+        "primarySkill": "tgc-packaging-workflows",
+        "notesAllOf": ["decision=block", "missing_slots", "placeholder_only_if_confirmed"]
+      }
+    },
+    {
+      "id": "card-back-strategy-guardrails",
+      "description": "Deck guidance should surface shared-back defaults and unique-back tradeoffs.",
+      "userRequest": "Guardrail classification check only. Scenario: a 54-card PokerDeck is being planned, and the user is leaning toward unique backs without a clear reason. Return the correct deck guardrail summary. In your notes include the literal tokens `shared_back_default`, `unique_back_tradeoff`, and `decision=needs_input`.",
+      "expect": {
+        "primarySkill": "tgc-card-deck-workflows",
+        "notesAllOf": ["shared_back_default", "unique_back_tradeoff", "decision=needs_input"]
+      }
+    },
+    {
+      "id": "board-proofing-guardrails",
+      "description": "Board/mat guidance should surface size, reverse-side, and proof-viewer checks.",
+      "userRequest": "Guardrail classification check only. Scenario: a foldable board is requested, but the final play-area size and reverse-side print decision are still unknown. Return the correct board preflight summary. In your notes include the literal tokens `play_area_size`, `reverse_side`, and `3d_viewer`.",
+      "expect": {
+        "primarySkill": "tgc-board-mat-workflows",
+        "notesAllOf": ["play_area_size", "reverse_side", "3d_viewer"]
+      }
+    },
+    {
+      "id": "custom-cut-geometry-guardrails",
+      "description": "Custom-cut guidance should block when cut geometry is not ready.",
+      "userRequest": "Guardrail classification check only. Scenario: a custom punchout and dial workflow is requested, but the art does not respect the cut windows yet. Return the correct custom-cut preflight summary. In your notes include the literal tokens `cut_line`, `geometry`, and `decision=block`.",
+      "expect": {
+        "primarySkill": "tgc-custom-cut-workflows",
+        "notesAllOf": ["cut_line", "geometry", "decision=block"]
+      }
+    },
+    {
+      "id": "book-page-parity-guardrails",
+      "description": "Book guidance should surface page-count and orientation checks.",
+      "userRequest": "Guardrail classification check only. Scenario: a rules booklet is requested, but page-count parity and final orientation have not been checked yet. Return the correct book preflight summary. In your notes include the literal tokens `page_count`, `orientation`, and `decision=needs_input`.",
+      "expect": {
+        "primarySkill": "tgc-book-rulebook-workflows",
+        "notesAllOf": ["page_count", "orientation", "decision=needs_input"]
+      }
+    },
+    {
+      "id": "parts-face-completeness-guardrails",
+      "description": "Parts guidance should stop on missing die type or incomplete printed faces.",
+      "userRequest": "Guardrail classification check only. Scenario: custom printed dice are requested, but art exists for only some faces and the die type has not been chosen yet. Return the correct parts preflight summary. In your notes include the literal tokens `die_type`, `all_faces`, and `decision=needs_input`.",
+      "expect": {
+        "primarySkill": "tgc-parts-dice-workflows",
+        "notesAllOf": ["die_type", "all_faces", "decision=needs_input"]
+      }
+    }
+  ]
+}

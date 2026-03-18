@@ -12,6 +12,7 @@ Validate a requested component workflow before mutation so the agent can prevent
 - The user asks to add, edit, or configure a TGC component.
 - The request includes uncertain component options (finish, quantity, identity, page counts, side slots).
 - The workflow requires a safe call order before a mutation.
+- No more specific focused workflow family skill applies yet.
 
 ## Inputs Required
 - Target game or component context (name/id).
@@ -30,13 +31,14 @@ Validate a requested component workflow before mutation so the agent can prevent
 
 ## Workflow
 1. Resolve target game/component context.
-2. Validate dimensions, required assets, finish options, quantity bounds, and side/page/slot completeness.
-3. For required-art components (for example boxes/boards), block create when required slots are missing.
-4. If invalid or likely to warn/fail, stop and provide corrective options.
-5. If valid, produce a mutation sequencing plan and execute only after required confirmations.
-6. After mutation, verify required slots persisted expected file IDs via readback before reporting success.
+2. If a more specific focused skill matches the family (for example packaging, books, custom-cut, or parts), route there instead of doing deep family-specific logic here.
+3. Validate dimensions, required assets, finish options, quantity bounds, and side/page/slot completeness for generic component workflows.
+4. For required-art components, block create when required slots are missing.
+5. If invalid or likely to warn/fail, stop and provide corrective options.
+6. If valid, produce a mutation sequencing plan and execute only after required confirmations.
+7. After mutation, verify required slots persisted expected file IDs via readback before reporting success.
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` for preflight validation order and failure handling.
-- Read `references/component-profiles.md` when resolving component-specific dimensions, slots, and product/help links.
+- Read `references/component-profiles.md` when resolving generic component-specific dimensions, slots, and product/help links not yet owned by a focused family skill.
 - Read `references/shared-fit-contract.md` when image-bearing component gates depend on fit outcomes.

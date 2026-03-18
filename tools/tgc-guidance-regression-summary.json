@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-03-17T17:42:13.385Z",
+  "catalog": {
+    "activeProducts": 201,
+    "fullySupportedProducts": 201,
+    "productGaps": 0,
+    "missingCreateApis": []
+  },
+  "guidance": {
+    "coveredIdentities": 201,
+    "underservedIdentities": 0,
+    "coveragePercent": 100
+  },
+  "ownerFamilies": [
+    {
+      "owner": "tgc-packaging-workflows",
+      "total": 48,
+      "baselineGuided": 48,
+      "remaining": 0,
+      "coveragePercent": 100
+    },
+    {
+      "owner": "tgc-card-deck-workflows",
+      "total": 24,
+      "baselineGuided": 24,
+      "remaining": 0,
+      "coveragePercent": 100
+    },
+    {
+      "owner": "tgc-custom-cut-workflows",
+      "total": 53,
+      "baselineGuided": 53,
+      "remaining": 0,
+      "coveragePercent": 100
+    },
+    {
+      "owner": "tgc-board-mat-workflows",
+      "total": 46,
+      "baselineGuided": 46,
+      "remaining": 0,
+      "coveragePercent": 100
+    },
+    {
+      "owner": "tgc-book-rulebook-workflows",
+      "total": 22,
+      "baselineGuided": 22,
+      "remaining": 0,
+      "coveragePercent": 100
+    },
+    {
+      "owner": "tgc-parts-dice-workflows",
+      "total": 8,
+      "baselineGuided": 8,
+      "remaining": 0,
+      "coveragePercent": 100
+    }
+  ],
+  "inputProfilePaths": [
+    "skills/tgc-board-mat-workflows/references/component-profiles.md",
+    "skills/tgc-book-rulebook-workflows/references/book-component-profiles.md",
+    "skills/tgc-card-deck-workflows/references/component-profiles.md",
+    "skills/tgc-component-preflight/references/component-profiles.md",
+    "skills/tgc-custom-cut-workflows/references/component-profiles.md",
+    "skills/tgc-packaging-workflows/references/component-profiles.md",
+    "skills/tgc-parts-dice-workflows/references/component-profiles.md"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "suite": "claude-routing-minimal-context",
+  "defaults": {
+    "mode": "read-only",
+    "effort": "low",
+    "permissionMode": "dontAsk",
+    "timeoutSeconds": 90,
+    "warn": {
+      "maxOutputTokens": 1600
+    },
+    "expect": {
+      "approvalRequired": false,
+      "requestedMutation": false,
+      "requireTelemetry": true,
+      "expectNoPermissionDenials": true,
+      "forbidApprovalLanguage": true,
+      "referencesLoadedNoneOf": ["code/", "src/", "dist/", "package.json", ".mcp.json"],
+      "maxReferencesLoaded": 6
+    }
+  },
+  "cases": [
+    {
+      "id": "packaging-optioning",
+      "description": "Packaging read-only optioning should stay in the packaging family.",
+      "userRequest": "I have a 54-card poker deck and a short rules leaflet. Which TGC packaging options should I compare first, and what packaging art or measurements would you need from me before setup?",
+      "expect": {
+        "primarySkill": "tgc-packaging-workflows"
+      }
+    },
+    {
+      "id": "card-deck-optioning",
+      "description": "Deck read-only optioning should stay in the card/deck family.",
+      "userRequest": "I'm making a 54-card poker-size deck. Should I use shared backs or unique backs, and what else would you want to know before setting up the deck?",
+      "expect": {
+        "primarySkill": "tgc-card-deck-workflows"
+      }
+    },
+    {
+      "id": "board-mat-optioning",
+      "description": "Board and mat planning should stay in the board/mat family.",
+      "userRequest": "I need a foldable central board that players open on the table. What board or mat options should I compare, and what proofing risks matter most before I choose one?",
+      "expect": {
+        "primarySkill": "tgc-board-mat-workflows"
+      }
+    },
+    {
+      "id": "custom-cut-optioning",
+      "description": "Custom-cut planning should stay in the custom-cut family.",
+      "userRequest": "I want punchout standees with bases and a rotating dial. What custom-cut workflows apply, and what cut-line or geometry issues should I plan for?",
+      "expect": {
+        "primarySkill": "tgc-custom-cut-workflows"
+      }
+    },
+    {
+      "id": "book-optioning",
+      "description": "Book and score pad planning should stay in the book/rulebook family.",
+      "userRequest": "I need a rules booklet and maybe a score pad. Which document or book components should I compare, and what page or file constraints matter most?",
+      "expect": {
+        "primarySkill": "tgc-book-rulebook-workflows"
+      }
+    },
+    {
+      "id": "parts-dice-optioning",
+      "description": "Printed parts planning should stay in the parts/dice family.",
+      "userRequest": "I want custom printed dice and meeples in the same game. What should I know before setting them up, and what art or component constraints matter first?",
+      "expect": {
+        "primarySkill": "tgc-parts-dice-workflows"
+      }
+    },
+    {
+      "id": "cross-family-orchestration",
+      "description": "A mixed component planning question should stay in the router/orchestration family.",
+      "userRequest": "I'm building a prototype with a 54-card deck, punchout tokens, a folded board, and a box. Help me choose the component plan and the order I should set things up.",
+      "expect": {
+        "primarySkill": "tgc-guided-workflows",
+        "secondarySkillsAllOf": [
+          "tgc-card-deck-workflows",
+          "tgc-custom-cut-workflows",
+          "tgc-board-mat-workflows",
+          "tgc-packaging-workflows"
+        ],
+        "maxReferencesLoaded": 10
+      }
+    }
+  ]
+}

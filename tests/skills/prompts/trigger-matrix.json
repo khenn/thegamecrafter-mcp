@@ -1,6 +1,117 @@
 {
   "skills": [
     {
+      "skill": "tgc-packaging-workflows",
+      "keywords": [
+        "packaging",
+        "box",
+        "tuckbox",
+        "hookbox",
+        "booster pack",
+        "envelope",
+        "mint tin"
+      ],
+      "positive": [
+        "Recommend the right box packaging for this deck and validate the required art slots before creation.",
+        "Check this tuckbox versus hookbox choice and block create until all packaging art is complete.",
+        "Update the mint tin packaging art and warn me about packaging proof issues."
+      ],
+      "negative": [
+        "Import this PDF into a booklet and handle page parity safely.",
+        "Fix trim and bleed clipping in this board image proof.",
+        "List my games and summarize their production cost."
+      ]
+    },
+    {
+      "skill": "tgc-card-deck-workflows",
+      "keywords": [
+        "deck",
+        "tarot deck",
+        "poker deck",
+        "foil deck",
+        "clear deck",
+        "randomizer",
+        "shared back"
+      ],
+      "positive": [
+        "Recommend the right poker deck or tarot deck and decide whether I should use one shared back image.",
+        "Create this foil deck and warn me about foil design issues before I bulk import the cards.",
+        "Help me choose a clear deck and explain the randomizer tradeoffs for a trading-card workflow."
+      ],
+      "negative": [
+        "Recommend the right box packaging for these card components and validate the required art slots before creation.",
+        "Import this PDF into a booklet and handle page parity safely.",
+        "Fix trim and bleed clipping in this board image proof."
+      ]
+    },
+    {
+      "skill": "tgc-board-mat-workflows",
+      "keywords": [
+        "board",
+        "game mat",
+        "neoprene mat",
+        "screen",
+        "folding board",
+        "3d viewer",
+        "dry erase"
+      ],
+      "positive": [
+        "Recommend whether this should be a folding board or a game mat and warn me about 3D viewer proof checks.",
+        "Validate the required surfaces for this screen and block create until both sides are ready.",
+        "Help me choose between a neoprene mat and a cardstock mat and explain dry erase and linen caveats."
+      ],
+      "negative": [
+        "Recommend the right tuckbox or hookbox for this deck packaging and validate the art slots.",
+        "Create this foil deck and warn me about foil design issues before bulk import.",
+        "Import this PDF into a booklet and handle page parity safely."
+      ]
+    },
+    {
+      "skill": "tgc-custom-cut-workflows",
+      "keywords": [
+        "custom-cut",
+        "custom punchout",
+        "custom sticker",
+        "standee",
+        "dial",
+        "dual-layer board",
+        "cutline",
+        "slugged"
+      ],
+      "positive": [
+        "Recommend whether this should be a custom punchout, custom sticker, or cardstock piece and validate the required custom-cut surfaces before create.",
+        "Create this dual-layer board and block the mutation until the face, back, and inner art are all ready and pocket alignment is confirmed.",
+        "Update this dial art and warn me about window readability, axle-hole clearance, and assembled proof checks."
+      ],
+      "negative": [
+        "Recommend the right tuckbox or hookbox for this deck packaging and validate the art slots.",
+        "Should I use a poker deck or tarot deck and keep one shared back image?",
+        "Import this PDF into a booklet and handle page parity safely."
+      ]
+    },
+    {
+      "skill": "tgc-parts-dice-workflows",
+      "keywords": [
+        "acrylic",
+        "printed dice",
+        "meeple",
+        "play money",
+        "die face",
+        "long edge",
+        "d6"
+      ],
+      "positive": [
+        "Recommend whether this should be an acrylic shape or a printed meeple and validate both printable sides before create.",
+        "Create these printed dice and block the mutation until every die face image is ready and the white-print plan is clear.",
+        "Set up play money and warn me about the long-edge flip orientation before upload."
+      ],
+      "negative": [
+        "Recommend the right tuckbox or hookbox for this deck packaging and validate the art slots.",
+        "Choose whether this should be a folio or a folded document insert and fix front/back orientation before upload.",
+        "Recommend whether this should be a custom punchout, custom sticker, or cardstock piece before create."
+      ]
+    },
+    {
       "skill": "tgc-component-preflight",
       "keywords": [
         "component",
@@ -19,7 +130,7 @@
       "negative": [
         "Import the first 10 pages of this PDF into a rulebook booklet.",
         "Fix trim and bleed clipping in this uploaded image proof.",
-        "List my games and summarize their production cost."
+        "Recommend whether I should use a tuckbox or hookbox for this deck."
       ]
     },
     {
@@ -28,12 +139,18 @@
         "rulebook",
         "booklet",
         "perfectbound",
-        "page parity"
+        "page parity",
+        "folio",
+        "score pad",
+        "document",
+        "coil book"
       ],
       "positive": [
         "Create a rulebook from this PDF and handle page parity safely.",
         "Should I use booklet or perfectbound for this manual?",
-        "Import pages into a perfectbound book and warn on parity issues."
+        "Import pages into a perfectbound book and warn on parity issues.",
+        "Choose the right folio or document rules insert and fix front/back orientation before upload.",
+        "Create a score pad and warn me if one side needs to be rotated 180 degrees for horizontal printing."
       ],
       "negative": [
         "Validate required side slots for a custom die component.",
@@ -87,12 +204,42 @@
   ],
   "routingCases": [
     {
+      "prompt": "Recommend the right tuckbox or hookbox for this deck, require all packaging art slots, and verify readback after create.",
+      "expectedPrimary": "tgc-packaging-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Recommend whether this should be a poker deck or tarot deck, decide on a shared back, and warn about foil if I choose a foil deck.",
+      "expectedPrimary": "tgc-card-deck-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Recommend whether this should be a folding board or a neoprene game mat, validate the required surfaces, and tell me to use the 3D viewer before ordering.",
+      "expectedPrimary": "tgc-board-mat-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Recommend whether this should be a custom punchout, custom sticker, or cardstock piece, validate the required surfaces, and confirm the cutline workflow before create.",
+      "expectedPrimary": "tgc-custom-cut-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Recommend whether this should be an acrylic shape or a printed meeple, validate the required sides, and warn about material-specific proof risks before create.",
+      "expectedPrimary": "tgc-parts-dice-workflows",
+      "minPrimaryHits": 2
+    },
+    {
       "prompt": "Validate required assets and finish options before creating this component.",
       "expectedPrimary": "tgc-component-preflight",
       "minPrimaryHits": 2
     },
     {
       "prompt": "Create a rulebook from this PDF and handle page parity for booklet vs perfectbound.",
+      "expectedPrimary": "tgc-book-rulebook-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Choose whether this should be a folio or a folded document insert, then warn me about front/back orientation before upload.",
       "expectedPrimary": "tgc-book-rulebook-workflows",
       "minPrimaryHits": 2
     },
@@ -112,6 +259,11 @@
       "minPrimaryHits": 1
     },
     {
+      "prompt": "Build me a full game creation workflow: create a new The Game Crafter game, set up a trading-card deck with randomized classes, explain bulk-pricing caveats, then help me choose packaging after the deck is defined.",
+      "expectedPrimary": "tgc-guided-workflows",
+      "minPrimaryHits": 1
+    },
+    {
       "prompt": "Before creating this component, verify required assets and identity side slots are complete.",
       "expectedPrimary": "tgc-component-preflight",
       "minPrimaryHits": 2
@@ -119,6 +271,31 @@
     {
       "prompt": "I need booklet versus perfectbound guidance for this 46-page PDF with parity checks.",
       "expectedPrimary": "tgc-book-rulebook-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Set up a horizontal score pad and make sure the back side is rotated correctly so both sides read the same way.",
+      "expectedPrimary": "tgc-book-rulebook-workflows",
+      "minPrimaryHits": 1
+    },
+    {
+      "prompt": "Set up play money and make sure the back side is rotated correctly because it flips on the long edge.",
+      "expectedPrimary": "tgc-parts-dice-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Choose a clear deck identity for this product and warn me about white ink and shared-back strategy before I create cards.",
+      "expectedPrimary": "tgc-card-deck-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Block this folding board until the face art is ready, then remind me about linen versus dry erase and 3D viewer proofing.",
+      "expectedPrimary": "tgc-board-mat-workflows",
+      "minPrimaryHits": 2
+    },
+    {
+      "prompt": "Block this custom-cut dual-layer board until the face, back, and inner art are ready and confirm the pocket alignment before create.",
+      "expectedPrimary": "tgc-custom-cut-workflows",
       "minPrimaryHits": 2
     },
     {
@@ -132,18 +309,28 @@
       "minPrimaryHits": 1
     },
     {
+      "prompt": "Block this box creation until top and bottom art are provided, then recommend a 3D viewer proof check.",
+      "expectedPrimary": "tgc-packaging-workflows",
+      "minPrimaryHits": 1
+    },
+    {
       "prompt": "Block this box creation until all required art slots are provided and verify slot readback after patch.",
-      "expectedPrimary": "tgc-component-preflight",
+      "expectedPrimary": "tgc-packaging-workflows",
       "minPrimaryHits": 1
     },
     {
-      "prompt": "Scale this board art to maximize safe frame utilization and avoid tiny centered content.",
+      "prompt": "Scale this board art to maximize safe frame utilization, check trim and bleed risk, and avoid tiny centered content.",
       "expectedPrimary": "tgc-image-preflight-fit",
       "minPrimaryHits": 1
     },
     {
-      "prompt": "Enforce DualDial vertical label alignment to indicator windows in assembled orientation before upload.",
+      "prompt": "Enforce DualDial vertical label alignment to indicator windows in assembled orientation before upload and give me a proof-fit report.",
       "expectedPrimary": "tgc-image-preflight-fit",
+      "minPrimaryHits": 1
+    },
+    {
+      "prompt": "Create a standee punchout set for these character pieces and warn me about slot geometry before you mutate anything.",
+      "expectedPrimary": "tgc-custom-cut-workflows",
       "minPrimaryHits": 1
     }
   ]

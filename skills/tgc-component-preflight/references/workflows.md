@@ -2,10 +2,11 @@
 
 ## Validation Order
 1. Confirm target object scope: game-level create vs component-level update.
-2. Resolve product constraints for the requested component type.
-3. Validate required media slots and quantity limits.
-4. Validate option compatibility (finish/surfacing/identity/side counts/page rules).
-5. Choose in-place update over duplicate create when editing existing non-deck components.
+2. If the request falls into a focused family skill (for example packaging, books, custom-cut, parts, or image-fit remediation), route there first.
+3. Resolve product constraints for the requested component type.
+4. Validate required media slots and quantity limits.
+5. Validate option compatibility (finish/surfacing/identity/side counts/page rules).
+6. Choose in-place update over duplicate create when editing existing non-deck components.
 
 ## Block Conditions
 - Missing required art/media slot.

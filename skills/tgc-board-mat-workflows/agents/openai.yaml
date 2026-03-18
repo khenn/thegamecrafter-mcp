@@ -1,0 +1,13 @@
+interface:
+  display_name: "TGC Board/Mat Workflows"
+  short_description: "Choose and preflight TGC boards, mats, and screens with fold-aware guidance"
+  default_prompt: "Use $tgc-board-mat-workflows to recommend, validate, and update TGC boards, mats, and screens with proof-safe guidance."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "thegamecrafter"
+      description: "The Game Crafter MCP server"
+
+policy:
+  allow_implicit_invocation: true

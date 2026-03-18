@@ -3,8 +3,12 @@
 This reference is orchestration-only. Use focused skills for deep constraints.
 
 ## Routing Rules
+- Use `tgc-packaging-workflows` for packaging choice, packaging required slots, and packaging-specific proof guidance.
+- Use `tgc-card-deck-workflows` for deck identity choice, card workflow setup, foil/clear guidance, and randomizer cautions.
+- Use `tgc-board-mat-workflows` for board/mat/screen choice, fold/surface validation, and board-specific proof guidance.
+- Use `tgc-parts-dice-workflows` for acrylic shapes, printed dice, printed meeples, play money, and part-specific material/orientation guidance.
 - Use `tgc-component-preflight` for component option validation and mutation readiness.
-- Use `tgc-book-rulebook-workflows` for rulebook/book creation, parity, and page sequencing.
+- Use `tgc-book-rulebook-workflows` for books, folios, documents, score pads, parity, and page sequencing.
 - Use `tgc-image-preflight-fit` for bleed/trim/safe-zone geometry and proof remediation.
 
 ## Baseline: Create Game

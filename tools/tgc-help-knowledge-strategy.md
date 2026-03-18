@@ -10,6 +10,7 @@ Use TGC Help Center content to improve agent guidance quality without overloadin
   - `tgc-help-center-guidance.md`
 - Triggered, on-demand loading via `SKILL.md` reference rules.
 - Public repo does not include automated crawling/scraping scripts.
+- Refresh and verification should happen via a private/manual review workflow, then only reviewed static outputs should be committed here.
 
 Why this first:
 - No infra overhead.
@@ -48,6 +49,29 @@ Adopt optional RAG only if one or more are true:
 - Run automated help-content refresh outside this public repository (private VPS service or private repo).
 - Commit only reviewed, static reference outputs to this public repo.
 - Avoid shipping generic scraping automation publicly unless usage policy is explicitly confirmed.
+
+## Phase 1 Refresh Policy (A5)
+- Treat `GET /api/tgc/products` as the canonical catalog inventory and identity list.
+- Treat TGC Help Center articles, TGC product pages, and product API pages as the canonical user-guidance source set.
+- Refresh in this order:
+  1. catalog identities and categories,
+  2. cross-family help articles (templates, UV, linen, 3D viewer, proofing/process guidance),
+  3. family-specific help articles,
+  4. identity-level fallbacks where no direct article exists.
+- Record refresh date in generated artifacts.
+- Preserve stable static references in git; do not depend on live retrieval during normal agent execution.
+- When a source cannot be refreshed automatically in public repo workflows, capture the missing refresh as a documented warning rather than silently assuming freshness.
+
+## Minimal-context guidance rule
+- `context/TGCAGENT.md` should contain only orchestration behavior, proactive guidance posture, and delegation rules.
+- `skills/tgc-guided-workflows` should load broad process references only when needed.
+- Component-family skills should own deep component facts and links.
+- Cross-family fit/proof rules should stay centralized so family files can stay short.
+
+## Source freshness snapshot
+- Phase 1 refreshed against current live TGC Help Center and product references on `2026-03-12`.
+- This snapshot is an audit marker, not proof that every article body was re-imported into local generated files on the same day.
+- Follow-up work should add generated freshness reporting so stale source sets are visible in coverage outputs.
 
 ## Recommendation
 - Keep static references as default for Goal A and Release 1.

@@ -1,0 +1,31 @@
+{
+  "suite": "claude-noninteractive-smoke",
+  "defaults": {
+    "mode": "read-only",
+    "effort": "low",
+    "permissionMode": "dontAsk",
+    "timeoutSeconds": 90,
+    "warn": {
+      "maxOutputTokens": 1000
+    },
+    "expect": {
+      "approvalRequired": false,
+      "requestedMutation": false,
+      "requireTelemetry": true,
+      "expectNoPermissionDenials": true,
+      "forbidApprovalLanguage": true,
+      "referencesLoadedNoneOf": ["code/", "src/", "dist/", "package.json", ".mcp.json"],
+      "maxReferencesLoaded": 5
+    }
+  },
+  "cases": [
+    {
+      "id": "downstream-readonly-smoke",
+      "description": "Verify downstream Claude responds without approval and keeps context lean for a broad read-only planning prompt.",
+      "userRequest": "I'm new here and want to make a small tabletop prototype. What are the top 2 or 3 component paths I should compare before I start building?",
+      "expect": {
+        "primarySkill": "tgc-guided-workflows"
+      }
+    }
+  ]
+}

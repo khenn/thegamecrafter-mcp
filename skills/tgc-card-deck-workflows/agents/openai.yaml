@@ -1,0 +1,13 @@
+interface:
+  display_name: "TGC Card/Deck Workflows"
+  short_description: "Choose and build TGC decks with foil, clear, and randomizer-aware guidance"
+  default_prompt: "Use $tgc-card-deck-workflows to recommend, preflight, and build TGC decks and cards with stock-specific guidance."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "thegamecrafter"
+      description: "The Game Crafter MCP server"
+
+policy:
+  allow_implicit_invocation: true

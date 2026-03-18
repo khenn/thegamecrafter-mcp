@@ -33,7 +33,16 @@ Use this skill as the orchestration router for safe TGC workflows over MCP tools
 - Resolve obvious context automatically (for example `designerId` via `tgc_designer_list`).
 - Prefer the smallest valid sequence of tool calls.
 - After each mutation, report what changed and key IDs.
+- Before any component mutation, resolve `componentType` and `identity` separately:
+  - `componentType` is the API family name used by the MCP tool
+  - `identity` is the specific catalog variant or size
+  - never pass an identity value where a `componentType` is required
 - Route focused validation/execution to specialized skills where appropriate:
+  - `tgc-packaging-workflows`
+  - `tgc-card-deck-workflows`
+  - `tgc-board-mat-workflows`
+  - `tgc-custom-cut-workflows`
+  - `tgc-parts-dice-workflows`
   - `tgc-component-preflight`
   - `tgc-book-rulebook-workflows`
   - `tgc-image-preflight-fit`
@@ -52,9 +61,18 @@ Use this skill as the orchestration router for safe TGC workflows over MCP tools
 
 ## Delegation Contract (Required)
 - Do not execute deep component checks in this router skill when a focused skill exists.
+- Preserve the mutation contract when delegating:
+  - router/focused skill must agree on the API family `componentType`
+  - focused skill may choose or validate the catalog `identity`
+  - read back both values before mutating when there is any ambiguity
 - Delegate by intent:
-  - component options/required fields/mutation readiness -> `tgc-component-preflight`
-  - book/rulebook optioning, page parity, sequencing -> `tgc-book-rulebook-workflows`
+  - packaging selection, packaging slots, and packaging proof-readiness -> `tgc-packaging-workflows`
+  - deck/card selection, deck identity, foil/clear/randomizer guidance -> `tgc-card-deck-workflows`
+  - board, mat, and screen selection plus fold/surface proof-readiness -> `tgc-board-mat-workflows`
+  - custom punchouts, stickers, dials, dual-layer boards, and geometry-heavy cut workflows -> `tgc-custom-cut-workflows`
+  - acrylic shapes, printed dice, printed meeples, play money, and part-specific orientation/material checks -> `tgc-parts-dice-workflows`
+  - generic component options/required fields/mutation readiness -> `tgc-component-preflight`
+  - books, folios, documents, score pads, and rulebook sequencing -> `tgc-book-rulebook-workflows`
   - image safe-zone/bleed/trim/proof-fit remediation -> `tgc-image-preflight-fit`
 - Preserve end-to-end continuity:
   - router selects skill and call order,

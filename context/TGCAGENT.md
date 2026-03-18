@@ -38,6 +38,10 @@ Rules:
 - For image-bearing workflows, run print-safe checks (trim/safe/binding risk) before upload.
 - If a request is likely to fail or create proofing issues, stop and offer corrective options.
 - Prefer in-place updates for revisions unless the user explicitly asks for a new variant/copy.
+- For create/update tools, resolve `componentType` and `identity` separately:
+  - `componentType` is the API family token such as `tuckbox`, `booklet`, `dial`, or `bifoldboard`
+  - `identity` is the catalog option such as `PokerTuckBox54`, `LargeBooklet`, `SmallDial`, or `BiFoldBoard`
+  - never pass an identity where a `componentType` is required
 
 ## Safety and Privacy Rules
 - Do not include credentials, tokens, session IDs, private URLs, local absolute paths, or PII in shared/public outputs.
@@ -52,16 +56,30 @@ Rules:
 - Keep responses concise and decision-oriented; avoid dumping long internal process text.
 
 ## Skills Delegation (Required)
-Use `skills/tgc-guided-workflows/` for detailed behavior:
-- `SKILL.md` for routing and workflow triggers.
-- `references/workflows.md` for multi-step task sequencing.
-- `references/component-profiles.md` for component constraints and references.
-- `references/image-preflight-and-fit.md` for geometry/fit/proofing rules.
-- `references/guardrails.md` for mutation safety and idempotency constraints.
-- `references/community-feedback.md` for feedback consent, redaction, and publication rules.
-- `references/tgc-help-center-guidance.md` and `references/tgc-help-center-catalog.md` for process/help-center guidance.
-- Proactively use this skill stack for TGC tasks without waiting for explicit user instruction to invoke skills.
-- Load only the specific reference files needed for the current task; do not bulk-load all references.
+Use the TGCMCP skill stack proactively for TGC tasks without waiting for explicit user instruction:
+- `skills/tgc-guided-workflows/`
+  - orchestration, option narrowing, cross-family sequencing, readiness, and process guidance
+- `skills/tgc-packaging-workflows/`
+  - packaging choice, packaging slot completeness, and packaging proof/readback behavior
+- `skills/tgc-card-deck-workflows/`
+  - deck identity choice, card workflow setup, foil/clear guidance, and randomizer cautions
+- `skills/tgc-board-mat-workflows/`
+  - board, mat, and screen choice plus fold/surface proof-readiness
+- `skills/tgc-custom-cut-workflows/`
+  - custom punchouts, stickers, dials, and dual-layer boards with geometry-aware guidance
+- `skills/tgc-parts-dice-workflows/`
+  - acrylic shapes, printed dice, printed meeples, play money, and part-specific orientation/material guidance
+- `skills/tgc-component-preflight/`
+  - generic component validation when no more specific family skill applies
+- `skills/tgc-book-rulebook-workflows/`
+  - books, folios, documents, score pads, parity, and page sequencing
+- `skills/tgc-image-preflight-fit/`
+  - geometry, safe-zone, bleed/trim, proof remediation, and fit contracts
+
+Reference loading rules:
+- Load only the specific skill and reference files needed for the current task.
+- Do not bulk-load all TGCMCP references.
+- Keep deep component facts in skill-owned reference files, not in this public profile.
 
 ## Maintenance Boundary
 - Keep this file orchestration-level and stable.

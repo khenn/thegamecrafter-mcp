@@ -32,9 +32,6 @@ Optional helper tools (recommended):
 - Image generation/editing:
   - `ImageMagick` (`magick`/`convert`) for resize/crop/pad/canvas prep and simple text overlays
   - `pngquant` (optional) for PNG size optimization before upload
-- LLM workflow utilities:
-  - `gh` (GitHub CLI) for issue-based feedback publishing flow
-  - `jq` for JSON inspection/transform during debugging and script output review
 
 ## Recommended Integration Pattern
 
@@ -338,8 +335,8 @@ Use the same skill package and place it where your Claude runtime expects skills
    - `skills/tgc-book-rulebook-workflows`
    - `skills/tgc-image-preflight-fit`
    Important:
-   - Claude reads the installed copies from its skills directory, not from this repo working tree.
-   - After pulling TGCMCP updates or changing any `skills/` files locally, recopy the updated skill folders into Claude's skills location before rerunning verification or regression prompts.
+   - Claude uses the installed copies from its skills directory.
+   - After updating TGCMCP, recopy the updated skill folders into Claude's skills location.
 2. Restart Claude Code.
 3. Verify by asking Claude:
    - `"List installed skills and confirm the TGCMCP skills are available."`
@@ -383,7 +380,7 @@ For The Game Crafter workflows, also follow:
 
 Why this pattern:
 - avoids overwriting your existing `AGENTS.md`,
-- allows `git pull` updates to refresh TGCMCP guidance without manual merge churn.
+- makes future TGCMCP updates easier to adopt without replacing your own local agent file.
 
 #### Claude (Step-by-step)
 
@@ -488,36 +485,9 @@ Most common causes:
 - Retry after short delay.
 - Avoid high request bursts.
 
-### Deleted test games still appear in TGC
-- TGC game deletion is effectively trash/soft-delete first.
-- TGCMCP regression cleanup guarantees that disposable live test games are no longer active after the run.
-- Trashed entries can still remain visible in TGC views for some time after deletion before TGC fully removes them.
-
 ### npm permission/cache issues
 - If `npm install` fails due to cache permissions, use a local temp cache path:
 
 ```bash
 npm install --cache /tmp/$USER-npm-cache
 ```
-
----
-
-## Repository Map
-
-- MCP source: `code/src/`
-- MCP dev scripts: `code/scripts/dev/`
-- Public agent profile: `context/TGCAGENT.md`
-- Public router skill: `skills/tgc-guided-workflows/SKILL.md`
-- Focused skills: `skills/tgc-packaging-workflows/`, `skills/tgc-card-deck-workflows/`, `skills/tgc-board-mat-workflows/`, `skills/tgc-custom-cut-workflows/`, `skills/tgc-parts-dice-workflows/`, `skills/tgc-component-preflight/`, `skills/tgc-book-rulebook-workflows/`, `skills/tgc-image-preflight-fit/`
-- Skill references: `skills/*/references/`
-- Skill metadata: `skills/*/agents/openai.yaml`
-- Local root agent files (`AGENTS.md`, `AGENT.md`) are intentionally local-only and not tracked in git.
-- Roadmap: `ROADMAP.md`
-
----
-
-## Current Security Model
-
-- Auth currently uses username + password + public API key ID.
-- Secrets are environment-variable based.
-- Secret-manager integration is planned but not default yet.

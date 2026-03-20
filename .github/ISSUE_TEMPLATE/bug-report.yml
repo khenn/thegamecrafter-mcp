@@ -1,0 +1,61 @@
+name: Bug Report
+description: Report a reproducible bug in TGCMCP behavior, contracts, docs, or workflows.
+title: "[Bug] <short summary>"
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What went wrong?
+      placeholder: Briefly describe the bug.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - MCP contract
+        - Handler / service behavior
+        - Skills / guidance
+        - Docs / onboarding
+        - CI / repo automation
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed Behavior
+      placeholder: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      placeholder: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      placeholder: Include prompts, commands, or tool calls needed to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification Or Evidence
+      placeholder: Logs, CI output, screenshots, or other evidence.
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy_check
+    attributes:
+      label: Privacy Check
+      options:
+        - label: I removed secrets, tokens, passwords, and private data.
+          required: true

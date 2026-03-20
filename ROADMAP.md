@@ -199,12 +199,12 @@ Stabilize what was built in Goal A and ship a reliable public first release.
 
 ### B4. Release Packaging
 - [ ] Versioning + release process discipline
-- [ ] Configure GitHub community contribution baseline:
-  - [ ] `CONTRIBUTING.md` contribution flow
-  - [ ] issue/PR templates
-  - [ ] `CODE_OF_CONDUCT.md`
-  - [ ] `SECURITY.md` vulnerability reporting path
-  - [ ] branch protection/review expectations
+- [x] ~~Configure GitHub community contribution baseline:~~
+  - [x] ~~`CONTRIBUTING.md` contribution flow~~
+  - [x] ~~issue/PR templates~~
+  - [x] ~~`CODE_OF_CONDUCT.md`~~
+  - [x] ~~`SECURITY.md` vulnerability reporting path~~
+  - [x] ~~branch protection/review expectations~~
 - [ ] Publish first stable release focused on Make/Iterate workflows
 
 ## Goal C - Sell and Publish Workflow (Release 2)

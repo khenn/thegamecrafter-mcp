@@ -1,0 +1,54 @@
+name: Feature Request
+description: Propose a new MCP, docs, workflow, or repo-maintenance improvement.
+title: "[Feature] <short summary>"
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Or Need
+      placeholder: What problem are you trying to solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Change
+      placeholder: Describe the change you want.
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Expected Scope
+      options:
+        - Component-specific
+        - Component-family specific
+        - Global
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target Timing
+      options:
+        - Current release
+        - Post-release
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected Impact
+      placeholder: Why is this change worthwhile?
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy_check
+    attributes:
+      label: Privacy Check
+      options:
+        - label: I removed secrets, tokens, passwords, and private data.
+          required: true

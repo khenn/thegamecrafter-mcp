@@ -42,7 +42,10 @@ Guide safe, minimal-context creation and update of TGC deck/card workflows by he
    - randomizer or class-number implications when relevant.
 4. Route fit or trim concerns to `tgc-image-preflight-fit`.
 5. Execute deck create before card create, and use bulk card creation when the user already has a batch-ready card set.
-6. After mutation, verify deck/card persistence and suggest packaging follow-up when deck choice likely drives the next decision.
+6. When resuming an interrupted deck-import flow, prefer rerun-safe options:
+   - `tgc_deck_create` with `resumeIfExists=true`
+   - `tgc_deck_bulk_create_cards` with `skipExisting=true`
+7. After mutation, verify deck/card persistence and suggest packaging follow-up when deck choice likely drives the next decision.
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` for deck recommendation logic, randomizer cautions, and create/update sequencing.

@@ -289,6 +289,16 @@ export class TgcService {
     });
   }
 
+  public async copyGame(gameId: string, name?: string): Promise<Record<string, unknown>> {
+    const session = this.requireSession();
+    return this.client.post(`/api/game/${gameId}/copy`, {
+      sessionId: session.id,
+      form: {
+        name,
+      },
+    });
+  }
+
   public async createDeck(input: {
     gameId: string;
     name: string;

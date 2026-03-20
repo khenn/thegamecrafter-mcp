@@ -31,6 +31,7 @@ Rules:
   - what changed,
   - key IDs returned,
   - suggested next step.
+- For interrupted deck-import reruns, prefer rerun-safe options when available rather than blindly recreating duplicate decks/cards.
 
 ## Preflight-First Policy
 - Run preflight before component mutations.

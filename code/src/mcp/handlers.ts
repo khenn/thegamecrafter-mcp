@@ -6,6 +6,13 @@ import { fail, ok, type ToolResultEnvelope } from "./response.js";
 
 type JsonObject = Record<string, unknown>;
 type ToolContext = { tgc: TgcService };
+type NormalizedBulkCard = {
+  name: string;
+  face_id: string;
+  back_id: string | undefined;
+  quantity: number | undefined;
+  class_number: number | undefined;
+};
 
 const CUSTOM_DICE_RULES: Record<
   string,
@@ -51,6 +58,13 @@ function asObject(value: unknown): JsonObject {
   return {};
 }
 
+function asItems(value: unknown): JsonObject[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.map((item) => asObject(item)).filter((item) => Object.keys(item).length > 0);
+}
+
 const loginSchema = z.object({
   username: z.string().min(1).optional(),
   password: z.string().min(1).optional(),
@@ -91,6 +105,11 @@ const gameGetSchema = z.object({
 
 const gameDeleteSchema = z.object({
   gameId: z.string().min(1),
+});
+
+const gameCopySchema = z.object({
+  gameId: z.string().min(1),
+  name: z.string().min(1).optional(),
 });
 
 const gamePublishSchema = z.object({
@@ -185,6 +204,7 @@ const deckCreateSchema = z.object({
   backFileId: z.string().min(1).optional(),
   hasProofedBack: z.boolean().optional(),
   cardCount: z.number().int().min(1).optional(),
+  resumeIfExists: z.boolean().optional(),
 });
 
 const cardCreateSchema = z.object({
@@ -220,6 +240,7 @@ const bulkCardSchema = z
 const deckBulkCreateCardsSchema = z.object({
   deckId: z.string().min(1),
   cards: z.array(bulkCardSchema).min(1).max(100),
+  skipExisting: z.boolean().optional(),
 });
 
 const partCreateSchema = z.object({
@@ -444,6 +465,11 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
       case "tgc_game_get": {
         const input = gameGetSchema.parse(safeArgs);
         const game = await context.tgc.getGame(input.gameId, input.include, input.includeRelationships);
+        return ok({ game });
+      }
+      case "tgc_game_copy": {
+        const input = gameCopySchema.parse(safeArgs);
+        const game = await context.tgc.copyGame(input.gameId, input.name);
         return ok({ game });
       }
       case "tgc_deck_get": {
@@ -825,15 +851,31 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
       }
       case "tgc_deck_create": {
         const input = deckCreateSchema.parse(safeArgs);
+        const requestedQuantity = input.quantity ?? input.cardCount;
+
+        if (input.resumeIfExists) {
+          const existingDeck = await findMatchingDeckForResume(context.tgc, {
+            gameId: input.gameId,
+            name: input.name,
+            identity: input.identity,
+            quantity: requestedQuantity,
+            backFileId: input.backFileId,
+            hasProofedBack: input.hasProofedBack,
+          });
+          if (existingDeck) {
+            return ok({ deck: existingDeck, resumed: true });
+          }
+        }
+
         const deck = await context.tgc.createDeck({
           gameId: input.gameId,
           name: input.name,
           identity: input.identity,
-          quantity: input.quantity ?? input.cardCount,
+          quantity: requestedQuantity,
           backFileId: input.backFileId,
           hasProofedBack: input.hasProofedBack,
         });
-        return ok({ deck });
+        return ok({ deck, resumed: false });
       }
       case "tgc_card_create": {
         const input = cardCreateSchema.parse(safeArgs);
@@ -848,16 +890,44 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
       }
       case "tgc_deck_bulk_create_cards": {
         const input = deckBulkCreateCardsSchema.parse(safeArgs);
-        const normalizedCards = input.cards.map((card) => ({
+        const normalizedCards: NormalizedBulkCard[] = input.cards.map((card) => ({
           name: card.name,
           face_id: card.frontFileId ?? card.faceFileId ?? card.face_id!,
           back_id: card.backFileId ?? card.back_id,
           quantity: card.quantity,
           class_number: card.classNumber ?? card.class_number,
         }));
-        const result = await context.tgc.bulkCreateCards(input.deckId, normalizedCards);
+
+        let cardsToCreate = normalizedCards;
+        let skippedExistingCount = 0;
+        if (input.skipExisting) {
+          const existingCards = await listAllDeckCardsForResume(context.tgc, input.deckId);
+          const filtered = filterExistingBulkCards(normalizedCards, existingCards);
+          cardsToCreate = filtered.pendingCards;
+          skippedExistingCount = filtered.skippedExistingCount;
+        }
+
+        if (cardsToCreate.length === 0) {
+          return ok({
+            requestedCount: normalizedCards.length,
+            createdCount: 0,
+            skippedExistingCount,
+            resumed: skippedExistingCount > 0,
+            cards: [],
+            raw: null,
+          });
+        }
+
+        const result = await context.tgc.bulkCreateCards(input.deckId, cardsToCreate);
         const cards = Array.isArray(result.cards) ? result.cards : [];
-        return ok({ createdCount: cards.length, cards, raw: result });
+        return ok({
+          requestedCount: normalizedCards.length,
+          createdCount: cards.length,
+          skippedExistingCount,
+          resumed: skippedExistingCount > 0,
+          cards,
+          raw: result,
+        });
       }
       case "tgc_part_create": {
         const input = partCreateSchema.parse(safeArgs);
@@ -1020,7 +1090,12 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
             pricing.push({ gameId, pricing: result });
           } catch (error: unknown) {
             if (error instanceof TgcApiError) {
-              errors.push({ gameId, code: error.code, message: error.message, details: error.details });
+              errors.push({
+                gameId,
+                code: error.code,
+                message: error.message,
+                details: sanitizeErrorDetails(error.details),
+              });
               continue;
             }
             throw error;
@@ -1077,6 +1152,113 @@ function sanitizeErrorDetails(details: Record<string, unknown> | null): Record<s
   return sanitizeUnknown(details) as Record<string, unknown>;
 }
 
+async function findMatchingDeckForResume(
+  tgc: TgcService,
+  input: {
+    gameId: string;
+    name: string;
+    identity: string;
+    quantity?: number;
+    backFileId?: string;
+    hasProofedBack?: boolean;
+  },
+): Promise<Record<string, unknown> | null> {
+  for (let page = 1; page <= 50; page += 1) {
+    const result = await tgc.listGameDecks(input.gameId, page, 100);
+    const items = asItems(result.items);
+    if (items.length === 0) {
+      break;
+    }
+
+    const match =
+      items.find((item) => {
+        if (asString(item.name) !== input.name) return false;
+        if (asString(item.identity) !== input.identity) return false;
+        if (input.quantity !== undefined && coerceIntegerish(item.quantity) !== input.quantity) return false;
+        if (input.backFileId !== undefined && asString(item.back_id) !== input.backFileId) return false;
+        if (
+          input.hasProofedBack !== undefined &&
+          coerceBooleanish(item.has_proofed_back) !== input.hasProofedBack
+        ) {
+          return false;
+        }
+        return true;
+      }) ?? null;
+
+    if (match) {
+      return match;
+    }
+
+    if (items.length < 100) {
+      break;
+    }
+  }
+
+  return null;
+}
+
+async function listAllDeckCardsForResume(tgc: TgcService, deckId: string): Promise<JsonObject[]> {
+  const items: JsonObject[] = [];
+  for (let page = 1; page <= 50; page += 1) {
+    const result = await tgc.listDeckCards(deckId, page, 100);
+    const pageItems = asItems(result.items);
+    if (pageItems.length === 0) {
+      break;
+    }
+    items.push(...pageItems);
+    if (pageItems.length < 100) {
+      break;
+    }
+  }
+  return items;
+}
+
+function filterExistingBulkCards(
+  requestedCards: NormalizedBulkCard[],
+  existingCards: JsonObject[],
+): {
+  pendingCards: NormalizedBulkCard[];
+  skippedExistingCount: number;
+} {
+  const existingCounts = new Map<string, number>();
+  for (const existingCard of existingCards) {
+    const fingerprint = fingerprintBulkCard({
+      name: asString(existingCard.name),
+      face_id: asString(existingCard.face_id),
+      back_id: asOptionalString(existingCard.back_id),
+      quantity: coerceIntegerish(existingCard.quantity),
+      class_number: coerceIntegerish(existingCard.class_number),
+    });
+    existingCounts.set(fingerprint, (existingCounts.get(fingerprint) ?? 0) + 1);
+  }
+
+  const pendingCards: typeof requestedCards = [];
+  let skippedExistingCount = 0;
+
+  for (const requestedCard of requestedCards) {
+    const fingerprint = fingerprintBulkCard(requestedCard);
+    const available = existingCounts.get(fingerprint) ?? 0;
+    if (available > 0) {
+      existingCounts.set(fingerprint, available - 1);
+      skippedExistingCount += 1;
+      continue;
+    }
+    pendingCards.push(requestedCard);
+  }
+
+  return { pendingCards, skippedExistingCount };
+}
+
+function fingerprintBulkCard(input: NormalizedBulkCard): string {
+  return JSON.stringify([
+    input.name,
+    input.face_id,
+    input.back_id ?? null,
+    input.quantity ?? null,
+    input.class_number ?? null,
+  ]);
+}
+
 function sanitizeUnknown(value: unknown): unknown {
   if (Array.isArray(value)) {
     return value.map((item) => sanitizeUnknown(item));
@@ -1129,6 +1311,25 @@ function coerceBooleanish(value: unknown): boolean | null {
     }
   }
   return null;
+}
+
+function coerceIntegerish(value: unknown): number | undefined {
+  if (typeof value === "number" && Number.isInteger(value)) {
+    return value;
+  }
+  if (typeof value === "string") {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  }
+  return undefined;
+}
+
+function asString(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+function asOptionalString(value: unknown): string | undefined {
+  return typeof value === "string" && value.length > 0 ? value : undefined;
 }
 
 function countUnproofedGameparts(items: unknown[]): number {

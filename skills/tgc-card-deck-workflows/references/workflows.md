@@ -46,6 +46,10 @@ Use this reference for card/deck recommendation, preflight, and sequencing.
 - Use `tgc_deck_bulk_create_cards` when the user already has a batch of prepared card fronts/backs.
 - Use `tgc_card_create` for incremental card additions or small deck edits.
 - For revisions to existing cards, prefer targeted updates only where supported; otherwise explain when recreate is necessary.
+- For interrupted reruns of the same deck-import job:
+  - use `tgc_deck_create` with `resumeIfExists=true` when the intended deck should already exist
+  - use `tgc_deck_bulk_create_cards` with `skipExisting=true` to avoid re-adding exact existing cards
+  - only use rerun-safe mode when the intended deck identity and batch contents are still materially the same
 
 ## Post-mutation verification
 - After deck create, verify deck exists before adding cards.

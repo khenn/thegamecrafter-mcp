@@ -35,12 +35,20 @@
 - Do not report success if required slot readback does not match intended file IDs.
 - For dial components, enforce functional label alignment to indicator windows in assembled orientation; safe-zone-only pass is insufficient.
 
-## Non-Idempotent Bulk Card Creation
+## Bulk Card Creation Resume Safety
 For `tgc_deck_bulk_create_cards`:
-- Treat as append-only and non-idempotent.
-- Do not retry blind.
-- Do not resume into partially populated decks.
-- If interrupted, create a fresh target deck/game and rerun from zero.
+- Default behavior is still append-only.
+- Do not retry blind when `skipExisting` is not enabled.
+- For rerun-safe recovery, prefer:
+  - `tgc_deck_create` with `resumeIfExists=true`
+  - `tgc_deck_bulk_create_cards` with `skipExisting=true`
+- `skipExisting=true` only skips exact existing card matches by card fingerprint:
+  - name
+  - front/face id
+  - back id
+  - quantity
+  - class number
+- If deck identity or batch contents materially changed, do not resume into the old deck blindly; create a new target deck or reconcile differences first.
 - Validate source-vs-target card totals before declaring success.
 - Ensure per-card image field is mapped correctly (`frontFileId` / mapped API `face_id`).
 

@@ -28,6 +28,43 @@ export function createFixtureGameName(prefix: string): string {
   return `${prefix}-${new Date().toISOString()}`;
 }
 
+function isManagedFixtureGameName(prefix: string, gameName: string): boolean {
+  return gameName === prefix || gameName.startsWith(`${prefix}-`);
+}
+
+async function listAllDesignerGames(tgc: TgcService, designerId: string): Promise<JsonObject[]> {
+  const items: JsonObject[] = [];
+  for (let page = 1; page <= 20; page += 1) {
+    const result = await tgc.listGames({ page, limit: 100, designerId });
+    const pageItems = asItems(result.items);
+    if (pageItems.length === 0) {
+      break;
+    }
+    items.push(...pageItems);
+    if (pageItems.length < 100) {
+      break;
+    }
+  }
+  return items;
+}
+
+async function deleteStaleFixtureGames(tgc: TgcService, designerId: string, prefix: string): Promise<string[]> {
+  const existingGames = await listAllDesignerGames(tgc, designerId);
+  const stale = existingGames.filter((game) => isManagedFixtureGameName(prefix, asString(game.name)));
+  const deletedIds: string[] = [];
+
+  for (const game of stale) {
+    const staleGameId = asString(game.id);
+    if (!staleGameId) {
+      continue;
+    }
+    await tgc.deleteGame(staleGameId).catch(() => {});
+    deletedIds.push(staleGameId);
+  }
+
+  return deletedIds;
+}
+
 export async function withFixtureGame(
   prefix: string,
   run: (context: FixtureContext) => Promise<void>,
@@ -42,6 +79,11 @@ export async function withFixtureGame(
     const designerId = asString(asItems(designers.items)[0]?.id);
     if (!designerId) {
       throw new Error("No designer available for authenticated user.");
+    }
+
+    const deletedStaleGameIds = await deleteStaleFixtureGames(tgc, designerId, prefix);
+    if (deletedStaleGameIds.length > 0) {
+      console.log(`Deleted ${deletedStaleGameIds.length} stale fixture game(s) for prefix ${prefix}.`);
     }
 
     gameName = createFixtureGameName(prefix);
@@ -62,4 +104,3 @@ export async function withFixtureGame(
     await tgc.logout().catch(() => {});
   }
 }
-

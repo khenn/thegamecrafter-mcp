@@ -228,8 +228,11 @@ Implemented additions (read/interrogation primitives):
   - `backFileId` (string, optional)
   - `hasProofedBack` (boolean, optional)
   - `cardCount` (integer, optional, deprecated alias)
+  - `resumeIfExists` (boolean, optional)
+    - when `true`, reuses an exact existing deck match in the same game instead of creating a duplicate
 - Output data:
   - `deck` (object)
+  - `resumed` (boolean)
   - Status: implemented
 
 15. `tgc_card_create`
@@ -247,6 +250,8 @@ Implemented additions (read/interrogation primitives):
 - Purpose: Bulk card create for a deck.
 - Input:
   - `deckId` (string)
+  - `skipExisting` (boolean, optional)
+    - when `true`, skips exact existing card matches already present in the target deck
   - `cards` (array, min 1, max 100)
   - per-card fields:
     - `name` (string, required)
@@ -255,7 +260,10 @@ Implemented additions (read/interrogation primitives):
     - `quantity` (integer, optional)
     - `classNumber` (integer, optional)
 - Output data:
+  - `requestedCount` (integer)
   - `createdCount` (integer)
+  - `skippedExistingCount` (integer)
+  - `resumed` (boolean)
   - `cards` (array)
   - Status: implemented
 

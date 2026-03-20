@@ -263,6 +263,8 @@ const componentCreateSchema = z.object({
   name: z.string().min(1),
   identity: z.string().min(1).optional(),
   quantity: z.number().int().min(1).max(9999).optional(),
+  relationship: z.string().trim().min(1).optional(),
+  resumeIfExists: z.boolean().optional(),
   backFileId: z.string().min(1).optional(),
   faceFileId: z.string().min(1).optional(),
   frontFileId: z.string().min(1).optional(),
@@ -951,6 +953,24 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
       }
       case "tgc_component_create": {
         const input = applyCustomDiceCreateRules(componentCreateSchema.parse(safeArgs));
+        if (input.resumeIfExists && !input.relationship) {
+          return fail(
+            "INVALID_INPUT",
+            "relationship is required when resumeIfExists=true for tgc_component_create.",
+            {
+              prompt:
+                "Provide the game relationship path for this component family, for example tuckboxes, booklets, bifoldboards, or acrylicshapes.",
+            },
+          );
+        }
+
+        if (input.resumeIfExists && input.relationship) {
+          const existingComponent = await findMatchingComponentForResume(context.tgc, input);
+          if (existingComponent) {
+            return ok({ component: existingComponent, resumed: true });
+          }
+        }
+
         const component = await context.tgc.createComponent({
           componentType: input.componentType,
           gameId: input.gameId,
@@ -985,7 +1005,7 @@ export async function executeTool(name: string, args: unknown, context: ToolCont
           hasProofedSpotGloss: input.hasProofedSpotGloss,
           hasProofedSpotGlossBottom: input.hasProofedSpotGlossBottom,
         });
-        return ok({ component });
+        return ok({ component, resumed: false });
       }
       case "tgc_component_update": {
         const input = componentUpdateSchema.parse(safeArgs);
@@ -1211,6 +1231,110 @@ async function listAllDeckCardsForResume(tgc: TgcService, deckId: string): Promi
     }
   }
   return items;
+}
+
+async function findMatchingComponentForResume(
+  tgc: TgcService,
+  input: z.infer<typeof componentCreateSchema>,
+): Promise<JsonObject | null> {
+  const relationship = input.relationship!;
+  for (let page = 1; page <= 50; page += 1) {
+    const result = await tgc.listGameComponents(input.gameId, relationship, page, 100);
+    const items = asItems(result.items);
+    if (items.length === 0) {
+      break;
+    }
+
+    const match =
+      items.find((item) => {
+        if (asString(item.name) !== input.name) return false;
+        if (input.identity !== undefined && asString(item.identity) !== input.identity) return false;
+        if (input.quantity !== undefined && coerceIntegerish(item.quantity) !== input.quantity) return false;
+        if (input.backFileId !== undefined && asOptionalString(item.back_id) !== input.backFileId) return false;
+        if (input.faceFileId !== undefined && asOptionalString(item.face_id) !== input.faceFileId) return false;
+        if (input.frontFileId !== undefined && asOptionalString(item.front_id) !== input.frontFileId) return false;
+        if (input.outsideFileId !== undefined && asOptionalString(item.outside_id) !== input.outsideFileId) return false;
+        if (input.insideFileId !== undefined && asOptionalString(item.inside_id) !== input.insideFileId) return false;
+        if (input.innerFileId !== undefined && asOptionalString(item.inner_id) !== input.innerFileId) return false;
+        if (input.topFileId !== undefined && asOptionalString(item.top_id) !== input.topFileId) return false;
+        if (input.bottomFileId !== undefined && asOptionalString(item.bottom_id) !== input.bottomFileId) return false;
+        if (input.spotGlossFileId !== undefined && asOptionalString(item.spot_gloss_id) !== input.spotGlossFileId) return false;
+        if (
+          input.spotGlossBottomFileId !== undefined &&
+          asOptionalString(item.spot_gloss_bottom_id) !== input.spotGlossBottomFileId
+        ) {
+          return false;
+        }
+        if (input.dieColor !== undefined && asOptionalString(item.diecolor) !== input.dieColor) return false;
+        if (input.side1FileId !== undefined && asOptionalString(item.side1_id) !== input.side1FileId) return false;
+        if (input.side2FileId !== undefined && asOptionalString(item.side2_id) !== input.side2FileId) return false;
+        if (input.side3FileId !== undefined && asOptionalString(item.side3_id) !== input.side3FileId) return false;
+        if (input.side4FileId !== undefined && asOptionalString(item.side4_id) !== input.side4FileId) return false;
+        if (input.side5FileId !== undefined && asOptionalString(item.side5_id) !== input.side5FileId) return false;
+        if (input.side6FileId !== undefined && asOptionalString(item.side6_id) !== input.side6FileId) return false;
+        if (input.side7FileId !== undefined && asOptionalString(item.side7_id) !== input.side7FileId) return false;
+        if (input.side8FileId !== undefined && asOptionalString(item.side8_id) !== input.side8FileId) return false;
+        if (
+          input.hasProofedFace !== undefined &&
+          coerceBooleanish(item.has_proofed_face) !== input.hasProofedFace
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedBack !== undefined &&
+          coerceBooleanish(item.has_proofed_back) !== input.hasProofedBack
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedOutside !== undefined &&
+          coerceBooleanish(item.has_proofed_outside) !== input.hasProofedOutside
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedInside !== undefined &&
+          coerceBooleanish(item.has_proofed_inside) !== input.hasProofedInside
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedTop !== undefined &&
+          coerceBooleanish(item.has_proofed_top) !== input.hasProofedTop
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedBottom !== undefined &&
+          coerceBooleanish(item.has_proofed_bottom) !== input.hasProofedBottom
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedSpotGloss !== undefined &&
+          coerceBooleanish(item.has_proofed_spot_gloss) !== input.hasProofedSpotGloss
+        ) {
+          return false;
+        }
+        if (
+          input.hasProofedSpotGlossBottom !== undefined &&
+          coerceBooleanish(item.has_proofed_spot_gloss_bottom) !== input.hasProofedSpotGlossBottom
+        ) {
+          return false;
+        }
+        return true;
+      }) ?? null;
+
+    if (match) {
+      return match;
+    }
+
+    if (items.length < 100) {
+      break;
+    }
+  }
+
+  return null;
 }
 
 function filterExistingBulkCards(

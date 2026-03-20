@@ -32,6 +32,7 @@ Rules:
   - key IDs returned,
   - suggested next step.
 - For interrupted deck-import reruns, prefer rerun-safe options when available rather than blindly recreating duplicate decks/cards.
+- For interrupted upload/component reruns, reuse known `fileId` values when available and prefer relationship-scoped resume mode for component creation rather than blindly creating duplicates.
 
 ## Preflight-First Policy
 - Run preflight before component mutations.

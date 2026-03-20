@@ -217,6 +217,9 @@ Implemented additions (read/interrogation primitives):
 - Output data:
   - `file` (object)
   - Status: implemented
+  - Notes:
+    - safe server-side file dedupe is not currently implemented
+    - if a prior upload already returned a `fileId`, prefer reusing that id rather than re-uploading blindly
 
 14. `tgc_deck_create`
 - Purpose: Create a deck component.
@@ -334,6 +337,10 @@ Implemented additions (read/interrogation primitives):
   - `name` (string, required)
   - `identity` (string, optional but typically required by TGC product family)
   - `quantity` (integer, optional)
+  - `relationship` (string, optional)
+  - `resumeIfExists` (boolean, optional)
+    - when `true`, requires `relationship`
+    - reuses an exact existing component match in that game relationship instead of creating a duplicate
   - `backFileId` (string, optional)
   - `faceFileId` (string, optional)
   - `frontFileId` (string, optional)
@@ -363,6 +370,7 @@ Implemented additions (read/interrogation primitives):
   - `hasProofedSpotGlossBottom` (boolean, optional)
 - Output data:
   - `component` (object)
+  - `resumed` (boolean)
   - Status: implemented
   - Packaging coverage validated in live tests for:
     - `/api/tuckbox`

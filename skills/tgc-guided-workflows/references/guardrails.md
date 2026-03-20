@@ -52,6 +52,16 @@ For `tgc_deck_bulk_create_cards`:
 - Validate source-vs-target card totals before declaring success.
 - Ensure per-card image field is mapped correctly (`frontFileId` / mapped API `face_id`).
 
+## File Upload + Component Create Resume Safety
+- `tgc_file_upload` does not currently provide safe server-side dedupe or lookup for reruns.
+- If a prior upload already succeeded and you know the `fileId`, reuse that `fileId` in the follow-up component mutation instead of re-uploading.
+- If upload state is unknown, re-upload intentionally and verify the returned `fileId`.
+- For rerun-safe component recovery, prefer:
+  - `tgc_component_create` with `resumeIfExists=true`
+  - and an explicit `relationship` matching the target component family
+- `resumeIfExists=true` only reuses an exact existing component match within that relationship scope, based on the provided fields.
+- Do not guess the relationship path; if unsure, resolve it before using resume mode.
+
 ## Known API Behavior
 - `tgc_part_create` can be permission-gated.
 - If blocked, prefer linking existing parts with `tgc_gamepart_upsert`.

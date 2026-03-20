@@ -47,6 +47,8 @@ If any fail, return `partial_success` summary with per-component remediation act
 
 ## Downloadable File Workflow (Make Tab)
 1. Upload local file via `tgc_file_upload`.
+   - If a prior upload already succeeded and you know the returned `fileId`, reuse that `fileId` instead of blindly re-uploading.
+   - If the prior upload state is unknown, re-upload intentionally; TGCMCP does not currently provide safe server-side file dedupe for reruns.
 2. Ask for/derive download name if missing.
 3. Attach file to game using `tgc_gamedownload_create`.
 4. Report `gamedownloadId` and file details.

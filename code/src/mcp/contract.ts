@@ -455,6 +455,8 @@ export const TOOL_CONTRACT: ToolContract[] = [
         name: { type: "string" },
         identity: { type: "string" },
         quantity: { type: "integer", minimum: 1, maximum: 9999 },
+        relationship: { type: "string" },
+        resumeIfExists: { type: "boolean" },
         backFileId: { type: "string" },
         faceFileId: { type: "string" },
         frontFileId: { type: "string" },

@@ -750,7 +750,7 @@ describe("executeTool", () => {
       page: 1,
       limit: 20,
     });
-    expect(create.data).toEqual({ component: { id: "component-2" } });
+    expect(create.data).toEqual({ component: { id: "component-2" }, resumed: false });
     expect(update.data).toEqual({ component: { id: "component-3" } });
     expect(itemCreate.data).toEqual({ item: { id: "item-2" } });
     expect(pageCreate.data).toEqual({ page: { id: "page-1" } });
@@ -761,6 +761,77 @@ describe("executeTool", () => {
         code: "INVALID_INPUT",
         message: "Missing required side image fields for customcolord4: side1FileId, side2FileId, side3FileId, side4FileId.",
         details: null,
+      },
+    });
+  });
+
+  it("resumes component creation when an exact relationship-scoped match already exists", async () => {
+    const tgc = createMockTgc();
+    tgc.listGameComponents.mockResolvedValue({
+      items: [
+        {
+          id: "component-existing",
+          name: "Tuckbox",
+          identity: "PokerTuckBox54",
+          quantity: 1,
+          outside_id: "outside-1",
+        },
+      ],
+      paging: { page_number: 1, items_per_page: 100 },
+    });
+
+    const result = await executeTool(
+      "tgc_component_create",
+      {
+        componentType: "tuckbox",
+        gameId: "game-1",
+        relationship: "tuckboxes",
+        name: "Tuckbox",
+        identity: "PokerTuckBox54",
+        quantity: 1,
+        outsideFileId: "outside-1",
+        resumeIfExists: true,
+      },
+      createContext(tgc),
+    );
+
+    expect(tgc.createComponent).not.toHaveBeenCalled();
+    expect(result.data).toEqual({
+      component: {
+        id: "component-existing",
+        name: "Tuckbox",
+        identity: "PokerTuckBox54",
+        quantity: 1,
+        outside_id: "outside-1",
+      },
+      resumed: true,
+    });
+  });
+
+  it("rejects component resume requests that omit relationship", async () => {
+    const tgc = createMockTgc();
+    const result = await executeTool(
+      "tgc_component_create",
+      {
+        componentType: "tuckbox",
+        gameId: "game-1",
+        name: "Tuckbox",
+        resumeIfExists: true,
+      },
+      createContext(tgc),
+    );
+
+    expect(tgc.createComponent).not.toHaveBeenCalled();
+    expect(result).toEqual({
+      ok: false,
+      data: null,
+      error: {
+        code: "INVALID_INPUT",
+        message: "relationship is required when resumeIfExists=true for tgc_component_create.",
+        details: {
+          prompt:
+            "Provide the game relationship path for this component family, for example tuckboxes, booklets, bifoldboards, or acrylicshapes.",
+        },
       },
     });
   });

@@ -188,8 +188,8 @@ Stabilize what was built in Goal A and ship a reliable public first release.
 ### B2. Docs and Onboarding
 - [x] ~~Cross-platform README install and verification guidance~~
 - [x] ~~Agent/skill installation guidance for Codex and Claude-style workflows~~
-- [ ] Finish release-specific docs pass for v1 toolset and known limitations
-- [ ] Create concise upgrade notes/changelog template for future releases
+- [x] ~~Finish release-specific docs pass for v1 toolset and known limitations~~
+- [x] ~~Create concise upgrade notes/changelog template for future releases~~
 
 ### B3. Skills and Agent Maintenance Loop
 - [x] ~~Issue-based feedback contribution flow with privacy safeguards~~

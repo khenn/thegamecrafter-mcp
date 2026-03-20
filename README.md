@@ -44,6 +44,17 @@ Recommended install location:
 - Install in the same project where you keep your game files/artwork and prompts.
 - Prefer project-local scope over global scope so behavior/config is isolated per game project and easier to audit/reproduce.
 
+## Release 1 Scope
+
+TGCMCP Release 1 is focused on **Make and Iterate** workflows:
+- create and manage games
+- upload files and create components
+- deck/card flows
+- packaging, board/mat, book, custom-cut, and specialty-part make workflows
+- readiness, pricing, and cost-breakdown helpers
+
+This release is intended for guided prototype-building and iteration, not full sell-surface automation.
+
 ## Quick Install Summary
 
 1. Build the MCP server (`code/dist/index.js`).  
@@ -491,3 +502,26 @@ Most common causes:
 ```bash
 npm install --cache /tmp/$USER-npm-cache
 ```
+
+## Known Limitations (v1)
+
+- Release 1 is centered on **Make and Iterate** workflows. Broader sell-surface automation is not complete yet.
+- `tgc_game_publish` and `tgc_game_unpublish` exist, but guided publish preparation and wider sell metadata workflows are not complete in v1.
+- `tgc_file_upload` does not currently dedupe or rediscover prior uploads automatically.
+  - If you already know the correct `fileId`, reuse it instead of blindly re-uploading.
+- Resumable behavior is opt-in and currently limited to selected workflows:
+  - `tgc_deck_create.resumeIfExists`
+  - `tgc_deck_bulk_create_cards.skipExisting`
+  - `tgc_component_create.resumeIfExists` with explicit `relationship`
+- Live TGC mutation tests are intentionally not part of default CI.
+  - CI covers deterministic typecheck/build/offline tests.
+- Long-lived secret-manager integration is not included in v1.
+- MCP `resources/list` / `resources/read` style docs resources are deferred.
+- Embedded-game mutation is not implemented.
+- Some stock-component and sell/growth workflows still require partial UI/manual handling.
+
+## Upgrade Notes
+
+Use these release-facing docs for future updates:
+- [CHANGELOG.md](/home/khenny/tgcmcp/CHANGELOG.md) for release notes / upgrade summaries
+- [docs/RELEASE_CHECKLIST.md](/home/khenny/tgcmcp/docs/RELEASE_CHECKLIST.md) for release preparation checks

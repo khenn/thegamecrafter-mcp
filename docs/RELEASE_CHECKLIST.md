@@ -7,6 +7,7 @@ Use this checklist when preparing a TGCMCP release.
 - Confirm README install steps still match the current build and client setup flow.
 - Confirm README known limitations still match the implemented v1 tool surface.
 - Confirm `CHANGELOG.md` has an entry for the release.
+- Confirm `docs/RELEASE_PROCESS.md` still matches the intended release flow.
 
 ## Quality Gates
 - Run `npm --prefix code run typecheck`

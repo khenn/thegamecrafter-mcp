@@ -525,3 +525,4 @@ npm install --cache /tmp/$USER-npm-cache
 Use these release-facing docs for future updates:
 - [CHANGELOG.md](CHANGELOG.md) for release notes / upgrade summaries
 - [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) for release preparation checks
+- [docs/RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md) for versioning and tagging policy

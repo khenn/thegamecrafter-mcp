@@ -198,7 +198,7 @@ Stabilize what was built in Goal A and ship a reliable public first release.
 - [ ] Gate: at least one full feedback cycle validated from issue to merged guidance update
 
 ### B4. Release Packaging
-- [ ] Versioning + release process discipline
+- [x] ~~Versioning + release process discipline~~
 - [x] ~~Configure GitHub community contribution baseline:~~
   - [x] ~~`CONTRIBUTING.md` contribution flow~~
   - [x] ~~issue/PR templates~~

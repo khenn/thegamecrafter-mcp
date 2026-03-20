@@ -205,7 +205,7 @@ Stabilize what was built in Goal A and ship a reliable public first release.
   - [x] ~~`CODE_OF_CONDUCT.md`~~
   - [x] ~~`SECURITY.md` vulnerability reporting path~~
   - [x] ~~branch protection/review expectations~~
-- [ ] Publish first stable release focused on Make/Iterate workflows
+- [x] ~~Publish first stable release focused on Make/Iterate workflows~~
 
 ## Goal C - Sell and Publish Workflow (Release 2)
 

@@ -194,7 +194,7 @@ Stabilize what was built in Goal A and ship a reliable public first release.
 ### B3. Skills and Agent Maintenance Loop
 - [x] ~~Issue-based feedback contribution flow with privacy safeguards~~
 - [x] ~~User approval gate before publishing feedback content~~
-- [ ] Add regression checklist for applying issue feedback across component/family/global scope
+- [x] ~~Add regression checklist for applying issue feedback across component/family/global scope~~
 - [ ] Gate: at least one full feedback cycle validated from issue to merged guidance update
 
 ### B4. Release Packaging

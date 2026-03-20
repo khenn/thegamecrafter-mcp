@@ -6,6 +6,9 @@ Convert field feedback from GitHub Issues into reliable improvements for:
 - `skills/tgc-guided-workflows/`
 - `README.md` (if onboarding/usage changes)
 
+Primary regression checklist:
+- `tools/feedback-regression-checklist.md`
+
 ## Intake Sources
 - Primary: issues labeled `agent-feedback`
 - Fallback: `contrib/feedback/*-pending.md`
@@ -17,15 +20,20 @@ Convert field feedback from GitHub Issues into reliable improvements for:
 - includes expected vs observed.
 2. Classify:
 - `component`, `workflow`, `preflight`, `docs`, `api-contract`.
-3. Decide action:
+3. Classify scope using the regression checklist:
+- `component-specific`
+- `component-family specific`
+- `global`
+4. Decide action:
 - `accept` (implement now),
 - `defer` (needs more evidence),
 - `reject` (out of scope/not actionable).
-4. If accepted:
+5. If accepted:
 - update public behavior docs (`context/TGCAGENT.md`),
 - update skill router/reference files,
 - add/adjust tests or verification scripts when feasible,
 - close issue with commit reference and outcome summary.
+- run the full `tools/feedback-regression-checklist.md` process before closure.
 
 ## Acceptance Heuristics
 - Repeated user friction avoided by deterministic agent behavior.
@@ -39,3 +47,4 @@ Convert field feedback from GitHub Issues into reliable improvements for:
 ## Release Hygiene
 - Batch related feedback into small test-gated increments.
 - Keep issue labels current (`accepted`, `deferred`, `needs-info`, `closed-fixed`).
+- If release stabilization is in progress, document explicitly whether accepted feedback is being handled now or intentionally deferred until after release.

@@ -16,7 +16,7 @@ function writePackageFixture(packageRoot: string): void {
   writeFileSync(
     join(packageRoot, "package.json"),
     JSON.stringify({
-      name: "@thegamecrafter/tgcmcp",
+      name: "@tgcmcp/thegamecrafter-mcp",
       version: "1.2.3",
     }),
   );
@@ -63,7 +63,7 @@ describe("installManagedBundle", () => {
       installedAt: string;
     };
     expect(manifest).toMatchObject({
-      packageName: "@thegamecrafter/tgcmcp",
+      packageName: "@tgcmcp/thegamecrafter-mcp",
       packageVersion: "1.2.3",
       installedAt: "2026-03-27T00:00:00.000Z",
     });

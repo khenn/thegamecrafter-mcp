@@ -79,7 +79,7 @@ Details: [Step 6: Contribute Agent Learning Feedback Optional](#6-contribute-age
 Run the bootstrap installer from the root of the project where you want TGCMCP available.
 
 ```bash
-npx @thegamecrafter/tgcmcp@latest
+npx @tgcmcp/thegamecrafter-mcp@latest
 ```
 
 The installer creates a local `.tgcmcp/` directory in the current project containing:
@@ -398,7 +398,7 @@ Use this when you want an LLM to do setup with minimal custom prompt maintenance
 This prompt tells the LLM to run the installer first, then follow the README from the local project.
 
 ```text
-Run npx @thegamecrafter/tgcmcp@latest in this project, then follow the TGCMCP README exactly for setup. Ask me only for missing required values. Do not duplicate or invent setup steps not in the README.
+Run npx @tgcmcp/thegamecrafter-mcp@latest in this project, then follow the TGCMCP README exactly for setup. Ask me only for missing required values. Do not duplicate or invent setup steps not in the README.
 ```
 
 ### Operator Notes
@@ -434,7 +434,7 @@ if (Test-Path .\.tgcmcp\server\index.js) { "Install OK" } else { "Missing .tgcmc
 If the local install is missing or stale, rerun:
 
 ```bash
-npx @thegamecrafter/tgcmcp@latest
+npx @tgcmcp/thegamecrafter-mcp@latest
 ```
 
 ### Login fails with missing auth input
@@ -458,7 +458,7 @@ Most common causes:
 - If `npx` or `npm` fails due to cache permissions, use a local temp cache path:
 
 ```bash
-NPM_CONFIG_CACHE=/tmp/$USER-npm-cache npx @thegamecrafter/tgcmcp@latest
+NPM_CONFIG_CACHE=/tmp/$USER-npm-cache npx @tgcmcp/thegamecrafter-mcp@latest
 ```
 
 ## Build From Source (Developers)

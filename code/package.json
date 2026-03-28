@@ -1,5 +1,5 @@
 {
-  "name": "@thegamecrafter/tgcmcp",
+  "name": "@tgcmcp/thegamecrafter-mcp",
   "version": "1.0.0",
   "private": false,
   "description": "Bootstrap installer and MCP server for The Game Crafter Developer API",

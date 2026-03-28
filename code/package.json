@@ -1,14 +1,34 @@
 {
-  "name": "tgcmcp",
+  "name": "@thegamecrafter/tgcmcp",
   "version": "1.0.0",
-  "private": true,
-  "description": "MCP server for The Game Crafter Developer API",
+  "private": false,
+  "description": "Bootstrap installer and MCP server for The Game Crafter Developer API",
   "type": "module",
+  "bin": {
+    "tgcmcp": "dist/install.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khenn/thegamecrafter-mcp.git"
+  },
+  "homepage": "https://github.com/khenn/thegamecrafter-mcp",
+  "bugs": {
+    "url": "https://github.com/khenn/thegamecrafter-mcp/issues"
+  },
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "npm run clean:dist && npm run prepare:installer-assets && npm run build:installer-runtime && tsc -p tsconfig.json",
+    "clean:dist": "tsx scripts/ci/clean-dist.ts --repo-root ..",
+    "prepare:installer-assets": "tsx scripts/ci/prepare-installer-assets.ts --repo-root ..",
+    "build:installer-runtime": "tsx scripts/ci/build-installer-runtime.ts --repo-root ..",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "start": "node dist/index.js",
     "dev": "node --loader tsx src/index.ts",
@@ -41,7 +61,8 @@
     "skills:test-fixtures": "tsx scripts/skills/test-skill-validator-fixtures.ts --repo-root ..",
     "skills:test": "npm run skills:validate && npm run skills:test-triggers && npm run skills:test-fixtures",
     "a5:test": "npm run report:component-matrix:check && npm run skills:test",
-    "a5:test:claude": "npm run claude:test:core"
+    "a5:test:claude": "npm run claude:test:core",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",
@@ -49,6 +70,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.8",
+    "esbuild": "^0.25.10",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "vitest": "^2.1.9"

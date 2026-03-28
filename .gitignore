@@ -9,7 +9,9 @@ subprojects/*
 code/scripts/dev/configure-codex-mcp.sh
 AGENTS.md
 AGENT.md
+CLAUDE.md
 .tgc-feedback/
+code/*.tgz
 
 context/MEMORY.md
 context/STRUCTURE.md

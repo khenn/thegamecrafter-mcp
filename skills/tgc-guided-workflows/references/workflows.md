@@ -85,9 +85,3 @@ If any fail, return `partial_success` summary with per-component remediation act
 - For set families, list container then members:
   1. `tgc_game_components_list`
   2. `tgc_component_items_list` with `relationship=members`
-
-## Community Feedback Capture (Event-Driven)
-1. Respect `preferences.feedback_contribution`.
-2. Only draft issue text for non-trivial, reusable, undocumented learnings.
-3. Show exact draft text and ask explicit publication approval.
-4. If publishing unavailable, write pending note under `contrib/feedback/`.

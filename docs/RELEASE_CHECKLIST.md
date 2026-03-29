@@ -4,16 +4,19 @@ Use this checklist when preparing a TGCMCP release.
 
 ## Release 1 Baseline
 - Confirm the release is still scoped to Make/Iterate workflows.
+- Confirm `code/package.json` has the intended release version and package name.
 - Confirm README install steps still match the current build and client setup flow.
 - Confirm README known limitations still match the implemented v1 tool surface.
 - Confirm `CHANGELOG.md` has an entry for the release.
 - Confirm `docs/RELEASE_PROCESS.md` still matches the intended release flow.
+- Confirm `tools/tgcmcp-npm-release-playbook.md` still matches the intended npm publish flow.
 
 ## Quality Gates
 - Run `npm --prefix code run typecheck`
 - Run `npm --prefix code run build`
 - Run `TMPDIR=/tmp npm --prefix code test`
 - Run `TMPDIR=/tmp npm --prefix code run skills:test`
+- Run `npm --prefix code publish --dry-run`
 - Confirm the latest `Core Quality Checks` workflow passed on GitHub.
 - Confirm the latest `Skills Policy Checks` workflow passed on GitHub when skill changes are included.
 
@@ -33,5 +36,11 @@ Use this checklist when preparing a TGCMCP release.
 ## Packaging / Publishing
 - Confirm branch is clean except for intentional local-only files.
 - Confirm the intended release commit is pushed to `main`.
+- Publish from `code/`:
+  - `npm publish`
+- Verify the published package metadata:
+  - `npm view @tgcmcp/thegamecrafter-mcp version`
+- Verify the published installer in a clean temp directory:
+  - `npx @tgcmcp/thegamecrafter-mcp@latest`
 - Create/update the release notes from `CHANGELOG.md`.
 - Tag the release only after CI and release notes are ready.

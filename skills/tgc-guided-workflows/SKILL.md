@@ -46,9 +46,6 @@ Use this skill as the orchestration router for safe TGC workflows over MCP tools
   - `tgc-component-preflight`
   - `tgc-book-rulebook-workflows`
   - `tgc-image-preflight-fit`
-- Use event-driven feedback capture from `references/community-feedback.md`:
-  - when non-trivial, new component-build learnings are discovered that are not already present in skills and would improve build accuracy, draft a GitHub issue proposal automatically,
-  - show exact draft text to user and request explicit publication approval before creating the issue.
 - For outcome-based requests without explicit component type, suggest 2-3 relevant implemented options, then wait for user selection.
   - if only one viable option remains, explain why alternatives were excluded and ask for explicit confirmation before create.
 - For revisions to existing non-deck components, default to `tgc_component_update` (in-place) instead of creating a second component.
@@ -83,7 +80,6 @@ Use this skill as the orchestration router for safe TGC workflows over MCP tools
 ```yaml
 preferences:
   currency: USD
-  feedback_contribution: true
 ```
 
 Rules:
@@ -91,13 +87,11 @@ Rules:
 - Always include currency code in displayed prices.
 - If `preferences.currency` is not USD, convert from USD using a reliable FX source.
 - If conversion fails or code is invalid, warn and fall back to USD.
-- Respect `preferences.feedback_contribution` as the global toggle for issue-draft feedback behavior.
 
 ## Read Additional References Only As Needed
 - Read `references/workflows.md` when executing game create/copy/interrogation flows.
 - Read `references/skill-routing-map.md` when intent is ambiguous between router and focused skills.
 - Read `references/guardrails.md` when handling retries, cleanup, non-idempotent calls, or test artifact control.
-- Read `references/community-feedback.md` when evaluating/producing reusable learning issue drafts and publication approval flow.
 - Read `references/tgc-help-center-guidance.md` when users need process/best-practice guidance.
 - Read `references/tgc-help-center-catalog.md` when you need specific article links by topic.
 

@@ -10,8 +10,7 @@ Primary regression checklist:
 - `tools/feedback-regression-checklist.md`
 
 ## Intake Sources
-- Primary: issues labeled `agent-feedback`
-- Fallback: `contrib/feedback/*-pending.md`
+- GitHub issues labeled `agent-feedback`
 
 ## Triage Steps
 1. Validate signal quality:

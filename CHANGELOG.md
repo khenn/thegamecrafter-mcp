@@ -16,6 +16,29 @@ This file is the release-facing change log for TGCMCP.
 ### Notes
 - 
 
+## v1.1.0 - 2026-03-29
+
+### Added
+- End-to-end client setup guides for:
+  - Codex
+  - Claude Code
+  - OpenCode
+  - Gemini CLI
+- A dedicated LLM setup helper doc for operator-assisted setup flows.
+- An npm release playbook for the public installer package.
+
+### Changed
+- Refocused `README.md` into a slimmer install-first landing page that routes users to client-specific setup guides.
+- Updated release docs to include the npm publish and post-publish verification flow for `@tgcmcp/thegamecrafter-mcp`.
+- Moved secondary client setup detail out of the main README.
+
+### Fixed
+- Removed the public GitHub feedback-capture / issue-drafting behavior from the public agent and guided-workflow skill surfaces.
+- Removed the old runtime fallback documentation that staged pending feedback notes under `contrib/feedback/`.
+
+### Notes
+- `v1.1.0` is a hardening/docs release focused on installer usability and product-surface consistency.
+
 ## v1.0.0 - 2026-03-20
 
 ### Added

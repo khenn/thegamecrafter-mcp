@@ -27,11 +27,15 @@ Rationale:
 
 ## Package Version Note
 
-`code/package.json` is currently private and not published as a public npm package.
+TGCMCP now ships a public npm installer package from `code/`:
+
+- package: `@tgcmcp/thegamecrafter-mcp`
+- installer entrypoint: `npx @tgcmcp/thegamecrafter-mcp@latest`
 
 Because of that:
-- Git tags and GitHub releases are the primary public version markers
-- the `package.json` version can be aligned during release preparation, but Git tag version is the authoritative public release identity
+- Git tags and GitHub releases still matter for source-history releases
+- the npm package version is the authoritative public version for installer users
+- the Git tag version and `code/package.json` version should stay aligned for every public release
 
 ## Release Flow
 
@@ -39,13 +43,20 @@ For each release:
 
 1. Confirm the release scope.
 2. Update `CHANGELOG.md`.
-3. Run the release checklist in `docs/RELEASE_CHECKLIST.md`.
-4. Ensure the intended release commit is on `main`.
-5. Create an annotated tag:
+3. Bump the version in `code/package.json`.
+4. Run the release checklist in `docs/RELEASE_CHECKLIST.md`.
+5. Ensure the intended release commit is on `main`.
+6. Publish the npm package from `code/`.
+7. Verify the published installer path:
+   - `npm view @tgcmcp/thegamecrafter-mcp version`
+   - `npx @tgcmcp/thegamecrafter-mcp@latest`
+8. Create an annotated tag:
    - example: `git tag -a v1.0.0 -m "Release v1.0.0"`
-6. Push the tag:
+9. Push the tag:
    - `git push origin v1.0.0`
-7. Create a GitHub release from that tag using the changelog entry as release notes.
+10. Create a GitHub release from that tag using the changelog entry as release notes.
+
+Use `tools/tgcmcp-npm-release-playbook.md` as the step-by-step npm publishing reference.
 
 ## Pre-Release Discipline
 
@@ -54,10 +65,11 @@ Before tagging:
 - ensure release-facing docs match actual behavior
 - ensure known limitations are explicit
 - ensure open post-release follow-ups are documented rather than silently omitted
+- ensure the install command in public docs matches the currently published npm package
 
 ## Post-Release Discipline
 
-After tagging:
+After tagging and publishing:
 - move the current `Unreleased` entries forward
 - start a fresh `Unreleased` section for new work
 - record any intentionally deferred validation gates or post-release cleanup tasks
